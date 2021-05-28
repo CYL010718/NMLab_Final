@@ -41,6 +41,13 @@ contract Account {
         return 0;
     }
 
+    function getUserHealth(uint idx) public view returns(uint) {
+        if(idx < kingdomAmount) {
+            return health[castleToOwner[idx]];
+        }
+        return 0;
+    }
+
     function getUserSpyPower(uint idx) public view returns(uint) {
         if(idx < kingdomAmount) {
             return spyPower[castleToOwner[idx]];
@@ -64,6 +71,7 @@ contract Account {
         ironOwnerCount[_owner] = 10000;
         coinOwnerCount[_owner] = 10000;
         power[_owner] = 0;
+        health[_owner] = 0;
         spyPower[_owner] = 0;
     }
 

@@ -41,7 +41,7 @@ contract Laboratory is BuildingFactory, Spy {
             numOfSpy[_owner] = numOfSpy[_owner] + (num);
             ownerStartCreateTime[_owner] = 0;
             ownerCreateSpyTime[_owner] = 0;
-            _updatePower(_owner);
+            _updatespyPower(_owner);
             return 0;
         }
         else {

@@ -13,9 +13,14 @@ contract Soldier is Account {
     uint public createSoldierTime = 10;
     uint public levelUpSoldierTime = 10;
 
+    uint public soldierPower = 1;
+    uint public soldierHealth = 1;
+
 
     function _updatePower(address _owner) internal {
-        power[_owner] = numOfSoldier[_owner] * levelOfSoldier[_owner];
+        power[_owner] = numOfSoldier[_owner] * levelOfSoldier[_owner] * soldierPower;
+        health[_owner] = numOfSoldier[_owner] * levelOfSoldier[_owner] * soldierHealth;
+
     }
 
     function _createSoldier(address _owner, uint number) internal returns(bool) {
