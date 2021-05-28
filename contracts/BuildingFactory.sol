@@ -30,6 +30,7 @@ contract BuildingFactory is Account {
     mapping (address => uint) ownerSawmillCount;
     mapping (address => uint) ownerCellarCount;
     mapping (address => uint) ownerBarrackCount;
+    mapping (address => uint) ownerLaboratoryCount;
 
 
     function _createBuilding(address _creator, string memory _name, uint _x, uint _y) internal returns(uint){
@@ -60,6 +61,9 @@ contract BuildingFactory is Account {
         }
         else if (keccak256(bytes(_name)) == keccak256(bytes("Barrack"))) {
             ownerBarrackCount[_creator] = ownerBarrackCount[_creator].add(1);
+        }
+        else if (keccak256(bytes(_name)) == keccak256(bytes("Laboratory"))) {
+            ownerLaboratoryCount[_creator] = ownerLaboratoryCount[_creator].add(1);
         }
         return id;
     }
@@ -167,6 +171,9 @@ contract BuildingFactory is Account {
         }
         else if (keccak256(bytes(_name)) == keccak256(bytes("Barrack"))) {
             buildingsLength = ownerBarrackCount[_owner];
+        }
+        else if (keccak256(bytes(_name)) == keccak256(bytes("Laboratory"))) {
+            buildingsLength = ownerLaboratoryCount[_owner];
         }
         uint[] memory result = new uint[](buildingsLength);
         // result.push(0);

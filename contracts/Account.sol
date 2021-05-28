@@ -11,6 +11,7 @@ contract Account {
     mapping (address => uint) public coinOwnerCount;
     mapping (address => uint) public woodOwnerCount;
     mapping (address => uint) public power;
+    mapping (address => uint) public spyPower;
     uint public kingdomAmount;
 
     mapping (uint => address) public castleToOwner;
@@ -40,6 +41,13 @@ contract Account {
         return 0;
     }
 
+    function getUserSpyPower(uint idx) public view returns(uint) {
+        if(idx < kingdomAmount) {
+            return spyPower[castleToOwner[idx]];
+        }
+        return 0;
+    }
+
     function getKingdomAmount() public view returns(uint) {
         return kingdomAmount;
     }
@@ -56,6 +64,7 @@ contract Account {
         ironOwnerCount[_owner] = 10000;
         coinOwnerCount[_owner] = 10000;
         power[_owner] = 0;
+        spyPower[_owner] = 0;
     }
 
     function _cost(address _owner, uint food, uint wood, uint iron, uint stone, uint coin) internal returns (bool){
