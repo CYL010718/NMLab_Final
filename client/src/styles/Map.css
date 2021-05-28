@@ -1,0 +1,52 @@
+.map_row  {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+}
+
+.flex_div {
+  /* height: 500px; */
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.inline_div {
+  display: inline-block;
+  position: relative;
+  /* width: 700px; */
+  /* flex-direction: row-reverse; */
+  z-index: 0;
+  cursor: grab;
+}
+
+.background_img {
+  pointer-events: none;
+  z-index: -1;
+}
+
+.floating_button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1;
+}
+
+.popup_div {
+  position: absolute;
+  border-radius: 1%;
+  top: 15%;
+  left: 20%;
+  right: 20%;
+  bottom: 15%;
+  z-index: 10;
+  background-color:cornsilk;
+  display:table-cell;
+  vertical-align: middle
+}
+
+.close_button {
+  position: absolute;
+  top: -15px;
+  right: -15px;
+}
