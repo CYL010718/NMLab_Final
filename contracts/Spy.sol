@@ -39,25 +39,26 @@ contract Spy is Account {
         return numOfSpy[_owner];
     }
 
-    function _spy(address myCastle, address attackedCastle) internal{
+    function _spy(address myCastle, address attackedCastle) internal returns(bool) {
         address winner;
         address loser;
-        bool win = -1;
+        bool win;
+        //bool win = -1;
 
         if (spyPower[myCastle] > spyPower[attackedCastle]){
             winner = myCastle;
             loser = attackedCastle;
-            win = 1;
+            win = true;
         }
         else {
             winner = attackedCastle;
             loser = myCastle;
-            win = 0;
+            win = false;
         }
         return win;
     }
 
-    function sendSpy(uint _ownerId, uint _attackedCastleId) public {
+    function sendSpy(uint _ownerId, uint _attackedCastleId) public returns(bool) {
         require(msg.sender == castleToOwner[_ownerId]);
         address myCastle = castleToOwner[_ownerId];
         address attackedCastle = castleToOwner[_attackedCastleId];

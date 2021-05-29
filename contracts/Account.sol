@@ -11,6 +11,7 @@ contract Account {
     mapping (address => uint) public coinOwnerCount;
     mapping (address => uint) public woodOwnerCount;
     mapping (address => uint) public power;
+    mapping (address => uint) public health;
     mapping (address => uint) public spyPower;
     uint public kingdomAmount;
 

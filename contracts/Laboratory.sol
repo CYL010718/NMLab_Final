@@ -11,7 +11,7 @@ contract Laboratory is BuildingFactory, Spy {
 
     function createLaboratory(uint _x, uint _y) public {
         _createBuilding(msg.sender, "Laboratory", _x, _y);
-        levelOfSoldier[msg.sender] = 1;
+        levelOfSpy[msg.sender] = 1;
     }
 
     // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
@@ -41,7 +41,7 @@ contract Laboratory is BuildingFactory, Spy {
             numOfSpy[_owner] = numOfSpy[_owner] + (num);
             ownerStartCreateTime[_owner] = 0;
             ownerCreateSpyTime[_owner] = 0;
-            _updatespyPower(_owner);
+            _updateSpyPower(_owner);
             return 0;
         }
         else {

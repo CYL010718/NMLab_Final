@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { ContractContext } from "../App";
 import { Modal } from 'semantic-ui-react';
 import "../styles/Map.css";
-import { None, Farm, Sawmill, Mine, Manor, Quarry, Barrack } from './ModalComponents/index';
+import { None, Farm, Sawmill, Mine, Manor, Quarry, Barrack, Laboratory } from './ModalComponents/index';
 
 const ModalContent = ({ upgradingIdx, idx, x, y, cellState, index, updateCellState }) => {
   const state = useContext(ContractContext);
@@ -41,14 +41,20 @@ const ModalContent = ({ upgradingIdx, idx, x, y, cellState, index, updateCellSta
   }
   if(type === "Quarry") {
     return <>
-      <Modal.Header>Manor</Modal.Header>
+      <Modal.Header>Quarry</Modal.Header>
       {state.accounts && state.contract ? <Quarry idx={idx} cellState={cellState} x={x} y={y} contract={state.contract} account={state.accounts[0]} updateCellState={updateCellState} /> : null}
     </>
   }
   if(type === "Barrack") {
     return <>
-      <Modal.Header>Manor</Modal.Header>
+      <Modal.Header>Barrack</Modal.Header>
       {state.accounts && state.contract ? <Barrack idx={idx} cellState={cellState} x={x} y={y} contract={state.contract} account={state.accounts[0]} updateCellState={updateCellState} /> : null}
+    </>
+  }
+  if(type === "Laboratory") {
+    return <>
+      <Modal.Header>Laboratory</Modal.Header>
+      {state.accounts && state.contract ? <Laboratory idx={idx} cellState={cellState} x={x} y={y} contract={state.contract} account={state.accounts[0]} updateCellState={updateCellState} /> : null}
     </>
   }
 

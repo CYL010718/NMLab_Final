@@ -76,6 +76,16 @@ const Page = ({ page, build }) => {
           <Button primary onClick={() => build("Barrack")}>Build</Button>
         </Segment>
       </Grid.Column>
+      <Grid.Column>
+        <Segment placeholder>
+          <Header icon>
+            Laboratory
+            <br/>
+            <Image size='massive' src={soldierpng} />
+          </Header>
+          <Button primary onClick={() => build("Laboratory")}>Build</Button>
+        </Segment>
+      </Grid.Column>
     </>
   }
 }

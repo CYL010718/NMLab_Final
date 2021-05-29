@@ -16,7 +16,7 @@ const None = ({ upgradingIdx, idx, x, y, contract, account, updateCellState }) =
       return;
     }
     let newBuildingId;
-    const { createSawmill, createFarm, createMine, createQuarry, createManor, createBarrack } = contract.methods;
+    const { createSawmill, createFarm, createMine, createQuarry, createManor, createBarrack, createSpy } = contract.methods;
     // const {  } = contractB.methods;
     switch (buildType) {
       case "Sawmill":
@@ -42,9 +42,17 @@ const None = ({ upgradingIdx, idx, x, y, contract, account, updateCellState }) =
         }
         newBuildingId = await createBarrack(x, y).send({from: account});
         break;
-        default:
-          console.alert("invalid buildingType");
+      case "Laboratory":
+        const haveBuilding = await contract.methods.getSpecificBuildingByOwner(account, "Laboratory").call({from:account});
+        if(haveBuilding.length > 0) {
+          alert("Already have Laboratory!");
           break;
+        }
+        newBuildingId = await createLaboratory(x, y).send({from: account});
+        break;
+      default:
+        console.alert("invalid buildingType");
+        break;
     }
     const building = await contract.methods.getBuildingByOwner(account, x, y).call({from: account});
     const loadIndex = parseInt(building[0]);
