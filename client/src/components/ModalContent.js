@@ -11,8 +11,8 @@ const ModalContent = ({ upgradingIdx, idx, x, y, cellState, index, updateCellSta
 
   if(type === "None") {
     return <>
-      <Modal.Header>Create Buiding</Modal.Header>
-      {state.accounts && state.contract ? <None upgradingIdx={upgradingIdx} idx={idx} cellState={cellState} x={x} y={y} contract={state.contract} account={state.accounts[0]} updateCellState={updateCellState} /> : null}
+      <Modal.Header>Create Building</Modal.Header>
+      {state.accounts && state.contract ? <None upgradingIdx={upgradingIdx} idx={idx} cellState={cellState} x={x} y={y} contract={state.contract} contractB = {state.contractB} account={state.accounts[0]} updateCellState={updateCellState} /> : null}
     </>
   }
   if(type === "Farm") {
@@ -48,7 +48,7 @@ const ModalContent = ({ upgradingIdx, idx, x, y, cellState, index, updateCellSta
   if(type === "Barrack") {
     return <>
       <Modal.Header>Barrack</Modal.Header>
-      {state.accounts && state.contract ? <Barrack idx={idx} cellState={cellState} x={x} y={y} contract={state.contract} account={state.accounts[0]} updateCellState={updateCellState} /> : null}
+      {state.accounts && state.contract ? <Barrack idx={idx} cellState={cellState} x={x} y={y} contract={state.contractB} account={state.accounts[0]} updateCellState={updateCellState} /> : null}
     </>
   }
   if(type === "Laboratory") {

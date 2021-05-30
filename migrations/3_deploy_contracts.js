@@ -1,5 +1,5 @@
-var Produce = artifacts.require("./Produce.sol")
+var LabFactory = artifacts.require("./Laboratory.sol")
 
 module.exports = function(deployer) {
-  deployer.deploy(Produce);
+  deployer.deploy(LabFactory);
 };

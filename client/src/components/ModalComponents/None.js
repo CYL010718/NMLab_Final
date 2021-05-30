@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Modal, Grid, Icon, Segment, Header, Menu, Pagination } from 'semantic-ui-react';
 import { Page } from './index'
 
-const None = ({ upgradingIdx, idx, x, y, contract, account, updateCellState }) => {
+const None = ({ upgradingIdx, idx, x, y, contract, contractB, account, updateCellState }) => {
   const [ page, setPage ] = useState(0);
 
   const build = async (buildType) => {
@@ -16,7 +16,8 @@ const None = ({ upgradingIdx, idx, x, y, contract, account, updateCellState }) =
       return;
     }
     let newBuildingId;
-    const { createSawmill, createFarm, createMine, createQuarry, createManor, createBarrack, createSpy } = contract.methods;
+    const { createSawmill, createFarm, createMine, createQuarry, createManor, createLaboratory } = contract.methods;
+    const { createBarrack } = contractB.methods
     // const {  } = contractB.methods;
     switch (buildType) {
       case "Sawmill":
@@ -43,8 +44,8 @@ const None = ({ upgradingIdx, idx, x, y, contract, account, updateCellState }) =
         newBuildingId = await createBarrack(x, y).send({from: account});
         break;
       case "Laboratory":
-        const haveBuilding = await contract.methods.getSpecificBuildingByOwner(account, "Laboratory").call({from:account});
-        if(haveBuilding.length > 0) {
+        const haveLab = await contract.methods.getSpecificBuildingByOwner(account, "Laboratory").call({from:account});
+        if(haveLab.length > 0) {
           alert("Already have Laboratory!");
           break;
         }
