@@ -20,6 +20,13 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
     setUserPower(userNewPower);
   }
 
+  const sendSpy = async() => {
+    const result = await contract.methods.sendSpy(myIdx, userIdx).send({from: account});
+    if(result === true){
+      const userNewPower = await contract.methods.getUserPower(userIdx).call({from: account});
+      setUserPower(userNewPower);
+    }
+  }
   return <>
     <Modal.Content>
       <Segment placeholder>
@@ -69,6 +76,12 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
         <Button.Content visible>Battle</Button.Content>
         <Button.Content hidden>
           <Icon name='fire' />
+        </Button.Content>
+      </Button>
+      <Button animated='fade' color='red' fluid inverted attached='bottom' onClick={() => sendSpy()}>
+        <Button.Content visible>Send spy</Button.Content>
+        <Button.Content hidden>
+          <Icon name='eye' />
         </Button.Content>
       </Button>
       

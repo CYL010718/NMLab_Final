@@ -6,9 +6,10 @@ import stonepng from '../../images/stone_noback.png';
 import coinpng from '../../images/coin_noback.png';
 import foodpng from '../../images/food_noback.png';
 import soldierpng from '../../images/soldier_noback.png';
-import spypng from '../../images/soldier_noback.png';
+import spypng from '../../images/soldier_noback.png'
 
-const Page = ( {build} ) => {
+const Page = ({ page, build }) => {
+  if(page === 0) {
     return <>
       <Grid.Column>
         <Segment placeholder>
@@ -63,9 +64,8 @@ const Page = ( {build} ) => {
         </Segment>
       </Grid.Column>
     </>
-}
-
-const BarrackPage = ( {build} ) => {
+  }
+  if(page === 1) {
     return <>
       <Grid.Column>
         <Segment placeholder>
@@ -77,11 +77,6 @@ const BarrackPage = ( {build} ) => {
           <Button primary onClick={() => build("Barrack")}>Build</Button>
         </Segment>
       </Grid.Column>
-    </>
-}
-
-const LabPage = ( {build} ) => {
-    return <>
       <Grid.Column>
         <Segment placeholder>
           <Header icon>
@@ -93,5 +88,7 @@ const LabPage = ( {build} ) => {
         </Segment>
       </Grid.Column>
     </>
+  }
 }
-export {Page, BarrackPage, LabPage};
+
+export default Page;

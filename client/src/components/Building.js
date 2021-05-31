@@ -5,6 +5,7 @@ import mine from '../images/mine.png';
 import quarry from '../images/quarry.png';
 import manor from '../images/manor.png';
 import barrack from '../images/barrack.png';
+import lab from '../images/barrack.png'
 import sawmill from '../images/sawmill.png';
 
 const Building = ({ type  }) => {
@@ -43,7 +44,7 @@ const Building = ({ type  }) => {
   }
 
   if(type === "Laboratory") {
-    return <Image src={barrack} />
+    return <Image src={lab} />
     // return <Icon name="shield alternate"  size='huge' style={} />
   }
   else return<></>;
