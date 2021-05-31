@@ -41,6 +41,11 @@ const Building = ({ type  }) => {
     return <Image src={barrack} />
     // return <Icon name="shield alternate"  size='huge' style={} />
   }
+
+  if(type === "Laboratory") {
+    return <Image src={barrack} />
+    // return <Icon name="shield alternate"  size='huge' style={} />
+  }
   else return<></>;
 }
 

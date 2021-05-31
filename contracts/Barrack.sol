@@ -9,7 +9,7 @@ contract Barrack is BuildingFactory, Soldier {
     using SafeMath for uint;
     using SafeMath for uint;
 
-    function createBarrack(uint _x, uint _y) public {
+    function createBarrack(uint16 _x, uint16 _y) public {
         _createBuilding(msg.sender, "Barrack", _x, _y);
         levelOfSoldier[msg.sender] = 1;
     }
