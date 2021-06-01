@@ -6,6 +6,11 @@ import "./Castle.sol";
 contract CellarFactory is CastleFactory {
     
     using SafeMath for uint;
+
+    Account accountInstance;
+    constructor(address _account_address) public {
+        accountInstance = Account(_account_address);
+    }
     
     mapping (address => uint) OwnerSaveWood;
     mapping (address => uint) OwnerSaveIron;
@@ -22,59 +27,59 @@ contract CellarFactory is CastleFactory {
         uint[] memory cellars = getSpecificBuildingByOwner(_owner, "Cellar");
         for (uint i = 0; i < cellars.length; i++) {
             uint saveAmount = buildings[cellars[i]].level * SaveResourceAbility;
-            if (stoneOwnerCount[_owner] <= saveAmount) {
-                OwnerSaveStone[_owner] = OwnerSaveStone[_owner].add(stoneOwnerCount[_owner]);
-                stoneOwnerCount[_owner] = 0;
+            if (accountInstance.getStoneOwnerCount(_owner) <= saveAmount) {
+                OwnerSaveStone[_owner] = OwnerSaveStone[_owner].add(accountInstance.getStoneOwnerCount(_owner));
+                accountInstance.setStoneOwnerCount(_owner, 0);
             }
             else{
-                stoneOwnerCount[_owner] = stoneOwnerCount[_owner].sub(saveAmount);
+                accountInstance.setStoneOwnerCount(_owner, accountInstance.getStoneOwnerCount(_owner).sub(saveAmount));
                 OwnerSaveStone[_owner] = OwnerSaveStone[_owner].add(saveAmount);
             }
-            if (ironOwnerCount[_owner] <= saveAmount) {
-                OwnerSaveIron[_owner] = OwnerSaveIron[_owner].add(ironOwnerCount[_owner]);
-                ironOwnerCount[_owner] = 0;
+            if (accountInstance.getIronOwnerCount(_owner) <= saveAmount) {
+                OwnerSaveIron[_owner] = OwnerSaveIron[_owner].add(accountInstance.getIronOwnerCount(_owner));
+                accountInstance.setIronOwnerCount(_owner, 0);
             }
             else{
-                ironOwnerCount[_owner] = ironOwnerCount[_owner].sub(saveAmount);
+                accountInstance.setIronOwnerCount(_owner, accountInstance.getIronOwnerCount(_owner).sub(saveAmount));
                 OwnerSaveIron[_owner] = OwnerSaveIron[_owner].add(saveAmount);
             }
-            if (foodOwnerCount[_owner] <= saveAmount) {
-                OwnerSaveFood[_owner] = OwnerSaveFood[_owner].add(foodOwnerCount[_owner]);
-                foodOwnerCount[_owner] = 0;
+            if (accountInstance.getFoodOwnerCount(_owner) <= saveAmount) {
+                OwnerSaveFood[_owner] = OwnerSaveFood[_owner].add(accountInstance.getFoodOwnerCount(_owner));
+                accountInstance.setFoodOwnerCount(_owner, 0);
             }
             else{
-                foodOwnerCount[_owner] = foodOwnerCount[_owner].sub(saveAmount);
+                accountInstance.setFoodOwnerCount(_owner, accountInstance.getFoodOwnerCount(_owner).sub(saveAmount));
                 OwnerSaveFood[_owner] = OwnerSaveFood[_owner].add(saveAmount);
             }
-            if (coinOwnerCount[_owner] <= saveAmount) {
-                OwnerSaveCoin[_owner] = OwnerSaveCoin[_owner].add(coinOwnerCount[_owner]);
-                coinOwnerCount[_owner] = 0;
+            if (accountInstance.getCoinOwnerCount(_owner) <= saveAmount) {
+                OwnerSaveCoin[_owner] = OwnerSaveCoin[_owner].add(accountInstance.getCoinOwnerCount(_owner));
+                accountInstance.setCoinOwnerCount(_owner, 0);
             }
             else{
-                coinOwnerCount[_owner] = coinOwnerCount[_owner].sub(saveAmount);
+                accountInstance.setCoinOwnerCount(_owner, accountInstance.getCoinOwnerCount(_owner).sub(saveAmount));
                 OwnerSaveCoin[_owner] = OwnerSaveCoin[_owner].add(saveAmount);
             }
-            if (woodOwnerCount[_owner] <= saveAmount) {
-                OwnerSaveWood[_owner] = OwnerSaveWood[_owner].add(woodOwnerCount[_owner]);
-                woodOwnerCount[_owner] = 0;
+            if (accountInstance.getWoodOwnerCount(_owner) <= saveAmount) {
+                OwnerSaveWood[_owner] = OwnerSaveWood[_owner].add(accountInstance.getWoodOwnerCount(_owner));
+                accountInstance.setWoodOwnerCount(_owner, 0);
             }
             else{
-                woodOwnerCount[_owner] = woodOwnerCount[_owner].sub(saveAmount);
+                accountInstance.setWoodOwnerCount(_owner, accountInstance.getWoodOwnerCount(_owner).sub(saveAmount));
                 OwnerSaveWood[_owner] = OwnerSaveWood[_owner].add(saveAmount);
             }
         }           
     }
 
     function _takeResource(address _owner) internal {
-        stoneOwnerCount[_owner] = stoneOwnerCount[_owner].add(OwnerSaveStone[_owner]);
+        accountInstance.setStoneOwnerCount(_owner, accountInstance.getStoneOwnerCount(_owner).add(OwnerSaveStone[_owner]));
         OwnerSaveStone[_owner] = 0;
-        ironOwnerCount[_owner] = ironOwnerCount[_owner].sub(OwnerSaveIron[_owner]);
+        accountInstance.setIronOwnerCount(_owner, accountInstance.getIronOwnerCount(_owner).sub(OwnerSaveIron[_owner]));
         OwnerSaveIron[_owner] = 0;
-        foodOwnerCount[_owner] = foodOwnerCount[_owner].sub(OwnerSaveFood[_owner]);
+        accountInstance.setFoodOwnerCount(_owner, accountInstance.getFoodOwnerCount(_owner).sub(OwnerSaveFood[_owner]));
         OwnerSaveFood[_owner] = 0;
-        coinOwnerCount[_owner] = coinOwnerCount[_owner].sub(OwnerSaveCoin[_owner]);
+        accountInstance.setCoinOwnerCount(_owner, accountInstance.getCoinOwnerCount(_owner).sub(OwnerSaveCoin[_owner]));
         OwnerSaveCoin[_owner] = 0;
-        woodOwnerCount[_owner] = woodOwnerCount[_owner].sub(OwnerSaveWood[_owner]);
+        accountInstance.setWoodOwnerCount(_owner, accountInstance.getWoodOwnerCount(_owner).sub(OwnerSaveWood[_owner]));
         OwnerSaveWood[_owner] = 0;        
     }
 }

@@ -5,6 +5,11 @@ import "./SafeMath.sol";
 import "./BuildingFactory.sol";
 
 contract Earning is Ownable, BuildingFactory {
+
+    Account accountInstance;
+    constructor(address _account_address) public {
+        accountInstance = Account(_account_address);
+    }
     
     uint speedUpFee = 0.002 ether;
     uint resourceFee = 0.001 ether;
@@ -34,19 +39,19 @@ contract Earning is Ownable, BuildingFactory {
         address _owner = msg.sender;
         require(msg.value == resourceFee);
         if ( keccak256(bytes(_name)) == keccak256(bytes("Stone"))) {
-            stoneOwnerCount[_owner] = stoneOwnerCount[_owner].add(getResourceNum);
+            accountInstance.setStoneOwnerCount(_owner, accountInstance.getStoneOwnerCount(_owner).add(getResourceNum));
         }
         else if (keccak256(bytes(_name)) == keccak256(bytes("Iron"))) {
-            ironOwnerCount[_owner] = ironOwnerCount[_owner].add(getResourceNum);
+            accountInstance.setIronOwnerCount(_owner, accountInstance.getIronOwnerCount(_owner).add(getResourceNum));
         }
         else if (keccak256(bytes(_name)) == keccak256(bytes("Food"))) {
-            foodOwnerCount[_owner] = foodOwnerCount[_owner].add(getResourceNum);
+            accountInstance.setFoodOwnerCount(_owner, accountInstance.getFoodOwnerCount(_owner).add(getResourceNum));
         }
         else if (keccak256(bytes(_name)) == keccak256(bytes("Coin"))) {
-            coinOwnerCount[_owner] = coinOwnerCount[_owner].add(getResourceNum);
+            accountInstance.setCoinOwnerCount(_owner, accountInstance.getCoinOwnerCount(_owner).add(getResourceNum));
         }
         else if (keccak256(bytes(_name)) == keccak256(bytes("Wood"))) {
-            woodOwnerCount[_owner] = woodOwnerCount[_owner].add(getResourceNum);
+            accountInstance.setWoodOwnerCount(_owner, accountInstance.getWoodOwnerCount(_owner).add(getResourceNum));
         }
     }
 }

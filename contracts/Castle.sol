@@ -6,10 +6,15 @@ import "./BuildingFactory.sol";
 contract CastleFactory is BuildingFactory {
 
     using SafeMath for uint;
+
+    Account accountInstance;
+    constructor(address _account_address) public {
+        accountInstance = Account(_account_address);
+    }
     
     function createCastle(uint _x, uint _y) public {
         _createBuilding(msg.sender, "Castle", _x, _y);
-        _initializeKingdom(msg.sender);
+        accountInstance.initializeKingdom(msg.sender);
         castleLevel[msg.sender] = 1;
     }
 

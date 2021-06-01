@@ -6,6 +6,11 @@ import "./Castle.sol";
 contract MineFactory is CastleFactory {
     
     using SafeMath for uint;
+
+    Account accountInstance;
+    constructor(address _account_address) public {
+        accountInstance = Account(_account_address);
+    }
     
     mapping (address => uint) public ownerIronProduceTime;
     uint produceIronAbility = 1;
@@ -27,7 +32,7 @@ contract MineFactory is CastleFactory {
         for (uint i=0; i<mines.length; i++) {
             produceAbilitySum += buildings[mines[i]].level * produceIronAbility;
         }
-        ironOwnerCount[_owner] += periodCounts * produceAbilitySum;
+        accountInstance.setIronOwnerCount(_owner, accountInstance.getIronOwnerCount(_owner) + periodCounts * produceAbilitySum);
         ownerIronProduceTime[_owner] += 10 * periodCounts;
     }
 }
