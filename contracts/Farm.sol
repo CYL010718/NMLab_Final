@@ -6,6 +6,11 @@ import "./Castle.sol";
 contract FarmFactory is CastleFactory {
     
     using SafeMath for uint;
+
+    Account accountInstance;
+    constructor(address _account_address) public {
+        accountInstance = Account(_account_address);
+    }
     
     mapping (address => uint) public ownerFoodProduceTime;
     uint produceFoodAbility = 1;
@@ -27,7 +32,7 @@ contract FarmFactory is CastleFactory {
         for (uint i=0; i<farms.length; i++) {
             produceAbilitySum += buildings[farms[i]].level * produceFoodAbility;
         }
-        foodOwnerCount[_owner] += periodCounts * produceAbilitySum;
+        accountInstance.setFoodOwnerCount(_owner, accountInstance.getFoodOwnerCount(_owner) + periodCounts * produceAbilitySum);
         ownerFoodProduceTime[_owner] += 10 * periodCounts;
     }
 

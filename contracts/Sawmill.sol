@@ -7,6 +7,12 @@ contract SawmillFactory is CastleFactory {
     
     using SafeMath for uint;
     
+    Account accountInstance;
+    constructor(address _account_address) public {
+        accountInstance = Account(_account_address);
+    }
+
+
     mapping (address => uint) public ownerWoodProduceTime;
     uint produceWoodAbility = 1;
 
@@ -27,7 +33,7 @@ contract SawmillFactory is CastleFactory {
         for (uint i=0; i<sawmills.length; i++) {
             produceAbilitySum += buildings[sawmills[i]].level * produceWoodAbility;
         }
-        woodOwnerCount[_owner] += periodCounts * produceAbilitySum;
+        accountInstance.setWoodOwnerCount(_owner,  accountInstance.getWoodOwnerCount(_owner) + periodCounts * produceAbilitySum);
         ownerWoodProduceTime[_owner] += 10 * periodCounts;
     }
 }

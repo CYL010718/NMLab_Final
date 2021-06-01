@@ -26,47 +26,6 @@ contract Account {
         return false;
     }
 
-    function getStoneOwnerCount(address _owner) public view returns(uint) {
-        return stoneOwnerCount[_owner];
-    }
-
-    function setStoneOwnerCount(address _owner, uint value) public {
-        stoneOwnerCount[_owner] = value;
-    }
-
-    function getIronOwnerCount(address _owner) public view returns(uint) {
-        return ironOwnerCount[_owner];
-    }
-
-    function setIronOwnerCount(address _owner, uint value) public {
-        ironOwnerCount[_owner] = value;
-    }
-
-    function getFoodOwnerCount(address _owner) public view returns(uint) {
-        return foodOwnerCount[_owner];
-    }
-
-    function setFoodOwnerCount(address _owner, uint value) public {
-        foodOwnerCount[_owner] = value;
-    }
-
-    function getCoinOwnerCount(address _owner) public view returns(uint) {
-        return coinOwnerCount[_owner];
-    }
-
-    function setCoinOwnerCount(address _owner, uint value) public {
-        coinOwnerCount[_owner] = value;
-    }
-
-    function getWoodOwnerCount(address _owner) public view returns(uint) {
-        return woodOwnerCount[_owner];
-    }
-
-    function setWoodOwnerCount(address _owner, uint value) public {
-        woodOwnerCount[_owner] = value;
-    }
-
-
     function getMyIdx() public view returns(uint) {
         for (uint i=0; i<kingdomAmount; ++i) {
             if(castleToOwner[i] == msg.sender) {
@@ -76,28 +35,25 @@ contract Account {
         return kingdomAmount;
     }
 
-    function getUserPower(address idx) public view returns(uint) {
-        return power[idx];
+    function getUserPower(uint idx) public view returns(uint) {
+        if(idx < kingdomAmount) {
+            return power[castleToOwner[idx]];
+        }
+        return 0;
     }
 
-    function setUserPower(address idx, uint value) public {
-        power[idx] = value;
+    function getUserHealth(uint idx) public view returns(uint) {
+        if(idx < kingdomAmount) {
+            return health[castleToOwner[idx]];
+        }
+        return 0;
     }
 
-    function getUserHealth(address idx) public view returns(uint) {
-        return health[idx];
-    }
-
-    function setUserHealth(address idx, uint value) public {
-        health[idx] = value;
-    }
-
-    function getUserSpyPower(address idx) public view returns(uint) {
-        return spyPower[idx];
-    }
-
-    function setUserSpyPower(address idx, uint value) public {
-        spyPower[idx] = value;
+    function getUserSpyPower(uint idx) public view returns(uint) {
+        if(idx < kingdomAmount) {
+            return spyPower[castleToOwner[idx]];
+        }
+        return 0;
     }
 
     function getKingdomAmount() public view returns(uint) {
@@ -105,7 +61,7 @@ contract Account {
     }
 
     // for web to create castle
-    function initializeKingdom(address _owner) public {
+    function _initializeKingdom(address _owner) internal {
         require(ownerCastleCount[_owner] == 0);
         castleToOwner[kingdomAmount] = _owner;
         kingdomAmount++;
@@ -120,7 +76,7 @@ contract Account {
         spyPower[_owner] = 0;
     }
 
-    function cost(address _owner, uint food, uint wood, uint iron, uint stone, uint coin) public returns (bool){
+    function _cost(address _owner, uint food, uint wood, uint iron, uint stone, uint coin) internal returns (bool){
         if(foodOwnerCount[_owner]>=food && woodOwnerCount[_owner]>=wood && ironOwnerCount[_owner]>=iron && stoneOwnerCount[_owner]>=stone && coinOwnerCount[_owner]>=coin){
             foodOwnerCount[_owner] = foodOwnerCount[_owner].sub(food);
             woodOwnerCount[_owner] = woodOwnerCount[_owner].sub(wood);

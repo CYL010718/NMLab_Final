@@ -6,6 +6,11 @@ import "./Castle.sol";
 contract QuarryFactory is CastleFactory {
     
     using SafeMath for uint;
+
+    Account accountInstance;
+    constructor(address _account_address) public {
+        accountInstance = Account(_account_address);
+    }
     
     mapping (address => uint) public ownerStoneProduceTime;
     uint produceStoneAbility = 1;
@@ -28,7 +33,7 @@ contract QuarryFactory is CastleFactory {
         for (uint i=0; i<quarries.length; i++) {
             produceAbilitySum += buildings[quarries[i]].level * produceStoneAbility;
         }
-        stoneOwnerCount[_owner] += periodCounts * produceAbilitySum;
+        accountInstance.setStoneOwnerCount(_owner, accountInstance.getStoneOwnerCount(_owner) + periodCounts * produceAbilitySum);
         ownerStoneProduceTime[_owner] += 10 * periodCounts;
         // while (now > ownerStoneProduceTime[_owner].add(10 seconds)) { //too slow
         //     for (uint i = 0; i < quarries.length; i++) {

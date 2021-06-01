@@ -3,9 +3,14 @@ pragma solidity >=0.4.21 <0.7.0;
 import "./SafeMath.sol";
 import "./Account.sol";
 
-contract BuildingFactory is Account {
+contract BuildingFactory {
     
     using SafeMath for uint;
+
+    Account accountInstance;
+    constructor(address _account_address) public {
+        accountInstance = Account(_account_address);
+    }
     
     struct Building {
         string name;
@@ -39,7 +44,7 @@ contract BuildingFactory is Account {
             buildingToOwner[0] = address(0);
         }
         uint id = buildings.push(Building(_name, _x, _y, 1)).sub(1);
-        _cost(_creator, 0, buildResourceNeed, buildResourceNeed, buildResourceNeed, buildResourceNeed);
+        accountInstance.cost(_creator, 0, buildResourceNeed, buildResourceNeed, buildResourceNeed, buildResourceNeed);
         buildingToOwner[id] = _creator;
         if (keccak256(bytes(_name)) == keccak256(bytes("Farm"))) {
             ownerFarmCount[_creator] = ownerFarmCount[_creator].add(1);
@@ -79,7 +84,7 @@ contract BuildingFactory is Account {
         ownerBuildingId[_owner] = buildingID;
         ownerStartBuildTime[_owner] = now;
         uint buildingResourceNeed = buildings[buildingID].level * buildResourceNeed;
-        _cost(_owner, 0, buildingResourceNeed, buildingResourceNeed, buildingResourceNeed, buildingResourceNeed);
+        accountInstance.cost(_owner, 0, buildingResourceNeed, buildingResourceNeed, buildingResourceNeed, buildingResourceNeed);
         return buildings[buildingID].level * buildTimeNeed;
     }
 

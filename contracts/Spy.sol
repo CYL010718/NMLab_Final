@@ -24,7 +24,7 @@ contract Spy is Account {
         uint ironCost = (25* levelOfSpy[_owner] - 5) * number;
         uint coinCost = (25* levelOfSpy[_owner] - 5) * number;
 
-        return _cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
+        return cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
     
     function _upgradeSpy(address _owner) internal returns(bool){
@@ -32,7 +32,7 @@ contract Spy is Account {
         uint ironCost = 500* levelOfSpy[_owner] - 125;
         uint coinCost = 500* levelOfSpy[_owner] - 125;
 
-        return _cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
+        return cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
 
     function getSpyAmount(address _owner) public view returns(uint) {
