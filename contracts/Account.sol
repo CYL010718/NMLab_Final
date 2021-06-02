@@ -104,6 +104,10 @@ contract Account {
         return kingdomAmount;
     }
 
+    function convertCastleToOwner(uint id) public view returns(address) {
+        return castleToOwner[id];
+    }
+
     // for web to create castle
     function initializeKingdom(address _owner) public {
         require(ownerCastleCount[_owner] == 0);

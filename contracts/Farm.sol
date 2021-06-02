@@ -2,8 +2,9 @@ pragma solidity >=0.4.21 <0.7.0;
 
 import "./SafeMath.sol";
 import "./Castle.sol";
+import "./Farm.sol";
 
-contract FarmFactory is CastleFactory {
+contract FarmFactory is BuildingFactory {
     
     using SafeMath for uint;
 
