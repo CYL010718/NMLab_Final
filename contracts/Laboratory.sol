@@ -9,6 +9,7 @@ contract Laboratory is BuildingFactory, Spy {
     using SafeMath for uint;
     using SafeMath for uint;
 
+    
     function createLaboratory(uint _x, uint _y) public {
         _createBuilding(msg.sender, "Laboratory", _x, _y);
         levelOfSpy[msg.sender] = 1;

@@ -7,7 +7,7 @@ contract CastleFactory is BuildingFactory {
 
     using SafeMath for uint;
 
-    Account accountInstance;
+    //Account accountInstance;
     constructor(address _account_address) public {
         accountInstance = Account(_account_address);
     }

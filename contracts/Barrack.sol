@@ -1,5 +1,6 @@
 pragma solidity >=0.4.21 <0.7.0;
 
+import "./Account.sol";
 import "./SafeMath.sol";
 import "./BuildingFactory.sol";
 import "./Soldier.sol";
@@ -7,7 +8,14 @@ import "./Soldier.sol";
 contract Barrack is BuildingFactory, Soldier {
     
     using SafeMath for uint;
-    using SafeMath for uint;
+    //using SafeMath for uint;
+
+    //Account accountInstanceA;
+    //Account accountInstanceB;
+    
+    constructor(address _account_address) public {
+        accountInstance = Account(_account_address);
+    }
 
     function createBarrack(uint _x, uint _y) public {
         _createBuilding(msg.sender, "Barrack", _x, _y);

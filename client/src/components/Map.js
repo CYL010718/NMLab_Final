@@ -3,7 +3,7 @@ import { ContractContext } from "../App";
 import { useMeasure } from 'react-use'
 import {Cell, BarrackCell, LabCell} from './Cell';
 import "../styles/Map.css";
-import gameBackground from '../images/main_map_small.png';
+import gameBackground from '../images/map.JPG';
 import Draggable from 'react-draggable';
 
 

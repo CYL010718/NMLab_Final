@@ -12,6 +12,10 @@ import "./Laboratory.sol";
 
 contract Produce is QuarryFactory, MineFactory, FarmFactory, ManorFactory, SawmillFactory {
 
+    constructor(address _account_address) public {
+        accountInstance = Account(_account_address);
+    }
+    
     function updateProduce(address _owner) public {
         _updateProduceCoin(_owner);
         _updateProduceIron(_owner);
