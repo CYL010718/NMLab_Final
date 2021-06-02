@@ -37,8 +37,12 @@ contract BuildingFactory {
     mapping (address => uint) ownerBarrackCount;
     mapping (address => uint) ownerLaboratoryCount;
 
+    function getBuildingLevel(uint buildingId) public view returns(uint){
+        return buildings[buildingId].level;
+    }
 
-    function _createBuilding(address _creator, string memory _name, uint _x, uint _y) internal returns(uint){
+
+    function _createBuilding(address _creator, string memory _name, uint _x, uint _y) public returns(uint){
         if(buildings.length == 0) {
             buildings.push(Building("first_building!", 0, 0, 1000));
             buildingToOwner[0] = address(0);

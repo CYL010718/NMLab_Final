@@ -5,6 +5,42 @@
       "constant": false,
       "inputs": [
         {
+          "internalType": "address",
+          "name": "_creator",
+          "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_x",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_y",
+          "type": "uint256"
+        }
+      ],
+      "name": "_createBuilding",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
           "internalType": "uint256",
           "name": "_ownerId",
           "type": "uint256"
@@ -174,6 +210,27 @@
           "internalType": "string",
           "name": "",
           "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "buildingId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getBuildingLevel",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         }
       ],
       "payable": false,
@@ -590,7 +647,7 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_ownerId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_attackedCastleId\",\"type\":\"uint256\"}],\"name\":\"attack\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"buildingToOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"buildings\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"placeX\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"placeY\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createBarrack\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createCastle\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"createSoldierTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"idx\",\"type\":\"uint256\"}],\"name\":\"getBuildingById\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_placeX\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_placeY\",\"type\":\"uint256\"}],\"name\":\"getBuildingByOwner\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getBuildingsByOwner\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getBuildingsLen\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getCreateSoldierTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getRemainingTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getSoldierAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"}],\"name\":\"getSpecificBuildingByOwner\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getUpgradingId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"levelOfSoldier\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"levelUpSoldierTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"numOfSoldier\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerCreateSoldierTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerStartCreateTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerStartLevelUpTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"soldierHealth\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"soldierPower\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"startBuild\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"number\",\"type\":\"uint256\"}],\"name\":\"startCreateSoldier\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"updateBuild\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"updateCreateSoldier\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/seanwang0823/NMLab_Final/contracts/Barrack.sol\":\"Barrack\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/seanwang0823/NMLab_Final/contracts/Account.sol\":{\"keccak256\":\"0x4efe15a0408cdb125a89cb50448204bd362a3e88ef0dca5ddd75f9a8cdcfcc34\",\"urls\":[\"bzz-raw://b87eb4f716016f01bd7a6fb818da038de89c342ef8a8260a8479d7b596a3815c\",\"dweb:/ipfs/QmNmCE1LFPsPTcJA5vG7uMPZDaAE3DGCQW8mdaNXsLQqPN\"]},\"/Users/seanwang0823/NMLab_Final/contracts/Barrack.sol\":{\"keccak256\":\"0x0dccc81f6b4e3ad71f3eb2d4f83918c26bcd3ca7deccae9d0b14a4ad835989e9\",\"urls\":[\"bzz-raw://706c0a97be13f2332f30c7ca35ef82aa496f5fa977e9cebfebd109221d79bd22\",\"dweb:/ipfs/QmY8pYLQR2Rvdn4GxWCChFDoBP9bzGFZQoxRZgYo1KTm5z\"]},\"/Users/seanwang0823/NMLab_Final/contracts/BuildingFactory.sol\":{\"keccak256\":\"0xca62727082c3572345b2e5f131970cf112822eb66d57767fef51db10e88d7df6\",\"urls\":[\"bzz-raw://9e93dffbfcc6f7ef6370e32109684494271f5037f8dfef6f7ae771be478961eb\",\"dweb:/ipfs/QmarUGjCvoJczaZiKFZS98zrS3NMwVCvqac4b3mvpa4x8J\"]},\"/Users/seanwang0823/NMLab_Final/contracts/SafeMath.sol\":{\"keccak256\":\"0x509ff84abda41e86fd3d4c5fe2f2f7a11fa1f2ad4a88d4f70022da87ae1bee73\",\"urls\":[\"bzz-raw://d4365c2db3136fcaa853c38fa9df48034f304d2c768513889fd2f0008ac4583b\",\"dweb:/ipfs/Qmbg9cXPehZJQXzRMNk6dbK74AD9iCWUuWzAV7SUyJFptX\"]},\"/Users/seanwang0823/NMLab_Final/contracts/Soldier.sol\":{\"keccak256\":\"0x6a617343d4830af9f76fd6bdce5be13fc0232b0b77d4b4828df6428ffa128811\",\"urls\":[\"bzz-raw://f2acca729277e1a3367f83977e01b88ed43b5b4c472de638fbb577770bc3c1ef\",\"dweb:/ipfs/Qmc7Tk4DtvcvQjF4WMFiRQSxPiDevhuSQtsh8wg6GgzYJS\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_creator\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"_createBuilding\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_ownerId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_attackedCastleId\",\"type\":\"uint256\"}],\"name\":\"attack\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"buildingToOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"buildings\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"placeX\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"placeY\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createBarrack\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createCastle\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"createSoldierTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"idx\",\"type\":\"uint256\"}],\"name\":\"getBuildingById\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_placeX\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_placeY\",\"type\":\"uint256\"}],\"name\":\"getBuildingByOwner\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"buildingId\",\"type\":\"uint256\"}],\"name\":\"getBuildingLevel\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getBuildingsByOwner\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getBuildingsLen\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getCreateSoldierTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getRemainingTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getSoldierAmount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"}],\"name\":\"getSpecificBuildingByOwner\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getUpgradingId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"levelOfSoldier\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"levelUpSoldierTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"numOfSoldier\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerCreateSoldierTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerStartCreateTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerStartLevelUpTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"soldierHealth\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"soldierPower\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"startBuild\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"number\",\"type\":\"uint256\"}],\"name\":\"startCreateSoldier\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"updateBuild\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"updateCreateSoldier\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/seanwang0823/NMLab_Final/contracts/Barrack.sol\":\"Barrack\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/seanwang0823/NMLab_Final/contracts/Account.sol\":{\"keccak256\":\"0x4efe15a0408cdb125a89cb50448204bd362a3e88ef0dca5ddd75f9a8cdcfcc34\",\"urls\":[\"bzz-raw://b87eb4f716016f01bd7a6fb818da038de89c342ef8a8260a8479d7b596a3815c\",\"dweb:/ipfs/QmNmCE1LFPsPTcJA5vG7uMPZDaAE3DGCQW8mdaNXsLQqPN\"]},\"/Users/seanwang0823/NMLab_Final/contracts/Barrack.sol\":{\"keccak256\":\"0x0dccc81f6b4e3ad71f3eb2d4f83918c26bcd3ca7deccae9d0b14a4ad835989e9\",\"urls\":[\"bzz-raw://706c0a97be13f2332f30c7ca35ef82aa496f5fa977e9cebfebd109221d79bd22\",\"dweb:/ipfs/QmY8pYLQR2Rvdn4GxWCChFDoBP9bzGFZQoxRZgYo1KTm5z\"]},\"/Users/seanwang0823/NMLab_Final/contracts/BuildingFactory.sol\":{\"keccak256\":\"0xcd1f3bdb698cdc2852d78eefeb8e3b06af21784c9f2e9401b4cc8ba84737cf19\",\"urls\":[\"bzz-raw://659ba91b7ba6a5d5b42730b22fc9a80c869317c119bd95ad83b1f9f1b9c9f529\",\"dweb:/ipfs/QmUX13PGecmeMcSnpD6QCoo2PecWit2EorwWVZSwjPav2i\"]},\"/Users/seanwang0823/NMLab_Final/contracts/SafeMath.sol\":{\"keccak256\":\"0x509ff84abda41e86fd3d4c5fe2f2f7a11fa1f2ad4a88d4f70022da87ae1bee73\",\"urls\":[\"bzz-raw://d4365c2db3136fcaa853c38fa9df48034f304d2c768513889fd2f0008ac4583b\",\"dweb:/ipfs/Qmbg9cXPehZJQXzRMNk6dbK74AD9iCWUuWzAV7SUyJFptX\"]},\"/Users/seanwang0823/NMLab_Final/contracts/Soldier.sol\":{\"keccak256\":\"0x6a617343d4830af9f76fd6bdce5be13fc0232b0b77d4b4828df6428ffa128811\",\"urls\":[\"bzz-raw://f2acca729277e1a3367f83977e01b88ed43b5b4c472de638fbb577770bc3c1ef\",\"dweb:/ipfs/Qmc7Tk4DtvcvQjF4WMFiRQSxPiDevhuSQtsh8wg6GgzYJS\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
@@ -627,7 +684,7 @@
         "id": 573,
         "nodeType": "ImportDirective",
         "scope": 793,
-        "sourceUnit": 3756,
+        "sourceUnit": 3812,
         "src": "34:24:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -638,7 +695,7 @@
         "id": 574,
         "nodeType": "ImportDirective",
         "scope": 793,
-        "sourceUnit": 1857,
+        "sourceUnit": 1870,
         "src": "59:31:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -649,7 +706,7 @@
         "id": 575,
         "nodeType": "ImportDirective",
         "scope": 793,
-        "sourceUnit": 4321,
+        "sourceUnit": 4377,
         "src": "91:23:1",
         "symbolAliases": [],
         "unitAlias": ""
@@ -663,10 +720,10 @@
               "id": 576,
               "name": "BuildingFactory",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 1856,
+              "referencedDeclaration": 1869,
               "src": "136:15:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_BuildingFactory_$1856",
+                "typeIdentifier": "t_contract$_BuildingFactory_$1869",
                 "typeString": "contract BuildingFactory"
               }
             },
@@ -681,10 +738,10 @@
               "id": 578,
               "name": "Soldier",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 4320,
+              "referencedDeclaration": 4376,
               "src": "153:7:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_Soldier_$4320",
+                "typeIdentifier": "t_contract$_Soldier_$4376",
                 "typeString": "contract Soldier"
               }
             },
@@ -694,8 +751,8 @@
           }
         ],
         "contractDependencies": [
-          1856,
-          4320
+          1869,
+          4376
         ],
         "contractKind": "contract",
         "documentation": null,
@@ -703,8 +760,8 @@
         "id": 792,
         "linearizedBaseContracts": [
           792,
-          4320,
-          1856
+          4376,
+          1869
         ],
         "name": "Barrack",
         "nodeType": "ContractDefinition",
@@ -716,10 +773,10 @@
               "id": 580,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3755,
+              "referencedDeclaration": 3811,
               "src": "178:8:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$3755",
+                "typeIdentifier": "t_contract$_SafeMath_$3811",
                 "typeString": "library SafeMath"
               }
             },
@@ -743,10 +800,10 @@
               "id": 583,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3755,
+              "referencedDeclaration": 3811,
               "src": "207:8:1",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$3755",
+                "typeIdentifier": "t_contract$_SafeMath_$3811",
                 "typeString": "library SafeMath"
               }
             },
@@ -781,7 +838,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4720,
+                          "referencedDeclaration": 4776,
                           "src": "305:3:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -870,7 +927,7 @@
                       "name": "_createBuilding",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 1144,
+                      "referencedDeclaration": 1157,
                       "src": "289:15:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_string_memory_ptr_$_t_uint256_$_t_uint256_$returns$_t_uint256_$",
@@ -911,7 +968,7 @@
                         "name": "levelOfSoldier",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3928,
+                        "referencedDeclaration": 3984,
                         "src": "345:14:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -927,7 +984,7 @@
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4720,
+                          "referencedDeclaration": 4776,
                           "src": "360:3:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
@@ -1117,7 +1174,7 @@
                       "name": "msg",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 4720,
+                      "referencedDeclaration": 4776,
                       "src": "579:3:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_magic_message",
@@ -1161,7 +1218,7 @@
                         "name": "ownerStartCreateTime",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3932,
+                        "referencedDeclaration": 3988,
                         "src": "602:20:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -1428,7 +1485,7 @@
                         "name": "_createSoldier",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 4051,
+                        "referencedDeclaration": 4107,
                         "src": "780:14:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_nonpayable$_t_address_$_t_uint256_$returns$_t_bool_$",
@@ -1490,7 +1547,7 @@
                         "name": "levelOfSoldier",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3928,
+                        "referencedDeclaration": 3984,
                         "src": "835:14:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -1666,7 +1723,7 @@
                         "name": "ownerStartCreateTime",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3932,
+                        "referencedDeclaration": 3988,
                         "src": "919:20:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -1709,7 +1766,7 @@
                           "name": "now",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4722,
+                          "referencedDeclaration": 4778,
                           "src": "955:3:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -1777,7 +1834,7 @@
                         "name": "ownerCreateSoldierTime",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3936,
+                        "referencedDeclaration": 3992,
                         "src": "969:22:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -1839,7 +1896,7 @@
                           "name": "createSoldierTime",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 3943,
+                          "referencedDeclaration": 3999,
                           "src": "1002:17:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -1907,7 +1964,7 @@
                       "name": "ownerCreateSoldierTime",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3936,
+                      "referencedDeclaration": 3992,
                       "src": "1059:22:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -2052,7 +2109,7 @@
                           "name": "now",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 4722,
+                          "referencedDeclaration": 4778,
                           "src": "1185:3:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_uint256",
@@ -2069,7 +2126,7 @@
                             "name": "ownerStartCreateTime",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 3932,
+                            "referencedDeclaration": 3988,
                             "src": "1191:20:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -2085,7 +2142,7 @@
                               "name": "msg",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4720,
+                              "referencedDeclaration": 4776,
                               "src": "1212:3:1",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_magic_message",
@@ -2131,7 +2188,7 @@
                           "name": "ownerCreateSoldierTime",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 3936,
+                          "referencedDeclaration": 3992,
                           "src": "1225:22:1",
                           "typeDescriptions": {
                             "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -2147,7 +2204,7 @@
                             "name": "msg",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 4720,
+                            "referencedDeclaration": 4776,
                             "src": "1248:3:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_message",
@@ -2304,7 +2361,7 @@
                         "name": "ownerStartCreateTime",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3932,
+                        "referencedDeclaration": 3988,
                         "src": "1412:20:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -2409,7 +2466,7 @@
                       "name": "now",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 4722,
+                      "referencedDeclaration": 4778,
                       "src": "1469:3:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -2429,7 +2486,7 @@
                             "name": "ownerCreateSoldierTime",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 3936,
+                            "referencedDeclaration": 3992,
                             "src": "1509:22:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -2477,7 +2534,7 @@
                             "name": "ownerStartCreateTime",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 3932,
+                            "referencedDeclaration": 3988,
                             "src": "1476:20:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -2516,7 +2573,7 @@
                         "lValueRequested": false,
                         "memberName": "add",
                         "nodeType": "MemberAccess",
-                        "referencedDeclaration": 3595,
+                        "referencedDeclaration": 3651,
                         "src": "1476:32:1",
                         "typeDescriptions": {
                           "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -2590,7 +2647,7 @@
                               "name": "now",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 4722,
+                              "referencedDeclaration": 4778,
                               "src": "2011:3:1",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -2627,7 +2684,7 @@
                                       "name": "ownerStartCreateTime",
                                       "nodeType": "Identifier",
                                       "overloadedDeclarations": [],
-                                      "referencedDeclaration": 3932,
+                                      "referencedDeclaration": 3988,
                                       "src": "1944:20:1",
                                       "typeDescriptions": {
                                         "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -2669,7 +2726,7 @@
                                       "name": "ownerCreateSoldierTime",
                                       "nodeType": "Identifier",
                                       "overloadedDeclarations": [],
-                                      "referencedDeclaration": 3936,
+                                      "referencedDeclaration": 3992,
                                       "src": "1975:22:1",
                                       "typeDescriptions": {
                                         "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -2728,7 +2785,7 @@
                             "lValueRequested": false,
                             "memberName": "sub",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 3611,
+                            "referencedDeclaration": 3667,
                             "src": "1943:67:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -2853,7 +2910,7 @@
                                     "name": "createSoldierTime",
                                     "nodeType": "Identifier",
                                     "overloadedDeclarations": [],
-                                    "referencedDeclaration": 3943,
+                                    "referencedDeclaration": 3999,
                                     "src": "1648:17:1",
                                     "typeDescriptions": {
                                       "typeIdentifier": "t_uint256",
@@ -2876,7 +2933,7 @@
                                       "name": "levelOfSoldier",
                                       "nodeType": "Identifier",
                                       "overloadedDeclarations": [],
-                                      "referencedDeclaration": 3928,
+                                      "referencedDeclaration": 3984,
                                       "src": "1621:14:1",
                                       "typeDescriptions": {
                                         "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -2915,7 +2972,7 @@
                                   "lValueRequested": false,
                                   "memberName": "mul",
                                   "nodeType": "MemberAccess",
-                                  "referencedDeclaration": 3672,
+                                  "referencedDeclaration": 3728,
                                   "src": "1621:26:1",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -2952,7 +3009,7 @@
                                   "name": "ownerCreateSoldierTime",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 3936,
+                                  "referencedDeclaration": 3992,
                                   "src": "1584:22:1",
                                   "typeDescriptions": {
                                     "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -2991,7 +3048,7 @@
                               "lValueRequested": false,
                               "memberName": "div",
                               "nodeType": "MemberAccess",
-                              "referencedDeclaration": 3688,
+                              "referencedDeclaration": 3744,
                               "src": "1584:34:1",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
@@ -3038,7 +3095,7 @@
                               "name": "numOfSoldier",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3924,
+                              "referencedDeclaration": 3980,
                               "src": "1682:12:1",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -3091,7 +3148,7 @@
                                 "name": "numOfSoldier",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 3924,
+                                "referencedDeclaration": 3980,
                                 "src": "1705:12:1",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -3187,7 +3244,7 @@
                               "name": "ownerStartCreateTime",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3932,
+                              "referencedDeclaration": 3988,
                               "src": "1747:20:1",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -3265,7 +3322,7 @@
                               "name": "ownerCreateSoldierTime",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 3936,
+                              "referencedDeclaration": 3992,
                               "src": "1793:22:1",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
@@ -3356,7 +3413,7 @@
                             "name": "_updatePower",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 3988,
+                            "referencedDeclaration": 4044,
                             "src": "1841:12:1",
                             "typeDescriptions": {
                               "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
@@ -3525,7 +3582,7 @@
       },
       {
         "attributes": {
-          "SourceUnit": 3756,
+          "SourceUnit": 3812,
           "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/SafeMath.sol",
           "file": "./SafeMath.sol",
           "scope": 793,
@@ -3540,7 +3597,7 @@
       },
       {
         "attributes": {
-          "SourceUnit": 1857,
+          "SourceUnit": 1870,
           "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/BuildingFactory.sol",
           "file": "./BuildingFactory.sol",
           "scope": 793,
@@ -3555,7 +3612,7 @@
       },
       {
         "attributes": {
-          "SourceUnit": 4321,
+          "SourceUnit": 4377,
           "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/Soldier.sol",
           "file": "./Soldier.sol",
           "scope": 793,
@@ -3571,16 +3628,16 @@
       {
         "attributes": {
           "contractDependencies": [
-            1856,
-            4320
+            1869,
+            4376
           ],
           "contractKind": "contract",
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
             792,
-            4320,
-            1856
+            4376,
+            1869
           ],
           "name": "Barrack",
           "scope": 793
@@ -3595,7 +3652,7 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "BuildingFactory",
-                  "referencedDeclaration": 1856,
+                  "referencedDeclaration": 1869,
                   "type": "contract BuildingFactory"
                 },
                 "id": 576,
@@ -3616,7 +3673,7 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "Soldier",
-                  "referencedDeclaration": 4320,
+                  "referencedDeclaration": 4376,
                   "type": "contract Soldier"
                 },
                 "id": 578,
@@ -3634,7 +3691,7 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "SafeMath",
-                  "referencedDeclaration": 3755,
+                  "referencedDeclaration": 3811,
                   "type": "library SafeMath"
                 },
                 "id": 580,
@@ -3661,7 +3718,7 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "SafeMath",
-                  "referencedDeclaration": 3755,
+                  "referencedDeclaration": 3811,
                   "type": "library SafeMath"
                 },
                 "id": 583,
@@ -3810,7 +3867,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 1144,
+                              "referencedDeclaration": 1157,
                               "type": "function (address,string memory,uint256,uint256) returns (uint256)",
                               "value": "_createBuilding"
                             },
@@ -3836,7 +3893,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 4720,
+                                  "referencedDeclaration": 4776,
                                   "type": "msg",
                                   "value": "msg"
                                 },
@@ -3933,7 +3990,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 3928,
+                                  "referencedDeclaration": 3984,
                                   "type": "mapping(address => uint256)",
                                   "value": "levelOfSoldier"
                                 },
@@ -3959,7 +4016,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 4720,
+                                      "referencedDeclaration": 4776,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -4150,7 +4207,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4720,
+                              "referencedDeclaration": 4776,
                               "type": "msg",
                               "value": "msg"
                             },
@@ -4204,7 +4261,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 3932,
+                                  "referencedDeclaration": 3988,
                                   "type": "mapping(address => uint256)",
                                   "value": "ownerStartCreateTime"
                                 },
@@ -4459,7 +4516,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 4051,
+                                  "referencedDeclaration": 4107,
                                   "type": "function (address,uint256) returns (bool)",
                                   "value": "_createSoldier"
                                 },
@@ -4553,7 +4610,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 3928,
+                                  "referencedDeclaration": 3984,
                                   "type": "mapping(address => uint256)",
                                   "value": "levelOfSoldier"
                                 },
@@ -4746,7 +4803,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 3932,
+                                  "referencedDeclaration": 3988,
                                   "type": "mapping(address => uint256)",
                                   "value": "ownerStartCreateTime"
                                 },
@@ -4813,7 +4870,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 4722,
+                                  "referencedDeclaration": 4778,
                                   "type": "uint256",
                                   "value": "now"
                                 },
@@ -4865,7 +4922,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 3936,
+                                  "referencedDeclaration": 3992,
                                   "type": "mapping(address => uint256)",
                                   "value": "ownerCreateSoldierTime"
                                 },
@@ -4928,7 +4985,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 3943,
+                                      "referencedDeclaration": 3999,
                                       "type": "uint256",
                                       "value": "createSoldierTime"
                                     },
@@ -5005,7 +5062,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3936,
+                              "referencedDeclaration": 3992,
                               "type": "mapping(address => uint256)",
                               "value": "ownerCreateSoldierTime"
                             },
@@ -5172,7 +5229,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 4722,
+                                  "referencedDeclaration": 4778,
                                   "type": "uint256",
                                   "value": "now"
                                 },
@@ -5196,7 +5253,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 3932,
+                                      "referencedDeclaration": 3988,
                                       "type": "mapping(address => uint256)",
                                       "value": "ownerStartCreateTime"
                                     },
@@ -5222,7 +5279,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 4720,
+                                          "referencedDeclaration": 4776,
                                           "type": "msg",
                                           "value": "msg"
                                         },
@@ -5261,7 +5318,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 3936,
+                                  "referencedDeclaration": 3992,
                                   "type": "mapping(address => uint256)",
                                   "value": "ownerCreateSoldierTime"
                                 },
@@ -5287,7 +5344,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 4720,
+                                      "referencedDeclaration": 4776,
                                       "type": "msg",
                                       "value": "msg"
                                     },
@@ -5446,7 +5503,7 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 3932,
+                                  "referencedDeclaration": 3988,
                                   "type": "mapping(address => uint256)",
                                   "value": "ownerStartCreateTime"
                                 },
@@ -5550,7 +5607,7 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 4722,
+                              "referencedDeclaration": 4778,
                               "type": "uint256",
                               "value": "now"
                             },
@@ -5586,7 +5643,7 @@
                                   "isPure": false,
                                   "lValueRequested": false,
                                   "member_name": "add",
-                                  "referencedDeclaration": 3595,
+                                  "referencedDeclaration": 3651,
                                   "type": "function (uint256,uint256) pure returns (uint256)"
                                 },
                                 "children": [
@@ -5606,7 +5663,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 3932,
+                                          "referencedDeclaration": 3988,
                                           "type": "mapping(address => uint256)",
                                           "value": "ownerStartCreateTime"
                                         },
@@ -5654,7 +5711,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 3936,
+                                      "referencedDeclaration": 3992,
                                       "type": "mapping(address => uint256)",
                                       "value": "ownerCreateSoldierTime"
                                     },
@@ -5787,7 +5844,7 @@
                                           "isPure": false,
                                           "lValueRequested": false,
                                           "member_name": "div",
-                                          "referencedDeclaration": 3688,
+                                          "referencedDeclaration": 3744,
                                           "type": "function (uint256,uint256) pure returns (uint256)"
                                         },
                                         "children": [
@@ -5807,7 +5864,7 @@
                                                   "overloadedDeclarations": [
                                                     null
                                                   ],
-                                                  "referencedDeclaration": 3936,
+                                                  "referencedDeclaration": 3992,
                                                   "type": "mapping(address => uint256)",
                                                   "value": "ownerCreateSoldierTime"
                                                 },
@@ -5867,7 +5924,7 @@
                                               "isPure": false,
                                               "lValueRequested": false,
                                               "member_name": "mul",
-                                              "referencedDeclaration": 3672,
+                                              "referencedDeclaration": 3728,
                                               "type": "function (uint256,uint256) pure returns (uint256)"
                                             },
                                             "children": [
@@ -5887,7 +5944,7 @@
                                                       "overloadedDeclarations": [
                                                         null
                                                       ],
-                                                      "referencedDeclaration": 3928,
+                                                      "referencedDeclaration": 3984,
                                                       "type": "mapping(address => uint256)",
                                                       "value": "levelOfSoldier"
                                                     },
@@ -5925,7 +5982,7 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 3943,
+                                              "referencedDeclaration": 3999,
                                               "type": "uint256",
                                               "value": "createSoldierTime"
                                             },
@@ -5982,7 +6039,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 3924,
+                                          "referencedDeclaration": 3980,
                                           "type": "mapping(address => uint256)",
                                           "value": "numOfSoldier"
                                         },
@@ -6040,7 +6097,7 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 3924,
+                                              "referencedDeclaration": 3980,
                                               "type": "mapping(address => uint256)",
                                               "value": "numOfSoldier"
                                             },
@@ -6141,7 +6198,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 3932,
+                                          "referencedDeclaration": 3988,
                                           "type": "mapping(address => uint256)",
                                           "value": "ownerStartCreateTime"
                                         },
@@ -6224,7 +6281,7 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 3936,
+                                          "referencedDeclaration": 3992,
                                           "type": "mapping(address => uint256)",
                                           "value": "ownerCreateSoldierTime"
                                         },
@@ -6306,7 +6363,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 3988,
+                                      "referencedDeclaration": 4044,
                                       "type": "function (address)",
                                       "value": "_updatePower"
                                     },
@@ -6433,7 +6490,7 @@
                                       "isPure": false,
                                       "lValueRequested": false,
                                       "member_name": "sub",
-                                      "referencedDeclaration": 3611,
+                                      "referencedDeclaration": 3667,
                                       "type": "function (uint256,uint256) pure returns (uint256)"
                                     },
                                     "children": [
@@ -6479,7 +6536,7 @@
                                                       "overloadedDeclarations": [
                                                         null
                                                       ],
-                                                      "referencedDeclaration": 3932,
+                                                      "referencedDeclaration": 3988,
                                                       "type": "mapping(address => uint256)",
                                                       "value": "ownerStartCreateTime"
                                                     },
@@ -6522,7 +6579,7 @@
                                                       "overloadedDeclarations": [
                                                         null
                                                       ],
-                                                      "referencedDeclaration": 3936,
+                                                      "referencedDeclaration": 3992,
                                                       "type": "mapping(address => uint256)",
                                                       "value": "ownerCreateSoldierTime"
                                                     },
@@ -6570,7 +6627,7 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 4722,
+                                      "referencedDeclaration": 4778,
                                       "type": "uint256",
                                       "value": "now"
                                     },
@@ -6757,7 +6814,7 @@
     }
   },
   "schemaVersion": "3.4.0",
-  "updatedAt": "2021-06-02T02:03:28.554Z",
+  "updatedAt": "2021-06-02T05:16:33.475Z",
   "devdoc": {
     "methods": {}
   },
