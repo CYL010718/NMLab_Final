@@ -3,7 +3,7 @@ pragma solidity >=0.4.21 <0.7.0;
 import "./SafeMath.sol";
 import "./BuildingFactory.sol";
 
-contract ManorFactory {
+contract Manor {
     
     using SafeMath for uint;
 
@@ -23,7 +23,7 @@ contract ManorFactory {
     }
 
 
-    function _updateProduceCoin(address _owner) internal {
+    function _updateProduceCoin(address _owner) public {
         uint[] memory manors = buildingInstance.getSpecificBuildingByOwner(_owner, "Manor");
         if (ownerCoinProduceTime[_owner] == 0 || manors.length == 0) {
             ownerCoinProduceTime[_owner] = now;

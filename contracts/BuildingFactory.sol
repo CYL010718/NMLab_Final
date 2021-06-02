@@ -3,11 +3,13 @@ pragma solidity >=0.4.21 <0.7.0;
 import "./SafeMath.sol";
 import "./Account.sol";
 
-contract BuildingFactory {
+contract BuildingFactory{
     
     using SafeMath for uint;
 
     Account accountInstance;
+
+    
     constructor(address _account_address) public {
         accountInstance = Account(_account_address);
     }

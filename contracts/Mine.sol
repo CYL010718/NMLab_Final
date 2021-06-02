@@ -3,7 +3,7 @@ pragma solidity >=0.4.21 <0.7.0;
 import "./SafeMath.sol";
 import "./BuildingFactory.sol";
 
-contract MineFactory {
+contract Mine {
     
     using SafeMath for uint;
 
@@ -23,7 +23,7 @@ contract MineFactory {
     }
 
 
-    function _updateProduceIron(address _owner) internal {
+    function _updateProduceIron(address _owner) public {
         uint[] memory mines = buildingInstance.getSpecificBuildingByOwner(_owner, "Mine");
         if (ownerIronProduceTime[_owner] == 0 || mines.length == 0) {
             ownerIronProduceTime[_owner] = now;
