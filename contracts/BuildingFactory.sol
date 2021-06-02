@@ -191,5 +191,17 @@ contract BuildingFactory {
         }
         return result;
     }
+
+    function createCastle(uint _x, uint _y) public {
+        _createBuilding(msg.sender, "Castle", _x, _y);
+        accountInstance.initializeKingdom(msg.sender);
+        castleLevel[msg.sender] = 1;
+    }
+
+
+    modifier lessThanCastle(address _owner, uint _buildingID) {
+        require(buildings[_buildingID].level.add(1) <= castleLevel[_owner]);
+        _;
+    }
     
 }

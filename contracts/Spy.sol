@@ -2,7 +2,13 @@ pragma solidity >=0.4.21 <0.7.0;
 
 import "./Account.sol";
 
-contract Spy is Account {
+contract Spy {
+
+    Account accountInstance;
+    constructor(address _account_address) public {
+        accountInstance = Account(_account_address);
+    }
+
     mapping (address => uint) public numOfSpy;
 
     mapping (address => uint) public levelOfSpy;
@@ -16,7 +22,7 @@ contract Spy is Account {
 
     function _updateSpyPower(address _owner) internal {
         // power[_owner] = numOfSpy[_owner] * levelOfSpy[_owner];
-        spyPower[_owner] = numOfSpy[_owner] * levelOfSpy[_owner];
+        accountInstance.setUserSpyPower(_owner, numOfSpy[_owner] * levelOfSpy[_owner]);
     }
 
     function _createSpy(address _owner, uint number) internal returns(bool) {
@@ -24,7 +30,7 @@ contract Spy is Account {
         uint ironCost = (25* levelOfSpy[_owner] - 5) * number;
         uint coinCost = (25* levelOfSpy[_owner] - 5) * number;
 
-        return cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
+        return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
     
     function _upgradeSpy(address _owner) internal returns(bool){
@@ -32,7 +38,7 @@ contract Spy is Account {
         uint ironCost = 500* levelOfSpy[_owner] - 125;
         uint coinCost = 500* levelOfSpy[_owner] - 125;
 
-        return cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
+        return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
 
     function getSpyAmount(address _owner) public view returns(uint) {
@@ -45,7 +51,7 @@ contract Spy is Account {
         bool win;
         //bool win = -1;
 
-        if (spyPower[myCastle] > spyPower[attackedCastle]){
+        if (accountInstance.getUserSpyPower(myCastle) > accountInstance.getUserSpyPower(attackedCastle)){
             winner = myCastle;
             loser = attackedCastle;
             win = true;
@@ -59,9 +65,9 @@ contract Spy is Account {
     }
 
     function sendSpy(uint _ownerId, uint _attackedCastleId) public returns(bool) {
-        require(msg.sender == castleToOwner[_ownerId]);
-        address myCastle = castleToOwner[_ownerId];
-        address attackedCastle = castleToOwner[_attackedCastleId];
+        require(msg.sender == accountInstance.convertCastleToOwner(_ownerId));
+        address myCastle = accountInstance.convertCastleToOwner(_ownerId);
+        address attackedCastle = accountInstance.convertCastleToOwner(_attackedCastleId);
 
         //returns TRUE if spy of myCastle > attackedCastle
         return _spy(myCastle, attackedCastle);

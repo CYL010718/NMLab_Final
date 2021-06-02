@@ -49,44 +49,47 @@ contract Soldier {
         return numOfSoldier[_owner];
     }
 
-    // function _fight(address myCastle, address attackedCastle) internal{
-    //     address winner;
-    //     address loser;
+    function _fight(address myCastle, address attackedCastle) internal{
+        address winner;
+        address loser;
 
-    //     if (power[myCastle] > power[attackedCastle]){
-    //         winner = myCastle;
-    //         loser = attackedCastle;
-    //     }
-    //     else {
-    //         winner = attackedCastle;
-    //         loser = myCastle;
-    //     }
+        if (accountInstance.getUserPower(myCastle) > accountInstance.getUserPower(attackedCastle)){
+            winner = myCastle;
+            loser = attackedCastle;
+        }
+        else {
+            winner = attackedCastle;
+            loser = myCastle;
+        }
         
-    //     foodOwnerCount[winner] = foodOwnerCount[winner] + (foodOwnerCount[loser] * 4/5);
-    //     // woodOwnerCount[winner] = woodOwnerCount[winner] + (woodOwnerCount[loser] * 4/5);
-    //     // ironOwnerCount[winner] = ironOwnerCount[winner] + (ironOwnerCount[loser] * 4/5);
-    //     // stoneOwnerCount[winner] = stoneOwnerCount[winner] + (stoneOwnerCount[loser] * 4/5);
-    //     coinOwnerCount[winner] = coinOwnerCount[winner] + (coinOwnerCount[loser] * 4/5);
-    //     foodOwnerCount[loser] = foodOwnerCount[loser] - (foodOwnerCount[loser] * 4/5);
-    //     // woodOwnerCount[loser] = woodOwnerCount[loser] - (woodOwnerCount[loser] * 4/5);
-    //     // ironOwnerCount[loser] = ironOwnerCount[loser] - (ironOwnerCount[loser] * 4/5);
-    //     // stoneOwnerCount[loser] = stoneOwnerCount[loser] - (stoneOwnerCount[loser] * 4/5);
-    //     coinOwnerCount[loser] = coinOwnerCount[loser] - (coinOwnerCount[loser] * 4/5);
+        accountInstance.setFoodOwnerCount(winner, accountInstance.getFoodOwnerCount(winner) + (accountInstance.getFoodOwnerCount(loser) * 4/5));
+        // woodOwnerCount[winner] = woodOwnerCount[winner] + (woodOwnerCount[loser] * 4/5);
+        // ironOwnerCount[winner] = ironOwnerCount[winner] + (ironOwnerCount[loser] * 4/5);
+        // stoneOwnerCount[winner] = stoneOwnerCount[winner] + (stoneOwnerCount[loser] * 4/5);
+        accountInstance.setCoinOwnerCount(winner, accountInstance.getCoinOwnerCount(winner) + (accountInstance.getCoinOwnerCount(loser) * 4/5));
+        accountInstance.setCoinOwnerCount(loser, accountInstance.getCoinOwnerCount(loser) - (accountInstance.getCoinOwnerCount(loser) * 4/5));
+        accountInstance.setFoodOwnerCount(loser, accountInstance.getFoodOwnerCount(loser) - (accountInstance.getFoodOwnerCount(loser) * 4/5));
 
-    //     uint winnerPowerLose = power[loser] / 2;
+        // foodOwnerCount[loser] = foodOwnerCount[loser] - (foodOwnerCount[loser] * 4/5);
+        // woodOwnerCount[loser] = woodOwnerCount[loser] - (woodOwnerCount[loser] * 4/5);
+        // ironOwnerCount[loser] = ironOwnerCount[loser] - (ironOwnerCount[loser] * 4/5);
+        // stoneOwnerCount[loser] = stoneOwnerCount[loser] - (stoneOwnerCount[loser] * 4/5);
+        // coinOwnerCount[loser] = coinOwnerCount[loser] - (coinOwnerCount[loser] * 4/5);
 
-    //     numOfSoldier[winner] = (power[winner] - winnerPowerLose) / levelOfSoldier[winner];
+        uint winnerPowerLose = accountInstance.getUserPower(loser)/2;
 
-    //     numOfSoldier[loser] = numOfSoldier[loser] * 4 / 5;
+        numOfSoldier[winner] = (accountInstance.getUserPower(winner) - winnerPowerLose) / levelOfSoldier[winner];
 
-    //     _updatePower(winner);
-    //     _updatePower(loser);
-    // }
+        numOfSoldier[loser] = numOfSoldier[loser] * 4 / 5;
 
-    // function attack(uint _ownerId, uint _attackedCastleId) public {
-    //     require(msg.sender == castleToOwner[_ownerId]);
-    //     address myCastle = castleToOwner[_ownerId];
-    //     address attackedCastle = castleToOwner[_attackedCastleId];
-    //     _fight(myCastle, attackedCastle);
-    // }
+        _updatePower(winner);
+        _updatePower(loser);
+    }
+
+    function attack(uint _ownerId, uint _attackedCastleId) public {
+        require(msg.sender == accountInstance.convertCastleToOwner(_ownerId));
+        address myCastle = accountInstance.convertCastleToOwner(_ownerId);
+        address attackedCastle = accountInstance.convertCastleToOwner(_attackedCastleId);
+        _fight(myCastle, attackedCastle);
+    }
 }

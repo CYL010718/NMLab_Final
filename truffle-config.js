@@ -15,6 +15,10 @@ module.exports = {
       websockets: true,
       gas: 0xfffffffffff,	// <-- Use this high gas value
       gasPrice: 0x01,	// <-- Use this low gas price
+  
     }
-  }
+  },
+  plugins: [
+    "truffle-contract-size"
+  ]
 };

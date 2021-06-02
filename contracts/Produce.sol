@@ -6,11 +6,12 @@ import "./Mine.sol";
 import "./Farm.sol";
 import "./Manor.sol";
 import "./Sawmill.sol";
-import "./Soldier.sol";
-import "./Barrack.sol";
-import "./Laboratory.sol";
+// import "./Soldier.sol";
+// import "./Barrack.sol";
+// import "./Laboratory.sol";
 
-contract Produce is QuarryFactory, MineFactory, FarmFactory, ManorFactory, SawmillFactory {
+// contract Produce is QuarryFactory, MineFactory, FarmFactory, ManorFactory, SawmillFactory {
+contract Produce is FarmFactory, ManorFactory, SawmillFactory, MineFactory, QuarryFactory {
 
     constructor(address _account_address) public {
         accountInstance = Account(_account_address);
