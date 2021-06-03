@@ -2,16 +2,40 @@
   "contractName": "Produce",
   "abi": [
     {
+      "constant": false,
       "inputs": [
         {
           "internalType": "address",
-          "name": "_account_address",
+          "name": "_creator",
           "type": "address"
+        },
+        {
+          "internalType": "string",
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_x",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_y",
+          "type": "uint256"
+        }
+      ],
+      "name": "_createBuilding",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         }
       ],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "constructor"
+      "type": "function"
     },
     {
       "constant": true,
@@ -251,6 +275,27 @@
           "internalType": "string",
           "name": "",
           "type": "string"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "buildingId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getBuildingLevel",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
         }
       ],
       "payable": false,
@@ -534,25 +579,25 @@
       "type": "function"
     }
   ],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_account_address\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"buildingToOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"buildings\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"placeX\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"placeY\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createCastle\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createFarm\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createManor\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createMine\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createQuarry\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createSawmill\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"idx\",\"type\":\"uint256\"}],\"name\":\"getBuildingById\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_placeX\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_placeY\",\"type\":\"uint256\"}],\"name\":\"getBuildingByOwner\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getBuildingsByOwner\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getBuildingsLen\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getRemainingTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"}],\"name\":\"getSpecificBuildingByOwner\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getUpgradingId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerCoinProduceTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerFoodProduceTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerIronProduceTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerStoneProduceTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerWoodProduceTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"startBuild\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"updateBuild\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"updateProduce\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/cyl/Desktop/\\u7db2\\u591a/NMlab_Final/contracts/Produce.sol\":\"Produce\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/cyl/Desktop/\\u7db2\\u591a/NMlab_Final/contracts/Account.sol\":{\"keccak256\":\"0x4efe15a0408cdb125a89cb50448204bd362a3e88ef0dca5ddd75f9a8cdcfcc34\",\"urls\":[\"bzz-raw://b87eb4f716016f01bd7a6fb818da038de89c342ef8a8260a8479d7b596a3815c\",\"dweb:/ipfs/QmNmCE1LFPsPTcJA5vG7uMPZDaAE3DGCQW8mdaNXsLQqPN\"]},\"/Users/cyl/Desktop/\\u7db2\\u591a/NMlab_Final/contracts/BuildingFactory.sol\":{\"keccak256\":\"0xca62727082c3572345b2e5f131970cf112822eb66d57767fef51db10e88d7df6\",\"urls\":[\"bzz-raw://9e93dffbfcc6f7ef6370e32109684494271f5037f8dfef6f7ae771be478961eb\",\"dweb:/ipfs/QmarUGjCvoJczaZiKFZS98zrS3NMwVCvqac4b3mvpa4x8J\"]},\"/Users/cyl/Desktop/\\u7db2\\u591a/NMlab_Final/contracts/Castle.sol\":{\"keccak256\":\"0xa60d2508c89c0ab0b1b1439fa77cc50cf30101e31097dfaddea5cb33ad4f3af4\",\"urls\":[\"bzz-raw://354536deebe954c2ac5051f7bfbc2304843e53dc824b384e4e0b6cf0723f83fa\",\"dweb:/ipfs/QmZWGUkzDCM3xwa4AdnQ99BTDJTa4ZDAxpqyVW3QHthEak\"]},\"/Users/cyl/Desktop/\\u7db2\\u591a/NMlab_Final/contracts/Farm.sol\":{\"keccak256\":\"0x786e1c05cf96d469612a1b2a2653f39ad6f596ae58835fe04cd495cfeb3d68b5\",\"urls\":[\"bzz-raw://6237ee15b7fb581be64beeee171d3120dc55c1859094b85e40317b1af63de9e6\",\"dweb:/ipfs/QmfVJs3WRZDagAK8tVYuwQfyn3BazDurVcUZZHPo6MzHiS\"]},\"/Users/cyl/Desktop/\\u7db2\\u591a/NMlab_Final/contracts/Manor.sol\":{\"keccak256\":\"0x14194bc217c12e36290547f34bfaacbb797357d2113aa537df82a7b1e40efc59\",\"urls\":[\"bzz-raw://a72aa6f41c56fde0d9aa33fa6da5b661c28799dab126bee4e95f18f4bc3e1d92\",\"dweb:/ipfs/QmZqS1En4eb4sajjPmHN9FUVYJAPw4kz9BNnFAwphoNbx2\"]},\"/Users/cyl/Desktop/\\u7db2\\u591a/NMlab_Final/contracts/Mine.sol\":{\"keccak256\":\"0x4de25dd0afb6d49310c0db5c05b2c42b89bd27f145b859f1ac0c341e39db9158\",\"urls\":[\"bzz-raw://76964069f46115ed57999830dc08457e7d9811d6c58f12704c7ec00d01e4c845\",\"dweb:/ipfs/QmNa9mXZQW3xWnRu5qzFwUVT5wFQkhoFKLXHxMyWJCTDk1\"]},\"/Users/cyl/Desktop/\\u7db2\\u591a/NMlab_Final/contracts/Produce.sol\":{\"keccak256\":\"0xffb12a1742e3102bb7beed9bc790f9d80b8a3247402ed47b62f7bd9885e510d4\",\"urls\":[\"bzz-raw://d92fe972ea0903b29932a9fd52ce6c522476321205a2f3f53d2bedcedd843fe9\",\"dweb:/ipfs/QmXHToYNonMsDuExy5UeELn2SxYHtC1xH9N9mxJq81k1Ey\"]},\"/Users/cyl/Desktop/\\u7db2\\u591a/NMlab_Final/contracts/Quarry.sol\":{\"keccak256\":\"0x3822986e892afd75b25031694c4e251fe13effd1fba544f811757da7cc3029bd\",\"urls\":[\"bzz-raw://4989b21b3b4abee8f49864de892239db7008144f2eb0803b7172738a321fe2e1\",\"dweb:/ipfs/QmPGVCkvehotrR8DgifgWmoZxRmNWeHdmeR3HM5tvm2HoW\"]},\"/Users/cyl/Desktop/\\u7db2\\u591a/NMlab_Final/contracts/SafeMath.sol\":{\"keccak256\":\"0x509ff84abda41e86fd3d4c5fe2f2f7a11fa1f2ad4a88d4f70022da87ae1bee73\",\"urls\":[\"bzz-raw://d4365c2db3136fcaa853c38fa9df48034f304d2c768513889fd2f0008ac4583b\",\"dweb:/ipfs/Qmbg9cXPehZJQXzRMNk6dbK74AD9iCWUuWzAV7SUyJFptX\"]},\"/Users/cyl/Desktop/\\u7db2\\u591a/NMlab_Final/contracts/Sawmill.sol\":{\"keccak256\":\"0x28acf3cfd6ab269bb97e82eec794a37a548498d43537f6fdaac6d804851e91cc\",\"urls\":[\"bzz-raw://51695bd23dc814407200d429fd65dafd882534218405f2d15ba0d54a6e8b8606\",\"dweb:/ipfs/QmeZ1xmoVia6iyiLm7n3KDUaXKhRkbAof8rdnaAf93Q3B6\"]}},\"version\":1}",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_creator\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"_createBuilding\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"buildingToOwner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"buildings\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"name\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"placeX\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"placeY\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"level\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createCastle\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createFarm\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createManor\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createMine\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createQuarry\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"createSawmill\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"idx\",\"type\":\"uint256\"}],\"name\":\"getBuildingById\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_placeX\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_placeY\",\"type\":\"uint256\"}],\"name\":\"getBuildingByOwner\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"buildingId\",\"type\":\"uint256\"}],\"name\":\"getBuildingLevel\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getBuildingsByOwner\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[],\"name\":\"getBuildingsLen\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getRemainingTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"string\",\"name\":\"_name\",\"type\":\"string\"}],\"name\":\"getSpecificBuildingByOwner\",\"outputs\":[{\"internalType\":\"uint256[]\",\"name\":\"\",\"type\":\"uint256[]\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"getUpgradingId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerCoinProduceTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerFoodProduceTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerIronProduceTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerStoneProduceTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":true,\"inputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"ownerWoodProduceTime\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"view\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_x\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_y\",\"type\":\"uint256\"}],\"name\":\"startBuild\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"updateBuild\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"constant\":false,\"inputs\":[{\"internalType\":\"address\",\"name\":\"_owner\",\"type\":\"address\"}],\"name\":\"updateProduce\",\"outputs\":[],\"payable\":false,\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/seanwang0823/NMLab_Final/contracts/Produce.sol\":\"Produce\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/seanwang0823/NMLab_Final/contracts/Account.sol\":{\"keccak256\":\"0x4efe15a0408cdb125a89cb50448204bd362a3e88ef0dca5ddd75f9a8cdcfcc34\",\"urls\":[\"bzz-raw://b87eb4f716016f01bd7a6fb818da038de89c342ef8a8260a8479d7b596a3815c\",\"dweb:/ipfs/QmNmCE1LFPsPTcJA5vG7uMPZDaAE3DGCQW8mdaNXsLQqPN\"]},\"/Users/seanwang0823/NMLab_Final/contracts/BuildingFactory.sol\":{\"keccak256\":\"0xcd1f3bdb698cdc2852d78eefeb8e3b06af21784c9f2e9401b4cc8ba84737cf19\",\"urls\":[\"bzz-raw://659ba91b7ba6a5d5b42730b22fc9a80c869317c119bd95ad83b1f9f1b9c9f529\",\"dweb:/ipfs/QmUX13PGecmeMcSnpD6QCoo2PecWit2EorwWVZSwjPav2i\"]},\"/Users/seanwang0823/NMLab_Final/contracts/FarmFactory.sol\":{\"keccak256\":\"0xa208f62eb1711ceacf7125d3c95e553e752bd4a7961b0b67c8523312f508395f\",\"urls\":[\"bzz-raw://bf1b3dd1a51c5b4b67866f787b38cb999a7fce942ae9026862a829cf2b4b029b\",\"dweb:/ipfs/QmS7ZUpnZkS4vQ3ckSnZ2sQtpkQQz6fpgWVUuyx5ZhtywY\"]},\"/Users/seanwang0823/NMLab_Final/contracts/Manor.sol\":{\"keccak256\":\"0xa86231b8ed4d8570f95bb34d1d1bb3757a093b2876777ce9379df8b5f3a8998c\",\"urls\":[\"bzz-raw://3e4170989ca59ff5cafc208ea64dad843bed4e910a05e639af1072bfb8b0279d\",\"dweb:/ipfs/QmdiAjzsaeXvkfjcwSNhRPTaYcmhHq6hUZeBSFFZ13oePX\"]},\"/Users/seanwang0823/NMLab_Final/contracts/Mine.sol\":{\"keccak256\":\"0xc15df287ae3096f9fe92a875a01a54101ee753a18c427bd437dba40e0ee7fc21\",\"urls\":[\"bzz-raw://4724f002d0460ae312a18fb181cbef84e61e8f15b79563d1b1bf253086a0820f\",\"dweb:/ipfs/QmWg68aYPLNyL9nU9GU4DHd6PqAX2D2ysMWPAhwPq6x3cQ\"]},\"/Users/seanwang0823/NMLab_Final/contracts/Produce.sol\":{\"keccak256\":\"0xba0965ba5abbdf0e2de646d09e97242fd0eb7d0228f419b9634cafc4f27e903f\",\"urls\":[\"bzz-raw://61edeb13a8aecabf4554ed8111b1e089f3e660b320815383bb3f6964b135083c\",\"dweb:/ipfs/QmbPPvEEtBoQkvYtFvT9jzX9dvLFbzVZd655mL9QAGJJPA\"]},\"/Users/seanwang0823/NMLab_Final/contracts/Quarry.sol\":{\"keccak256\":\"0x5f26f058b060cb6c7480480a76c06653538c4613d07177cfddf8c5d1a17f52bd\",\"urls\":[\"bzz-raw://bdc848a0ac5fd100455af1024a5fdd7627cbbc120b94b39f9700cb58193368f5\",\"dweb:/ipfs/QmYaib4V2RYMm8jbXYrdmswphxUHXDuns2Si6T6a2aotoo\"]},\"/Users/seanwang0823/NMLab_Final/contracts/SafeMath.sol\":{\"keccak256\":\"0x509ff84abda41e86fd3d4c5fe2f2f7a11fa1f2ad4a88d4f70022da87ae1bee73\",\"urls\":[\"bzz-raw://d4365c2db3136fcaa853c38fa9df48034f304d2c768513889fd2f0008ac4583b\",\"dweb:/ipfs/Qmbg9cXPehZJQXzRMNk6dbK74AD9iCWUuWzAV7SUyJFptX\"]},\"/Users/seanwang0823/NMLab_Final/contracts/Sawmill.sol\":{\"keccak256\":\"0x0beecf07d3512bb391d71cc434564c649345e7f8cc6ae2589b32fb7aaba23a4c\",\"urls\":[\"bzz-raw://e8120b7b10daa0b32693911db8e6dbe818fcabdcc6d3c504b626204e4e437c5d\",\"dweb:/ipfs/QmeikDJSTS4ojxnn3nwsgry39to1E3eyfoNfoFNZPmvrrW\"]}},\"version\":1}",
   "bytecode": "0x",
   "deployedBytecode": "0x",
   "sourceMap": "",
   "deployedSourceMap": "",
-  "source": "pragma solidity >=0.4.21 <0.7.0;\n\nimport \"./SafeMath.sol\";\nimport \"./Quarry.sol\";\nimport \"./Mine.sol\";\nimport \"./Farm.sol\";\nimport \"./Manor.sol\";\nimport \"./Sawmill.sol\";\n// import \"./Soldier.sol\";\n// import \"./Barrack.sol\";\n// import \"./Laboratory.sol\";\n\n// contract Produce is QuarryFactory, MineFactory, FarmFactory, ManorFactory, SawmillFactory {\ncontract Produce is FarmFactory, ManorFactory, SawmillFactory, MineFactory, QuarryFactory {\n\n    constructor(address _account_address) public {\n        accountInstance = Account(_account_address);\n    }\n    \n    function updateProduce(address _owner) public {\n        _updateProduceCoin(_owner);\n        _updateProduceIron(_owner);\n        _updateProduceFood(_owner);\n        _updateProduceStone(_owner);\n        _updateProduceWood(_owner);\n    }\n\n}",
-  "sourcePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Produce.sol",
+  "source": "pragma solidity >=0.4.21 <0.7.0;\n\nimport \"./SafeMath.sol\";\nimport \"./Quarry.sol\";\nimport \"./Mine.sol\";\nimport \"./FarmFactory.sol\";\nimport \"./Manor.sol\";\nimport \"./Sawmill.sol\";\n// import \"./Soldier.sol\";\n// import \"./Barrack.sol\";\n// import \"./Laboratory.sol\";\n\n// contract Produce is QuarryFactory, MineFactory, FarmFactory, ManorFactory, SawmillFactory {\ncontract Produce is FarmFactory, ManorFactory, SawmillFactory, MineFactory, QuarryFactory {\n\n    function updateProduce(address _owner) public {\n        _updateProduceCoin(_owner);\n        _updateProduceIron(_owner);\n        _updateProduceFood(_owner);\n        _updateProduceStone(_owner);\n        _updateProduceWood(_owner);\n    }\n\n}",
+  "sourcePath": "/Users/seanwang0823/NMLab_Final/contracts/Produce.sol",
   "ast": {
-    "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Produce.sol",
+    "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/Produce.sol",
     "exportedSymbols": {
       "Produce": [
-        3432
+        3465
       ]
     },
-    "id": 3433,
+    "id": 3466,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 3377,
+        "id": 3422,
         "literals": [
           "solidity",
           ">=",
@@ -566,68 +611,68 @@
         "src": "0:32:11"
       },
       {
-        "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/SafeMath.sol",
+        "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/SafeMath.sol",
         "file": "./SafeMath.sol",
-        "id": 3378,
+        "id": 3423,
         "nodeType": "ImportDirective",
-        "scope": 3433,
-        "sourceUnit": 3766,
+        "scope": 3466,
+        "sourceUnit": 3812,
         "src": "34:24:11",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Quarry.sol",
+        "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/Quarry.sol",
         "file": "./Quarry.sol",
-        "id": 3379,
+        "id": 3424,
         "nodeType": "ImportDirective",
-        "scope": 3433,
-        "sourceUnit": 3579,
+        "scope": 3466,
+        "sourceUnit": 3625,
         "src": "59:22:11",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Mine.sol",
+        "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/Mine.sol",
         "file": "./Mine.sol",
-        "id": 3380,
+        "id": 3425,
         "nodeType": "ImportDirective",
-        "scope": 3433,
-        "sourceUnit": 3376,
+        "scope": 3466,
+        "sourceUnit": 3421,
         "src": "82:20:11",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Farm.sol",
-        "file": "./Farm.sol",
-        "id": 3381,
+        "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/FarmFactory.sol",
+        "file": "./FarmFactory.sol",
+        "id": 3426,
         "nodeType": "ImportDirective",
-        "scope": 3433,
-        "sourceUnit": 2862,
-        "src": "103:20:11",
+        "scope": 3466,
+        "sourceUnit": 2881,
+        "src": "103:27:11",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Manor.sol",
+        "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/Manor.sol",
         "file": "./Manor.sol",
-        "id": 3382,
+        "id": 3427,
         "nodeType": "ImportDirective",
-        "scope": 3433,
-        "sourceUnit": 3230,
-        "src": "124:21:11",
+        "scope": 3466,
+        "sourceUnit": 3262,
+        "src": "131:21:11",
         "symbolAliases": [],
         "unitAlias": ""
       },
       {
-        "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Sawmill.sol",
+        "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/Sawmill.sol",
         "file": "./Sawmill.sol",
-        "id": 3383,
+        "id": 3428,
         "nodeType": "ImportDirective",
-        "scope": 3433,
-        "sourceUnit": 3912,
-        "src": "146:23:11",
+        "scope": 3466,
+        "sourceUnit": 3960,
+        "src": "153:23:11",
         "symbolAliases": [],
         "unitAlias": ""
       },
@@ -637,265 +682,122 @@
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 3384,
+              "id": 3429,
               "name": "FarmFactory",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 2861,
-              "src": "370:11:11",
+              "referencedDeclaration": 2880,
+              "src": "377:11:11",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_FarmFactory_$2861",
+                "typeIdentifier": "t_contract$_FarmFactory_$2880",
                 "typeString": "contract FarmFactory"
               }
             },
-            "id": 3385,
+            "id": 3430,
             "nodeType": "InheritanceSpecifier",
-            "src": "370:11:11"
+            "src": "377:11:11"
           },
           {
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 3386,
+              "id": 3431,
               "name": "ManorFactory",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3229,
-              "src": "383:12:11",
+              "referencedDeclaration": 3261,
+              "src": "390:12:11",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_ManorFactory_$3229",
+                "typeIdentifier": "t_contract$_ManorFactory_$3261",
                 "typeString": "contract ManorFactory"
               }
             },
-            "id": 3387,
+            "id": 3432,
             "nodeType": "InheritanceSpecifier",
-            "src": "383:12:11"
+            "src": "390:12:11"
           },
           {
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 3388,
+              "id": 3433,
               "name": "SawmillFactory",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3911,
-              "src": "397:14:11",
+              "referencedDeclaration": 3959,
+              "src": "404:14:11",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SawmillFactory_$3911",
+                "typeIdentifier": "t_contract$_SawmillFactory_$3959",
                 "typeString": "contract SawmillFactory"
               }
             },
-            "id": 3389,
+            "id": 3434,
             "nodeType": "InheritanceSpecifier",
-            "src": "397:14:11"
+            "src": "404:14:11"
           },
           {
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 3390,
+              "id": 3435,
               "name": "MineFactory",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3375,
-              "src": "413:11:11",
+              "referencedDeclaration": 3420,
+              "src": "420:11:11",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_MineFactory_$3375",
+                "typeIdentifier": "t_contract$_MineFactory_$3420",
                 "typeString": "contract MineFactory"
               }
             },
-            "id": 3391,
+            "id": 3436,
             "nodeType": "InheritanceSpecifier",
-            "src": "413:11:11"
+            "src": "420:11:11"
           },
           {
             "arguments": null,
             "baseName": {
               "contractScope": null,
-              "id": 3392,
+              "id": 3437,
               "name": "QuarryFactory",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3578,
-              "src": "426:13:11",
+              "referencedDeclaration": 3624,
+              "src": "433:13:11",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_QuarryFactory_$3578",
+                "typeIdentifier": "t_contract$_QuarryFactory_$3624",
                 "typeString": "contract QuarryFactory"
               }
             },
-            "id": 3393,
+            "id": 3438,
             "nodeType": "InheritanceSpecifier",
-            "src": "426:13:11"
+            "src": "433:13:11"
           }
         ],
         "contractDependencies": [
-          1866,
-          2861,
-          3229,
-          3375,
-          3578,
-          3911
+          1869,
+          2880,
+          3261,
+          3420,
+          3624,
+          3959
         ],
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": false,
-        "id": 3432,
+        "id": 3465,
         "linearizedBaseContracts": [
-          3432,
-          3578,
-          3375,
-          3911,
-          3229,
-          2861,
-          1866
+          3465,
+          3624,
+          3420,
+          3959,
+          1869,
+          3261,
+          2880
         ],
         "name": "Produce",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "body": {
-              "id": 3404,
+              "id": 3463,
               "nodeType": "Block",
-              "src": "492:60:11",
-              "statements": [
-                {
-                  "expression": {
-                    "argumentTypes": null,
-                    "id": 3402,
-                    "isConstant": false,
-                    "isLValue": false,
-                    "isPure": false,
-                    "lValueRequested": false,
-                    "leftHandSide": {
-                      "argumentTypes": null,
-                      "id": 3398,
-                      "name": "accountInstance",
-                      "nodeType": "Identifier",
-                      "overloadedDeclarations": [],
-                      "referencedDeclaration": 811,
-                      "src": "502:15:11",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_Account_$570",
-                        "typeString": "contract Account"
-                      }
-                    },
-                    "nodeType": "Assignment",
-                    "operator": "=",
-                    "rightHandSide": {
-                      "argumentTypes": null,
-                      "arguments": [
-                        {
-                          "argumentTypes": null,
-                          "id": 3400,
-                          "name": "_account_address",
-                          "nodeType": "Identifier",
-                          "overloadedDeclarations": [],
-                          "referencedDeclaration": 3395,
-                          "src": "528:16:11",
-                          "typeDescriptions": {
-                            "typeIdentifier": "t_address",
-                            "typeString": "address"
-                          }
-                        }
-                      ],
-                      "expression": {
-                        "argumentTypes": [
-                          {
-                            "typeIdentifier": "t_address",
-                            "typeString": "address"
-                          }
-                        ],
-                        "id": 3399,
-                        "name": "Account",
-                        "nodeType": "Identifier",
-                        "overloadedDeclarations": [],
-                        "referencedDeclaration": 570,
-                        "src": "520:7:11",
-                        "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_Account_$570_$",
-                          "typeString": "type(contract Account)"
-                        }
-                      },
-                      "id": 3401,
-                      "isConstant": false,
-                      "isLValue": false,
-                      "isPure": false,
-                      "kind": "typeConversion",
-                      "lValueRequested": false,
-                      "names": [],
-                      "nodeType": "FunctionCall",
-                      "src": "520:25:11",
-                      "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_Account_$570",
-                        "typeString": "contract Account"
-                      }
-                    },
-                    "src": "502:43:11",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_Account_$570",
-                      "typeString": "contract Account"
-                    }
-                  },
-                  "id": 3403,
-                  "nodeType": "ExpressionStatement",
-                  "src": "502:43:11"
-                }
-              ]
-            },
-            "documentation": null,
-            "id": 3405,
-            "implemented": true,
-            "kind": "constructor",
-            "modifiers": [],
-            "name": "",
-            "nodeType": "FunctionDefinition",
-            "parameters": {
-              "id": 3396,
-              "nodeType": "ParameterList",
-              "parameters": [
-                {
-                  "constant": false,
-                  "id": 3395,
-                  "name": "_account_address",
-                  "nodeType": "VariableDeclaration",
-                  "scope": 3405,
-                  "src": "459:24:11",
-                  "stateVariable": false,
-                  "storageLocation": "default",
-                  "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
-                  },
-                  "typeName": {
-                    "id": 3394,
-                    "name": "address",
-                    "nodeType": "ElementaryTypeName",
-                    "src": "459:7:11",
-                    "stateMutability": "nonpayable",
-                    "typeDescriptions": {
-                      "typeIdentifier": "t_address",
-                      "typeString": "address"
-                    }
-                  },
-                  "value": null,
-                  "visibility": "internal"
-                }
-              ],
-              "src": "458:26:11"
-            },
-            "returnParameters": {
-              "id": 3397,
-              "nodeType": "ParameterList",
-              "parameters": [],
-              "src": "492:0:11"
-            },
-            "scope": 3432,
-            "src": "447:105:11",
-            "stateMutability": "nonpayable",
-            "superFunction": null,
-            "visibility": "public"
-          },
-          {
-            "body": {
-              "id": 3430,
-              "nodeType": "Block",
-              "src": "608:188:11",
+              "src": "500:188:11",
               "statements": [
                 {
                   "expression": {
@@ -903,12 +805,12 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 3411,
+                        "id": 3444,
                         "name": "_owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3407,
-                        "src": "637:6:11",
+                        "referencedDeclaration": 3440,
+                        "src": "529:6:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -922,18 +824,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 3410,
+                      "id": 3443,
                       "name": "_updateProduceCoin",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3228,
-                      "src": "618:18:11",
+                      "referencedDeclaration": 3260,
+                      "src": "510:18:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 3412,
+                    "id": 3445,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -941,15 +843,15 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "618:26:11",
+                    "src": "510:26:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3413,
+                  "id": 3446,
                   "nodeType": "ExpressionStatement",
-                  "src": "618:26:11"
+                  "src": "510:26:11"
                 },
                 {
                   "expression": {
@@ -957,12 +859,12 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 3415,
+                        "id": 3448,
                         "name": "_owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3407,
-                        "src": "673:6:11",
+                        "referencedDeclaration": 3440,
+                        "src": "565:6:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -976,18 +878,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 3414,
+                      "id": 3447,
                       "name": "_updateProduceIron",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3374,
-                      "src": "654:18:11",
+                      "referencedDeclaration": 3419,
+                      "src": "546:18:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 3416,
+                    "id": 3449,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -995,15 +897,15 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "654:26:11",
+                    "src": "546:26:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3417,
+                  "id": 3450,
                   "nodeType": "ExpressionStatement",
-                  "src": "654:26:11"
+                  "src": "546:26:11"
                 },
                 {
                   "expression": {
@@ -1011,12 +913,12 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 3419,
+                        "id": 3452,
                         "name": "_owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3407,
-                        "src": "709:6:11",
+                        "referencedDeclaration": 3440,
+                        "src": "601:6:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -1030,18 +932,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 3418,
+                      "id": 3451,
                       "name": "_updateProduceFood",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 2860,
-                      "src": "690:18:11",
+                      "referencedDeclaration": 2879,
+                      "src": "582:18:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 3420,
+                    "id": 3453,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1049,15 +951,15 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "690:26:11",
+                    "src": "582:26:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3421,
+                  "id": 3454,
                   "nodeType": "ExpressionStatement",
-                  "src": "690:26:11"
+                  "src": "582:26:11"
                 },
                 {
                   "expression": {
@@ -1065,12 +967,12 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 3423,
+                        "id": 3456,
                         "name": "_owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3407,
-                        "src": "746:6:11",
+                        "referencedDeclaration": 3440,
+                        "src": "638:6:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -1084,18 +986,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 3422,
+                      "id": 3455,
                       "name": "_updateProduceStone",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3577,
-                      "src": "726:19:11",
+                      "referencedDeclaration": 3623,
+                      "src": "618:19:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 3424,
+                    "id": 3457,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1103,15 +1005,15 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "726:27:11",
+                    "src": "618:27:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3425,
+                  "id": 3458,
                   "nodeType": "ExpressionStatement",
-                  "src": "726:27:11"
+                  "src": "618:27:11"
                 },
                 {
                   "expression": {
@@ -1119,12 +1021,12 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 3427,
+                        "id": 3460,
                         "name": "_owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3407,
-                        "src": "782:6:11",
+                        "referencedDeclaration": 3440,
+                        "src": "674:6:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -1138,18 +1040,18 @@
                           "typeString": "address"
                         }
                       ],
-                      "id": 3426,
+                      "id": 3459,
                       "name": "_updateProduceWood",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 3910,
-                      "src": "763:18:11",
+                      "referencedDeclaration": 3958,
+                      "src": "655:18:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 3428,
+                    "id": 3461,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1157,36 +1059,36 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "763:26:11",
+                    "src": "655:26:11",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 3429,
+                  "id": 3462,
                   "nodeType": "ExpressionStatement",
-                  "src": "763:26:11"
+                  "src": "655:26:11"
                 }
               ]
             },
             "documentation": null,
-            "id": 3431,
+            "id": 3464,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "updateProduce",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 3408,
+              "id": 3441,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 3407,
+                  "id": 3440,
                   "name": "_owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 3431,
-                  "src": "585:14:11",
+                  "scope": 3464,
+                  "src": "477:14:11",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1194,10 +1096,10 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 3406,
+                    "id": 3439,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
-                    "src": "585:7:11",
+                    "src": "477:7:11",
                     "stateMutability": "nonpayable",
                     "typeDescriptions": {
                       "typeIdentifier": "t_address",
@@ -1208,33 +1110,33 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "584:16:11"
+              "src": "476:16:11"
             },
             "returnParameters": {
-              "id": 3409,
+              "id": 3442,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "608:0:11"
+              "src": "500:0:11"
             },
-            "scope": 3432,
-            "src": "562:234:11",
+            "scope": 3465,
+            "src": "454:234:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 3433,
-        "src": "350:449:11"
+        "scope": 3466,
+        "src": "357:334:11"
       }
     ],
-    "src": "0:799:11"
+    "src": "0:691:11"
   },
   "legacyAST": {
     "attributes": {
-      "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Produce.sol",
+      "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/Produce.sol",
       "exportedSymbols": {
         "Produce": [
-          3432
+          3465
         ]
       }
     },
@@ -1251,124 +1153,124 @@
             ".0"
           ]
         },
-        "id": 3377,
+        "id": 3422,
         "name": "PragmaDirective",
         "src": "0:32:11"
       },
       {
         "attributes": {
-          "SourceUnit": 3766,
-          "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/SafeMath.sol",
+          "SourceUnit": 3812,
+          "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/SafeMath.sol",
           "file": "./SafeMath.sol",
-          "scope": 3433,
+          "scope": 3466,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 3378,
+        "id": 3423,
         "name": "ImportDirective",
         "src": "34:24:11"
       },
       {
         "attributes": {
-          "SourceUnit": 3579,
-          "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Quarry.sol",
+          "SourceUnit": 3625,
+          "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/Quarry.sol",
           "file": "./Quarry.sol",
-          "scope": 3433,
+          "scope": 3466,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 3379,
+        "id": 3424,
         "name": "ImportDirective",
         "src": "59:22:11"
       },
       {
         "attributes": {
-          "SourceUnit": 3376,
-          "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Mine.sol",
+          "SourceUnit": 3421,
+          "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/Mine.sol",
           "file": "./Mine.sol",
-          "scope": 3433,
+          "scope": 3466,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 3380,
+        "id": 3425,
         "name": "ImportDirective",
         "src": "82:20:11"
       },
       {
         "attributes": {
-          "SourceUnit": 2862,
-          "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Farm.sol",
-          "file": "./Farm.sol",
-          "scope": 3433,
+          "SourceUnit": 2881,
+          "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/FarmFactory.sol",
+          "file": "./FarmFactory.sol",
+          "scope": 3466,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 3381,
+        "id": 3426,
         "name": "ImportDirective",
-        "src": "103:20:11"
+        "src": "103:27:11"
       },
       {
         "attributes": {
-          "SourceUnit": 3230,
-          "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Manor.sol",
+          "SourceUnit": 3262,
+          "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/Manor.sol",
           "file": "./Manor.sol",
-          "scope": 3433,
+          "scope": 3466,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 3382,
+        "id": 3427,
         "name": "ImportDirective",
-        "src": "124:21:11"
+        "src": "131:21:11"
       },
       {
         "attributes": {
-          "SourceUnit": 3912,
-          "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Sawmill.sol",
+          "SourceUnit": 3960,
+          "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/Sawmill.sol",
           "file": "./Sawmill.sol",
-          "scope": 3433,
+          "scope": 3466,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 3383,
+        "id": 3428,
         "name": "ImportDirective",
-        "src": "146:23:11"
+        "src": "153:23:11"
       },
       {
         "attributes": {
           "contractDependencies": [
-            1866,
-            2861,
-            3229,
-            3375,
-            3578,
-            3911
+            1869,
+            2880,
+            3261,
+            3420,
+            3624,
+            3959
           ],
           "contractKind": "contract",
           "documentation": null,
           "fullyImplemented": false,
           "linearizedBaseContracts": [
-            3432,
-            3578,
-            3375,
-            3911,
-            3229,
-            2861,
-            1866
+            3465,
+            3624,
+            3420,
+            3959,
+            1869,
+            3261,
+            2880
           ],
           "name": "Produce",
-          "scope": 3433
+          "scope": 3466
         },
         "children": [
           {
@@ -1380,17 +1282,17 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "FarmFactory",
-                  "referencedDeclaration": 2861,
+                  "referencedDeclaration": 2880,
                   "type": "contract FarmFactory"
                 },
-                "id": 3384,
+                "id": 3429,
                 "name": "UserDefinedTypeName",
-                "src": "370:11:11"
+                "src": "377:11:11"
               }
             ],
-            "id": 3385,
+            "id": 3430,
             "name": "InheritanceSpecifier",
-            "src": "370:11:11"
+            "src": "377:11:11"
           },
           {
             "attributes": {
@@ -1401,17 +1303,17 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "ManorFactory",
-                  "referencedDeclaration": 3229,
+                  "referencedDeclaration": 3261,
                   "type": "contract ManorFactory"
                 },
-                "id": 3386,
+                "id": 3431,
                 "name": "UserDefinedTypeName",
-                "src": "383:12:11"
+                "src": "390:12:11"
               }
             ],
-            "id": 3387,
+            "id": 3432,
             "name": "InheritanceSpecifier",
-            "src": "383:12:11"
+            "src": "390:12:11"
           },
           {
             "attributes": {
@@ -1422,17 +1324,17 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "SawmillFactory",
-                  "referencedDeclaration": 3911,
+                  "referencedDeclaration": 3959,
                   "type": "contract SawmillFactory"
                 },
-                "id": 3388,
+                "id": 3433,
                 "name": "UserDefinedTypeName",
-                "src": "397:14:11"
+                "src": "404:14:11"
               }
             ],
-            "id": 3389,
+            "id": 3434,
             "name": "InheritanceSpecifier",
-            "src": "397:14:11"
+            "src": "404:14:11"
           },
           {
             "attributes": {
@@ -1443,17 +1345,17 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "MineFactory",
-                  "referencedDeclaration": 3375,
+                  "referencedDeclaration": 3420,
                   "type": "contract MineFactory"
                 },
-                "id": 3390,
+                "id": 3435,
                 "name": "UserDefinedTypeName",
-                "src": "413:11:11"
+                "src": "420:11:11"
               }
             ],
-            "id": 3391,
+            "id": 3436,
             "name": "InheritanceSpecifier",
-            "src": "413:11:11"
+            "src": "420:11:11"
           },
           {
             "attributes": {
@@ -1464,180 +1366,17 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "QuarryFactory",
-                  "referencedDeclaration": 3578,
+                  "referencedDeclaration": 3624,
                   "type": "contract QuarryFactory"
                 },
-                "id": 3392,
+                "id": 3437,
                 "name": "UserDefinedTypeName",
-                "src": "426:13:11"
+                "src": "433:13:11"
               }
             ],
-            "id": 3393,
+            "id": 3438,
             "name": "InheritanceSpecifier",
-            "src": "426:13:11"
-          },
-          {
-            "attributes": {
-              "documentation": null,
-              "implemented": true,
-              "isConstructor": true,
-              "kind": "constructor",
-              "modifiers": [
-                null
-              ],
-              "name": "",
-              "scope": 3432,
-              "stateMutability": "nonpayable",
-              "superFunction": null,
-              "visibility": "public"
-            },
-            "children": [
-              {
-                "children": [
-                  {
-                    "attributes": {
-                      "constant": false,
-                      "name": "_account_address",
-                      "scope": 3405,
-                      "stateVariable": false,
-                      "storageLocation": "default",
-                      "type": "address",
-                      "value": null,
-                      "visibility": "internal"
-                    },
-                    "children": [
-                      {
-                        "attributes": {
-                          "name": "address",
-                          "stateMutability": "nonpayable",
-                          "type": "address"
-                        },
-                        "id": 3394,
-                        "name": "ElementaryTypeName",
-                        "src": "459:7:11"
-                      }
-                    ],
-                    "id": 3395,
-                    "name": "VariableDeclaration",
-                    "src": "459:24:11"
-                  }
-                ],
-                "id": 3396,
-                "name": "ParameterList",
-                "src": "458:26:11"
-              },
-              {
-                "attributes": {
-                  "parameters": [
-                    null
-                  ]
-                },
-                "children": [],
-                "id": 3397,
-                "name": "ParameterList",
-                "src": "492:0:11"
-              },
-              {
-                "children": [
-                  {
-                    "children": [
-                      {
-                        "attributes": {
-                          "argumentTypes": null,
-                          "isConstant": false,
-                          "isLValue": false,
-                          "isPure": false,
-                          "lValueRequested": false,
-                          "operator": "=",
-                          "type": "contract Account"
-                        },
-                        "children": [
-                          {
-                            "attributes": {
-                              "argumentTypes": null,
-                              "overloadedDeclarations": [
-                                null
-                              ],
-                              "referencedDeclaration": 811,
-                              "type": "contract Account",
-                              "value": "accountInstance"
-                            },
-                            "id": 3398,
-                            "name": "Identifier",
-                            "src": "502:15:11"
-                          },
-                          {
-                            "attributes": {
-                              "argumentTypes": null,
-                              "isConstant": false,
-                              "isLValue": false,
-                              "isPure": false,
-                              "isStructConstructorCall": false,
-                              "lValueRequested": false,
-                              "names": [
-                                null
-                              ],
-                              "type": "contract Account",
-                              "type_conversion": true
-                            },
-                            "children": [
-                              {
-                                "attributes": {
-                                  "argumentTypes": [
-                                    {
-                                      "typeIdentifier": "t_address",
-                                      "typeString": "address"
-                                    }
-                                  ],
-                                  "overloadedDeclarations": [
-                                    null
-                                  ],
-                                  "referencedDeclaration": 570,
-                                  "type": "type(contract Account)",
-                                  "value": "Account"
-                                },
-                                "id": 3399,
-                                "name": "Identifier",
-                                "src": "520:7:11"
-                              },
-                              {
-                                "attributes": {
-                                  "argumentTypes": null,
-                                  "overloadedDeclarations": [
-                                    null
-                                  ],
-                                  "referencedDeclaration": 3395,
-                                  "type": "address",
-                                  "value": "_account_address"
-                                },
-                                "id": 3400,
-                                "name": "Identifier",
-                                "src": "528:16:11"
-                              }
-                            ],
-                            "id": 3401,
-                            "name": "FunctionCall",
-                            "src": "520:25:11"
-                          }
-                        ],
-                        "id": 3402,
-                        "name": "Assignment",
-                        "src": "502:43:11"
-                      }
-                    ],
-                    "id": 3403,
-                    "name": "ExpressionStatement",
-                    "src": "502:43:11"
-                  }
-                ],
-                "id": 3404,
-                "name": "Block",
-                "src": "492:60:11"
-              }
-            ],
-            "id": 3405,
-            "name": "FunctionDefinition",
-            "src": "447:105:11"
+            "src": "433:13:11"
           },
           {
             "attributes": {
@@ -1649,7 +1388,7 @@
                 null
               ],
               "name": "updateProduce",
-              "scope": 3432,
+              "scope": 3465,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -1661,7 +1400,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "_owner",
-                      "scope": 3431,
+                      "scope": 3464,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -1675,19 +1414,19 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 3406,
+                        "id": 3439,
                         "name": "ElementaryTypeName",
-                        "src": "585:7:11"
+                        "src": "477:7:11"
                       }
                     ],
-                    "id": 3407,
+                    "id": 3440,
                     "name": "VariableDeclaration",
-                    "src": "585:14:11"
+                    "src": "477:14:11"
                   }
                 ],
-                "id": 3408,
+                "id": 3441,
                 "name": "ParameterList",
-                "src": "584:16:11"
+                "src": "476:16:11"
               },
               {
                 "attributes": {
@@ -1696,9 +1435,9 @@
                   ]
                 },
                 "children": [],
-                "id": 3409,
+                "id": 3442,
                 "name": "ParameterList",
-                "src": "608:0:11"
+                "src": "500:0:11"
               },
               {
                 "children": [
@@ -1730,13 +1469,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3228,
+                              "referencedDeclaration": 3260,
                               "type": "function (address)",
                               "value": "_updateProduceCoin"
                             },
-                            "id": 3410,
+                            "id": 3443,
                             "name": "Identifier",
-                            "src": "618:18:11"
+                            "src": "510:18:11"
                           },
                           {
                             "attributes": {
@@ -1744,23 +1483,23 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3407,
+                              "referencedDeclaration": 3440,
                               "type": "address",
                               "value": "_owner"
                             },
-                            "id": 3411,
+                            "id": 3444,
                             "name": "Identifier",
-                            "src": "637:6:11"
+                            "src": "529:6:11"
                           }
                         ],
-                        "id": 3412,
+                        "id": 3445,
                         "name": "FunctionCall",
-                        "src": "618:26:11"
+                        "src": "510:26:11"
                       }
                     ],
-                    "id": 3413,
+                    "id": 3446,
                     "name": "ExpressionStatement",
-                    "src": "618:26:11"
+                    "src": "510:26:11"
                   },
                   {
                     "children": [
@@ -1790,13 +1529,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3374,
+                              "referencedDeclaration": 3419,
                               "type": "function (address)",
                               "value": "_updateProduceIron"
                             },
-                            "id": 3414,
+                            "id": 3447,
                             "name": "Identifier",
-                            "src": "654:18:11"
+                            "src": "546:18:11"
                           },
                           {
                             "attributes": {
@@ -1804,23 +1543,23 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3407,
+                              "referencedDeclaration": 3440,
                               "type": "address",
                               "value": "_owner"
                             },
-                            "id": 3415,
+                            "id": 3448,
                             "name": "Identifier",
-                            "src": "673:6:11"
+                            "src": "565:6:11"
                           }
                         ],
-                        "id": 3416,
+                        "id": 3449,
                         "name": "FunctionCall",
-                        "src": "654:26:11"
+                        "src": "546:26:11"
                       }
                     ],
-                    "id": 3417,
+                    "id": 3450,
                     "name": "ExpressionStatement",
-                    "src": "654:26:11"
+                    "src": "546:26:11"
                   },
                   {
                     "children": [
@@ -1850,13 +1589,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 2860,
+                              "referencedDeclaration": 2879,
                               "type": "function (address)",
                               "value": "_updateProduceFood"
                             },
-                            "id": 3418,
+                            "id": 3451,
                             "name": "Identifier",
-                            "src": "690:18:11"
+                            "src": "582:18:11"
                           },
                           {
                             "attributes": {
@@ -1864,23 +1603,23 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3407,
+                              "referencedDeclaration": 3440,
                               "type": "address",
                               "value": "_owner"
                             },
-                            "id": 3419,
+                            "id": 3452,
                             "name": "Identifier",
-                            "src": "709:6:11"
+                            "src": "601:6:11"
                           }
                         ],
-                        "id": 3420,
+                        "id": 3453,
                         "name": "FunctionCall",
-                        "src": "690:26:11"
+                        "src": "582:26:11"
                       }
                     ],
-                    "id": 3421,
+                    "id": 3454,
                     "name": "ExpressionStatement",
-                    "src": "690:26:11"
+                    "src": "582:26:11"
                   },
                   {
                     "children": [
@@ -1910,13 +1649,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3577,
+                              "referencedDeclaration": 3623,
                               "type": "function (address)",
                               "value": "_updateProduceStone"
                             },
-                            "id": 3422,
+                            "id": 3455,
                             "name": "Identifier",
-                            "src": "726:19:11"
+                            "src": "618:19:11"
                           },
                           {
                             "attributes": {
@@ -1924,23 +1663,23 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3407,
+                              "referencedDeclaration": 3440,
                               "type": "address",
                               "value": "_owner"
                             },
-                            "id": 3423,
+                            "id": 3456,
                             "name": "Identifier",
-                            "src": "746:6:11"
+                            "src": "638:6:11"
                           }
                         ],
-                        "id": 3424,
+                        "id": 3457,
                         "name": "FunctionCall",
-                        "src": "726:27:11"
+                        "src": "618:27:11"
                       }
                     ],
-                    "id": 3425,
+                    "id": 3458,
                     "name": "ExpressionStatement",
-                    "src": "726:27:11"
+                    "src": "618:27:11"
                   },
                   {
                     "children": [
@@ -1970,13 +1709,13 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3910,
+                              "referencedDeclaration": 3958,
                               "type": "function (address)",
                               "value": "_updateProduceWood"
                             },
-                            "id": 3426,
+                            "id": 3459,
                             "name": "Identifier",
-                            "src": "763:18:11"
+                            "src": "655:18:11"
                           },
                           {
                             "attributes": {
@@ -1984,43 +1723,43 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 3407,
+                              "referencedDeclaration": 3440,
                               "type": "address",
                               "value": "_owner"
                             },
-                            "id": 3427,
+                            "id": 3460,
                             "name": "Identifier",
-                            "src": "782:6:11"
+                            "src": "674:6:11"
                           }
                         ],
-                        "id": 3428,
+                        "id": 3461,
                         "name": "FunctionCall",
-                        "src": "763:26:11"
+                        "src": "655:26:11"
                       }
                     ],
-                    "id": 3429,
+                    "id": 3462,
                     "name": "ExpressionStatement",
-                    "src": "763:26:11"
+                    "src": "655:26:11"
                   }
                 ],
-                "id": 3430,
+                "id": 3463,
                 "name": "Block",
-                "src": "608:188:11"
+                "src": "500:188:11"
               }
             ],
-            "id": 3431,
+            "id": 3464,
             "name": "FunctionDefinition",
-            "src": "562:234:11"
+            "src": "454:234:11"
           }
         ],
-        "id": 3432,
+        "id": 3465,
         "name": "ContractDefinition",
-        "src": "350:449:11"
+        "src": "357:334:11"
       }
     ],
-    "id": 3433,
+    "id": 3466,
     "name": "SourceUnit",
-    "src": "0:799:11"
+    "src": "0:691:11"
   },
   "compiler": {
     "name": "solc",
@@ -2088,8 +1827,8 @@
       "transactionHash": "0xcf45f238cc571bdb821b6f52703fcf1f3570fa61b9cc516123e02eea94fef1fd"
     }
   },
-  "schemaVersion": "3.4.1",
-  "updatedAt": "2021-06-02T03:18:36.708Z",
+  "schemaVersion": "3.4.0",
+  "updatedAt": "2021-06-02T05:16:33.520Z",
   "devdoc": {
     "methods": {}
   },

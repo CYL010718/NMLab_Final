@@ -3,7 +3,7 @@ pragma solidity >=0.4.21 <0.7.0;
 import "./SafeMath.sol";
 import "./Quarry.sol";
 import "./Mine.sol";
-import "./Farm.sol";
+import "./FarmFactory.sol";
 import "./Manor.sol";
 import "./Sawmill.sol";
 // import "./Soldier.sol";
