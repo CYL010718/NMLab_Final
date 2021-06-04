@@ -26,11 +26,6 @@ contract Produce {
 
 
 
-
-
-    constructor(address _account_address) public {
-        accountInstance = Account(_account_address);
-    }
     
     function updateProduce(address _owner) public {
         manorInstance._updateProduceCoin(_owner);
