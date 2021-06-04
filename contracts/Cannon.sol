@@ -2,76 +2,76 @@ pragma solidity >=0.4.21 <0.7.0;
 
 import "./Account.sol";
 
-contract Soldier {
+contract Cannon {
 
     Account accountInstance;
     constructor(address _account_address) public {
         accountInstance = Account(_account_address);
     }
 
-    mapping (address => uint) public numOfSoldier;
+    mapping (address => uint) public numOfCannon;
 
-    mapping (address => uint) public levelOfSoldier;
+    mapping (address => uint) public levelOfCannon;
 
     mapping (address => uint) public ownerStartCreateTime;
-    mapping (address => uint) public ownerCreateSoldierTime;
+    mapping (address => uint) public ownerCreateCannonTime;
     mapping (address => uint) public ownerStartLevelUpTime;
-    uint public createSoldierTime = 10;
-    uint public levelUpSoldierTime = 10;
+    uint public createCannonTime = 10;
+    uint public levelUpCannonTime = 10;
 
-    uint public soldierHealth = 3;
-    uint public soldierPower = 3;
-    uint public soldierFrequency = 2;
-    uint public soldierArmour = 1;
-    uint public soldierCapacity = 200;
-    uint public soldierSpeed = 3;
+    uint public cannonHealth = 3;
+    uint public cannonPower = 3;
+    uint public cannonFrequency = 2;
+    uint public cannonArmour = 1;
+    uint public cannonCapacity = 200;
+    uint public cannonSpeed = 3;
     
 
-    function setSoldierLevel(address _owner, uint value) public {
-        levelOfSoldier[_owner] = value;
+    function setCannonLevel(address _owner, uint value) public {
+        levelOfCannon[_owner] = value;
     }
 
     function setStartCreateTime(address _owner, uint value) public {
         ownerStartCreateTime[_owner] = value;
     }
 
-    function setCreateSoldierTime(address _owner, uint value) public {
-        ownerCreateSoldierTime[_owner] = value;
+    function setCreateCannonTime(address _owner, uint value) public {
+        ownerCreateCannonTime[_owner] = value;
     }
 
-    function setNumOfSoldier(address _owner, uint value) public {
-        numOfSoldier[_owner] = value;
+    function setNumOfCannon(address _owner, uint value) public {
+        numOfCannon[_owner] = value;
     }
 
-    // function getSoldierStartCreateTime(address _owner) public view return(uint) {
+    // function getCannonStartCreateTime(address _owner) public view return(uint) {
     //     return ownerStartCreateTime[_owner];
     // }
 
 
-    function _updatePower(address _owner) public {
-        accountInstance.setUserPower(_owner, numOfSoldier[_owner] * levelOfSoldier[_owner] * soldierPower);
-        accountInstance.setUserHealth(_owner, numOfSoldier[_owner] * levelOfSoldier[_owner] * soldierHealth);
+    function _updateCannonPower(address _owner) public {
+        accountInstance.setUserPower(_owner, numOfCannon[_owner] * levelOfCannon[_owner] * cannonPower);
+        accountInstance.setUserHealth(_owner, numOfCannon[_owner] * levelOfCannon[_owner] * cannonHealth);
 
     }
 
-    function _createSoldier(address _owner, uint number) public returns(bool) {
-        uint foodCost = (25* levelOfSoldier[_owner] - 5) * number;
-        uint ironCost = (25* levelOfSoldier[_owner] - 5) * number;
-        uint coinCost = (25* levelOfSoldier[_owner] - 5) * number;
+    function _createCannon(address _owner, uint number) public returns(bool) {
+        uint foodCost = (25* levelOfCannon[_owner] - 5) * number;
+        uint ironCost = (25* levelOfCannon[_owner] - 5) * number;
+        uint coinCost = (25* levelOfCannon[_owner] - 5) * number;
 
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
     
-    function _upgradeSoldier(address _owner) internal returns(bool){
-        uint foodCost = 500* levelOfSoldier[_owner] - 125;
-        uint ironCost = 500* levelOfSoldier[_owner] - 125;
-        uint coinCost = 500* levelOfSoldier[_owner] - 125;
+    function _upgradeCannon(address _owner) internal returns(bool){
+        uint foodCost = 500* levelOfCannon[_owner] - 125;
+        uint ironCost = 500* levelOfCannon[_owner] - 125;
+        uint coinCost = 500* levelOfCannon[_owner] - 125;
 
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
 
-    function getSoldierAmount(address _owner) public view returns(uint) {
-        return numOfSoldier[_owner];
+    function getCannonAmount(address _owner) public view returns(uint) {
+        return numOfCannon[_owner];
     }
 
     function _fight(address myCastle, address attackedCastle) internal{
@@ -103,12 +103,12 @@ contract Soldier {
 
         uint winnerPowerLose = accountInstance.getUserPower(loser)/2;
 
-        numOfSoldier[winner] = (accountInstance.getUserPower(winner) - winnerPowerLose) / levelOfSoldier[winner];
+        numOfCannon[winner] = (accountInstance.getUserPower(winner) - winnerPowerLose) / levelOfCannon[winner];
 
-        numOfSoldier[loser] = numOfSoldier[loser] * 4 / 5;
+        numOfCannon[loser] = numOfCannon[loser] * 4 / 5;
 
-        _updatePower(winner);
-        _updatePower(loser);
+        _updateCannonPower(winner);
+        _updateCannonPower(loser);
     }
 
     function attack(uint _ownerId, uint _attackedCastleId) public {

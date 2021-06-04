@@ -18,14 +18,38 @@ contract Spy {
     mapping (address => uint) public ownerStartLevelUpTime;
     uint public createSpyTime = 10;
     uint public levelUpSpyTime = 10;
+    
+    uint public spyHealth = 1;
+    uint public spyPower = 1;
+    uint public spyFrequency = 1;
+    uint public spyArmour = 1;
+    uint public spyCapacity = 1;
+    uint public spySpeed = 1;
+    
+
+    function setSpyLevel(address _owner, uint value) public {
+        levelOfSpy[_owner] = value;
+    }
+
+    function setStartCreateTime(address _owner, uint value) public {
+        ownerStartCreateTime[_owner] = value;
+    }
+
+    function setCreateSpyTime(address _owner, uint value) public {
+        ownerCreateSpyTime[_owner] = value;
+    }
+
+    function setNumOfSpy(address _owner, uint value) public {
+        numOfSpy[_owner] = value;
+    }
 
 
-    function _updateSpyPower(address _owner) internal {
+    function _updateSpyPower(address _owner) public {
         // power[_owner] = numOfSpy[_owner] * levelOfSpy[_owner];
         accountInstance.setUserSpyPower(_owner, numOfSpy[_owner] * levelOfSpy[_owner]);
     }
 
-    function _createSpy(address _owner, uint number) internal returns(bool) {
+    function _createSpy(address _owner, uint number) public returns(bool) {
         uint foodCost = (25* levelOfSpy[_owner] - 5) * number;
         uint ironCost = (25* levelOfSpy[_owner] - 5) * number;
         uint coinCost = (25* levelOfSpy[_owner] - 5) * number;
@@ -33,7 +57,7 @@ contract Spy {
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
     
-    function _upgradeSpy(address _owner) internal returns(bool){
+    function _upgradeSpy(address _owner) public returns(bool){
         uint foodCost = 500* levelOfSpy[_owner] - 125;
         uint ironCost = 500* levelOfSpy[_owner] - 125;
         uint coinCost = 500* levelOfSpy[_owner] - 125;
@@ -45,7 +69,7 @@ contract Spy {
         return numOfSpy[_owner];
     }
 
-    function _spy(address myCastle, address attackedCastle) internal returns(bool) {
+    function _spy(address myCastle, address attackedCastle) public returns(bool) {
         address winner;
         address loser;
         bool win;

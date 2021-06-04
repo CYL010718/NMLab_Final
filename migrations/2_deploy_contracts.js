@@ -1,13 +1,17 @@
 var Soldier = artifacts.require("./Soldier.sol")
+var Cannon = artifacts.require("./Cannon.sol")
+var Protector =  artifacts.require("./Protector.sol")
 var Spy = artifacts.require("./Spy.sol")
 var Account = artifacts.require("./Account.sol")
 var BuildingFactory = artifacts.require("./BuildingFactory.sol")
-// var Produce = artifacts.require("./Produce.sol")
-// var Barrack = artifacts.require("./Barrack.sol")
+var Produce = artifacts.require("./Produce.sol")
+var Barrack = artifacts.require("./Barrack.sol")
 // var Laboratory = artifacts.require("./Laboratory.sol")
 var FarmFactory = artifacts.require("./FarmFactory.sol")
 var Sawmill = artifacts.require("./Sawmill.sol")
 var Mine = artifacts.require("./Mine.sol")
+var Manor = artifacts.require("./Manor.sol")
+var Quarry = artifacts.require("./Quarry.sol")
 
 
 
@@ -19,7 +23,17 @@ module.exports = function(deployer) {
           return deployer.deploy(FarmFactory, Account.address, BuildingFactory.address).then(function() {
             return deployer.deploy(Sawmill, Account.address, BuildingFactory.address).then(function() {
               return deployer.deploy(Mine, Account.address, BuildingFactory.address).then(function() {
-                return deployer.deploy(Manor, Account.address, BuildingFactory.address)
+                return deployer.deploy(Manor, Account.address, BuildingFactory.address).then(function() {
+                  return deployer.deploy(Quarry, Account.address, BuildingFactory.address).then(function() {
+                    return deployer.deploy(Cannon, Account.address).then(function() {
+                      return deployer.deploy(Protector, Account.address).then(function() {
+                        return deployer.deploy(Barrack, BuildingFactory.address, Soldier.address, Spy.address, Cannon.address, Protector.address).then(function() {
+                          return deployer.deploy(Produce, FarmFactory.address, Manor.address, Sawmill.address, Mine.address, Quarry.address, BuildingFactory.address)
+                        });
+                      });
+                    });  
+                  });
+                });
               });
             });
           });
@@ -28,3 +42,5 @@ module.exports = function(deployer) {
     });
   });
 };
+
+// return deployer.deploy(Produce, FarmFactory.address, Manor.address, Sawmill.address, Mine.address, Quarry.address)

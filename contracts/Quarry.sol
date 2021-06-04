@@ -3,7 +3,7 @@ pragma solidity >=0.4.21 <0.7.0;
 import "./SafeMath.sol";
 import "./BuildingFactory.sol";
 
-contract QuarryFactory {
+contract Quarry {
     
     using SafeMath for uint;
 
@@ -24,7 +24,7 @@ contract QuarryFactory {
     }
 
     
-    function _updateProduceStone(address _owner) internal {
+    function _updateProduceStone(address _owner) public {
         uint[] memory quarries = buildingInstance.getSpecificBuildingByOwner(_owner, "Quarry");
         if (ownerStoneProduceTime[_owner] == 0 || quarries.length == 0) {
             ownerStoneProduceTime[_owner] = now;

@@ -23,7 +23,7 @@ contract FarmFactory {
     }
 
 
-    function _updateProduceFood(address _owner) internal {
+    function _updateProduceFood(address _owner) public {
         uint[] memory farms = buildingInstance.getSpecificBuildingByOwner(_owner, "Farm");
         if (ownerFoodProduceTime[_owner] == 0 || farms.length == 0) {
             ownerFoodProduceTime[_owner] = now;

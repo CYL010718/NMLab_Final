@@ -11,23 +11,23 @@ const GameScene = () => {
   const state = useContext(ContractContext);
 
   useEffect(() => {
-    const { contract, accounts } = state;
+    const { accountContract, accounts } = state;
     const load = async () => {
-      const checkUser = await contract.methods.checkUserAddress().call({from:accounts[0]});
+      const checkUser = await accountContract.methods.checkUserAddress().call({from:accounts[0]});
       setNewUser(!checkUser)
     }
-    if(contract !== null && accounts.length > 0) {
+    if(accountContract !== null && accounts.length > 0) {
       load();
     }
   }, [state])
   
   const initializeKingdom = async () => {
-    const { contract, accounts } = state;
-    if(contract == null || accounts.length < 1) {
+    const { buildingContract, accounts } = state;
+    if(buildingContract == null || accounts.length < 1) {
       alert("contract error!");
       return;
     }
-    const create = await contract.methods.createCastle(650, 300).send({from: accounts[0]});
+    const create = await buildingContract.methods.createCastle(650, 300).send({from: accounts[0]});
     console.log(create);
     setNewUser(false);
   }
