@@ -76,6 +76,13 @@ contract Account {
         return kingdomAmount;
     }
 
+    function getUserPowerById(uint idx) public view returns(uint) {
+        if(idx < kingdomAmount) {
+            return power[castleToOwner[idx]];
+        }
+        return 0;
+    }
+
     function getUserPower(address idx) public view returns(uint) {
         return power[idx];
     }

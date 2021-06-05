@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useContext} from 'react';
+import { ContractContext } from '../App';
 import {
   Button,
   Divider,
@@ -10,14 +11,34 @@ import {
 } from 'semantic-ui-react'
 
 
-const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPower, contract, account }) => {
+const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPower }) => {
+  const state = useContext(ContractContext);
+  const {accountContract, barrackContract, accounts} = state;
+  const [battled, setBattled] = useState(false);
+  const [spyed, setSpyed] = useState(false);
+  //const [battleResult, setBattleResult] = useState(false) 
+  const [spyResult, setSpyResult] = useState(false); // True = win
 
   const goBattle = async () => {
-    await contract.methods.attack(myIdx, userIdx).send({from: account});
-    const myNewPower = await contract.methods.getUserPower(myIdx).call({from: account});
-    const userNewPower = await contract.methods.getUserPower(userIdx).call({from: account});
+    await barrackContract.methods.attack(myIdx, userIdx).send({from: accounts[0]});
+    const myNewPower = await accountContract.methods.getUserPowerById(myIdx).call({from: accounts[0]});
+    const userNewPower = await accountContract.methods.getUserPowerById(userIdx).call({from: accounts[0]});
+    setBattled(true);
     setMyPower(myNewPower);
     setUserPower(userNewPower);
+  }
+
+  const sendSpy = async () => {
+    const spyResult = await barrackContract.methods.sendSpy(myIdx, userIdx).call({from: accounts[0]});
+    
+    setSpyed(true);
+    if(spyResult){
+      const myNewPower = await accountContract.methods.getUserPowerById(myIdx).call({from: accounts[0]});
+      const userNewPower = await accountContract.methods.getUserPowerById(userIdx).call({from: accounts[0]});
+      setSpyResult(true);
+      setMyPower(myNewPower);
+      setUserPower(userNewPower);
+    }
   }
 
   return <>
@@ -65,12 +86,39 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
           </Grid.Row>
         </Grid>
       </Segment>
-      <Button animated='fade' color='red' fluid inverted attached='bottom' onClick={() => goBattle()}>
-        <Button.Content visible>Battle</Button.Content>
-        <Button.Content hidden>
-          <Icon name='fire' />
-        </Button.Content>
-      </Button>
+      {
+        !battled ? 
+        <Button animated='fade' color='red' fluid inverted attached='bottom' onClick={() => goBattle()}>
+          <Button.Content visible>Battle</Button.Content>
+          <Button.Content hidden>
+            <Icon name='fire' />
+          </Button.Content>
+        </Button>
+        :
+        <Button animated='fade' color='red' fluid inverted attached='bottom'>
+          <Button.Content visible>
+            <Icon name='fire' />
+          </Button.Content>
+        </Button>
+      }
+      {
+        !spyed ?
+        <Button animated='fade' color='red' fluid inverted attached='bottom' onClick={() => goBattle()}>
+          <Button.Content visible>Send Spy</Button.Content>
+          <Button.Content hidden>
+            <Icon name='fire' />
+          </Button.Content>
+        </Button>
+        :
+        spyResult?
+        <Button positive fluid>
+          spy success!
+        </Button>
+        :
+        <Button negative fluid>
+          spy failed!
+        </Button>
+      }
       
     </Modal.Content>
   </>

@@ -5,17 +5,20 @@ import { BattleModal } from './index';
 
 const BattleMenuItem = ({ userIdx, myIdx, active }) => {
   const state = useContext(ContractContext);
-  const { contract, accounts } = state;
+  //const { contract, accounts } = state;
   const [ myPower, setMyPower ] = useState(-1);
   const [ userPower, setUserPower ] = useState(-1);
   const [ open, setOpen ] = useState(false);
 
   useEffect(() => {
-    const { contract, accounts } = state;
-    if(!contract || accounts.length < 1) return;
+    const { accountContract, accounts } = state;
+    console.log(myIdx);
+    console.log(accountContract);
+    console.log(accounts);
+    if(!accountContract || accounts.length < 1) return;
     const getUP = async () => {
       // const pow = await contract.methods.getUserPower(userIdx).call({from:accounts[0]});
-      const myPow = await contract.methods.getUserPower(myIdx).call({from:accounts[0]});
+      const myPow = await accountContract.methods.getUserPowerById(myIdx).call({from:accounts[0]});
       // console.log(pow);
       // setUserPower(pow);
       setMyPower(myPow);
@@ -51,7 +54,7 @@ const BattleMenuItem = ({ userIdx, myIdx, active }) => {
       onOpen={() => setOpen(true)}
       open={open}
     >
-      <BattleModal myIdx={myIdx} userIdx={userIdx} myPower={myPower} userPower={userPower} setMyPower={setMyPower} setUserPower={setUserPower} contract={contract} account={accounts[0]} />
+      <BattleModal myIdx={myIdx} userIdx={userIdx} myPower={myPower} userPower={userPower} setMyPower={setMyPower} setUserPower={setUserPower}  />
       <Modal.Actions>
         <Button onClick={() => setOpen(false)} color='red'>
           <Icon name='close' /> close
