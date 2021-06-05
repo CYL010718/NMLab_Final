@@ -27,6 +27,9 @@ contract Barrack {
     function createBarrack(uint _x, uint _y) public {
         buildingInstance._createBuilding(msg.sender, "Barrack", _x, _y);
         soldierInstance.setSoldierLevel(msg.sender, 1);
+        SpyInstance.setSpyLevel(msg.sender, 1);
+        ProtectorInstance.setProtectorLevel(msg.sender, 1);
+        CannonInstance.setCannonLevel(msg.sender, 1);
     }
 
     function getSoldierAmount(address _owner) public view returns(uint) {

@@ -111,7 +111,7 @@ const Map = () => {
       updateBothProgress();
     }
     else {
-      updateProduce();
+      //updateProduce();
       updateProgress();
     }
     setReload(!reload);
@@ -127,12 +127,34 @@ const Map = () => {
       const loadType = building[1];
       let newState = { type: loadType, index: loadIndex };
       if(loadType === "Barrack") {
-        const getCreateTime = await barrackContract.methods.getCreateSoldierTime().call({from: accounts[0]});
-        const nowStartPeriod = parseInt( getCreateTime[0] );
-        const createTimeNeed = parseInt( getCreateTime[1] );
-        if(createTimeNeed != 0) {
+        const getSoldierCreateTime = await barrackContract.methods.getCreateSoldierTime().call({from: accounts[0]});
+        const soldierStartPeriod = parseInt( getSoldierCreateTime[0] );
+        const createSoldierTimeNeed = parseInt( getSoldierCreateTime[1] );
+        if(createSoldierTimeNeed != 0) {
           pdIdx = idx;
-          newState = { ...newState, produce: [ nowStartPeriod, createTimeNeed ] };
+          newState = { ...newState, soldierProduce: [ soldierStartPeriod, createSoldierTimeNeed ] };
+        }
+        const getSpyCreateTime = await barrackContract.methods.getCreateSpyTime().call({from: accounts[0]});
+        const spyStartPeriod = parseInt( getSpyCreateTime[0] );
+        const createSpyTimeNeed = parseInt( getSpyCreateTime[1] );
+        if(createSpyTimeNeed != 0) {
+          pdIdx = idx;
+          newState = { ...newState, spyProduce: [ spyStartPeriod, createSpyTimeNeed ] };
+        }
+        const getCannonCreateTime = await barrackContract.methods.getCreateCannonTime().call({from: accounts[0]});
+        const cannonStartPeriod = parseInt( getCannonCreateTime[0] );
+        const createCannonTimeNeed = parseInt( getCannonCreateTime[1] );
+        if(createCannonTimeNeed != 0) {
+          pdIdx = idx;
+          newState = { ...newState, cannonProduce: [ cannonStartPeriod, createCannonTimeNeed ] };
+        }
+        const getProtectorCreateTime = await barrackContract.methods.getCreateProtectorTime().call({from: accounts[0]});
+        const protectorStartPeriod = parseInt( getProtectorCreateTime[0] );
+        const createProtectorTimeNeed = parseInt( getProtectorCreateTime[1] );
+        console.log("protector:", protectorStartPeriod, createProtectorTimeNeed);
+        if(createProtectorTimeNeed != 0) {
+          pdIdx = idx;
+          newState = { ...newState, protectorProduce: [ protectorStartPeriod, createProtectorTimeNeed ] };
         }
       }
       if(loadIndex === upgradingId && upgradingId !== 0) {
@@ -160,7 +182,7 @@ const Map = () => {
         // updateProgress();
       })
     }
-    if(contract && accounts.length > 0) {
+    if(buildingContract && barrackContract && accounts.length > 0) {
       if(!initialized) {
         init();
       }

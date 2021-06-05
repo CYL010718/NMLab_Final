@@ -6,7 +6,7 @@ const None = ({ upgradingIdx, idx, x, y, produceContract, buildingContract, barr
   //const [ page, setPage ] = useState(0);
 
   const build = async (buildType) => {
-    if(!contract || !account) {
+    if(!buildingContract || !barrackContract && !account) {
       alert("please wait a minute and try again");
       return;
     }

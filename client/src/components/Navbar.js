@@ -21,24 +21,24 @@ const Navbar = ({ makeReload }) => {
   const [ updateTimes, setUpdateTimes ] = useState(0);
 
   useEffect(() => {
-    const { contract, accounts } = state;
-    if(!contract || accounts.length < 1) return;
+    const { accountContract, produceContract, accounts } = state;
+    if(!produceContract || accounts.length < 1) return;
     const updateResource = async () => {
-      const result = await contract.methods.updateProduce(accounts[0]).send({from: accounts[0]});
+      const result = await produceContract.methods.updateProduce(accounts[0]).send({from: accounts[0]});
       console.log(result);
-      const wood = await contract.methods.getWoodAmount().call({from: accounts[0]});
-      const food = await contract.methods.getFoodAmount().call({from: accounts[0]});
-      const iron = await contract.methods.getIronAmount().call({from: accounts[0]});
-      const stone = await contract.methods.getStoneAmount().call({from: accounts[0]});
-      const coin = await contract.methods.getCoinAmount().call({from: accounts[0]});
+      const wood = await accountContract.methods.getWoodAmount().call({from: accounts[0]});
+      const food = await accountContract.methods.getFoodAmount().call({from: accounts[0]});
+      const iron = await accountContract.methods.getIronAmount().call({from: accounts[0]});
+      const stone = await accountContract.methods.getStoneAmount().call({from: accounts[0]});
+      const coin = await accountContract.methods.getCoinAmount().call({from: accounts[0]});
       setResources({ wood, food, iron, stone, coin });
     }
     const getResource = async () => {
-      const wood = await contract.methods.getWoodAmount().call({from: accounts[0]});
-      const food = await contract.methods.getFoodAmount().call({from: accounts[0]});
-      const iron = await contract.methods.getIronAmount().call({from: accounts[0]});
-      const stone = await contract.methods.getStoneAmount().call({from: accounts[0]});
-      const coin = await contract.methods.getCoinAmount().call({from: accounts[0]});
+      const wood = await accountContract.methods.getWoodAmount().call({from: accounts[0]});
+      const food = await accountContract.methods.getFoodAmount().call({from: accounts[0]});
+      const iron = await accountContract.methods.getIronAmount().call({from: accounts[0]});
+      const stone = await accountContract.methods.getStoneAmount().call({from: accounts[0]});
+      const coin = await accountContract.methods.getCoinAmount().call({from: accounts[0]});
       setResources({ wood, food, iron, stone, coin });
     }
     if(updateTimes === 0) {

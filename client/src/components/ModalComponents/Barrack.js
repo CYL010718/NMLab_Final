@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BarrackPage from './BarrackPage'
-import { Button, Modal, Grid, Icon, Segment, Header, Input, Progress, Image } from 'semantic-ui-react';
+import { Button, Modal, Grid, Icon, Segment, Header, Input, Progress, Menu, Image } from 'semantic-ui-react';
 import soldierpng from '../../images/soldier_noback.png';
 
 const Barrack = ({ idx, x, y, cellState, buildingContract, barrackContract, account, updateCellState }) => {
@@ -37,13 +37,13 @@ const Barrack = ({ idx, x, y, cellState, buildingContract, barrackContract, acco
   }
 
   const startUpgrade = async () => {
-    if(!contract || !account) return;
+    if(!buildingContract || !account) return;
     const upgradingId = parseInt( await buildingContract.methods.getUpgradingId(account).call({from: account}) );
     if(upgradingId !== 0 && upgradingId !== cellState.index) {
       alert("something else are upgrading now!");
       return;
     }
-    await contract.methods.startBuild(account, x, y).send({from: account});
+    await buildingContract.methods.startBuild(account, x, y).send({from: account});
     const remainTime = parseInt( await buildingContract.methods.getRemainingTime(account).call({from: account}) );
     console.log("upgrade remainTime: ", remainTime);
     const newState = { ...cellState, upgrade: [0, remainTime] };
@@ -51,7 +51,7 @@ const Barrack = ({ idx, x, y, cellState, buildingContract, barrackContract, acco
   }
 
   const confirmUpgrade = async () => {
-    await contract.methods.updateBuild(account).send({from: account});
+    await buildingContract.methods.updateBuild(account).send({from: account});
     const newState = { ...cellState, upgrade: false };
     updateCellState(idx, newState);
   }
@@ -95,7 +95,7 @@ const Barrack = ({ idx, x, y, cellState, buildingContract, barrackContract, acco
           </Menu>
         </Grid.Row>
         <Grid.Row stretched>
-          <BarrackPage page = {page} level = {level} upgrading = {upgrading} contract = {barrackContract} cellState = {cellState} updateCellState = {updateCellState}/>
+          <BarrackPage page = {page} idx = {idx} level = {level} upgrading = {upgrading} contract = {barrackContract} account = {account} cellState = {cellState} updateCellState = {updateCellState}/>
           <Grid.Column>
             <Header icon>
               Barrack
