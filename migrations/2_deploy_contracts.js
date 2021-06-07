@@ -6,7 +6,7 @@ var Account = artifacts.require("./Account.sol")
 var BuildingFactory = artifacts.require("./BuildingFactory.sol")
 var Produce = artifacts.require("./Produce.sol")
 var Barrack = artifacts.require("./Barrack.sol")
-// var Laboratory = artifacts.require("./Laboratory.sol")
+var Laboratory = artifacts.require("./Laboratory.sol")
 var FarmFactory = artifacts.require("./FarmFactory.sol")
 var Sawmill = artifacts.require("./Sawmill.sol")
 var Mine = artifacts.require("./Mine.sol")
@@ -28,7 +28,9 @@ module.exports = function(deployer) {
                     return deployer.deploy(Cannon, Account.address).then(function() {
                       return deployer.deploy(Protector, Account.address).then(function() {
                         return deployer.deploy(Barrack, BuildingFactory.address, Soldier.address, Spy.address, Cannon.address, Protector.address).then(function() {
-                          return deployer.deploy(Produce, FarmFactory.address, Manor.address, Sawmill.address, Mine.address, Quarry.address, BuildingFactory.address)
+                          return deployer.deploy(Produce, FarmFactory.address, Manor.address, Sawmill.address, Mine.address, Quarry.address, BuildingFactory.address).then(function() {
+                            return deployer.deploy(Laboratory, BuildingFactory.address)
+                          });
                         });
                       });
                     });  

@@ -2,17 +2,44 @@ pragma solidity >=0.4.21 <0.7.0;
 
 import "./SafeMath.sol";
 import "./BuildingFactory.sol";
-import "./Spy.sol";
 
-contract Laboratory is BuildingFactory, Spy {
+contract Laboratory {
     
     using SafeMath for uint;
-    using SafeMath for uint;
+    
+    // Account accountInstance;
+    BuildingFactory buildingInstance;
+    constructor(address _building_address) public {
+        // accountInstance = Account(_account_address);
+        buildingInstance = BuildingFactory(_building_address);
+    }
+    
+    mapping (address => uint) public ownerLabProduceTime;
+    uint public labAbility = 1;
 
     function createLaboratory(uint _x, uint _y) public {
-        _createBuilding(msg.sender, "Laboratory", _x, _y);
-        levelOfSpy[msg.sender] = 1;
+        buildingInstance._createBuilding(msg.sender, "Laboratory", _x, _y);
+        _updateLaboratory(msg.sender);
     }
+
+
+    function _updateLaboratory(address _owner) public {
+        uint[] memory labs = buildingInstance.getSpecificBuildingByOwner(_owner, "Laboratory");
+        if (ownerLabProduceTime[_owner] == 0 || labs.length == 0) {
+            ownerLabProduceTime[_owner] = now;
+            return;
+        }
+        uint periodCounts = (now - ownerLabProduceTime[_owner]).div(10 seconds);
+        // uint produceAbilitySum = 0;
+        // for (uint i=0; i<farms.length; i++) {
+        //     produceAbilitySum += buildingInstance.getBuildingLevel(labs[i]) * produceLabAbility;
+        // }
+        // accountInstance.setLabOwnerCount(_owner, accountInstance.getFoodOwnerCount(_owner) + periodCounts * produceAbilitySum);
+        ownerLabProduceTime[_owner] += 10 * periodCounts;
+        labAbility += 1;
+    }
+
+
 
     // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
     // function startCreateSpy(uint number) public returns(uint) {
