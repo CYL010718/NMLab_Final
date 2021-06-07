@@ -1,18 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Modal, Grid, Icon, Segment, Header, Input, Progress, Image } from 'semantic-ui-react';
+import BarrackPage from './BarrackPage'
+import { Button, Modal, Grid, Icon, Segment, Header, Input, Progress, Menu, Image } from 'semantic-ui-react';
 import soldierpng from '../../images/soldier_noback.png';
 
-const Barrack = ({ idx, x, y, cellState, contract, account, updateCellState }) => {
+const Barrack = ({ idx, x, y, cellState, buildingContract, barrackContract, account, updateCellState }) => {
+  const [ page, setPage ] = useState(0);
   const [ level, setLevel ] = useState(1);
   const [ soldierAmount, setSoldierAmount ] = useState(0);
+  const [ cannonAmount, setCannonAmount ] = useState(0);
+  const [ protectorAmount, setProtectorAmount ] = useState(0);
+  const [ spyAmount, setSpyAmount ] = useState(0);
   const [ upgrading, setUpgrading ] = useState(false);
   const [ upgradeProgress, setUpgradeProgress ] = useState(0);
-  const [ produceAmount, setProduceAmount ] = useState(0);
   const [ producing, setProducing ] = useState(false);
-  const [ produceProgress, setProduceProgress ] = useState(0);
+  
 
   const getLevel = async () => {
-    const building = await contract.methods.getBuildingById(cellState.index).call({from: account});
+    const building = await buildingContract.methods.getBuildingById(cellState.index).call({from: account});
     const exist = building[0];
     const lv = building[2];
     if(exist) {
@@ -21,120 +25,77 @@ const Barrack = ({ idx, x, y, cellState, contract, account, updateCellState }) =
     }
   }
 
-  const getSoldierAmount = async () => {
-    const getSA = await contract.methods.getSoldierAmount(account).call({from: account});
-    setSoldierAmount(getSA);
+  const getAmounts = async () => {
+    const soldierNum = await barrackContract.methods.getSoldierAmount(account).call({from: account});
+    const cannonNum = await barrackContract.methods.getCannonAmount(account).call({from: account});
+    const protectorNum = await barrackContract.methods.getProtectorAmount(account).call({from: account});
+    const spyNum = await barrackContract.methods.getSpyAmount(account).call({from: account});
+    setSoldierAmount(soldierNum);
+    setCannonAmount(cannonNum);
+    setProtectorAmount(protectorNum);
+    setSpyAmount(spyNum);
   }
 
   const startUpgrade = async () => {
-    if(!contract || !account) return;
-    const upgradingId = parseInt( await contract.methods.getUpgradingId(account).call({from: account}) );
+    if(!buildingContract || !account) return;
+    const upgradingId = parseInt( await buildingContract.methods.getUpgradingId(account).call({from: account}) );
     if(upgradingId !== 0 && upgradingId !== cellState.index) {
       alert("something else are upgrading now!");
       return;
     }
-    await contract.methods.startBuild(account, x, y).send({from: account});
-    const remainTime = parseInt( await contract.methods.getRemainingTime(account).call({from: account}) );
+    await buildingContract.methods.startBuild(account, x, y).send({from: account});
+    const remainTime = parseInt( await buildingContract.methods.getRemainingTime(account).call({from: account}) );
     console.log("upgrade remainTime: ", remainTime);
     const newState = { ...cellState, upgrade: [0, remainTime] };
     updateCellState(idx, newState);
   }
 
   const confirmUpgrade = async () => {
-    await contract.methods.updateBuild(account).send({from: account});
+    await buildingContract.methods.updateBuild(account).send({from: account});
     const newState = { ...cellState, upgrade: false };
-    updateCellState(idx, newState);
-  }
-  
-  const startCreateSoldier = async () => {
-    await contract.methods.startCreateSoldier(produceAmount).send({from: account});
-    const getCreateTime = await contract.methods.getCreateSoldierTime().call({from: account});
-    const nowStartPeriod = parseInt( getCreateTime[0] );
-    const createTimeNeed = parseInt( getCreateTime[1] );
-    console.log("createSoldier: ", nowStartPeriod, createTimeNeed);
-    if(createTimeNeed == 0) {
-      alert("Not enough resource!");
-      return;
-    }
-    const newState = { ...cellState, produce: [ nowStartPeriod, createTimeNeed ]};
-    updateCellState(idx, newState);
-    // const remainTime = parseInt( await contract.methods.)
-  }
-  
-  const confirmCreateSoldier = async () => {
-    await contract.methods.updateCreateSoldier(account).send({from: account});
-    const getCreateTime = await contract.methods.getCreateSoldierTime().call({from: account});
-    const nowStartPeriod = parseInt( getCreateTime[0] );
-    const createTimeNeed = parseInt( getCreateTime[1] );
-    if(createTimeNeed != 0) {
-      alert("confirm failed");
-      return;
-    }
-    const newState = { ...cellState, produce: false };
     updateCellState(idx, newState);
   }
 
   useEffect(() => {
-    if(contract && account) {
+    if(buildingContract && barrackContract && account) {
       getLevel();
-      getSoldierAmount();
+      getAmounts();
     }
-    setProducing(cellState.produce?true:false);
-    setProduceProgress(cellState.produce? cellState.produce[1]===0 ? 100 : cellState.produce[0]/cellState.produce[1]*100>100?100:cellState.produce[0]/cellState.produce[1]*100  : 0)
+    setProducing((cellState.soldierProduce || cellState.cannonProduce || cellState.protectorProduce || cellState.spyProduce) ?true:false);
+    //setProduceProgress(cellState.produce? cellState.produce[1]===0 ? 100 : cellState.produce[0]/cellState.produce[1]*100>100?100:cellState.produce[0]/cellState.produce[1]*100  : 0)
     setUpgrading(cellState.upgrade?true:false);
     setUpgradeProgress(cellState.upgrade? cellState.upgrade[1]===0 ? 100 : cellState.upgrade[0]/cellState.upgrade[1]*100>100?100:cellState.upgrade[0]/cellState.upgrade[1]*100  : 0);
-  }, [contract, account, cellState])
-
-  const handleInputChange = (e, { value }) => {
-    e.preventDefault();
-    setProduceAmount(value);
-  }
+  }, [buildingContract, barrackContract, account, cellState])
 
   return <>
     <Modal.Content image>
       <Grid columns='equal' divided padded>
+        <Grid.Row centered>
+          <Menu pointing secondary>
+            <Menu.Item
+              name='Soldier'
+              active={page === 0}
+              onClick={()=>setPage(0)}
+            />
+            <Menu.Item
+              name='Cannon'
+              active={page === 1}
+              onClick={()=>setPage(1)}
+            />
+            <Menu.Item
+              name='Protector'
+              active={page === 2}
+              onClick={()=>setPage(2)}
+            />
+            <Menu.Item
+              name='Spy'
+              active={page === 3}
+              onClick={()=>setPage(3)}
+            />
+          </Menu>
+        </Grid.Row>
         <Grid.Row stretched>
-          <Grid.Column>
-            <Header as='h4'>
-              Level
-            </Header>
-            <Segment textAlign='center' compact color='grey' size='tiny'>
-              {level}
-            </Segment>
-            {
-              producing ?
-              <>
-              <Header as='h4'>
-                Produce soldier progress
-              </Header>
-              <Progress percent={produceProgress} indicating />
-              <div style={{textAlign: 'center'}}>
-                <Button disabled={produceProgress !== 100} primary onClick={() => confirmCreateSoldier()} >
-                  confirm soldier
-                </Button>
-              </div>
-              </>
-              :
-              <>
-              <Header as='h4'>
-                Produce Soldier
-              </Header>
-              <Segment textAlign='center' compact color='grey' size='tiny'>
-                <div>soldier amount: {produceAmount}</div>
-                <Input
-                  min={0}
-                  max={10*level}
-                  onChange={handleInputChange}
-                  type='range'
-                  value={produceAmount}
-                />
-              </Segment>
-              <div style={{textAlign: 'center'}}>
-                <Button primary disabled={upgrading} onClick={() => startCreateSoldier()} >produce</Button>
-              </div>
-              </>
-            }
-          </Grid.Column>
+          <BarrackPage page = {page} idx = {idx} level = {level} upgrading = {upgrading} contract = {barrackContract} account = {account} cellState = {cellState} updateCellState = {updateCellState}/>
           <Grid.Column>
             <Header icon>
               Barrack
@@ -142,8 +103,11 @@ const Barrack = ({ idx, x, y, cellState, contract, account, updateCellState }) =
               <Image size='massive' src={soldierpng} />
             </Header>
             <Segment padded color='black'>
-              <p>Produce Soldier  </p>
+              <p>Produce Army  </p>
               <p>Soldier amount: {soldierAmount}</p>
+              <p>Cannon amount: {cannonAmount}</p>
+              <p>Protector amount: {protectorAmount}</p>
+              <p>Spy amount: {spyAmount}</p>
             </Segment>
             {
               upgrading?

@@ -17,6 +17,7 @@ contract Laboratory {
     mapping (address => uint) public ownerLabProduceTime;
     uint public labAbility = 1;
 
+    
     function createLaboratory(uint _x, uint _y) public {
         buildingInstance._createBuilding(msg.sender, "Laboratory", _x, _y);
         _updateLaboratory(msg.sender);

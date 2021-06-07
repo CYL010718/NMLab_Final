@@ -69,7 +69,7 @@ contract Spy {
         return numOfSpy[_owner];
     }
 
-    function _spy(address myCastle, address attackedCastle) public returns(bool) {
+    function _spy(address myCastle, address attackedCastle) public view returns(bool) {
         address winner;
         address loser;
         bool win;
@@ -88,7 +88,7 @@ contract Spy {
         return win;
     }
 
-    function sendSpy(uint _ownerId, uint _attackedCastleId) public returns(bool) {
+    function sendSpy(uint _ownerId, uint _attackedCastleId) public view returns(bool) {
         require(msg.sender == accountInstance.convertCastleToOwner(_ownerId));
         address myCastle = accountInstance.convertCastleToOwner(_ownerId);
         address attackedCastle = accountInstance.convertCastleToOwner(_attackedCastleId);

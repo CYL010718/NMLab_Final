@@ -26,8 +26,7 @@ contract Produce {
 
 
 
-
-
+    
     function updateProduce(address _owner) public {
         manorInstance._updateProduceCoin(_owner);
         mineInstance._updateProduceIron(_owner);

@@ -27,6 +27,13 @@ contract Barrack {
     function createBarrack(uint _x, uint _y) public {
         buildingInstance._createBuilding(msg.sender, "Barrack", _x, _y);
         soldierInstance.setSoldierLevel(msg.sender, 1);
+        SpyInstance.setSpyLevel(msg.sender, 1);
+        ProtectorInstance.setProtectorLevel(msg.sender, 1);
+        CannonInstance.setCannonLevel(msg.sender, 1);
+    }
+
+    function getSoldierAmount(address _owner) public view returns(uint) {
+        return soldierInstance.getSoldierAmount(_owner);
     }
 
     // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
@@ -65,6 +72,10 @@ contract Barrack {
         }
     }
 
+    function getSpyAmount(address _owner) public view returns(uint) {
+        return SpyInstance.getSpyAmount(_owner);
+    }
+
     // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
     function startCreateSpy(uint number) public returns(uint) {
         address _owner = msg.sender;
@@ -99,6 +110,10 @@ contract Barrack {
             uint remainingTime = (SpyInstance.ownerStartCreateTime(_owner) + SpyInstance.ownerCreateSpyTime(_owner)).sub(now);
             return remainingTime;
         }
+    }
+
+    function getCannonAmount(address _owner) public view returns(uint) {
+        return CannonInstance.getCannonAmount(_owner);
     }
 
     // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
@@ -137,6 +152,10 @@ contract Barrack {
         }
     }
 
+    function getProtectorAmount(address _owner) public view returns(uint) {
+        return ProtectorInstance.getProtectorAmount(_owner);
+    }
+
     // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
     function startCreateProtector(uint number) public returns(uint) {
         address _owner = msg.sender;
@@ -171,6 +190,15 @@ contract Barrack {
             uint remainingTime = (ProtectorInstance.ownerStartCreateTime(_owner) + ProtectorInstance.ownerCreateProtectorTime(_owner)).sub(now);
             return remainingTime;
         }
+    }
+
+    function attack(uint _ownerId, uint _attackedCastleId) public {
+        soldierInstance.attack(_ownerId, _attackedCastleId);
+    }
+
+    function sendSpy(uint _ownerId, uint _attackedCastleId) public view returns(bool) {
+        //returns TRUE if spy of myCastle > attackedCastle
+        return SpyInstance.sendSpy(_ownerId, _attackedCastleId);
     }
 
 }
