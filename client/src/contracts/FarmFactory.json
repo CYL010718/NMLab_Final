@@ -4591,10 +4591,16 @@
       "links": {},
       "address": "0x2d211DF51F566c5630028bE54e8AB965E3997fc3",
       "transactionHash": "0x3c0d42a292681814bb35c552addae529953caa6fc3be4c17da42dcc9becbbc90"
+    },
+    "1623166222416": {
+      "events": {},
+      "links": {},
+      "address": "0x193c7069397724f824653d0a1Db65cD79c55dF46",
+      "transactionHash": "0xb91d03607e6a931b4189602971e7cbfc3eb1baa5b5e741f357de0656bb4f40f0"
     }
   },
   "schemaVersion": "3.4.0",
-  "updatedAt": "2021-06-08T10:05:09.222Z",
+  "updatedAt": "2021-06-08T15:35:34.653Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
