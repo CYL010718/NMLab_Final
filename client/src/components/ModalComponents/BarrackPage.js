@@ -287,7 +287,7 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
                 <Header as='h4'>
                 Produce soldier progress
                 </Header>
-                <Progress percent={soldierProduceProgress} indicating />
+                <Progress progress='percent'  progress='percent'  percent={soldierProduceProgress} indicating />
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={soldierProduceProgress !== 100} primary onClick={() => confirmCreateSoldier()} >
                     confirm
@@ -332,7 +332,7 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
                 <Header as='h4'>
                 Produce cannon progress
                 </Header>
-                <Progress percent={cannonProduceProgress} indicating />
+                <Progress progress='percent'  progress='percent'  percent={cannonProduceProgress} indicating />
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={cannonProduceProgress !== 100} primary onClick={() => confirmCreateCannon()} >
                     confirm
@@ -377,7 +377,7 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
                 <Header as='h4'>
                 Produce protector progress
                 </Header>
-                <Progress percent={protectorProduceProgress} indicating />
+                <Progress progress='percent'  percent={protectorProduceProgress} indicating />
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={protectorProduceProgress !== 100} primary onClick={() => confirmCreateProtector()} >
                     confirm
@@ -422,7 +422,7 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
                 <Header as='h4'>
                 Produce spy progress
                 </Header>
-                <Progress percent={spyProduceProgress} indicating />
+                <Progress progress='percent'  percent={spyProduceProgress} indicating />
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={spyProduceProgress !== 100} primary onClick={() => confirmCreateSpy()} >
                     confirm

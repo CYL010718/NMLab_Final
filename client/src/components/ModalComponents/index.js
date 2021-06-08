@@ -6,6 +6,7 @@ import Manor from './Manor';
 import Quarry from './Quarry';
 import Page from './Page';
 import Barrack from './Barrack';
+import Laboratory from './Laboratory'
 
 export {
   None,
@@ -16,4 +17,5 @@ export {
   Quarry,
   Page,
   Barrack,
+  Laboratory
 }

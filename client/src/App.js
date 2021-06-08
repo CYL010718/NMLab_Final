@@ -14,7 +14,7 @@ import Building from "./components/Building";
 
 export const ContractContext = React.createContext();
 const App = () => {
-  const [ state, setState ] = useState({ storageValue: 0, web3: null, accounts: null, produceContract: null, barrackContract: null,  buildingContract: null, accountContract: null});
+  const [ state, setState ] = useState({ storageValue: 0, web3: null, accounts: null, produceContract: null, barrackContract: null,  buildingContract: null, accountContract: null, labContract: null});
   useEffect(() => {
     async function getState() {
       try {
@@ -45,9 +45,14 @@ const App = () => {
           AccountContract.abi,
           deployedNetworkA && deployedNetworkA.address,
         );
+        const deployedNetworkL = LaboratoryContract.networks[networkId];
+        const instanceL = new web3.eth.Contract(
+          LaboratoryContract.abi,
+          deployedNetworkL && deployedNetworkL.address,
+        );
         // Set web3, accounts, and contract to the state, and then proceed with an
         // example of interacting with the contract's methods.
-        setState({ web3, accounts, produceContract: instanceP, barrackContract: instanceBa , buildingContract: instanceBu, accountContract: instanceA});
+        setState({ web3, accounts, produceContract: instanceP, barrackContract: instanceBa , buildingContract: instanceBu, accountContract: instanceA, labContract: instanceL});
       } catch (error) {
         // Catch any errors for any of the above operations.
         alert(
@@ -64,7 +69,7 @@ const App = () => {
 
   return <>
     {
-      (state.produceContract && state.barrackContract && state.buildingContract && state.accountContract && state.accounts.length > 0)
+      (state.produceContract && state.barrackContract && state.buildingContract && state.accountContract && state.labContract && state.accounts.length > 0)
       ? 
       <ContractContext.Provider value={state}>
         <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
