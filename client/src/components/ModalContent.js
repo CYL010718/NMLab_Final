@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { ContractContext } from "../App";
 import { Modal } from 'semantic-ui-react';
 import "../styles/Map.css";
-import { None, Farm, Sawmill, Mine, Manor, Quarry, Barrack } from './ModalComponents/index';
+import { None, Farm, Sawmill, Mine, Manor, Quarry, Barrack, Laboratory } from './ModalComponents/index';
 
 const ModalContent = ({ upgradingIdx, idx, x, y, cellState, index, updateCellState, page = {page} }) => {
   const state = useContext(ContractContext);
@@ -12,7 +12,7 @@ const ModalContent = ({ upgradingIdx, idx, x, y, cellState, index, updateCellSta
   if(type === "None") {
     return <>
       <Modal.Header>Create Building</Modal.Header>
-      {state.accounts && state.produceContract && state.buildingContract && state.barrackContract ? <None upgradingIdx={upgradingIdx} idx={idx} cellState={cellState} x={x} y={y} produceContract={state.produceContract} buildingContract={state.buildingContract} barrackContract={state.barrackContract} account={state.accounts[0]} updateCellState={updateCellState} page = {page} /> : null}
+      {state.accounts && state.produceContract && state.buildingContract && state.barrackContract && state.labContract ? <None upgradingIdx={upgradingIdx} idx={idx} cellState={cellState} x={x} y={y} produceContract={state.produceContract} buildingContract={state.buildingContract} barrackContract={state.barrackContract} labContract = {state.labContract} account={state.accounts[0]} updateCellState={updateCellState} page = {page} /> : null}
     </>
   }
   if(type === "Farm") {
@@ -49,6 +49,12 @@ const ModalContent = ({ upgradingIdx, idx, x, y, cellState, index, updateCellSta
     return <>
       <Modal.Header>Barrack</Modal.Header>
       {state.accounts && state.buildingContract && state.barrackContract  ? <Barrack idx={idx} cellState={cellState} x={x} y={y} buildingContract={state.buildingContract} barrackContract={state.barrackContract} account={state.accounts[0]} updateCellState={updateCellState} /> : null}
+    </>
+  }
+  if(type === "Laboratory") {
+    return <>
+      <Modal.Header>Laboratory</Modal.Header>
+      {state.accounts && state.buildingContract && state.labContract  ? <Laboratory idx={idx} cellState={cellState} x={x} y={y} buildingContract={state.buildingContract} labContract={state.labContract} account={state.accounts[0]} updateCellState={updateCellState} /> : null}
     </>
   }
 

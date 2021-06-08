@@ -9,7 +9,7 @@ import Draggable from 'react-draggable';
 
 const imgWidth = 1700;//1803
 const imgHeight = 1086;//1086
-const cellAry = [[188, 278], [360, 364], [801, 163], [1092, 166], [1384, 364], [1500, 250], [1597, 428], [1500, 723], [1560, 903], [1264, 813], [842, 663], [131, 708], [310, 843], [554, 940]];
+const cellAry = [[188, 278], [360, 364], [801, 163], [1092, 166], [1384, 364], [1500, 250], [1597, 428], [1500, 723], [1560, 903], [1264, 813], [842, 663], [842, 563], [131, 708], [310, 843], [554, 940]];
 
 const Map = () => {
   const state = useContext(ContractContext);
@@ -210,6 +210,9 @@ const Map = () => {
                 const [x, y] = xy_list;
                 if(idx === 10){
                   return <Cell key={idx} upgradingIdx={upgradingIdx} idx={idx} x={x} y={y} initialized={initialized} cellState={cellStateList[idx]} updateCellState={updateCellState} page = {1}/>
+                }
+                else if(idx === 11){
+                  return <Cell key={idx} upgradingIdx={upgradingIdx} idx={idx} x={x} y={y} initialized={initialized} cellState={cellStateList[idx]} updateCellState={updateCellState} page = {2}/>
                 }
                 else{
                   return <Cell key={idx} upgradingIdx={upgradingIdx} idx={idx} x={x} y={y} initialized={initialized} cellState={cellStateList[idx]} updateCellState={updateCellState} page = {0}/>

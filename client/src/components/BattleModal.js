@@ -16,14 +16,17 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
   const {accountContract, barrackContract, accounts} = state;
   const [battled, setBattled] = useState(false);
   const [spyed, setSpyed] = useState(false);
+  const [battleLog, setBattleLog] = useState("");
   //const [battleResult, setBattleResult] = useState(false) 
   const [spyResult, setSpyResult] = useState(false); // True = win
 
   const goBattle = async () => {
     await barrackContract.methods.attack(myIdx, userIdx).send({from: accounts[0]});
+    const log = await barrackContract.methods.getBattleLog().call({from: accounts[0]});
     const myNewPower = await accountContract.methods.getUserPowerById(myIdx).call({from: accounts[0]});
     const userNewPower = await accountContract.methods.getUserPowerById(userIdx).call({from: accounts[0]});
     setBattled(true);
+    setBattleLog(log);
     setMyPower(myNewPower);
     setUserPower(userNewPower);
   }
@@ -42,6 +45,7 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
   }
 
   return <>
+  {battled ?
     <Modal.Content>
       <Segment placeholder>
         <Grid columns={2} stackable textAlign='center'>
@@ -86,24 +90,16 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
           </Grid.Row>
         </Grid>
       </Segment>
-      {
-        !battled ? 
-        <Button animated='fade' color='red' fluid inverted attached='bottom' onClick={() => goBattle()}>
-          <Button.Content visible>Battle</Button.Content>
-          <Button.Content hidden>
-            <Icon name='fire' />
-          </Button.Content>
-        </Button>
-        :
-        <Button animated='fade' color='red' fluid inverted attached='bottom'>
-          <Button.Content visible>
-            <Icon name='fire' />
-          </Button.Content>
-        </Button>
-      }
+      <Button animated='fade' color='red' fluid inverted attached='bottom' onClick={() => goBattle()}>
+        <Button.Content visible>Battle</Button.Content>
+        <Button.Content hidden>
+          <Icon name='fire' />
+        </Button.Content>
+      </Button>
+       
       {
         !spyed ?
-        <Button animated='fade' color='red' fluid inverted attached='bottom' onClick={() => goBattle()}>
+        <Button animated='fade' color='red' fluid inverted attached='bottom' onClick={() => sendSpy()}>
           <Button.Content visible>Send Spy</Button.Content>
           <Button.Content hidden>
             <Icon name='fire' />
@@ -120,7 +116,18 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
         </Button>
       }
       
+      
     </Modal.Content>
+    :
+    <Modal.Content>
+      <Grid columns='equal' divided padded>
+        <Grid.Row stretched>
+          <Grid.Column>
+            {battleLog}
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Modal.Content>}
   </>
 }
 

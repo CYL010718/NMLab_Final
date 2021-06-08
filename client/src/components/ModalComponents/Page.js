@@ -6,6 +6,7 @@ import stonepng from '../../images/stone_noback.png';
 import coinpng from '../../images/coin_noback.png';
 import foodpng from '../../images/food_noback.png';
 import soldierpng from '../../images/soldier_noback.png';
+import labpng from '../../images/soldier_noback.png'
 
 const Page = ({ page, build }) => {
   if(page === 0) {
@@ -74,6 +75,20 @@ const Page = ({ page, build }) => {
             <Image size='massive' src={soldierpng} />
           </Header>
           <Button primary onClick={() => build("Barrack")}>Build</Button>
+        </Segment>
+      </Grid.Column>
+    </>
+  }
+  if(page === 2) {
+    return <>
+      <Grid.Column>
+        <Segment placeholder>
+          <Header icon>
+            Laboratory
+            <br/>
+            <Image size='massive' src={labpng} />
+          </Header>
+          <Button primary onClick={() => build("Laboratory")}>Build</Button>
         </Segment>
       </Grid.Column>
     </>
