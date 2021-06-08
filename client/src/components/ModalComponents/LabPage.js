@@ -17,10 +17,10 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
     const [ spyLevel, setSpyLevel ] = useState(1);
 
     const getLevels = async () => {
-        const levelOfSoldier = await contract.methods.getSoldierLevel().call({from: account});
-        const levelOfCannon = await contract.methods.getCannonLevel().call({from:account});
-        const levelOfProtector = await contract.methods.getProtectorLevel().call({from: account});
-        const levelOfSpy = await contract.methods.getSpyLevel().call({from:account});
+        const levelOfSoldier = await contract.methods.getSoldierLevel(account).call({from: account});
+        const levelOfCannon = await contract.methods.getCannonLevel(account).call({from:account});
+        const levelOfProtector = await contract.methods.getProtectorLevel(account).call({from: account});
+        const levelOfSpy = await contract.methods.getSpyLevel(account).call({from:account});
 
         setSoldierLevel(levelOfSoldier);
         setCannonLevel(levelOfCannon);
@@ -38,7 +38,7 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
             alert("Not enough resource!");
             return;
         }
-        const newState = { ...cellState, soldier: [ nowStartPeriod, UpgradeTimeNeed ]};
+        const newState = { ...cellState, soldierUpgrade: [ nowStartPeriod, UpgradeTimeNeed ]};
         setSoldierUpgrading(true);
         updateCellState(idx, newState);
         // const remainTime = parseInt( await contract.methods.)
@@ -267,13 +267,14 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
     
     return <>
         <Grid.Column>
+            <Segment clearing vertical>
             {
                 soldierUpgrading ?
                 <>
-                <Header as='h4'>
+                <Header as='h4' textAlign='center'>
                 Upgrade Progress
                 </Header>
-                <Progress percent={soldierUpgradeProgress} indicating />
+                <Progress progress='percent' percent={soldierUpgradeProgress} indicating />
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={soldierUpgradeProgress !== 100} primary onClick={() => confirmUpgradeSoldier()} >
                     confirm
@@ -282,22 +283,23 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
                 </>
                 :
                 <>
-                <div style={{textAlign: 'center'}}>
-                    <Header as='h4'>
-                        Soldier Technology Level: {soldierLevel 
+                
+                    <Header as='h4' floated='left'>
+                        Soldier Technology Level: {soldierLevel} 
                     </Header>
-                    <Button primary disabled={upgrading} onClick={() => startUpgradeSoldier()} >Upgrade</Button>
-                </div>
+                    <Button primary  onClick={() => startUpgradeSoldier()} floated='right'>Upgrade</Button>
+                
                 </>
             }
-       
+            </Segment>
+            <Segment clearing vertical>
             {
                 cannonUpgrading ?
                 <>
-                <Header as='h4'>
+                <Header as='h4' textAlign='center'>
                 Upgrade Progress
                 </Header>
-                <Progress percent={cannonUpgradeProgress} indicating />
+                <Progress progress='percent' percent={cannonUpgradeProgress} indicating />
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={cannonUpgradeProgress !== 100} primary onClick={() => confirmUpgradeCannon()} >
                     confirm
@@ -306,22 +308,23 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
                 </>
                 :
                 <>
-                <div style={{textAlign: 'center'}}>
-                    <Header as='h4'>
+                
+                    <Header as='h4' floated='left'>
                         Cannon Technology Level: {cannonLevel}
                     </Header>
-                    <Button primary disabled={upgrading} onClick={() => startUpgradeCannon()} >Upgrade</Button>
-                </div>
+                    <Button primary  onClick={() => startUpgradeCannon()} floated='right'>Upgrade</Button>
+                
                 </>
             }
-         
+            </Segment>
+            <Segment clearing vertical>
             {
                 protectorUpgrading ?
                 <>
-                <Header as='h4'>
+                <Header as='h4' textAlign='center'>
                 Upgrade Progress
                 </Header>
-                <Progress percent={protectorUpgradeProgress} indicating />
+                <Progress progress='percent' percent={protectorUpgradeProgress} indicating />
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={protectorUpgradeProgress !== 100} primary onClick={() => confirmUpgradeProtector()} >
                     confirm
@@ -330,22 +333,23 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
                 </>
                 :
                 <>
-                <div style={{textAlign: 'center'}}>
-                    <Header as='h4'>
+                
+                    <Header as='h4' floated='left'>
                         Protector Technology Level: {protectorLevel}
                     </Header>
-                    <Button primary disabled={upgrading} onClick={() => startUpgradeProtector()} >Upgrade</Button>
-                </div>
+                    <Button primary  onClick={() => startUpgradeProtector()} floated='right'>Upgrade</Button>
+                
                 </>
             }
-        
+            </Segment>
+            <Segment clearing vertical>
             {
                 spyUpgrading ?
                 <>
-                <Header as='h4'>
+                <Header as='h4' textAlign='center'>
                 Upgrade Progress
                 </Header>
-                <Progress percent={spyUpgradeProgress} indicating />
+                <Progress progress='percent' percent={spyUpgradeProgress} indicating />
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={spyUpgradeProgress !== 100} primary onClick={() => confirmUpgradeSpy()} >
                     confirm
@@ -354,14 +358,15 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
                 </>
                 :
                 <>
-                <div style={{textAlign: 'center'}}>
-                    <Header as='h4'>
+                
+                    <Header as='h4' floated='left'>
                         Spy Technology Level: {spyLevel}
                     </Header>
-                    <Button primary disabled={upgrading} onClick={() => startUpgradeSpy()} >Upgrade</Button>
-                </div>
+                    <Button primary  onClick={() => startUpgradeSpy()} floated='right'>Upgrade</Button>
+                
                 </>
             }
+            </Segment>
         </Grid.Column>
     </>
     

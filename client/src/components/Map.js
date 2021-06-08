@@ -118,7 +118,7 @@ const Map = () => {
   }
 
   useEffect(() => {
-    const { buildingContract, barrackContract, accounts } = state;
+    const { buildingContract, barrackContract, labContract, accounts } = state;
     let upgIdx = 0;
     let pdIdx = 0;
     const load = async (x, y, idx, upgradingId) => {
@@ -157,6 +157,37 @@ const Map = () => {
           newState = { ...newState, protectorProduce: [ protectorStartPeriod, createProtectorTimeNeed ] };
         }
       }
+      if(loadType === "Laboratory"){
+        const getSoldierUpgradeTime = await labContract.methods.getUpgradeSoldierTime().call({from: accounts[0]});
+        const soldierStartPeriod = parseInt( getSoldierUpgradeTime[0] );
+        const upgradeSoldierTimeNeed = parseInt( getSoldierUpgradeTime[1] );
+        if(upgradeSoldierTimeNeed != 0) {
+          pdIdx = idx;
+          newState = { ...newState, soldierUpgrade: [ soldierStartPeriod, upgradeSoldierTimeNeed ] };
+        }
+        const getSpyUpgradeTime = await labContract.methods.getUpgradeSpyTime().call({from: accounts[0]});
+        const spyStartPeriod = parseInt( getSpyUpgradeTime[0] );
+        const upgradeSpyTimeNeed = parseInt( getSpyUpgradeTime[1] );
+        if(upgradeSpyTimeNeed != 0) {
+          pdIdx = idx;
+          newState = { ...newState, spyUpgrade: [ spyStartPeriod, upgradeSpyTimeNeed ] };
+        }
+        const getCannonUpgradeTime = await labContract.methods.getUpgradeCannonTime().call({from: accounts[0]});
+        const cannonStartPeriod = parseInt( getCannonUpgradeTime[0] );
+        const upgradeCannonTimeNeed = parseInt( getCannonUpgradeTime[1] );
+        if(upgradeCannonTimeNeed != 0) {
+          pdIdx = idx;
+          newState = { ...newState, cannonUpgrade: [ cannonStartPeriod, upgradeCannonTimeNeed ] };
+        }
+        const getProtectorUpgradeTime = await labContract.methods.getUpgradeProtectorTime().call({from: accounts[0]});
+        const protectorStartPeriod = parseInt( getProtectorUpgradeTime[0] );
+        const upgradeProtectorTimeNeed = parseInt( getProtectorUpgradeTime[1] );
+        console.log("protector:", protectorStartPeriod, upgradeProtectorTimeNeed);
+        if(upgradeProtectorTimeNeed != 0) {
+          pdIdx = idx;
+          newState = { ...newState, protectorUpgrade: [ protectorStartPeriod, upgradeProtectorTimeNeed ] };
+        }
+      }
       if(loadIndex === upgradingId && upgradingId !== 0) {
         const remainTime = parseInt( await buildingContract.methods.getRemainingTime(accounts[0]).call({from: accounts[0]}) );
         if(remainTime < 1000) {
@@ -182,7 +213,7 @@ const Map = () => {
         // updateProgress();
       })
     }
-    if(buildingContract && barrackContract && accounts.length > 0) {
+    if(buildingContract && barrackContract && labContract && accounts.length > 0) {
       if(!initialized) {
         init();
       }

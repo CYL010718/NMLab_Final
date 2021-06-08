@@ -67,7 +67,7 @@ contract Cannon {
         uint foodCost = (25* levelOfCannon[_owner] - 5) * number;
         uint ironCost = (25* levelOfCannon[_owner] - 5) * number;
         uint coinCost = (25* levelOfCannon[_owner] - 5) * number;
-        levelOfCannon[_owner] += 1;
+       
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
     
@@ -75,6 +75,7 @@ contract Cannon {
         uint foodCost = 500* levelOfCannon[_owner] - 125;
         uint ironCost = 500* levelOfCannon[_owner] - 125;
         uint coinCost = 500* levelOfCannon[_owner] - 125;
+        levelOfCannon[_owner] += 1;
 
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }

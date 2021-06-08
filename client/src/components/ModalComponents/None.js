@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button, Modal, Grid, Icon, Segment, Header, Menu, Pagination } from 'semantic-ui-react';
 import { Page } from './index'
 
-const None = ({ upgradingIdx, idx, x, y, produceContract, buildingContract, barrackContract, laContract, account, updateCellState, page }) => {
+const None = ({ upgradingIdx, idx, x, y, produceContract, buildingContract, barrackContract, labContract, account, updateCellState, page }) => {
   //const [ page, setPage ] = useState(0);
 
   const build = async (buildType) => {
@@ -44,6 +44,11 @@ const None = ({ upgradingIdx, idx, x, y, produceContract, buildingContract, barr
         newBuildingId = await barrackContract.methods.createBarrack(x, y).send({from: account});
         break;
       case "Laboratory":
+        const haveBarrack = await buildingContract.methods.getSpecificBuildingByOwner(account, "Barrack").call({from:account});
+        if(haveBarrack.length === 0){
+          alert("Does not have a barrack! Build barrack before laboratory!")
+          break;
+        }
         newBuildingId = await labContract.methods.createLaboratory(x, y).send({from: account});
         break;
       default:

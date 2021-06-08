@@ -17,13 +17,11 @@ const Laboratory = ({ idx, x, y, cellState, buildingContract, labContract, accou
         <Grid.Row stretched>
           <Grid.Column>
             <Header icon>
-              Lab
+            Upgrade Technology
               <br/>
               <Image size='massive' src={soldierpng} />
             </Header>
-            <Segment padded color='black'>
-              <p>Upgrade Technology  </p>
-            </Segment>
+            
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>

@@ -29,6 +29,7 @@ contract Laboratory {
 
 
     function createLaboratory(uint _x, uint _y) public {
+        
         buildingInstance._createBuilding(msg.sender, "Laboratory", _x, _y);
         _updateLaboratory(msg.sender);
     }
@@ -188,19 +189,19 @@ contract Laboratory {
         }
     }
 
-    function getSoldierLevel(address _owner) public view return(uint) {
-        return SoldierInstance.levelOfSoldier(_owner);
+    function getSoldierLevel(address _owner) public view returns(uint) {
+        return soldierInstance.levelOfSoldier(_owner);
     }
 
-    function getProtectorLevel(address _owner) public view return(uint) {
+    function getProtectorLevel(address _owner) public view returns(uint) {
         return ProtectorInstance.levelOfProtector(_owner);
     }
 
-    function getCannonLevel(address _owner) public view return(uint) {
+    function getCannonLevel(address _owner) public view returns(uint) {
         return CannonInstance.levelOfCannon(_owner);
     }
 
-    function getSpyLevel(address _owner) public view return(uint) {
+    function getSpyLevel(address _owner) public view returns(uint) {
         return SpyInstance.levelOfSpy(_owner);
     }
 }
