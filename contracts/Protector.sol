@@ -62,11 +62,11 @@ contract Protector {
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
     
-    function _upgradeProtector(address _owner) internal returns(bool){
+    function _upgradeProtector(address _owner) public returns(bool){
         uint foodCost = 500* levelOfProtector[_owner] - 125;
         uint ironCost = 500* levelOfProtector[_owner] - 125;
         uint coinCost = 500* levelOfProtector[_owner] - 125;
-
+        levelOfProtector[_owner] += 1;
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
 

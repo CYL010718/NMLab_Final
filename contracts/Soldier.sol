@@ -62,10 +62,11 @@ contract Soldier {
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
     
-    function _upgradeSoldier(address _owner) internal returns(bool){
+    function _upgradeSoldier(address _owner) public returns(bool){
         uint foodCost = 500* levelOfSoldier[_owner] - 125;
         uint ironCost = 500* levelOfSoldier[_owner] - 125;
         uint coinCost = 500* levelOfSoldier[_owner] - 125;
+        levelOfSoldier[_owner] += 1;
 
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
