@@ -48,104 +48,143 @@ contract Laboratory {
         ownerLabProduceTime[_owner] += 10 * periodCounts;
     }
 
-
-    function upgradeSoldier(address _owner) public {
-        uint[] memory labs = buildingInstance.getSpecificBuildingByOwner(_owner, "Laboratory");
-        if (ownerLabProduceTime[_owner] == 0 || labs.length == 0) {
-            ownerLabProduceTime[_owner] = now;
-            return;
-        }
-        uint periodCounts = (now - ownerLabProduceTime[_owner]).div(10 seconds);
-        ownerLabProduceTime[_owner] += 10 * periodCounts;
-        soldierInstance._upgradeSoldier(_owner);
+        function startUpgradeSoldier() public returns(uint) {
+        address _owner = msg.sender;
+        if(soldierInstance.ownerStartUpgradeTime(_owner) != 0) return uint(0); // check if there is already creating soldiers
+        bool enoughResource;
+        uint lvOfSoldier;
+        enoughResource = soldierInstance._UpgradeSoldier(_owner);
+        lvOfSoldier =  soldierInstance.levelOfSoldier(_owner);
+        if(enoughResource == false) return uint(0);
+        soldierInstance.setStartUpgradeTime(_owner, uint(now));
+        soldierInstance.setUpgradeSoldierTime(_owner, soldierInstance.UpgradeSoldierTime() * lvOfSoldier);
+        return soldierInstance.ownerUpgradeSoldierTime(_owner);
     }
 
-    function upgradeProtector(address _owner) public {
-        uint[] memory labs = buildingInstance.getSpecificBuildingByOwner(_owner, "Laboratory");
-        if (ownerLabProduceTime[_owner] == 0 || labs.length == 0) {
-            ownerLabProduceTime[_owner] = now;
-            return;
-        }
-        uint periodCounts = (now - ownerLabProduceTime[_owner]).div(10 seconds);
-        ownerLabProduceTime[_owner] += 10 * periodCounts;
-        ProtectorInstance._upgradeProtector(_owner);
+    function getUpgradeSoldierTime() public view returns(uint, uint) {
+        return ( now - soldierInstance.ownerStartUpgradeTime(msg.sender), soldierInstance.ownerUpgradeSoldierTime(msg.sender) ) ;
     }
 
-    function upgradeCannon(address _owner) public {
-        uint[] memory labs = buildingInstance.getSpecificBuildingByOwner(_owner, "Laboratory");
-        if (ownerLabProduceTime[_owner] == 0 || labs.length == 0) {
-            ownerLabProduceTime[_owner] = now;
-            return;
+    // // return 0 if success else return remaining time
+    function updateUpgradeSoldier(address _owner) public returns(uint) {
+        if (soldierInstance.ownerStartUpgradeTime(_owner) == 0) return 0;
+        if (now >= soldierInstance.ownerStartUpgradeTime(_owner).add(soldierInstance.ownerUpgradeSoldierTime(_owner))) {
+            uint num;
+            num = soldierInstance.ownerUpgradeSoldierTime(_owner).div(  soldierInstance.levelOfSoldier(_owner).mul(soldierInstance.UpgradeSoldierTime()) );
+            soldierInstance.setNumOfSoldier(_owner, soldierInstance.numOfSoldier(_owner) + (num));
+            soldierInstance.setStartUpgradeTime(_owner, 0);
+            soldierInstance.setUpgradeSoldierTime(_owner, 0);
+            soldierInstance._updatePower(_owner);
+            return 0;
         }
-        uint periodCounts = (now - ownerLabProduceTime[_owner]).div(10 seconds);
-        ownerLabProduceTime[_owner] += 10 * periodCounts;
-        CannonInstance._upgradeCannon(_owner);
+        else {
+            uint remainingTime = (soldierInstance.ownerStartUpgradeTime(_owner) + soldierInstance.ownerUpgradeSoldierTime(_owner)).sub(now);
+            return remainingTime;
+        }
     }
 
-    function upgradeSpy(address _owner) public {
-        uint[] memory labs = buildingInstance.getSpecificBuildingByOwner(_owner, "Laboratory");
-        if (ownerLabProduceTime[_owner] == 0 || labs.length == 0) {
-            ownerLabProduceTime[_owner] = now;
-            return;
-        }
-        uint periodCounts = (now - ownerLabProduceTime[_owner]).div(10 seconds);
-        ownerLabProduceTime[_owner] += 10 * periodCounts;
-        SpyInstance._upgradeSpy(_owner);
+    function startUpgradeProtector() public returns(uint) {
+        address _owner = msg.sender;
+        if(ProtectorInstance.ownerStartUpgradeTime(_owner) != 0) return uint(0); // check if there is already creating Protectors
+        bool enoughResource;
+        uint lvOfProtector;
+        enoughResource = ProtectorInstance._UpgradeProtector(_owner);
+        lvOfProtector =  ProtectorInstance.levelOfProtector(_owner);
+        if(enoughResource == false) return uint(0);
+        ProtectorInstance.setStartUpgradeTime(_owner, uint(now));
+        ProtectorInstance.setUpgradeProtectorTime(_owner, ProtectorInstance.UpgradeProtectorTime() * lvOfProtector);
+        return ProtectorInstance.ownerUpgradeProtectorTime(_owner);
     }
 
-    // function upgradeSoldier(address _owner) public {
-    //     soldierInstance._upgradeSoldier(_owner);
-    // }
+    function getUpgradeProtectorTime() public view returns(uint, uint) {
+        return ( now - ProtectorInstance.ownerStartUpgradeTime(msg.sender), ProtectorInstance.ownerUpgradeProtectorTime(msg.sender) ) ;
+    }
 
-    // function upgradeProtector(address _owner) public {
-    //     ProtectorInstance._upgradeProtector(_owner);
-    // }
+    // // return 0 if success else return remaining time
+    function updateUpgradeProtector(address _owner) public returns(uint) {
+        if (ProtectorInstance.ownerStartUpgradeTime(_owner) == 0) return 0;
+        if (now >= ProtectorInstance.ownerStartUpgradeTime(_owner).add(ProtectorInstance.ownerUpgradeProtectorTime(_owner))) {
+            uint num;
+            num = ProtectorInstance.ownerUpgradeProtectorTime(_owner).div(  ProtectorInstance.levelOfProtector(_owner).mul(ProtectorInstance.UpgradeProtectorTime()) );
+            ProtectorInstance.setNumOfProtector(_owner, ProtectorInstance.numOfProtector(_owner) + (num));
+            ProtectorInstance.setStartUpgradeTime(_owner, 0);
+            ProtectorInstance.setUpgradeProtectorTime(_owner, 0);
+            ProtectorInstance._updateProtectorPower(_owner);
+            return 0;
+        }
+        else {
+            uint remainingTime = (ProtectorInstance.ownerStartUpgradeTime(_owner) + ProtectorInstance.ownerUpgradeProtectorTime(_owner)).sub(now);
+            return remainingTime;
+        }
+    }
 
-    // function upgradeCannon(address _owner) public {
-    //     CannonInstance._upgradeCannon(_owner);
-    // }
+    function startUpgradeCannon() public returns(uint) {
+        address _owner = msg.sender;
+        if(CannonInstance.ownerStartUpgradeTime(_owner) != 0) return uint(0); // check if there is already creating Cannons
+        bool enoughResource;
+        uint lvOfCannon;
+        enoughResource = CannonInstance._UpgradeCannon(_owner);
+        lvOfCannon =  CannonInstance.levelOfCannon(_owner);
+        if(enoughResource == false) return uint(0);
+        CannonInstance.setStartUpgradeTime(_owner, uint(now));
+        CannonInstance.setUpgradeCannonTime(_owner, CannonInstance.UpgradeCannonTime() * lvOfCannon);
+        return CannonInstance.ownerUpgradeCannonTime(_owner);
+    }
 
-    // function upgradeSpy(address _owner) public {
-    //     SpyInstance._upgradeSpy(_owner);
-    // }
+    function getUpgradeCannonTime() public view returns(uint, uint) {
+        return ( now - CannonInstance.ownerStartUpgradeTime(msg.sender), CannonInstance.ownerUpgradeCannonTime(msg.sender) ) ;
+    }
 
-    
+    // // return 0 if success else return remaining time
+    function updateUpgradeCannon(address _owner) public returns(uint) {
+        if (CannonInstance.ownerStartUpgradeTime(_owner) == 0) return 0;
+        if (now >= CannonInstance.ownerStartUpgradeTime(_owner).add(CannonInstance.ownerUpgradeCannonTime(_owner))) {
+            uint num;
+            num = CannonInstance.ownerUpgradeCannonTime(_owner).div(  CannonInstance.levelOfCannon(_owner).mul(CannonInstance.UpgradeCannonTime()) );
+            CannonInstance.setNumOfCannon(_owner, CannonInstance.numOfCannon(_owner) + (num));
+            CannonInstance.setStartUpgradeTime(_owner, 0);
+            CannonInstance.setUpgradeCannonTime(_owner, 0);
+            CannonInstance._updateCannonPower(_owner);
+            return 0;
+        }
+        else {
+            uint remainingTime = (CannonInstance.ownerStartUpgradeTime(_owner) + CannonInstance.ownerUpgradeCannonTime(_owner)).sub(now);
+            return remainingTime;
+        }
+    }
 
+    function startUpgradeSpy() public returns(uint) {
+        address _owner = msg.sender;
+        if(SpyInstance.ownerStartUpgradeTime(_owner) != 0) return uint(0); // check if there is already creating Spys
+        bool enoughResource;
+        uint lvOfSpy;
+        enoughResource = SpyInstance._UpgradeSpy(_owner);
+        lvOfSpy =  SpyInstance.levelOfSpy(_owner);
+        if(enoughResource == false) return uint(0);
+        SpyInstance.setStartUpgradeTime(_owner, uint(now));
+        SpyInstance.setUpgradeSpyTime(_owner, SpyInstance.UpgradeSpyTime() * lvOfSpy);
+        return SpyInstance.ownerUpgradeSpyTime(_owner);
+    }
 
+    function getUpgradeSpyTime() public view returns(uint, uint) {
+        return ( now - SpyInstance.ownerStartUpgradeTime(msg.sender), SpyInstance.ownerUpgradeSpyTime(msg.sender) ) ;
+    }
 
-    // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
-    // function startCreateSpy(uint number) public returns(uint) {
-    //     address _owner = msg.sender;
-    //     if(ownerStartCreateTime[_owner] != 0) return uint(0); // check if there is already creating Spys
-    //     bool enoughResource;
-    //     uint lvOfSpy;
-    //     enoughResource = _createSpy(_owner, number);
-    //     lvOfSpy =  levelOfSpy[_owner];
-    //     if(enoughResource == false) return uint(0);
-    //     ownerStartCreateTime[_owner] = uint(now);
-    //     ownerCreateSpyTime[_owner] = createSpyTime * lvOfSpy * number;
-    //     return ownerCreateSpyTime[_owner];
-    // }
-
-    // function getCreateSpyTime() public view returns(uint, uint) {
-    //     return ( now - ownerStartCreateTime[msg.sender], ownerCreateSpyTime[msg.sender] ) ;
-    // }
-
-    // // // return 0 if success else return remaining time
-    // function updateCreateSpy(address _owner) public returns(uint) {
-    //     if (ownerStartCreateTime[_owner] == 0) return 0;
-    //     if (now >= ownerStartCreateTime[_owner].add(ownerCreateSpyTime[_owner])) {
-    //         uint num;
-    //         num = ownerCreateSpyTime[_owner].div(  levelOfSpy[_owner].mul(createSpyTime) );
-    //         numOfSpy[_owner] = numOfSpy[_owner] + (num);
-    //         ownerStartCreateTime[_owner] = 0;
-    //         ownerCreateSpyTime[_owner] = 0;
-    //         _updateSpyPower(_owner);
-    //         return 0;
-    //     }
-    //     else {
-    //         uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateSpyTime[_owner]).sub(now);
-    //         return remainingTime;
-    //     }
-    // }
+    // // return 0 if success else return remaining time
+    function updateUpgradeSpy(address _owner) public returns(uint) {
+        if (SpyInstance.ownerStartUpgradeTime(_owner) == 0) return 0;
+        if (now >= SpyInstance.ownerStartUpgradeTime(_owner).add(SpyInstance.ownerUpgradeSpyTime(_owner))) {
+            uint num;
+            num = SpyInstance.ownerUpgradeSpyTime(_owner).div(  SpyInstance.levelOfSpy(_owner).mul(SpyInstance.UpgradeSpyTime()) );
+            SpyInstance.setNumOfSpy(_owner, SpyInstance.numOfSpy(_owner) + (num));
+            SpyInstance.setStartUpgradeTime(_owner, 0);
+            SpyInstance.setUpgradeSpyTime(_owner, 0);
+            SpyInstance._updateSpyPower(_owner);
+            return 0;
+        }
+        else {
+            uint remainingTime = (SpyInstance.ownerStartUpgradeTime(_owner) + SpyInstance.ownerUpgradeSpyTime(_owner)).sub(now);
+            return remainingTime;
+        }
+    }
 }

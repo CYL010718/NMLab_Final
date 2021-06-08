@@ -15,9 +15,10 @@ contract Protector {
 
     mapping (address => uint) public ownerStartCreateTime;
     mapping (address => uint) public ownerCreateProtectorTime;
-    mapping (address => uint) public ownerStartLevelUpTime;
+    mapping (address => uint) public ownerStartUpgradeTime;
+    mapping (address => uint) public ownerUpgradeProtectorTime;
     uint public createProtectorTime = 10;
-    uint public levelUpProtectorTime = 10;
+    uint public UpgradeProtectorTime = 10;
 
     uint public protectorHealth = 3;
     uint public protectorPower = 3;
@@ -37,6 +38,14 @@ contract Protector {
 
     function setCreateProtectorTime(address _owner, uint value) public {
         ownerCreateProtectorTime[_owner] = value;
+    }
+
+    function setStartUpgradeTime(address _owner, uint value) public {
+        ownerStartUpgradeTime[_owner] = value;
+    }
+
+    function setUpgradeProtectorTime(address _owner, uint value) public {
+        ownerUpgradeProtectorTime[_owner] = value;
     }
 
     function setNumOfProtector(address _owner, uint value) public {
@@ -62,7 +71,7 @@ contract Protector {
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
     
-    function _upgradeProtector(address _owner) public returns(bool){
+    function _UpgradeProtector(address _owner) public returns(bool){
         uint foodCost = 500* levelOfProtector[_owner] - 125;
         uint ironCost = 500* levelOfProtector[_owner] - 125;
         uint coinCost = 500* levelOfProtector[_owner] - 125;

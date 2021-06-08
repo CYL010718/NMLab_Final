@@ -15,9 +15,10 @@ contract Spy {
 
     mapping (address => uint) public ownerStartCreateTime;
     mapping (address => uint) public ownerCreateSpyTime;
-    mapping (address => uint) public ownerStartLevelUpTime;
+    mapping (address => uint) public ownerStartUpgradeTime;
+    mapping (address => uint) public ownerUpgradeSpyTime;
     uint public createSpyTime = 10;
-    uint public levelUpSpyTime = 10;
+    uint public UpgradeSpyTime = 10;
     
     uint public spyHealth = 1;
     uint public spyPower = 1;
@@ -39,6 +40,14 @@ contract Spy {
         ownerCreateSpyTime[_owner] = value;
     }
 
+    function setStartUpgradeTime(address _owner, uint value) public {
+        ownerStartUpgradeTime[_owner] = value;
+    }
+
+    function setUpgradeSpyTime(address _owner, uint value) public {
+        ownerUpgradeSpyTime[_owner] = value;
+    }
+
     function setNumOfSpy(address _owner, uint value) public {
         numOfSpy[_owner] = value;
     }
@@ -57,7 +66,7 @@ contract Spy {
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
     
-    function _upgradeSpy(address _owner) public returns(bool){
+    function _UpgradeSpy(address _owner) public returns(bool){
         uint foodCost = 500* levelOfSpy[_owner] - 125;
         uint ironCost = 500* levelOfSpy[_owner] - 125;
         uint coinCost = 500* levelOfSpy[_owner] - 125;

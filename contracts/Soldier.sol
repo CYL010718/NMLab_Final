@@ -15,9 +15,10 @@ contract Soldier {
 
     mapping (address => uint) public ownerStartCreateTime;
     mapping (address => uint) public ownerCreateSoldierTime;
-    mapping (address => uint) public ownerStartLevelUpTime;
+    mapping (address => uint) public ownerStartUpgradeTime;
+    mapping (address => uint) public ownerUpgradeSoldierTime;
     uint public createSoldierTime = 10;
-    uint public levelUpSoldierTime = 10;
+    uint public UpgradeSoldierTime = 10;
 
     uint public soldierHealth = 3;
     uint public soldierPower = 3;
@@ -37,6 +38,14 @@ contract Soldier {
 
     function setCreateSoldierTime(address _owner, uint value) public {
         ownerCreateSoldierTime[_owner] = value;
+    }
+
+    function setStartUpgradeTime(address _owner, uint value) public {
+        ownerStartUpgradeTime[_owner] = value;
+    }
+
+    function setUpgradeSoldierTime(address _owner, uint value) public {
+        ownerUpgradeSoldierTime[_owner] = value;
     }
 
     function setNumOfSoldier(address _owner, uint value) public {
@@ -62,7 +71,7 @@ contract Soldier {
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
     
-    function _upgradeSoldier(address _owner) public returns(bool){
+    function _UpgradeSoldier(address _owner) public returns(bool){
         uint foodCost = 500* levelOfSoldier[_owner] - 125;
         uint ironCost = 500* levelOfSoldier[_owner] - 125;
         uint coinCost = 500* levelOfSoldier[_owner] - 125;
