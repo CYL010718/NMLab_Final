@@ -187,4 +187,20 @@ contract Laboratory {
             return remainingTime;
         }
     }
+
+    function getSoldierLevel(address _owner) public view return(uint) {
+        return SoldierInstance.levelOfSoldier(_owner);
+    }
+
+    function getProtectorLevel(address _owner) public view return(uint) {
+        return ProtectorInstance.levelOfProtector(_owner);
+    }
+
+    function getCannonLevel(address _owner) public view return(uint) {
+        return CannonInstance.levelOfCannon(_owner);
+    }
+
+    function getSpyLevel(address _owner) public view return(uint) {
+        return SpyInstance.levelOfSpy(_owner);
+    }
 }
