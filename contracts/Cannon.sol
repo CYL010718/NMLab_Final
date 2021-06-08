@@ -15,9 +15,10 @@ contract Cannon {
 
     mapping (address => uint) public ownerStartCreateTime;
     mapping (address => uint) public ownerCreateCannonTime;
-    mapping (address => uint) public ownerStartLevelUpTime;
+    mapping (address => uint) public ownerStartUpgradeTime;
+    mapping (address => uint) public ownerUpgradeCannonTime;
     uint public createCannonTime = 10;
-    uint public levelUpCannonTime = 10;
+    uint public UpgradeCannonTime = 10;
 
     uint public cannonHealth = 3;
     uint public cannonPower = 3;
@@ -37,6 +38,14 @@ contract Cannon {
 
     function setCreateCannonTime(address _owner, uint value) public {
         ownerCreateCannonTime[_owner] = value;
+    }
+
+    function setStartUpgradeTime(address _owner, uint value) public {
+        ownerStartUpgradeTime[_owner] = value;
+    }
+
+    function setUpgradeCannonTime(address _owner, uint value) public {
+        ownerUpgradeCannonTime[_owner] = value;
     }
 
     function setNumOfCannon(address _owner, uint value) public {
@@ -62,7 +71,7 @@ contract Cannon {
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
     
-    function _upgradeCannon(address _owner) public returns(bool){
+    function _UpgradeCannon(address _owner) public returns(bool){
         uint foodCost = 500* levelOfCannon[_owner] - 125;
         uint ironCost = 500* levelOfCannon[_owner] - 125;
         uint coinCost = 500* levelOfCannon[_owner] - 125;
