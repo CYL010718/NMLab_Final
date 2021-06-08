@@ -61,7 +61,7 @@ contract Spy {
         uint foodCost = 500* levelOfSpy[_owner] - 125;
         uint ironCost = 500* levelOfSpy[_owner] - 125;
         uint coinCost = 500* levelOfSpy[_owner] - 125;
-
+        levelOfSpy[_owner] += 1;
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
 

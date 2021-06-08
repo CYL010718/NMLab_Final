@@ -29,7 +29,7 @@ module.exports = function(deployer) {
                       return deployer.deploy(Quarry, Account.address, BuildingFactory.address).then(function() {
                         return deployer.deploy(Barrack, BuildingFactory.address, Soldier.address, Spy.address, Cannon.address, Protector.address).then(function() {
                           return deployer.deploy(Produce, FarmFactory.address, Manor.address, Sawmill.address, Mine.address, Quarry.address, BuildingFactory.address).then(function() {
-                            return deployer.deploy(Laboratory, BuildingFactory.address)
+                            return deployer.deploy(Laboratory, BuildingFactory.address, Soldier.address, Spy.address, Cannon.address, Protector.address)
                           });
                         });
                       });
