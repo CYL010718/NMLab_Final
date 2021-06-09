@@ -119,6 +119,7 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
       
     </Modal.Content>
     :
+    
     <Modal.Content>
       <Grid columns='equal' divided padded>
         <Grid.Row stretched>
