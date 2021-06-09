@@ -193,7 +193,7 @@ contract Barrack {
     }
 
     function attack(uint _ownerId, uint _attackedCastleId) public {
-        soldierInstance.attack(_ownerId, _attackedCastleId);
+        // soldierInstance.attack(_ownerId, _attackedCastleId);
     }
 
     function sendSpy(uint _ownerId, uint _attackedCastleId) public view returns(bool) {
