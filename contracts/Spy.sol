@@ -98,7 +98,7 @@ contract Spy {
     }
 
     function sendSpy(uint _ownerId, uint _attackedCastleId) public view returns(bool) {
-        require(msg.sender == accountInstance.convertCastleToOwner(_ownerId));
+        //require(msg.sender == accountInstance.convertCastleToOwner(_ownerId));
         address myCastle = accountInstance.convertCastleToOwner(_ownerId);
         address attackedCastle = accountInstance.convertCastleToOwner(_attackedCastleId);
 
