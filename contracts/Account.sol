@@ -18,8 +18,42 @@ contract Account {
     mapping (uint => address) public castleToOwner;
     mapping (address => uint) public ownerCastleCount;
 
+    bool isAttacked = false;
+    address attackerAddress;
+    uint attackStartTime;
+    uint attackTotalTime;
+
+
     uint IdDigits = 16;
     uint IdModulus = 10 ** IdDigits;
+
+    function setAttackedInfo(bool _isAttack, address _attacker, uint _attackstarttime, uint _attacktotaltime) public {
+        isAttacked = _isAttack;
+        attackerAddress = _attacker;
+        attackStartTime = _attackstarttime;
+        attackTotalTime = _attacktotaltime;
+    }
+
+    function getMarchTime() public view returns(uint, uint) {
+        return ( now - attackStartTime, attackTotalTime ) ;
+    }
+
+    // // return 0 if success else return remaining time
+    function updateMarch(address _owner) public returns(uint) {
+        if (attackStartTime == 0) return 0;
+        if (now >= attackStartTime.add(attackTotalTime)) {
+            // uint num;
+            // num = ownerTotalMarchTime[_owner].div(  MarchInstance.levelOfMarch(_owner).mul(MarchInstance.createMarchTime()) );
+            // MarchInstance.setNumOfMarch(_owner, MarchInstance.numOfMarch(_owner) + (num));
+            attackStartTime = 0;
+            attackTotalTime = 0;
+            return 0;
+        }
+        else {
+            uint remainingTime = (attackStartTime + attackTotalTime).sub(now);
+            return remainingTime;
+        }
+    }
 
     function checkUserAddress() public view returns(bool) {
         if(ownerCastleCount[msg.sender] > 0) return true;
