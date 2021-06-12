@@ -38,6 +38,10 @@ contract Account {
         return ( now - attackStartTime, attackTotalTime ) ;
     }
 
+    function getAttackerInfo() public returns(bool,address) {
+        return (isAttacked, attackerAddress);
+    }
+
     // // return 0 if success else return remaining time
     function updateMarch(address _owner) public returns(uint) {
         if (attackStartTime == 0) return 0;
