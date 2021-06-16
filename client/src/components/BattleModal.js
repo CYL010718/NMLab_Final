@@ -32,6 +32,8 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
   }
 
   const sendSpy = async () => {
+    console.log(accounts);
+    console.log(barrackContract);
     const spyResult = await barrackContract.methods.sendSpy(myIdx, userIdx).call({from: accounts[0]});
 
     console.log("hello123")
@@ -121,7 +123,7 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
       
     </Modal.Content>
     :
-    
+
     <Modal.Content>
       <Grid columns='equal' divided padded>
         <Grid.Row stretched>

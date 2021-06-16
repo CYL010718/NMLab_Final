@@ -1,15 +1,15 @@
 {
   "contractName": "Context",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/seanwang0823/NMLab_Final/contracts/Context.sol\":\"Context\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/seanwang0823/NMLab_Final/contracts/Context.sol\":{\"keccak256\":\"0x25c76bf1d8fcc06b313d0614ba3eb99ca79d96d3f740845166a9888bd7d944e9\",\"urls\":[\"bzz-raw://a628797f9598f7f23e144c84d73bf02842b6f757106ab53129fdddbb2c076cc6\",\"dweb:/ipfs/QmPKn65XUm2EcKTEDRMKZNwyAtBgpxzdwiiCYHMFxL6dW6\"]}},\"version\":1}",
-  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a723158202b03110625f4c3a0720241eb6b4eb1022ed3ed9581941dd45ac2b7ff36d154dd64736f6c63430005100032",
-  "deployedBytecode": "0x6080604052600080fdfea265627a7a723158202b03110625f4c3a0720241eb6b4eb1022ed3ed9581941dd45ac2b7ff36d154dd64736f6c63430005100032",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.16+commit.9c3226ce\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/Users/cyl/Desktop/\\u7db2\\u591a/NMlab_Final/contracts/Context.sol\":\"Context\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/Users/cyl/Desktop/\\u7db2\\u591a/NMlab_Final/contracts/Context.sol\":{\"keccak256\":\"0x25c76bf1d8fcc06b313d0614ba3eb99ca79d96d3f740845166a9888bd7d944e9\",\"urls\":[\"bzz-raw://a628797f9598f7f23e144c84d73bf02842b6f757106ab53129fdddbb2c076cc6\",\"dweb:/ipfs/QmPKn65XUm2EcKTEDRMKZNwyAtBgpxzdwiiCYHMFxL6dW6\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603e80601d6000396000f3fe6080604052600080fdfea265627a7a723158201a9819371d0df0c0d2130905436c7371e77576494947643511227a31fd2b1e4164736f6c63430005100032",
+  "deployedBytecode": "0x6080604052600080fdfea265627a7a723158201a9819371d0df0c0d2130905436c7371e77576494947643511227a31fd2b1e4164736f6c63430005100032",
   "sourceMap": "567:349:6:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;567:349:6;;;;;;;",
   "deployedSourceMap": "567:349:6:-;;;;;",
   "source": "// SPDX-License-Identifier: MIT\n\npragma solidity >=0.4.21 <0.7.0;\n\n/*\n * @dev Provides information about the current execution context, including the\n * sender of the transaction and its data. While these are generally available\n * via msg.sender and msg.data, they should not be accessed in such a direct\n * manner, since when dealing with GSN meta-transactions the account sending and\n * paying for execution may not be the actual sender (as far as an application\n * is concerned).\n *\n * This contract is only required for intermediate, library-like contracts.\n */\ncontract Context {\n    function _msgSender() internal view returns (address payable) {\n        return msg.sender;\n    }\n\n    function _msgData() internal view returns (bytes memory) {\n        this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691\n        return msg.data;\n    }\n}",
-  "sourcePath": "/Users/seanwang0823/NMLab_Final/contracts/Context.sol",
+  "sourcePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Context.sol",
   "ast": {
-    "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/Context.sol",
+    "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Context.sol",
     "exportedSymbols": {
       "Context": [
         3793
@@ -263,7 +263,7 @@
   },
   "legacyAST": {
     "attributes": {
-      "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/Context.sol",
+      "absolutePath": "/Users/cyl/Desktop/網多/NMlab_Final/contracts/Context.sol",
       "exportedSymbols": {
         "Context": [
           3793
@@ -568,8 +568,8 @@
     "version": "0.5.16+commit.9c3226ce.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.4.0",
-  "updatedAt": "2021-06-09T03:16:58.941Z",
+  "schemaVersion": "3.4.1",
+  "updatedAt": "2021-06-09T03:42:53.739Z",
   "devdoc": {
     "methods": {}
   },
