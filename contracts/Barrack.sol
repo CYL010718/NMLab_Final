@@ -6,22 +6,30 @@ import "./Soldier.sol";
 import "./Spy.sol";
 import "./Cannon.sol";
 import "./Protector.sol";
+import "./Wall.sol";
 
 contract Barrack {
 
     using SafeMath for uint;
+
+    mapping (address => uint) public ownerStartMarchTime;
+    mapping (address => uint) public ownerTotalMarchTime;
 
     BuildingFactory buildingInstance;
     Soldier soldierInstance;
     Protector ProtectorInstance;
     Cannon CannonInstance;
     Spy SpyInstance;
-    constructor(address _building_address, address _soldier_address, address _spy_instance, address _cannon_instance, address _protector_instance) public {
+    Wall WallInstance;
+    Account AccountInstance;
+    constructor(address _building_address, address _soldier_address, address _spy_instance, address _cannon_instance, address _protector_instance, address _wall_instance, address _account_instance) public {
         buildingInstance = BuildingFactory(_building_address);
         soldierInstance = Soldier(_soldier_address);
         SpyInstance = Spy(_spy_instance);
         ProtectorInstance = Protector(_protector_instance);
         CannonInstance = Cannon(_cannon_instance);
+        WallInstance = Wall(_wall_instance);
+        AccountInstance = Account(_account_instance);
     }
 
     function createBarrack(uint _x, uint _y) public {
@@ -175,25 +183,99 @@ contract Barrack {
     }
 
     // // return 0 if success else return remaining time
-    function updateCreateProtector(address _owner) public returns(uint) {
-        if (ProtectorInstance.ownerStartCreateTime(_owner) == 0) return 0;
-        if (now >= ProtectorInstance.ownerStartCreateTime(_owner).add(ProtectorInstance.ownerCreateProtectorTime(_owner))) {
-            uint num;
-            num = ProtectorInstance.ownerCreateProtectorTime(_owner).div(  ProtectorInstance.levelOfProtector(_owner).mul(ProtectorInstance.createProtectorTime()) );
-            ProtectorInstance.setNumOfProtector(_owner, ProtectorInstance.numOfProtector(_owner) + (num));
-            ProtectorInstance.setStartCreateTime(_owner, 0);
-            ProtectorInstance.setCreateProtectorTime(_owner, 0);
-            ProtectorInstance._updateProtectorPower(_owner);
-            return 0;
-        }
-        else {
-            uint remainingTime = (ProtectorInstance.ownerStartCreateTime(_owner) + ProtectorInstance.ownerCreateProtectorTime(_owner)).sub(now);
-            return remainingTime;
-        }
-    }
+    // function updateCreateProtector(address _owner) public returns(uint) {
+    //     if (ProtectorInstance.ownerStartCreateTime(_owner) == 0) return 0;
+    //     if (now >= ProtectorInstance.ownerStartCreateTime(_owner).add(ProtectorInstance.ownerCreateProtectorTime(_owner))) {
+    //         uint num;
+    //         num = ProtectorInstance.ownerCreateProtectorTime(_owner).div(  ProtectorInstance.levelOfProtector(_owner).mul(ProtectorInstance.createProtectorTime()) );
+    //         ProtectorInstance.setNumOfProtector(_owner, ProtectorInstance.numOfProtector(_owner) + (num));
+    //         ProtectorInstance.setStartCreateTime(_owner, 0);
+    //         ProtectorInstance.setCreateProtectorTime(_owner, 0);
+    //         ProtectorInstance._updateProtectorPower(_owner);
+    //         return 0;
+    //     }
+    //     else {
+    //         uint remainingTime = (ProtectorInstance.ownerStartCreateTime(_owner) + ProtectorInstance.ownerCreateProtectorTime(_owner)).sub(now);
+    //         return remainingTime;
+    //     }
+    // }
+
+    // // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
+    // function startCreateWall(uint number) public returns(uint) {
+    //     address _owner = msg.sender;
+    //     if(WallInstance.ownerStartCreateTime(_owner) != 0) return uint(0); // check if there is already creating Walls
+    //     bool enoughResource;
+    //     uint lvOfWall;
+    //     enoughResource = WallInstance._createWall(_owner, number);
+    //     lvOfWall =  WallInstance.levelOfWall(_owner);
+    //     if(enoughResource == false) return uint(0);
+    //     WallInstance.setStartCreateTime(_owner, uint(now));
+    //     WallInstance.setCreateWallTime(_owner, WallInstance.createWallTime() * lvOfWall * number);
+    //     return WallInstance.ownerCreateWallTime(_owner);
+    // }
+
+    // function getCreateWallTime() public view returns(uint, uint) {
+    //     return ( now - WallInstance.ownerStartCreateTime(msg.sender), WallInstance.ownerCreateWallTime(msg.sender) ) ;
+    // }
+
+    // // // return 0 if success else return remaining time
+    // function updateCreateWall(address _owner) public returns(uint) {
+    //     if (WallInstance.ownerStartCreateTime(_owner) == 0) return 0;
+    //     if (now >= WallInstance.ownerStartCreateTime(_owner).add(WallInstance.ownerCreateWallTime(_owner))) {
+    //         uint num;
+    //         num = WallInstance.ownerCreateWallTime(_owner).div(  WallInstance.levelOfWall(_owner).mul(WallInstance.createWallTime()) );
+    //         WallInstance.setNumOfWall(_owner, WallInstance.numOfWall(_owner) + (num));
+    //         WallInstance.setStartCreateTime(_owner, 0);
+    //         WallInstance.setCreateWallTime(_owner, 0);
+    //         // WallInstance._updateWallPower(_owner);
+    //         return 0;
+    //     }
+    //     else {
+    //         uint remainingTime = (WallInstance.ownerStartCreateTime(_owner) + WallInstance.ownerCreateWallTime(_owner)).sub(now);
+    //         return remainingTime;
+    //     }
+    // }
+
+
 
     function attack(uint _ownerId, uint _attackedCastleId) public {
         // soldierInstance.attack(_ownerId, _attackedCastleId);
+    }
+
+    function startMarch(uint _attackedCastleId) public returns(uint) {
+        address _owner = msg.sender;
+        address attackedAddress = AccountInstance.castleToOwner(_attackedCastleId);
+        Account attackedInstance = Account(attackedAddress);
+        
+        if(ownerStartMarchTime[_owner] != 0) return uint(0); // check if there is already Marching
+        bool enoughResource;
+        enoughResource = enoughResource = AccountInstance.cost(_owner, 100, uint(0), 100, uint(0), 100);
+        if(enoughResource == false) return uint(0);
+        ownerStartMarchTime[_owner] = uint(now);
+        ownerTotalMarchTime[_owner] = 10;
+        attackedInstance.setAttackedInfo(true, _owner, ownerStartMarchTime[_owner], ownerTotalMarchTime[_owner]);
+        return ownerTotalMarchTime[_owner];
+    }
+
+    function getMarchTime() public view returns(uint, uint) {
+        return ( now - ownerStartMarchTime[msg.sender], ownerTotalMarchTime[msg.sender] ) ;
+    }
+
+    // // return 0 if success else return remaining time
+    function updateMarch(address _owner) public returns(uint) {
+        if (ownerStartMarchTime[_owner] == 0) return 0;
+        if (now >= ownerStartMarchTime[_owner].add(ownerTotalMarchTime[_owner])) {
+            // uint num;
+            // num = ownerTotalMarchTime[_owner].div(  MarchInstance.levelOfMarch(_owner).mul(MarchInstance.createMarchTime()) );
+            // MarchInstance.setNumOfMarch(_owner, MarchInstance.numOfMarch(_owner) + (num));
+            ownerStartMarchTime[_owner] = 0;
+            ownerTotalMarchTime[_owner] = 0;
+            return 0;
+        }
+        else {
+            uint remainingTime = (ownerStartMarchTime[_owner] + ownerTotalMarchTime[_owner]).sub(now);
+            return remainingTime;
+        }
     }
 
     function sendSpy(uint _ownerId, uint _attackedCastleId) public view returns(bool) {

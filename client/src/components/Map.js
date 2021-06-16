@@ -157,6 +157,14 @@ const Map = () => {
           pdIdx = idx;
           newState = { ...newState, protectorProduce: [ protectorStartPeriod, createProtectorTimeNeed ] };
         }
+        const getWallCreateTime = await barrackContract.methods.getCreateWallTime().call({from: accounts[0]});
+        const wallStartPeriod = parseInt( getWallCreateTime[0] );
+        const createWallTimeNeed = parseInt( getWallCreateTime[1] );
+        console.log("wall:", wallStartPeriod, createWallTimeNeed);
+        if(createWallTimeNeed != 0) {
+          pdIdx = idx;
+          newState = { ...newState, wallProduce: [ wallStartPeriod, createWallTimeNeed ] };
+        }
       }
       if(loadType === "Laboratory"){
         const getSoldierUpgradeTime = await labContract.methods.getUpgradeSoldierTime().call({from: accounts[0]});
