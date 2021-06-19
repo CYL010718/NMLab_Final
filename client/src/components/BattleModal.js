@@ -89,7 +89,8 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
 
       setMarchPeriod(nowStartPeriod);
       setMarchTimeNeed(marchingTimeNeed);
-      setMarching(true);
+      if(marchingTimeNeed !== 0) setMarching(true);
+      setInitialize(true);
     }
     if(barrackContract && accounts.length > 0) {
       if(!initialized) {
@@ -109,7 +110,7 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
 
     return () => {
       clearTimeout(handle);
-  }
+    }
   }, [state, marchPeriod, marchTimeNeed])
 
   return <>
@@ -202,7 +203,9 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
               <Header as='h4'>
                 March progress
               </Header>
-              <Progress progress='percent'  progress='percent'  percent={marchProgress} indicating />
+              <Progress progress='percent'  progress='percent'  percent={marchProgress} indicating>
+                March progress
+              </Progress>
               <div style={{textAlign: 'center'}}>
               <Button disabled={marchProgress !== 100} primary onClick={() => goBattle()} >
                   Battle!

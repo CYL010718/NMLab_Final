@@ -124,7 +124,9 @@ const Barrack = ({ idx, x, y, cellState, buildingContract, barrackContract, acco
               <Header as='h4'>
                 Upgrade progress
               </Header>
-              <Progress progress='percent' percent={upgradeProgress} indicating />
+              <Progress progress='percent' percent={upgradeProgress} indicating>
+               Upgrade progress
+              </Progress>
               <div style={{textAlign: 'center'}}>
                 <Button primary disabled={upgradeProgress !== 100} onClick={() => confirmUpgrade()} >comfirm upgrade</Button>
               </div>

@@ -343,7 +343,9 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
                 <Header as='h4'>
                 Produce soldier progress
                 </Header>
-                <Progress progress='percent'  progress='percent'  percent={soldierProduceProgress} indicating />
+                <Progress progress='percent'  progress='percent'  percent={soldierProduceProgress} indicating>
+                    Produce soldier progress
+                </Progress>
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={soldierProduceProgress !== 100} primary onClick={() => confirmCreateSoldier()} >
                     confirm
@@ -388,7 +390,9 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
                 <Header as='h4'>
                 Produce cannon progress
                 </Header>
-                <Progress progress='percent'  progress='percent'  percent={cannonProduceProgress} indicating />
+                <Progress  progress='percent'  percent={cannonProduceProgress} indicating>
+                    Produce cannon progress
+                </Progress>
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={cannonProduceProgress !== 100} primary onClick={() => confirmCreateCannon()} >
                     confirm
@@ -433,7 +437,9 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
                 <Header as='h4'>
                 Produce protector progress
                 </Header>
-                <Progress progress='percent'  percent={protectorProduceProgress} indicating />
+                <Progress progress='percent'  percent={protectorProduceProgress} indicating>
+                    Produce protector progress
+                </Progress>
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={protectorProduceProgress !== 100} primary onClick={() => confirmCreateProtector()} >
                     confirm
@@ -478,7 +484,9 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
                 <Header as='h4'>
                 Produce spy progress
                 </Header>
-                <Progress progress='percent'  percent={spyProduceProgress} indicating />
+                <Progress progress='percent'  percent={spyProduceProgress} indicating>
+                    Produce spy progress
+                </Progress>
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={spyProduceProgress !== 100} primary onClick={() => confirmCreateSpy()} >
                     confirm
@@ -523,7 +531,9 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
                 <Header as='h4'>
                 Produce wall progress
                 </Header>
-                <Progress progress='percent'  percent={wallProduceProgress} indicating />
+                <Progress progress='percent'  percent={wallProduceProgress} indicating>
+                    Produce wall progress
+                </Progress>
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={wallProduceProgress !== 100} primary onClick={() => confirmCreateWall()} >
                     confirm

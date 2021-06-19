@@ -274,7 +274,9 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
                 <Header as='h4' textAlign='center'>
                 Upgrade Progress
                 </Header>
-                <Progress progress='percent' percent={soldierUpgradeProgress} indicating />
+                <Progress progress='percent' percent={soldierUpgradeProgress} indicating>
+                    Upgrade Progress
+                </Progress>
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={soldierUpgradeProgress !== 100} primary onClick={() => confirmUpgradeSoldier()} >
                     confirm
@@ -299,7 +301,9 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
                 <Header as='h4' textAlign='center'>
                 Upgrade Progress
                 </Header>
-                <Progress progress='percent' percent={cannonUpgradeProgress} indicating />
+                <Progress progress='percent' percent={cannonUpgradeProgress} indicating>
+                    Upgrade Progress
+                </Progress>
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={cannonUpgradeProgress !== 100} primary onClick={() => confirmUpgradeCannon()} >
                     confirm
@@ -324,7 +328,9 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
                 <Header as='h4' textAlign='center'>
                 Upgrade Progress
                 </Header>
-                <Progress progress='percent' percent={protectorUpgradeProgress} indicating />
+                <Progress progress='percent' percent={protectorUpgradeProgress} indicating>
+                    Upgrade Progress
+                </Progress>
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={protectorUpgradeProgress !== 100} primary onClick={() => confirmUpgradeProtector()} >
                     confirm
@@ -349,7 +355,9 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
                 <Header as='h4' textAlign='center'>
                 Upgrade Progress
                 </Header>
-                <Progress progress='percent' percent={spyUpgradeProgress} indicating />
+                <Progress progress='percent' percent={spyUpgradeProgress} indicating>
+                    Upgrade Progress
+                </Progress>
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={spyUpgradeProgress !== 100} primary onClick={() => confirmUpgradeSpy()} >
                     confirm
