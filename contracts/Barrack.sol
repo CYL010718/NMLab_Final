@@ -245,7 +245,7 @@ contract Barrack {
     function startMarch(uint _attackedCastleId) public returns(uint) {
         address _owner = msg.sender;
         address attackedAddress = AccountInstance.castleToOwner(_attackedCastleId);
-        Account attackedInstance = Account(attackedAddress);
+
         
         if(ownerStartMarchTime[_owner] != 0) return uint(0); // check if there is already Marching
         bool enoughResource;
@@ -253,7 +253,7 @@ contract Barrack {
         if(enoughResource == false) return uint(0);
         ownerStartMarchTime[_owner] = uint(now);
         ownerTotalMarchTime[_owner] = 10;
-        attackedInstance.setAttackedInfo(true, _owner, ownerStartMarchTime[_owner], ownerTotalMarchTime[_owner]);
+        AccountInstance.setAttackedInfo(attackedAddress, true, _owner, ownerStartMarchTime[_owner], ownerTotalMarchTime[_owner]);
         return ownerTotalMarchTime[_owner];
     }
 
