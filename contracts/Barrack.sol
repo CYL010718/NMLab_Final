@@ -280,6 +280,7 @@ contract Barrack {
 
     function sendSpy(uint _ownerId, uint _attackedCastleId) public view returns(bool) {
         //returns TRUE if spy of myCastle > attackedCastle
+        
         return SpyInstance.sendSpy(_ownerId, _attackedCastleId);
     }
 

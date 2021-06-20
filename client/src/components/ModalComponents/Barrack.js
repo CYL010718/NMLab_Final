@@ -10,6 +10,7 @@ const Barrack = ({ idx, x, y, cellState, buildingContract, barrackContract, acco
   const [ cannonAmount, setCannonAmount ] = useState(0);
   const [ protectorAmount, setProtectorAmount ] = useState(0);
   const [ spyAmount, setSpyAmount ] = useState(0);
+  const [ wallAmount, setWallAmount ] = useState(0);
   const [ upgrading, setUpgrading ] = useState(false);
   const [ upgradeProgress, setUpgradeProgress ] = useState(0);
   const [ producing, setProducing ] = useState(false);
@@ -30,10 +31,12 @@ const Barrack = ({ idx, x, y, cellState, buildingContract, barrackContract, acco
     const cannonNum = await barrackContract.methods.getCannonAmount(account).call({from: account});
     const protectorNum = await barrackContract.methods.getProtectorAmount(account).call({from: account});
     const spyNum = await barrackContract.methods.getSpyAmount(account).call({from: account});
+    const wallNum = await barrackContract.methods.getWallAmount(account).call({from: account});
     setSoldierAmount(soldierNum);
     setCannonAmount(cannonNum);
     setProtectorAmount(protectorNum);
     setSpyAmount(spyNum);
+    setWallAmount(wallNum);
   }
 
   const startUpgrade = async () => {
@@ -92,6 +95,11 @@ const Barrack = ({ idx, x, y, cellState, buildingContract, barrackContract, acco
               active={page === 3}
               onClick={()=>setPage(3)}
             />
+            <Menu.Item
+              name='Wall'
+              active={page === 4}
+              onClick={()=>setPage(4)}
+            />
           </Menu>
         </Grid.Row>
         <Grid.Row stretched>
@@ -108,6 +116,7 @@ const Barrack = ({ idx, x, y, cellState, buildingContract, barrackContract, acco
               <p>Cannon amount: {cannonAmount}</p>
               <p>Protector amount: {protectorAmount}</p>
               <p>Spy amount: {spyAmount}</p>
+              <p>Wall amount: {wallAmount}</p>
             </Segment>
             {
               upgrading?
@@ -115,7 +124,9 @@ const Barrack = ({ idx, x, y, cellState, buildingContract, barrackContract, acco
               <Header as='h4'>
                 Upgrade progress
               </Header>
-              <Progress progress='percent' percent={upgradeProgress} indicating />
+              <Progress progress='percent' percent={upgradeProgress} indicating>
+               Upgrade progress
+              </Progress>
               <div style={{textAlign: 'center'}}>
                 <Button primary disabled={upgradeProgress !== 100} onClick={() => confirmUpgrade()} >comfirm upgrade</Button>
               </div>

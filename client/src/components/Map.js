@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Icon, Image } from 'semantic-ui-react';
 import { ContractContext } from "../App";
 import { useMeasure } from 'react-use'
 import Cell from './Cell';
 import "../styles/Map.css";
-import gameBackground from '../images/main_map_small.png';
+import gameBackground from '../images/map.JPG';
 import Draggable from 'react-draggable';
 
 
@@ -155,6 +156,14 @@ const Map = () => {
         if(createProtectorTimeNeed != 0) {
           pdIdx = idx;
           newState = { ...newState, protectorProduce: [ protectorStartPeriod, createProtectorTimeNeed ] };
+        }
+        const getWallCreateTime = await barrackContract.methods.getCreateWallTime().call({from: accounts[0]});
+        const wallStartPeriod = parseInt( getWallCreateTime[0] );
+        const createWallTimeNeed = parseInt( getWallCreateTime[1] );
+        console.log("wall:", wallStartPeriod, createWallTimeNeed);
+        if(createWallTimeNeed != 0) {
+          pdIdx = idx;
+          newState = { ...newState, wallProduce: [ wallStartPeriod, createWallTimeNeed ] };
         }
       }
       if(loadType === "Laboratory"){
