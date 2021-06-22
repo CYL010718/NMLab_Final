@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import BarrackPage from './BarrackPage'
+import { ContractContext } from '../../App';
 import { Button, Modal, Grid, Icon, Segment, Header, Input, Progress, Menu, Image } from 'semantic-ui-react';
 import soldierpng from '../../images/soldier_noback.png';
 
-const Barrack = ({ idx, x, y, cellState, buildingContract, barrackContract, account, updateCellState }) => {
+const Barrack = ({ idx, x, y, cellState, account, updateCellState }) => {
+  const state = useContext(ContractContext);
+  const {buildingContract, barrackContract, soldierContract, cannonContract, protectorContract, spyContract, wallContract} = state;
   const [ page, setPage ] = useState(0);
   const [ level, setLevel ] = useState(1);
   const [ soldierAmount, setSoldierAmount ] = useState(0);
@@ -27,11 +30,11 @@ const Barrack = ({ idx, x, y, cellState, buildingContract, barrackContract, acco
   }
 
   const getAmounts = async () => {
-    const soldierNum = await barrackContract.methods.getSoldierAmount(account).call({from: account});
-    const cannonNum = await barrackContract.methods.getCannonAmount(account).call({from: account});
-    const protectorNum = await barrackContract.methods.getProtectorAmount(account).call({from: account});
-    const spyNum = await barrackContract.methods.getSpyAmount(account).call({from: account});
-    const wallNum = await barrackContract.methods.getWallAmount(account).call({from: account});
+    const soldierNum = await soldierContract.methods.getSoldierAmount(account).call({from: account});
+    const cannonNum = await cannonContract.methods.getCannonAmount(account).call({from: account});
+    const protectorNum = await protectorContract.methods.getProtectorAmount(account).call({from: account});
+    const spyNum = await spyContract.methods.getSpyAmount(account).call({from: account});
+    const wallNum = await wallContract.methods.getWallAmount(account).call({from: account});
     setSoldierAmount(soldierNum);
     setCannonAmount(cannonNum);
     setProtectorAmount(protectorNum);
@@ -103,7 +106,7 @@ const Barrack = ({ idx, x, y, cellState, buildingContract, barrackContract, acco
           </Menu>
         </Grid.Row>
         <Grid.Row stretched>
-          <BarrackPage page = {page} idx = {idx} level = {level} upgrading = {upgrading} contract = {barrackContract} account = {account} cellState = {cellState} updateCellState = {updateCellState}/>
+          <BarrackPage page = {page} idx = {idx} level = {level} upgrading = {upgrading} account = {account} cellState = {cellState} updateCellState = {updateCellState}/>
           <Grid.Column>
             <Header icon>
               Barrack

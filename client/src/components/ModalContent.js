@@ -48,7 +48,7 @@ const ModalContent = ({ upgradingIdx, idx, x, y, cellState, index, updateCellSta
   if(type === "Barrack") {
     return <>
       <Modal.Header>Barrack</Modal.Header>
-      {state.accounts && state.buildingContract && state.barrackContract  ? <Barrack idx={idx} cellState={cellState} x={x} y={y} buildingContract={state.buildingContract} barrackContract={state.barrackContract} account={state.accounts[0]} updateCellState={updateCellState} /> : null}
+      {state.accounts && state.buildingContract && state.barrackContract  ? <Barrack idx={idx} cellState={cellState} x={x} y={y} account={state.accounts[0]} updateCellState={updateCellState} /> : null}
     </>
   }
   if(type === "Laboratory") {

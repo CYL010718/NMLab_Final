@@ -50,6 +50,8 @@ contract Account {
             // uint num;
             // num = ownerTotalMarchTime[_owner].div(  MarchInstance.levelOfMarch(_owner).mul(MarchInstance.createMarchTime()) );
             // MarchInstance.setNumOfMarch(_owner, MarchInstance.numOfMarch(_owner) + (num));
+            ownerIsAttacked[_owner] = false;
+            ownerAttackerAddress[_owner] = _owner;
             ownerAttackStartTime[_owner] = 0;
             ownerAttackTotalTime[_owner] = 0;
             return 0;

@@ -4,6 +4,8 @@ import "./Account.sol";
 
 contract Protector {
 
+    using SafeMath for uint;
+    
     Account accountInstance;
     constructor(address _account_address) public {
         accountInstance = Account(_account_address);
@@ -126,4 +128,41 @@ contract Protector {
         address attackedCastle = accountInstance.convertCastleToOwner(_attackedCastleId);
         _fight(myCastle, attackedCastle);
     }
+
+
+    // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
+    function startCreateProtector(uint number) public returns(uint) {
+        address _owner = msg.sender;
+        if(ownerStartCreateTime[_owner] != 0) return uint(0); // check if there is already creating Protectors
+        bool enoughResource;
+        uint lvOfProtector;
+        enoughResource = _createProtector(_owner, number);
+        lvOfProtector =  levelOfProtector[_owner];
+        if(enoughResource == false) return uint(0);
+        setStartCreateTime(_owner, uint(now));
+        setCreateProtectorTime(_owner, createProtectorTime * lvOfProtector * number);
+        return ownerCreateProtectorTime[_owner];
+    }
+
+    function getCreateProtectorTime() public view returns(uint, uint) {
+        return ( now - ownerStartCreateTime[msg.sender], ownerCreateProtectorTime[msg.sender] ) ;
+    }
+
+    // // return 0 if success else return remaining time
+    function updateCreateProtector(address _owner) public returns(uint) {
+         if (ownerStartCreateTime[_owner] == 0) return 0;
+         if (now >= ownerStartCreateTime[_owner].add(ownerCreateProtectorTime[_owner])) {
+             uint num;
+             num = ownerCreateProtectorTime[_owner].div(  levelOfProtector[_owner].mul(createProtectorTime) );
+             setNumOfProtector(_owner, numOfProtector[_owner] + (num));
+             setStartCreateTime(_owner, 0);
+             setCreateProtectorTime(_owner, 0);
+             _updateProtectorPower(_owner);
+             return 0;
+         }
+         else {
+             uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateProtectorTime[_owner]).sub(now);
+             return remainingTime;
+         }
+     }
 }

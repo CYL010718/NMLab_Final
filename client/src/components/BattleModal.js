@@ -8,6 +8,7 @@ import {
   Icon,
   Segment,
   Modal,
+  Progress
 } from 'semantic-ui-react'
 
 
@@ -104,7 +105,7 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
 
     if(marching) {
       handle = setTimeout(() => {
-        updateMarch;
+        updateMarch();
       }, 3000);
     }
 
@@ -203,7 +204,7 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
               <Header as='h4'>
                 March progress
               </Header>
-              <Progress progress='percent'  progress='percent'  percent={marchProgress} indicating>
+              <Progress progress='percent'  percent={marchProgress} indicating>
                 March progress
               </Progress>
               <div style={{textAlign: 'center'}}>

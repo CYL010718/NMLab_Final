@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { ContractContext } from "../App";
-import { Menu, Icon, Button, Image, Modal, Progress } from 'semantic-ui-react';
+import { Menu, Icon, Button, Image, Modal, Progress, Header } from 'semantic-ui-react';
 import "../styles/Navbar.css";
 import woodpng from '../images/wood_noback.png';
 import ironpng from '../images/iron_noback.png';
@@ -11,6 +11,7 @@ import foodpng from '../images/food_noback.png';
 
 const Navbar = ({ makeReload }) => { 
   const state = useContext(ContractContext);
+  const { accountContract, produceContract, barrackContract, accounts } = state;
   const [ initialized, setInitialized ] = useState(false);
   const [ beingAttacked, setBeingAttacked ] = useState(false);
   const [ attacker, setAttacker ] = useState("");
@@ -27,7 +28,7 @@ const Navbar = ({ makeReload }) => {
   });
   const [ updateTimes, setUpdateTimes ] = useState(0);
 
-  const updateCountdown = () => {
+  const updateCountdown = async() => {
     if(!beingAttacked){
       console.log("???")
       return 
@@ -36,7 +37,7 @@ const Navbar = ({ makeReload }) => {
         setMarchPeriod(marchPeriod + 3);
     }
     else{
-      await barrackContract.methods.updateMarch(accounts[0]).send({from: accounts[0]});
+      await accountContract.methods.updateMarch(accounts[0]).send({from: accounts[0]});
       setBeingAttacked(false);
       setMarchPeriod(0);
       setMarchTimeNeed(0);
@@ -56,7 +57,6 @@ const Navbar = ({ makeReload }) => {
   }
 
   useEffect(() => {
-    const { accountContract, produceContract, barrackContract, accounts } = state;
     if(!produceContract || accounts.length < 1) return;
     
     const getResource = async () => {
@@ -70,10 +70,10 @@ const Navbar = ({ makeReload }) => {
     const init = async () => {
       getResource();
 
-      const getMarchTime = await barrackContract.methods.getMarchTime().call({from: accounts[0]}); //Modify
+      const getMarchTime = await accountContract.methods.getMarchTime(accounts[0]).call({from: accounts[0]}); //Modify
       const nowStartPeriod = parseInt( getMarchTime[0] );
       const marchingTimeNeed = parseInt( getMarchTime[1] );
-      const attackerInfo = await accountContract.methods.getAttackerInfo().call({from: accounts[0]});
+      const attackerInfo = await accountContract.methods.getAttackerInfo(accounts[0]).call({from: accounts[0]});
       const isAttacked = attackerInfo[0];
       const attackerAddress = attackerInfo[0];
       

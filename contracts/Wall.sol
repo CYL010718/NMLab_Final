@@ -4,6 +4,8 @@ import "./Account.sol";
 
 contract Wall {
 
+    using SafeMath for uint;
+    
     Account accountInstance;
     constructor(address _account_address) public {
         accountInstance = Account(_account_address);
@@ -80,4 +82,39 @@ contract Wall {
     function getWallAmount(address _owner) public view returns(uint) {
         return numOfWall[_owner];
     }
+    
+    function startCreateWall(uint number) public returns(uint) {
+        address _owner = msg.sender;
+        if(ownerStartCreateTime[_owner] != 0) return uint(0); // check if there is already creating Walls
+        bool enoughResource;
+        uint lvOfWall;
+        enoughResource = _createWall(_owner, number);
+        lvOfWall = levelOfWall[_owner];
+        if(enoughResource == false) return uint(0);
+        setStartCreateTime(_owner, uint(now));
+        setCreateWallTime(_owner, createWallTime * lvOfWall * number);
+        return ownerCreateWallTime[_owner];
+    }
+
+    function getCreateWallTime() public view returns(uint, uint) {
+        return ( now - ownerStartCreateTime[msg.sender], ownerCreateWallTime[msg.sender] ) ;
+    }
+
+     // // return 0 if success else return remaining time
+    function updateCreateWall(address _owner) public returns(uint) {
+        if (ownerStartCreateTime[_owner] == 0) return 0;
+        if (now >= ownerStartCreateTime[_owner].add(ownerCreateWallTime[_owner])) {
+            uint num;
+            num = ownerCreateWallTime[_owner].div(levelOfWall[_owner].mul(createWallTime) );
+            setNumOfWall(_owner, numOfWall[_owner] + (num));
+            setStartCreateTime(_owner, 0);
+            setCreateWallTime(_owner, 0);
+            // WallInstance._updateWallPower(_owner);
+            return 0;
+        }
+        else {
+            uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateWallTime[_owner]).sub(now);
+            return remainingTime;
+        }
+     }
 }

@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Button, Modal, Grid, Icon, Segment, Header, Input, Progress, Image } from 'semantic-ui-react';
+import { ContractContext } from '../../App';
 import soldierpng from '../../images/soldier_noback.png';
 
-const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState, updateCellState }) => {
+const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCellState }) => {
+    const state = useContext(ContractContext);
+    const {soldierContract, cannonContract, protectorContract, spyContract, wallContract} = state;
     const [ soldierProduceAmount, setSoldierProduceAmount ] = useState(0);
     const [ cannonProduceAmount, setCannonProduceAmount ] = useState(0);
     const [ protectorProduceAmount, setProtectorProduceAmount ] = useState(0);
@@ -20,8 +23,8 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
     const [ wallProduceProgress, setWallProduceProgress ] = useState(0);
 
     const startCreateSoldier = async () => {
-        await contract.methods.startCreateSoldier(soldierProduceAmount).send({from: account});
-        const getCreateTime = await contract.methods.getCreateSoldierTime().call({from: account});
+        await soldierContract.methods.startCreateSoldier(soldierProduceAmount).send({from: account});
+        const getCreateTime = await soldierContract.methods.getCreateSoldierTime().call({from: account});
         const nowStartPeriod = parseInt( getCreateTime[0] );
         const createTimeNeed = parseInt( getCreateTime[1] );
         console.log("createSoldier: ", nowStartPeriod, createTimeNeed);
@@ -36,8 +39,8 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
     }
         
     const confirmCreateSoldier = async () => {
-        await contract.methods.updateCreateSoldier(account).send({from: account});
-        const getCreateTime = await contract.methods.getCreateSoldierTime().call({from: account});
+        await soldierContract.methods.updateCreateSoldier(account).send({from: account});
+        const getCreateTime = await soldierContract.methods.getCreateSoldierTime().call({from: account});
         const nowStartPeriod = parseInt( getCreateTime[0] );
         const createTimeNeed = parseInt( getCreateTime[1] );
         if(createTimeNeed != 0) {
@@ -50,9 +53,9 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
     }
 
     const startCreateCannon = async () => {
-        const test = await contract.methods.startCreateCannon(cannonProduceAmount).send({from: account});
+        const test = await cannonContract.methods.startCreateCannon(cannonProduceAmount).send({from: account});
         console.log("test: ", test);
-        const getCreateTime = await contract.methods.getCreateCannonTime().call({from: account});
+        const getCreateTime = await cannonContract.methods.getCreateCannonTime().call({from: account});
         const nowStartPeriod = parseInt( getCreateTime[0] );
         const createTimeNeed = parseInt( getCreateTime[1] );
         console.log("createCannon: ", nowStartPeriod, createTimeNeed);
@@ -67,8 +70,8 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
     }
         
     const confirmCreateCannon = async () => {
-        await contract.methods.updateCreateCannon(account).send({from: account});
-        const getCreateTime = await contract.methods.getCreateCannonTime().call({from: account});
+        await cannonContract.methods.updateCreateCannon(account).send({from: account});
+        const getCreateTime = await cannonContract.methods.getCreateCannonTime().call({from: account});
         const nowStartPeriod = parseInt( getCreateTime[0] );
         const createTimeNeed = parseInt( getCreateTime[1] );
         if(createTimeNeed != 0) {
@@ -81,8 +84,8 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
     }
 
     const startCreateProtector = async () => {
-        await contract.methods.startCreateProtector(protectorProduceAmount).send({from: account});
-        const getCreateTime = await contract.methods.getCreateProtectorTime().call({from: account});
+        await protectorContract.methods.startCreateProtector(protectorProduceAmount).send({from: account});
+        const getCreateTime = await protectorContract.methods.getCreateProtectorTime().call({from: account});
         const nowStartPeriod = parseInt( getCreateTime[0] );
         const createTimeNeed = parseInt( getCreateTime[1] );
         console.log("createProtector: ", nowStartPeriod, createTimeNeed);
@@ -97,8 +100,8 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
     }
         
     const confirmCreateProtector = async () => {
-        await contract.methods.updateCreateProtector(account).send({from: account});
-        const getCreateTime = await contract.methods.getCreateProtectorTime().call({from: account});
+        await protectorContract.methods.updateCreateProtector(account).send({from: account});
+        const getCreateTime = await protectorContract.methods.getCreateProtectorTime().call({from: account});
         const nowStartPeriod = parseInt( getCreateTime[0] );
         const createTimeNeed = parseInt( getCreateTime[1] );
         console.log("Confirm: ", nowStartPeriod, createTimeNeed);
@@ -112,8 +115,8 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
     }
 
     const startCreateSpy = async () => {
-        await contract.methods.startCreateSpy(spyProduceAmount).send({from: account});
-        const getCreateTime = await contract.methods.getCreateSpyTime().call({from: account});
+        await spyContract.methods.startCreateSpy(spyProduceAmount).send({from: account});
+        const getCreateTime = await spyContract.methods.getCreateSpyTime().call({from: account});
         const nowStartPeriod = parseInt( getCreateTime[0] );
         const createTimeNeed = parseInt( getCreateTime[1] );
         console.log("createSpy: ", nowStartPeriod, createTimeNeed);
@@ -128,8 +131,8 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
     }
         
     const confirmCreateSpy = async () => {
-        await contract.methods.updateCreateSpy(account).send({from: account});
-        const getCreateTime = await contract.methods.getCreateSpyTime().call({from: account});
+        await spyContract.methods.updateCreateSpy(account).send({from: account});
+        const getCreateTime = await spyContract.methods.getCreateSpyTime().call({from: account});
         const nowStartPeriod = parseInt( getCreateTime[0] );
         const createTimeNeed = parseInt( getCreateTime[1] );
         if(createTimeNeed != 0) {
@@ -142,8 +145,8 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
     }
 
     const startCreateWall = async () => {
-        await contract.methods.startCreateWall(wallProduceAmount).send({from: account});
-        const getCreateTime = await contract.methods.getCreateWallTime().call({from: account});
+        await wallContract.methods.startCreateWall(wallProduceAmount).send({from: account});
+        const getCreateTime = await wallContract.methods.getCreateWallTime().call({from: account});
         const nowStartPeriod = parseInt( getCreateTime[0] );
         const createTimeNeed = parseInt( getCreateTime[1] );
         //console.log("createSpy: ", nowStartPeriod, createTimeNeed);
@@ -158,8 +161,8 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
     }
         
     const confirmCreateWall = async () => {
-        await contract.methods.updateCreateWall(account).send({from: account});
-        const getCreateTime = await contract.methods.getCreateWallTime().call({from: account});
+        await wallContract.methods.updateCreateWall(account).send({from: account});
+        const getCreateTime = await wallContract.methods.getCreateWallTime().call({from: account});
         const nowStartPeriod = parseInt( getCreateTime[0] );
         const createTimeNeed = parseInt( getCreateTime[1] );
         if(createTimeNeed != 0) {
@@ -301,7 +304,7 @@ const BarrackPage = ({ page, idx, level, upgrading, contract, account, cellState
             clearTimeout(handle);
         }
 
-    }, [contract, account, cellState])
+    }, [account, cellState])
       
     const handleSoldierInputChange = (e, { value }) => {
         e.preventDefault();

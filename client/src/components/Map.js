@@ -4,7 +4,7 @@ import { ContractContext } from "../App";
 import { useMeasure } from 'react-use'
 import Cell from './Cell';
 import "../styles/Map.css";
-import gameBackground from '../images/map.JPG';
+import gameBackground from '../images/main_map_small.png';
 import Draggable from 'react-draggable';
 
 
@@ -119,7 +119,7 @@ const Map = () => {
   }
 
   useEffect(() => {
-    const { buildingContract, barrackContract, labContract, accounts } = state;
+    const { buildingContract, barrackContract, soldierContract, cannonContract, protectorContract, spyContract, wallContract, labContract, accounts } = state;
     let upgIdx = 0;
     let pdIdx = 0;
     const load = async (x, y, idx, upgradingId) => {
@@ -128,28 +128,29 @@ const Map = () => {
       const loadType = building[1];
       let newState = { type: loadType, index: loadIndex };
       if(loadType === "Barrack") {
-        const getSoldierCreateTime = await barrackContract.methods.getCreateSoldierTime().call({from: accounts[0]});
+        const getSoldierCreateTime = await soldierContract.methods.getCreateSoldierTime().call({from: accounts[0]});
+        console.log(getSoldierCreateTime)
         const soldierStartPeriod = parseInt( getSoldierCreateTime[0] );
         const createSoldierTimeNeed = parseInt( getSoldierCreateTime[1] );
         if(createSoldierTimeNeed != 0) {
           pdIdx = idx;
           newState = { ...newState, soldierProduce: [ soldierStartPeriod, createSoldierTimeNeed ] };
         }
-        const getSpyCreateTime = await barrackContract.methods.getCreateSpyTime().call({from: accounts[0]});
+        const getSpyCreateTime = await spyContract.methods.getCreateSpyTime().call({from: accounts[0]});
         const spyStartPeriod = parseInt( getSpyCreateTime[0] );
         const createSpyTimeNeed = parseInt( getSpyCreateTime[1] );
         if(createSpyTimeNeed != 0) {
           pdIdx = idx;
           newState = { ...newState, spyProduce: [ spyStartPeriod, createSpyTimeNeed ] };
         }
-        const getCannonCreateTime = await barrackContract.methods.getCreateCannonTime().call({from: accounts[0]});
+        const getCannonCreateTime = await cannonContract.methods.getCreateCannonTime().call({from: accounts[0]});
         const cannonStartPeriod = parseInt( getCannonCreateTime[0] );
         const createCannonTimeNeed = parseInt( getCannonCreateTime[1] );
         if(createCannonTimeNeed != 0) {
           pdIdx = idx;
           newState = { ...newState, cannonProduce: [ cannonStartPeriod, createCannonTimeNeed ] };
         }
-        const getProtectorCreateTime = await barrackContract.methods.getCreateProtectorTime().call({from: accounts[0]});
+        const getProtectorCreateTime = await protectorContract.methods.getCreateProtectorTime().call({from: accounts[0]});
         const protectorStartPeriod = parseInt( getProtectorCreateTime[0] );
         const createProtectorTimeNeed = parseInt( getProtectorCreateTime[1] );
         console.log("protector:", protectorStartPeriod, createProtectorTimeNeed);
@@ -157,7 +158,7 @@ const Map = () => {
           pdIdx = idx;
           newState = { ...newState, protectorProduce: [ protectorStartPeriod, createProtectorTimeNeed ] };
         }
-        const getWallCreateTime = await barrackContract.methods.getCreateWallTime().call({from: accounts[0]});
+        const getWallCreateTime = await wallContract.methods.getCreateWallTime().call({from: accounts[0]});
         const wallStartPeriod = parseInt( getWallCreateTime[0] );
         const createWallTimeNeed = parseInt( getWallCreateTime[1] );
         console.log("wall:", wallStartPeriod, createWallTimeNeed);
