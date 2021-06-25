@@ -86,14 +86,14 @@
     "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/Sawmill.sol",
     "exportedSymbols": {
       "Sawmill": [
-        6094
+        6102
       ]
     },
-    "id": 6095,
+    "id": 6103,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 5937,
+        "id": 5945,
         "literals": [
           "solidity",
           ">=",
@@ -109,10 +109,10 @@
       {
         "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/SafeMath.sol",
         "file": "./SafeMath.sol",
-        "id": 5938,
+        "id": 5946,
         "nodeType": "ImportDirective",
-        "scope": 6095,
-        "sourceUnit": 5936,
+        "scope": 6103,
+        "sourceUnit": 5944,
         "src": "34:24:11",
         "symbolAliases": [],
         "unitAlias": ""
@@ -120,10 +120,10 @@
       {
         "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/BuildingFactory.sol",
         "file": "./BuildingFactory.sol",
-        "id": 5939,
+        "id": 5947,
         "nodeType": "ImportDirective",
-        "scope": 6095,
-        "sourceUnit": 3455,
+        "scope": 6103,
+        "sourceUnit": 3463,
         "src": "59:31:11",
         "symbolAliases": [],
         "unitAlias": ""
@@ -134,31 +134,31 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 6094,
+        "id": 6102,
         "linearizedBaseContracts": [
-          6094
+          6102
         ],
         "name": "Sawmill",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
-            "id": 5942,
+            "id": 5950,
             "libraryName": {
               "contractScope": null,
-              "id": 5940,
+              "id": 5948,
               "name": "SafeMath",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 5935,
+              "referencedDeclaration": 5943,
               "src": "126:8:11",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_SafeMath_$5935",
+                "typeIdentifier": "t_contract$_SafeMath_$5943",
                 "typeString": "library SafeMath"
               }
             },
             "nodeType": "UsingForDirective",
             "src": "120:24:11",
             "typeName": {
-              "id": 5941,
+              "id": 5949,
               "name": "uint",
               "nodeType": "ElementaryTypeName",
               "src": "139:4:11",
@@ -170,10 +170,10 @@
           },
           {
             "constant": false,
-            "id": 5944,
+            "id": 5952,
             "name": "accountInstance",
             "nodeType": "VariableDeclaration",
-            "scope": 6094,
+            "scope": 6102,
             "src": "154:23:11",
             "stateVariable": true,
             "storageLocation": "default",
@@ -183,7 +183,7 @@
             },
             "typeName": {
               "contractScope": null,
-              "id": 5943,
+              "id": 5951,
               "name": "Account",
               "nodeType": "UserDefinedTypeName",
               "referencedDeclaration": 783,
@@ -198,26 +198,26 @@
           },
           {
             "constant": false,
-            "id": 5946,
+            "id": 5954,
             "name": "buildingInstance",
             "nodeType": "VariableDeclaration",
-            "scope": 6094,
+            "scope": 6102,
             "src": "183:32:11",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_contract$_BuildingFactory_$3454",
+              "typeIdentifier": "t_contract$_BuildingFactory_$3462",
               "typeString": "contract BuildingFactory"
             },
             "typeName": {
               "contractScope": null,
-              "id": 5945,
+              "id": 5953,
               "name": "BuildingFactory",
               "nodeType": "UserDefinedTypeName",
-              "referencedDeclaration": 3454,
+              "referencedDeclaration": 3462,
               "src": "183:15:11",
               "typeDescriptions": {
-                "typeIdentifier": "t_contract$_BuildingFactory_$3454",
+                "typeIdentifier": "t_contract$_BuildingFactory_$3462",
                 "typeString": "contract BuildingFactory"
               }
             },
@@ -226,25 +226,25 @@
           },
           {
             "body": {
-              "id": 5965,
+              "id": 5973,
               "nodeType": "Block",
               "src": "293:123:11",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 5957,
+                    "id": 5965,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 5953,
+                      "id": 5961,
                       "name": "accountInstance",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 5944,
+                      "referencedDeclaration": 5952,
                       "src": "303:15:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_contract$_Account_$783",
@@ -258,11 +258,11 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "id": 5955,
+                          "id": 5963,
                           "name": "_account_address",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 5948,
+                          "referencedDeclaration": 5956,
                           "src": "329:16:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -277,7 +277,7 @@
                             "typeString": "address"
                           }
                         ],
-                        "id": 5954,
+                        "id": 5962,
                         "name": "Account",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
@@ -288,7 +288,7 @@
                           "typeString": "type(contract Account)"
                         }
                       },
-                      "id": 5956,
+                      "id": 5964,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -308,28 +308,28 @@
                       "typeString": "contract Account"
                     }
                   },
-                  "id": 5958,
+                  "id": 5966,
                   "nodeType": "ExpressionStatement",
                   "src": "303:43:11"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 5963,
+                    "id": 5971,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 5959,
+                      "id": 5967,
                       "name": "buildingInstance",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 5946,
+                      "referencedDeclaration": 5954,
                       "src": "356:16:11",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_BuildingFactory_$3454",
+                        "typeIdentifier": "t_contract$_BuildingFactory_$3462",
                         "typeString": "contract BuildingFactory"
                       }
                     },
@@ -340,11 +340,11 @@
                       "arguments": [
                         {
                           "argumentTypes": null,
-                          "id": 5961,
+                          "id": 5969,
                           "name": "_building_address",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 5950,
+                          "referencedDeclaration": 5958,
                           "src": "391:17:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -359,18 +359,18 @@
                             "typeString": "address"
                           }
                         ],
-                        "id": 5960,
+                        "id": 5968,
                         "name": "BuildingFactory",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 3454,
+                        "referencedDeclaration": 3462,
                         "src": "375:15:11",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_type$_t_contract$_BuildingFactory_$3454_$",
+                          "typeIdentifier": "t_type$_t_contract$_BuildingFactory_$3462_$",
                           "typeString": "type(contract BuildingFactory)"
                         }
                       },
-                      "id": 5962,
+                      "id": 5970,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -380,39 +380,39 @@
                       "nodeType": "FunctionCall",
                       "src": "375:34:11",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_contract$_BuildingFactory_$3454",
+                        "typeIdentifier": "t_contract$_BuildingFactory_$3462",
                         "typeString": "contract BuildingFactory"
                       }
                     },
                     "src": "356:53:11",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_contract$_BuildingFactory_$3454",
+                      "typeIdentifier": "t_contract$_BuildingFactory_$3462",
                       "typeString": "contract BuildingFactory"
                     }
                   },
-                  "id": 5964,
+                  "id": 5972,
                   "nodeType": "ExpressionStatement",
                   "src": "356:53:11"
                 }
               ]
             },
             "documentation": null,
-            "id": 5966,
+            "id": 5974,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 5951,
+              "id": 5959,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 5948,
+                  "id": 5956,
                   "name": "_account_address",
                   "nodeType": "VariableDeclaration",
-                  "scope": 5966,
+                  "scope": 5974,
                   "src": "233:24:11",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -421,7 +421,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 5947,
+                    "id": 5955,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "233:7:11",
@@ -436,10 +436,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 5950,
+                  "id": 5958,
                   "name": "_building_address",
                   "nodeType": "VariableDeclaration",
-                  "scope": 5966,
+                  "scope": 5974,
                   "src": "259:25:11",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -448,7 +448,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 5949,
+                    "id": 5957,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "259:7:11",
@@ -465,12 +465,12 @@
               "src": "232:53:11"
             },
             "returnParameters": {
-              "id": 5952,
+              "id": 5960,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "293:0:11"
             },
-            "scope": 6094,
+            "scope": 6102,
             "src": "221:195:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -478,10 +478,10 @@
           },
           {
             "constant": false,
-            "id": 5970,
+            "id": 5978,
             "name": "ownerWoodProduceTime",
             "nodeType": "VariableDeclaration",
-            "scope": 6094,
+            "scope": 6102,
             "src": "423:53:11",
             "stateVariable": true,
             "storageLocation": "default",
@@ -490,9 +490,9 @@
               "typeString": "mapping(address => uint256)"
             },
             "typeName": {
-              "id": 5969,
+              "id": 5977,
               "keyType": {
-                "id": 5967,
+                "id": 5975,
                 "name": "address",
                 "nodeType": "ElementaryTypeName",
                 "src": "432:7:11",
@@ -508,7 +508,7 @@
                 "typeString": "mapping(address => uint256)"
               },
               "valueType": {
-                "id": 5968,
+                "id": 5976,
                 "name": "uint",
                 "nodeType": "ElementaryTypeName",
                 "src": "443:4:11",
@@ -523,10 +523,10 @@
           },
           {
             "constant": false,
-            "id": 5973,
+            "id": 5981,
             "name": "produceWoodAbility",
             "nodeType": "VariableDeclaration",
-            "scope": 6094,
+            "scope": 6102,
             "src": "482:27:11",
             "stateVariable": true,
             "storageLocation": "default",
@@ -535,7 +535,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 5971,
+              "id": 5979,
               "name": "uint",
               "nodeType": "ElementaryTypeName",
               "src": "482:4:11",
@@ -547,7 +547,7 @@
             "value": {
               "argumentTypes": null,
               "hexValue": "31",
-              "id": 5972,
+              "id": 5980,
               "isConstant": false,
               "isLValue": false,
               "isPure": true,
@@ -566,7 +566,7 @@
           },
           {
             "body": {
-              "id": 5995,
+              "id": 6003,
               "nodeType": "Block",
               "src": "564:120:11",
               "statements": [
@@ -578,18 +578,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 5983,
+                          "id": 5991,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 7780,
+                          "referencedDeclaration": 7788,
                           "src": "607:3:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 5984,
+                        "id": 5992,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -606,7 +606,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5361776d696c6c",
-                        "id": 5985,
+                        "id": 5993,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -623,11 +623,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 5986,
+                        "id": 5994,
                         "name": "_x",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 5975,
+                        "referencedDeclaration": 5983,
                         "src": "630:2:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -636,11 +636,11 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 5987,
+                        "id": 5995,
                         "name": "_y",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 5977,
+                        "referencedDeclaration": 5985,
                         "src": "634:2:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -669,32 +669,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 5980,
+                        "id": 5988,
                         "name": "buildingInstance",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 5946,
+                        "referencedDeclaration": 5954,
                         "src": "574:16:11",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_BuildingFactory_$3454",
+                          "typeIdentifier": "t_contract$_BuildingFactory_$3462",
                           "typeString": "contract BuildingFactory"
                         }
                       },
-                      "id": 5982,
+                      "id": 5990,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "_createBuilding",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 2742,
+                      "referencedDeclaration": 2750,
                       "src": "574:32:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_nonpayable$_t_address_$_t_string_memory_ptr_$_t_uint256_$_t_uint256_$returns$_t_uint256_$",
                         "typeString": "function (address,string memory,uint256,uint256) external returns (uint256)"
                       }
                     },
-                    "id": 5988,
+                    "id": 5996,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -708,7 +708,7 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 5989,
+                  "id": 5997,
                   "nodeType": "ExpressionStatement",
                   "src": "574:63:11"
                 },
@@ -720,18 +720,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 5991,
+                          "id": 5999,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 7780,
+                          "referencedDeclaration": 7788,
                           "src": "666:3:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 5992,
+                        "id": 6000,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -753,18 +753,18 @@
                           "typeString": "address payable"
                         }
                       ],
-                      "id": 5990,
+                      "id": 5998,
                       "name": "_updateProduceWood",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 6093,
+                      "referencedDeclaration": 6101,
                       "src": "647:18:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_nonpayable$_t_address_$returns$__$",
                         "typeString": "function (address)"
                       }
                     },
-                    "id": 5993,
+                    "id": 6001,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -778,29 +778,29 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 5994,
+                  "id": 6002,
                   "nodeType": "ExpressionStatement",
                   "src": "647:30:11"
                 }
               ]
             },
             "documentation": null,
-            "id": 5996,
+            "id": 6004,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "createSawmill",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 5978,
+              "id": 5986,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 5975,
+                  "id": 5983,
                   "name": "_x",
                   "nodeType": "VariableDeclaration",
-                  "scope": 5996,
+                  "scope": 6004,
                   "src": "539:7:11",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -809,7 +809,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 5974,
+                    "id": 5982,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "539:4:11",
@@ -823,10 +823,10 @@
                 },
                 {
                   "constant": false,
-                  "id": 5977,
+                  "id": 5985,
                   "name": "_y",
                   "nodeType": "VariableDeclaration",
-                  "scope": 5996,
+                  "scope": 6004,
                   "src": "548:7:11",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -835,7 +835,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 5976,
+                    "id": 5984,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
                     "src": "548:4:11",
@@ -851,12 +851,12 @@
               "src": "538:18:11"
             },
             "returnParameters": {
-              "id": 5979,
+              "id": 5987,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "564:0:11"
             },
-            "scope": 6094,
+            "scope": 6102,
             "src": "516:168:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -864,21 +864,21 @@
           },
           {
             "body": {
-              "id": 6092,
+              "id": 6100,
               "nodeType": "Block",
               "src": "742:723:11",
               "statements": [
                 {
                   "assignments": [
-                    6004
+                    6012
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 6004,
+                      "id": 6012,
                       "name": "sawmills",
                       "nodeType": "VariableDeclaration",
-                      "scope": 6092,
+                      "scope": 6100,
                       "src": "752:22:11",
                       "stateVariable": false,
                       "storageLocation": "memory",
@@ -888,7 +888,7 @@
                       },
                       "typeName": {
                         "baseType": {
-                          "id": 6002,
+                          "id": 6010,
                           "name": "uint",
                           "nodeType": "ElementaryTypeName",
                           "src": "752:4:11",
@@ -897,7 +897,7 @@
                             "typeString": "uint256"
                           }
                         },
-                        "id": 6003,
+                        "id": 6011,
                         "length": null,
                         "nodeType": "ArrayTypeName",
                         "src": "752:6:11",
@@ -910,17 +910,17 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 6010,
+                  "id": 6018,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 6007,
+                        "id": 6015,
                         "name": "_owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 5998,
+                        "referencedDeclaration": 6006,
                         "src": "821:6:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -930,7 +930,7 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "5361776d696c6c",
-                        "id": 6008,
+                        "id": 6016,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -959,32 +959,32 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 6005,
+                        "id": 6013,
                         "name": "buildingInstance",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 5946,
+                        "referencedDeclaration": 5954,
                         "src": "777:16:11",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_contract$_BuildingFactory_$3454",
+                          "typeIdentifier": "t_contract$_BuildingFactory_$3462",
                           "typeString": "contract BuildingFactory"
                         }
                       },
-                      "id": 6006,
+                      "id": 6014,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "getSpecificBuildingByOwner",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 3401,
+                      "referencedDeclaration": 3409,
                       "src": "777:43:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_external_view$_t_address_$_t_string_memory_ptr_$returns$_t_array$_t_uint256_$dyn_memory_ptr_$",
                         "typeString": "function (address,string memory) view external returns (uint256[] memory)"
                       }
                     },
-                    "id": 6009,
+                    "id": 6017,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1008,7 +1008,7 @@
                       "typeIdentifier": "t_bool",
                       "typeString": "bool"
                     },
-                    "id": 6020,
+                    "id": 6028,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1019,7 +1019,7 @@
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       },
-                      "id": 6015,
+                      "id": 6023,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1028,25 +1028,25 @@
                         "argumentTypes": null,
                         "baseExpression": {
                           "argumentTypes": null,
-                          "id": 6011,
+                          "id": 6019,
                           "name": "ownerWoodProduceTime",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 5970,
+                          "referencedDeclaration": 5978,
                           "src": "853:20:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                             "typeString": "mapping(address => uint256)"
                           }
                         },
-                        "id": 6013,
+                        "id": 6021,
                         "indexExpression": {
                           "argumentTypes": null,
-                          "id": 6012,
+                          "id": 6020,
                           "name": "_owner",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 5998,
+                          "referencedDeclaration": 6006,
                           "src": "874:6:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_address",
@@ -1069,7 +1069,7 @@
                       "rightExpression": {
                         "argumentTypes": null,
                         "hexValue": "30",
-                        "id": 6014,
+                        "id": 6022,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -1098,7 +1098,7 @@
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       },
-                      "id": 6019,
+                      "id": 6027,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1107,18 +1107,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 6016,
+                          "id": 6024,
                           "name": "sawmills",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 6004,
+                          "referencedDeclaration": 6012,
                           "src": "890:8:11",
                           "typeDescriptions": {
                             "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
                             "typeString": "uint256[] memory"
                           }
                         },
-                        "id": 6017,
+                        "id": 6025,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1137,7 +1137,7 @@
                       "rightExpression": {
                         "argumentTypes": null,
                         "hexValue": "30",
-                        "id": 6018,
+                        "id": 6026,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -1165,18 +1165,18 @@
                     }
                   },
                   "falseBody": null,
-                  "id": 6029,
+                  "id": 6037,
                   "nodeType": "IfStatement",
                   "src": "849:142:11",
                   "trueBody": {
-                    "id": 6028,
+                    "id": 6036,
                     "nodeType": "Block",
                     "src": "912:79:11",
                     "statements": [
                       {
                         "expression": {
                           "argumentTypes": null,
-                          "id": 6025,
+                          "id": 6033,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1185,25 +1185,25 @@
                             "argumentTypes": null,
                             "baseExpression": {
                               "argumentTypes": null,
-                              "id": 6021,
+                              "id": 6029,
                               "name": "ownerWoodProduceTime",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 5970,
+                              "referencedDeclaration": 5978,
                               "src": "926:20:11",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                                 "typeString": "mapping(address => uint256)"
                               }
                             },
-                            "id": 6023,
+                            "id": 6031,
                             "indexExpression": {
                               "argumentTypes": null,
-                              "id": 6022,
+                              "id": 6030,
                               "name": "_owner",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 5998,
+                              "referencedDeclaration": 6006,
                               "src": "947:6:11",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_address",
@@ -1225,11 +1225,11 @@
                           "operator": "=",
                           "rightHandSide": {
                             "argumentTypes": null,
-                            "id": 6024,
+                            "id": 6032,
                             "name": "now",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 7782,
+                            "referencedDeclaration": 7790,
                             "src": "957:3:11",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -1242,14 +1242,14 @@
                             "typeString": "uint256"
                           }
                         },
-                        "id": 6026,
+                        "id": 6034,
                         "nodeType": "ExpressionStatement",
                         "src": "926:34:11"
                       },
                       {
                         "expression": null,
-                        "functionReturnParameters": 6000,
-                        "id": 6027,
+                        "functionReturnParameters": 6008,
+                        "id": 6035,
                         "nodeType": "Return",
                         "src": "974:7:11"
                       }
@@ -1258,15 +1258,15 @@
                 },
                 {
                   "assignments": [
-                    6031
+                    6039
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 6031,
+                      "id": 6039,
                       "name": "periodCounts",
                       "nodeType": "VariableDeclaration",
-                      "scope": 6092,
+                      "scope": 6100,
                       "src": "1000:17:11",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -1275,7 +1275,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 6030,
+                        "id": 6038,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
                         "src": "1000:4:11",
@@ -1288,14 +1288,14 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 6041,
+                  "id": 6049,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
                       {
                         "argumentTypes": null,
                         "hexValue": "3130",
-                        "id": 6039,
+                        "id": 6047,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -1327,18 +1327,18 @@
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
                             },
-                            "id": 6036,
+                            "id": 6044,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
                             "lValueRequested": false,
                             "leftExpression": {
                               "argumentTypes": null,
-                              "id": 6032,
+                              "id": 6040,
                               "name": "now",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 7782,
+                              "referencedDeclaration": 7790,
                               "src": "1021:3:11",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -1351,25 +1351,25 @@
                               "argumentTypes": null,
                               "baseExpression": {
                                 "argumentTypes": null,
-                                "id": 6033,
+                                "id": 6041,
                                 "name": "ownerWoodProduceTime",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 5970,
+                                "referencedDeclaration": 5978,
                                 "src": "1027:20:11",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                                   "typeString": "mapping(address => uint256)"
                                 }
                               },
-                              "id": 6035,
+                              "id": 6043,
                               "indexExpression": {
                                 "argumentTypes": null,
-                                "id": 6034,
+                                "id": 6042,
                                 "name": "_owner",
                                 "nodeType": "Identifier",
                                 "overloadedDeclarations": [],
-                                "referencedDeclaration": 5998,
+                                "referencedDeclaration": 6006,
                                 "src": "1048:6:11",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_address",
@@ -1394,7 +1394,7 @@
                             }
                           }
                         ],
-                        "id": 6037,
+                        "id": 6045,
                         "isConstant": false,
                         "isInlineArray": false,
                         "isLValue": false,
@@ -1407,21 +1407,21 @@
                           "typeString": "uint256"
                         }
                       },
-                      "id": 6038,
+                      "id": 6046,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
                       "lValueRequested": false,
                       "memberName": "div",
                       "nodeType": "MemberAccess",
-                      "referencedDeclaration": 5868,
+                      "referencedDeclaration": 5876,
                       "src": "1020:40:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_internal_pure$_t_uint256_$_t_uint256_$returns$_t_uint256_$bound_to$_t_uint256_$",
                         "typeString": "function (uint256,uint256) pure returns (uint256)"
                       }
                     },
-                    "id": 6040,
+                    "id": 6048,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1440,15 +1440,15 @@
                 },
                 {
                   "assignments": [
-                    6043
+                    6051
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 6043,
+                      "id": 6051,
                       "name": "produceAbilitySum",
                       "nodeType": "VariableDeclaration",
-                      "scope": 6092,
+                      "scope": 6100,
                       "src": "1082:22:11",
                       "stateVariable": false,
                       "storageLocation": "default",
@@ -1457,7 +1457,7 @@
                         "typeString": "uint256"
                       },
                       "typeName": {
-                        "id": 6042,
+                        "id": 6050,
                         "name": "uint",
                         "nodeType": "ElementaryTypeName",
                         "src": "1082:4:11",
@@ -1470,11 +1470,11 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 6045,
+                  "id": 6053,
                   "initialValue": {
                     "argumentTypes": null,
                     "hexValue": "30",
-                    "id": 6044,
+                    "id": 6052,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": true,
@@ -1494,25 +1494,25 @@
                 },
                 {
                   "body": {
-                    "id": 6068,
+                    "id": 6076,
                     "nodeType": "Block",
                     "src": "1157:113:11",
                     "statements": [
                       {
                         "expression": {
                           "argumentTypes": null,
-                          "id": 6066,
+                          "id": 6074,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "leftHandSide": {
                             "argumentTypes": null,
-                            "id": 6057,
+                            "id": 6065,
                             "name": "produceAbilitySum",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 6043,
+                            "referencedDeclaration": 6051,
                             "src": "1171:17:11",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -1527,7 +1527,7 @@
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
                             },
-                            "id": 6065,
+                            "id": 6073,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -1539,25 +1539,25 @@
                                   "argumentTypes": null,
                                   "baseExpression": {
                                     "argumentTypes": null,
-                                    "id": 6060,
+                                    "id": 6068,
                                     "name": "sawmills",
                                     "nodeType": "Identifier",
                                     "overloadedDeclarations": [],
-                                    "referencedDeclaration": 6004,
+                                    "referencedDeclaration": 6012,
                                     "src": "1226:8:11",
                                     "typeDescriptions": {
                                       "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
                                       "typeString": "uint256[] memory"
                                     }
                                   },
-                                  "id": 6062,
+                                  "id": 6070,
                                   "indexExpression": {
                                     "argumentTypes": null,
-                                    "id": 6061,
+                                    "id": 6069,
                                     "name": "i",
                                     "nodeType": "Identifier",
                                     "overloadedDeclarations": [],
-                                    "referencedDeclaration": 6047,
+                                    "referencedDeclaration": 6055,
                                     "src": "1235:1:11",
                                     "typeDescriptions": {
                                       "typeIdentifier": "t_uint256",
@@ -1585,32 +1585,32 @@
                                 ],
                                 "expression": {
                                   "argumentTypes": null,
-                                  "id": 6058,
+                                  "id": 6066,
                                   "name": "buildingInstance",
                                   "nodeType": "Identifier",
                                   "overloadedDeclarations": [],
-                                  "referencedDeclaration": 5946,
+                                  "referencedDeclaration": 5954,
                                   "src": "1192:16:11",
                                   "typeDescriptions": {
-                                    "typeIdentifier": "t_contract$_BuildingFactory_$3454",
+                                    "typeIdentifier": "t_contract$_BuildingFactory_$3462",
                                     "typeString": "contract BuildingFactory"
                                   }
                                 },
-                                "id": 6059,
+                                "id": 6067,
                                 "isConstant": false,
                                 "isLValue": false,
                                 "isPure": false,
                                 "lValueRequested": false,
                                 "memberName": "getBuildingLevel",
                                 "nodeType": "MemberAccess",
-                                "referencedDeclaration": 2477,
+                                "referencedDeclaration": 2485,
                                 "src": "1192:33:11",
                                 "typeDescriptions": {
                                   "typeIdentifier": "t_function_external_view$_t_uint256_$returns$_t_uint256_$",
                                   "typeString": "function (uint256) view external returns (uint256)"
                                 }
                               },
-                              "id": 6063,
+                              "id": 6071,
                               "isConstant": false,
                               "isLValue": false,
                               "isPure": false,
@@ -1628,11 +1628,11 @@
                             "operator": "*",
                             "rightExpression": {
                               "argumentTypes": null,
-                              "id": 6064,
+                              "id": 6072,
                               "name": "produceWoodAbility",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 5973,
+                              "referencedDeclaration": 5981,
                               "src": "1241:18:11",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_uint256",
@@ -1651,7 +1651,7 @@
                             "typeString": "uint256"
                           }
                         },
-                        "id": 6067,
+                        "id": 6075,
                         "nodeType": "ExpressionStatement",
                         "src": "1171:88:11"
                       }
@@ -1663,18 +1663,18 @@
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     },
-                    "id": 6053,
+                    "id": 6061,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftExpression": {
                       "argumentTypes": null,
-                      "id": 6050,
+                      "id": 6058,
                       "name": "i",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 6047,
+                      "referencedDeclaration": 6055,
                       "src": "1133:1:11",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -1687,18 +1687,18 @@
                       "argumentTypes": null,
                       "expression": {
                         "argumentTypes": null,
-                        "id": 6051,
+                        "id": 6059,
                         "name": "sawmills",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 6004,
+                        "referencedDeclaration": 6012,
                         "src": "1135:8:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_array$_t_uint256_$dyn_memory_ptr",
                           "typeString": "uint256[] memory"
                         }
                       },
-                      "id": 6052,
+                      "id": 6060,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1718,18 +1718,18 @@
                       "typeString": "bool"
                     }
                   },
-                  "id": 6069,
+                  "id": 6077,
                   "initializationExpression": {
                     "assignments": [
-                      6047
+                      6055
                     ],
                     "declarations": [
                       {
                         "constant": false,
-                        "id": 6047,
+                        "id": 6055,
                         "name": "i",
                         "nodeType": "VariableDeclaration",
-                        "scope": 6069,
+                        "scope": 6077,
                         "src": "1123:6:11",
                         "stateVariable": false,
                         "storageLocation": "default",
@@ -1738,7 +1738,7 @@
                           "typeString": "uint256"
                         },
                         "typeName": {
-                          "id": 6046,
+                          "id": 6054,
                           "name": "uint",
                           "nodeType": "ElementaryTypeName",
                           "src": "1123:4:11",
@@ -1751,11 +1751,11 @@
                         "visibility": "internal"
                       }
                     ],
-                    "id": 6049,
+                    "id": 6057,
                     "initialValue": {
                       "argumentTypes": null,
                       "hexValue": "30",
-                      "id": 6048,
+                      "id": 6056,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -1776,7 +1776,7 @@
                   "loopExpression": {
                     "expression": {
                       "argumentTypes": null,
-                      "id": 6055,
+                      "id": 6063,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1787,11 +1787,11 @@
                       "src": "1152:3:11",
                       "subExpression": {
                         "argumentTypes": null,
-                        "id": 6054,
+                        "id": 6062,
                         "name": "i",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 6047,
+                        "referencedDeclaration": 6055,
                         "src": "1152:1:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -1803,7 +1803,7 @@
                         "typeString": "uint256"
                       }
                     },
-                    "id": 6056,
+                    "id": 6064,
                     "nodeType": "ExpressionStatement",
                     "src": "1152:3:11"
                   },
@@ -1816,11 +1816,11 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 6073,
+                        "id": 6081,
                         "name": "_owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 5998,
+                        "referencedDeclaration": 6006,
                         "src": "1313:6:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -1833,7 +1833,7 @@
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
                         },
-                        "id": 6081,
+                        "id": 6089,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1843,11 +1843,11 @@
                           "arguments": [
                             {
                               "argumentTypes": null,
-                              "id": 6076,
+                              "id": 6084,
                               "name": "_owner",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 5998,
+                              "referencedDeclaration": 6006,
                               "src": "1356:6:11",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_address",
@@ -1864,18 +1864,18 @@
                             ],
                             "expression": {
                               "argumentTypes": null,
-                              "id": 6074,
+                              "id": 6082,
                               "name": "accountInstance",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 5944,
+                              "referencedDeclaration": 5952,
                               "src": "1322:15:11",
                               "typeDescriptions": {
                                 "typeIdentifier": "t_contract$_Account_$783",
                                 "typeString": "contract Account"
                               }
                             },
-                            "id": 6075,
+                            "id": 6083,
                             "isConstant": false,
                             "isLValue": false,
                             "isPure": false,
@@ -1889,7 +1889,7 @@
                               "typeString": "function (address) view external returns (uint256)"
                             }
                           },
-                          "id": 6077,
+                          "id": 6085,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
@@ -1911,18 +1911,18 @@
                             "typeIdentifier": "t_uint256",
                             "typeString": "uint256"
                           },
-                          "id": 6080,
+                          "id": 6088,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": false,
                           "lValueRequested": false,
                           "leftExpression": {
                             "argumentTypes": null,
-                            "id": 6078,
+                            "id": 6086,
                             "name": "periodCounts",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 6031,
+                            "referencedDeclaration": 6039,
                             "src": "1366:12:11",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -1933,11 +1933,11 @@
                           "operator": "*",
                           "rightExpression": {
                             "argumentTypes": null,
-                            "id": 6079,
+                            "id": 6087,
                             "name": "produceAbilitySum",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 6043,
+                            "referencedDeclaration": 6051,
                             "src": "1381:17:11",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
@@ -1970,18 +1970,18 @@
                       ],
                       "expression": {
                         "argumentTypes": null,
-                        "id": 6070,
+                        "id": 6078,
                         "name": "accountInstance",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 5944,
+                        "referencedDeclaration": 5952,
                         "src": "1279:15:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_contract$_Account_$783",
                           "typeString": "contract Account"
                         }
                       },
-                      "id": 6072,
+                      "id": 6080,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -1995,7 +1995,7 @@
                         "typeString": "function (address,uint256) external"
                       }
                     },
-                    "id": 6082,
+                    "id": 6090,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2009,14 +2009,14 @@
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 6083,
+                  "id": 6091,
                   "nodeType": "ExpressionStatement",
                   "src": "1279:120:11"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 6090,
+                    "id": 6098,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -2025,25 +2025,25 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 6084,
+                        "id": 6092,
                         "name": "ownerWoodProduceTime",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 5970,
+                        "referencedDeclaration": 5978,
                         "src": "1409:20:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_mapping$_t_address_$_t_uint256_$",
                           "typeString": "mapping(address => uint256)"
                         }
                       },
-                      "id": 6086,
+                      "id": 6094,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 6085,
+                        "id": 6093,
                         "name": "_owner",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 5998,
+                        "referencedDeclaration": 6006,
                         "src": "1430:6:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
@@ -2069,7 +2069,7 @@
                         "typeIdentifier": "t_uint256",
                         "typeString": "uint256"
                       },
-                      "id": 6089,
+                      "id": 6097,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": false,
@@ -2077,7 +2077,7 @@
                       "leftExpression": {
                         "argumentTypes": null,
                         "hexValue": "3130",
-                        "id": 6087,
+                        "id": 6095,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
@@ -2096,11 +2096,11 @@
                       "operator": "*",
                       "rightExpression": {
                         "argumentTypes": null,
-                        "id": 6088,
+                        "id": 6096,
                         "name": "periodCounts",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 6031,
+                        "referencedDeclaration": 6039,
                         "src": "1446:12:11",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
@@ -2119,29 +2119,29 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 6091,
+                  "id": 6099,
                   "nodeType": "ExpressionStatement",
                   "src": "1409:49:11"
                 }
               ]
             },
             "documentation": null,
-            "id": 6093,
+            "id": 6101,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "_updateProduceWood",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 5999,
+              "id": 6007,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 5998,
+                  "id": 6006,
                   "name": "_owner",
                   "nodeType": "VariableDeclaration",
-                  "scope": 6093,
+                  "scope": 6101,
                   "src": "719:14:11",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -2150,7 +2150,7 @@
                     "typeString": "address"
                   },
                   "typeName": {
-                    "id": 5997,
+                    "id": 6005,
                     "name": "address",
                     "nodeType": "ElementaryTypeName",
                     "src": "719:7:11",
@@ -2167,19 +2167,19 @@
               "src": "718:16:11"
             },
             "returnParameters": {
-              "id": 6000,
+              "id": 6008,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "742:0:11"
             },
-            "scope": 6094,
+            "scope": 6102,
             "src": "691:774:11",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 6095,
+        "scope": 6103,
         "src": "92:1375:11"
       }
     ],
@@ -2190,7 +2190,7 @@
       "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/Sawmill.sol",
       "exportedSymbols": {
         "Sawmill": [
-          6094
+          6102
         ]
       }
     },
@@ -2207,37 +2207,37 @@
             ".0"
           ]
         },
-        "id": 5937,
+        "id": 5945,
         "name": "PragmaDirective",
         "src": "0:32:11"
       },
       {
         "attributes": {
-          "SourceUnit": 5936,
+          "SourceUnit": 5944,
           "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/SafeMath.sol",
           "file": "./SafeMath.sol",
-          "scope": 6095,
+          "scope": 6103,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 5938,
+        "id": 5946,
         "name": "ImportDirective",
         "src": "34:24:11"
       },
       {
         "attributes": {
-          "SourceUnit": 3455,
+          "SourceUnit": 3463,
           "absolutePath": "/Users/seanwang0823/NMLab_Final/contracts/BuildingFactory.sol",
           "file": "./BuildingFactory.sol",
-          "scope": 6095,
+          "scope": 6103,
           "symbolAliases": [
             null
           ],
           "unitAlias": ""
         },
-        "id": 5939,
+        "id": 5947,
         "name": "ImportDirective",
         "src": "59:31:11"
       },
@@ -2253,10 +2253,10 @@
           "documentation": null,
           "fullyImplemented": true,
           "linearizedBaseContracts": [
-            6094
+            6102
           ],
           "name": "Sawmill",
-          "scope": 6095
+          "scope": 6103
         },
         "children": [
           {
@@ -2265,10 +2265,10 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "SafeMath",
-                  "referencedDeclaration": 5935,
+                  "referencedDeclaration": 5943,
                   "type": "library SafeMath"
                 },
-                "id": 5940,
+                "id": 5948,
                 "name": "UserDefinedTypeName",
                 "src": "126:8:11"
               },
@@ -2277,12 +2277,12 @@
                   "name": "uint",
                   "type": "uint256"
                 },
-                "id": 5941,
+                "id": 5949,
                 "name": "ElementaryTypeName",
                 "src": "139:4:11"
               }
             ],
-            "id": 5942,
+            "id": 5950,
             "name": "UsingForDirective",
             "src": "120:24:11"
           },
@@ -2290,7 +2290,7 @@
             "attributes": {
               "constant": false,
               "name": "accountInstance",
-              "scope": 6094,
+              "scope": 6102,
               "stateVariable": true,
               "storageLocation": "default",
               "type": "contract Account",
@@ -2305,12 +2305,12 @@
                   "referencedDeclaration": 783,
                   "type": "contract Account"
                 },
-                "id": 5943,
+                "id": 5951,
                 "name": "UserDefinedTypeName",
                 "src": "154:7:11"
               }
             ],
-            "id": 5944,
+            "id": 5952,
             "name": "VariableDeclaration",
             "src": "154:23:11"
           },
@@ -2318,7 +2318,7 @@
             "attributes": {
               "constant": false,
               "name": "buildingInstance",
-              "scope": 6094,
+              "scope": 6102,
               "stateVariable": true,
               "storageLocation": "default",
               "type": "contract BuildingFactory",
@@ -2330,15 +2330,15 @@
                 "attributes": {
                   "contractScope": null,
                   "name": "BuildingFactory",
-                  "referencedDeclaration": 3454,
+                  "referencedDeclaration": 3462,
                   "type": "contract BuildingFactory"
                 },
-                "id": 5945,
+                "id": 5953,
                 "name": "UserDefinedTypeName",
                 "src": "183:15:11"
               }
             ],
-            "id": 5946,
+            "id": 5954,
             "name": "VariableDeclaration",
             "src": "183:32:11"
           },
@@ -2352,7 +2352,7 @@
                 null
               ],
               "name": "",
-              "scope": 6094,
+              "scope": 6102,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -2364,7 +2364,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "_account_address",
-                      "scope": 5966,
+                      "scope": 5974,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -2378,12 +2378,12 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 5947,
+                        "id": 5955,
                         "name": "ElementaryTypeName",
                         "src": "233:7:11"
                       }
                     ],
-                    "id": 5948,
+                    "id": 5956,
                     "name": "VariableDeclaration",
                     "src": "233:24:11"
                   },
@@ -2391,7 +2391,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "_building_address",
-                      "scope": 5966,
+                      "scope": 5974,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -2405,17 +2405,17 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 5949,
+                        "id": 5957,
                         "name": "ElementaryTypeName",
                         "src": "259:7:11"
                       }
                     ],
-                    "id": 5950,
+                    "id": 5958,
                     "name": "VariableDeclaration",
                     "src": "259:25:11"
                   }
                 ],
-                "id": 5951,
+                "id": 5959,
                 "name": "ParameterList",
                 "src": "232:53:11"
               },
@@ -2426,7 +2426,7 @@
                   ]
                 },
                 "children": [],
-                "id": 5952,
+                "id": 5960,
                 "name": "ParameterList",
                 "src": "293:0:11"
               },
@@ -2451,11 +2451,11 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 5944,
+                              "referencedDeclaration": 5952,
                               "type": "contract Account",
                               "value": "accountInstance"
                             },
-                            "id": 5953,
+                            "id": 5961,
                             "name": "Identifier",
                             "src": "303:15:11"
                           },
@@ -2489,7 +2489,7 @@
                                   "type": "type(contract Account)",
                                   "value": "Account"
                                 },
-                                "id": 5954,
+                                "id": 5962,
                                 "name": "Identifier",
                                 "src": "321:7:11"
                               },
@@ -2499,26 +2499,26 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 5948,
+                                  "referencedDeclaration": 5956,
                                   "type": "address",
                                   "value": "_account_address"
                                 },
-                                "id": 5955,
+                                "id": 5963,
                                 "name": "Identifier",
                                 "src": "329:16:11"
                               }
                             ],
-                            "id": 5956,
+                            "id": 5964,
                             "name": "FunctionCall",
                             "src": "321:25:11"
                           }
                         ],
-                        "id": 5957,
+                        "id": 5965,
                         "name": "Assignment",
                         "src": "303:43:11"
                       }
                     ],
-                    "id": 5958,
+                    "id": 5966,
                     "name": "ExpressionStatement",
                     "src": "303:43:11"
                   },
@@ -2541,11 +2541,11 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 5946,
+                              "referencedDeclaration": 5954,
                               "type": "contract BuildingFactory",
                               "value": "buildingInstance"
                             },
-                            "id": 5959,
+                            "id": 5967,
                             "name": "Identifier",
                             "src": "356:16:11"
                           },
@@ -2575,11 +2575,11 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 3454,
+                                  "referencedDeclaration": 3462,
                                   "type": "type(contract BuildingFactory)",
                                   "value": "BuildingFactory"
                                 },
-                                "id": 5960,
+                                "id": 5968,
                                 "name": "Identifier",
                                 "src": "375:15:11"
                               },
@@ -2589,36 +2589,36 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 5950,
+                                  "referencedDeclaration": 5958,
                                   "type": "address",
                                   "value": "_building_address"
                                 },
-                                "id": 5961,
+                                "id": 5969,
                                 "name": "Identifier",
                                 "src": "391:17:11"
                               }
                             ],
-                            "id": 5962,
+                            "id": 5970,
                             "name": "FunctionCall",
                             "src": "375:34:11"
                           }
                         ],
-                        "id": 5963,
+                        "id": 5971,
                         "name": "Assignment",
                         "src": "356:53:11"
                       }
                     ],
-                    "id": 5964,
+                    "id": 5972,
                     "name": "ExpressionStatement",
                     "src": "356:53:11"
                   }
                 ],
-                "id": 5965,
+                "id": 5973,
                 "name": "Block",
                 "src": "293:123:11"
               }
             ],
-            "id": 5966,
+            "id": 5974,
             "name": "FunctionDefinition",
             "src": "221:195:11"
           },
@@ -2626,7 +2626,7 @@
             "attributes": {
               "constant": false,
               "name": "ownerWoodProduceTime",
-              "scope": 6094,
+              "scope": 6102,
               "stateVariable": true,
               "storageLocation": "default",
               "type": "mapping(address => uint256)",
@@ -2644,7 +2644,7 @@
                       "name": "address",
                       "type": "address"
                     },
-                    "id": 5967,
+                    "id": 5975,
                     "name": "ElementaryTypeName",
                     "src": "432:7:11"
                   },
@@ -2653,17 +2653,17 @@
                       "name": "uint",
                       "type": "uint256"
                     },
-                    "id": 5968,
+                    "id": 5976,
                     "name": "ElementaryTypeName",
                     "src": "443:4:11"
                   }
                 ],
-                "id": 5969,
+                "id": 5977,
                 "name": "Mapping",
                 "src": "423:25:11"
               }
             ],
-            "id": 5970,
+            "id": 5978,
             "name": "VariableDeclaration",
             "src": "423:53:11"
           },
@@ -2671,7 +2671,7 @@
             "attributes": {
               "constant": false,
               "name": "produceWoodAbility",
-              "scope": 6094,
+              "scope": 6102,
               "stateVariable": true,
               "storageLocation": "default",
               "type": "uint256",
@@ -2683,7 +2683,7 @@
                   "name": "uint",
                   "type": "uint256"
                 },
-                "id": 5971,
+                "id": 5979,
                 "name": "ElementaryTypeName",
                 "src": "482:4:11"
               },
@@ -2700,12 +2700,12 @@
                   "type": "int_const 1",
                   "value": "1"
                 },
-                "id": 5972,
+                "id": 5980,
                 "name": "Literal",
                 "src": "508:1:11"
               }
             ],
-            "id": 5973,
+            "id": 5981,
             "name": "VariableDeclaration",
             "src": "482:27:11"
           },
@@ -2719,7 +2719,7 @@
                 null
               ],
               "name": "createSawmill",
-              "scope": 6094,
+              "scope": 6102,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -2731,7 +2731,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "_x",
-                      "scope": 5996,
+                      "scope": 6004,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -2744,12 +2744,12 @@
                           "name": "uint",
                           "type": "uint256"
                         },
-                        "id": 5974,
+                        "id": 5982,
                         "name": "ElementaryTypeName",
                         "src": "539:4:11"
                       }
                     ],
-                    "id": 5975,
+                    "id": 5983,
                     "name": "VariableDeclaration",
                     "src": "539:7:11"
                   },
@@ -2757,7 +2757,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "_y",
-                      "scope": 5996,
+                      "scope": 6004,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "uint256",
@@ -2770,17 +2770,17 @@
                           "name": "uint",
                           "type": "uint256"
                         },
-                        "id": 5976,
+                        "id": 5984,
                         "name": "ElementaryTypeName",
                         "src": "548:4:11"
                       }
                     ],
-                    "id": 5977,
+                    "id": 5985,
                     "name": "VariableDeclaration",
                     "src": "548:7:11"
                   }
                 ],
-                "id": 5978,
+                "id": 5986,
                 "name": "ParameterList",
                 "src": "538:18:11"
               },
@@ -2791,7 +2791,7 @@
                   ]
                 },
                 "children": [],
-                "id": 5979,
+                "id": 5987,
                 "name": "ParameterList",
                 "src": "564:0:11"
               },
@@ -2839,7 +2839,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "_createBuilding",
-                              "referencedDeclaration": 2742,
+                              "referencedDeclaration": 2750,
                               "type": "function (address,string memory,uint256,uint256) external returns (uint256)"
                             },
                             "children": [
@@ -2849,16 +2849,16 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 5946,
+                                  "referencedDeclaration": 5954,
                                   "type": "contract BuildingFactory",
                                   "value": "buildingInstance"
                                 },
-                                "id": 5980,
+                                "id": 5988,
                                 "name": "Identifier",
                                 "src": "574:16:11"
                               }
                             ],
-                            "id": 5982,
+                            "id": 5990,
                             "name": "MemberAccess",
                             "src": "574:32:11"
                           },
@@ -2880,16 +2880,16 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 7780,
+                                  "referencedDeclaration": 7788,
                                   "type": "msg",
                                   "value": "msg"
                                 },
-                                "id": 5983,
+                                "id": 5991,
                                 "name": "Identifier",
                                 "src": "607:3:11"
                               }
                             ],
-                            "id": 5984,
+                            "id": 5992,
                             "name": "MemberAccess",
                             "src": "607:10:11"
                           },
@@ -2906,7 +2906,7 @@
                               "type": "literal_string \"Sawmill\"",
                               "value": "Sawmill"
                             },
-                            "id": 5985,
+                            "id": 5993,
                             "name": "Literal",
                             "src": "619:9:11"
                           },
@@ -2916,11 +2916,11 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 5975,
+                              "referencedDeclaration": 5983,
                               "type": "uint256",
                               "value": "_x"
                             },
-                            "id": 5986,
+                            "id": 5994,
                             "name": "Identifier",
                             "src": "630:2:11"
                           },
@@ -2930,21 +2930,21 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 5977,
+                              "referencedDeclaration": 5985,
                               "type": "uint256",
                               "value": "_y"
                             },
-                            "id": 5987,
+                            "id": 5995,
                             "name": "Identifier",
                             "src": "634:2:11"
                           }
                         ],
-                        "id": 5988,
+                        "id": 5996,
                         "name": "FunctionCall",
                         "src": "574:63:11"
                       }
                     ],
-                    "id": 5989,
+                    "id": 5997,
                     "name": "ExpressionStatement",
                     "src": "574:63:11"
                   },
@@ -2976,11 +2976,11 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 6093,
+                              "referencedDeclaration": 6101,
                               "type": "function (address)",
                               "value": "_updateProduceWood"
                             },
-                            "id": 5990,
+                            "id": 5998,
                             "name": "Identifier",
                             "src": "647:18:11"
                           },
@@ -3002,36 +3002,36 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 7780,
+                                  "referencedDeclaration": 7788,
                                   "type": "msg",
                                   "value": "msg"
                                 },
-                                "id": 5991,
+                                "id": 5999,
                                 "name": "Identifier",
                                 "src": "666:3:11"
                               }
                             ],
-                            "id": 5992,
+                            "id": 6000,
                             "name": "MemberAccess",
                             "src": "666:10:11"
                           }
                         ],
-                        "id": 5993,
+                        "id": 6001,
                         "name": "FunctionCall",
                         "src": "647:30:11"
                       }
                     ],
-                    "id": 5994,
+                    "id": 6002,
                     "name": "ExpressionStatement",
                     "src": "647:30:11"
                   }
                 ],
-                "id": 5995,
+                "id": 6003,
                 "name": "Block",
                 "src": "564:120:11"
               }
             ],
-            "id": 5996,
+            "id": 6004,
             "name": "FunctionDefinition",
             "src": "516:168:11"
           },
@@ -3045,7 +3045,7 @@
                 null
               ],
               "name": "_updateProduceWood",
-              "scope": 6094,
+              "scope": 6102,
               "stateMutability": "nonpayable",
               "superFunction": null,
               "visibility": "public"
@@ -3057,7 +3057,7 @@
                     "attributes": {
                       "constant": false,
                       "name": "_owner",
-                      "scope": 6093,
+                      "scope": 6101,
                       "stateVariable": false,
                       "storageLocation": "default",
                       "type": "address",
@@ -3071,17 +3071,17 @@
                           "stateMutability": "nonpayable",
                           "type": "address"
                         },
-                        "id": 5997,
+                        "id": 6005,
                         "name": "ElementaryTypeName",
                         "src": "719:7:11"
                       }
                     ],
-                    "id": 5998,
+                    "id": 6006,
                     "name": "VariableDeclaration",
                     "src": "719:14:11"
                   }
                 ],
-                "id": 5999,
+                "id": 6007,
                 "name": "ParameterList",
                 "src": "718:16:11"
               },
@@ -3092,7 +3092,7 @@
                   ]
                 },
                 "children": [],
-                "id": 6000,
+                "id": 6008,
                 "name": "ParameterList",
                 "src": "742:0:11"
               },
@@ -3101,7 +3101,7 @@
                   {
                     "attributes": {
                       "assignments": [
-                        6004
+                        6012
                       ]
                     },
                     "children": [
@@ -3109,7 +3109,7 @@
                         "attributes": {
                           "constant": false,
                           "name": "sawmills",
-                          "scope": 6092,
+                          "scope": 6100,
                           "stateVariable": false,
                           "storageLocation": "memory",
                           "type": "uint256[]",
@@ -3128,17 +3128,17 @@
                                   "name": "uint",
                                   "type": "uint256"
                                 },
-                                "id": 6002,
+                                "id": 6010,
                                 "name": "ElementaryTypeName",
                                 "src": "752:4:11"
                               }
                             ],
-                            "id": 6003,
+                            "id": 6011,
                             "name": "ArrayTypeName",
                             "src": "752:6:11"
                           }
                         ],
-                        "id": 6004,
+                        "id": 6012,
                         "name": "VariableDeclaration",
                         "src": "752:22:11"
                       },
@@ -3174,7 +3174,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "getSpecificBuildingByOwner",
-                              "referencedDeclaration": 3401,
+                              "referencedDeclaration": 3409,
                               "type": "function (address,string memory) view external returns (uint256[] memory)"
                             },
                             "children": [
@@ -3184,16 +3184,16 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 5946,
+                                  "referencedDeclaration": 5954,
                                   "type": "contract BuildingFactory",
                                   "value": "buildingInstance"
                                 },
-                                "id": 6005,
+                                "id": 6013,
                                 "name": "Identifier",
                                 "src": "777:16:11"
                               }
                             ],
-                            "id": 6006,
+                            "id": 6014,
                             "name": "MemberAccess",
                             "src": "777:43:11"
                           },
@@ -3203,11 +3203,11 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 5998,
+                              "referencedDeclaration": 6006,
                               "type": "address",
                               "value": "_owner"
                             },
-                            "id": 6007,
+                            "id": 6015,
                             "name": "Identifier",
                             "src": "821:6:11"
                           },
@@ -3224,17 +3224,17 @@
                               "type": "literal_string \"Sawmill\"",
                               "value": "Sawmill"
                             },
-                            "id": 6008,
+                            "id": 6016,
                             "name": "Literal",
                             "src": "829:9:11"
                           }
                         ],
-                        "id": 6009,
+                        "id": 6017,
                         "name": "FunctionCall",
                         "src": "777:62:11"
                       }
                     ],
-                    "id": 6010,
+                    "id": 6018,
                     "name": "VariableDeclarationStatement",
                     "src": "752:87:11"
                   },
@@ -3289,11 +3289,11 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 5970,
+                                      "referencedDeclaration": 5978,
                                       "type": "mapping(address => uint256)",
                                       "value": "ownerWoodProduceTime"
                                     },
-                                    "id": 6011,
+                                    "id": 6019,
                                     "name": "Identifier",
                                     "src": "853:20:11"
                                   },
@@ -3303,16 +3303,16 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 5998,
+                                      "referencedDeclaration": 6006,
                                       "type": "address",
                                       "value": "_owner"
                                     },
-                                    "id": 6012,
+                                    "id": 6020,
                                     "name": "Identifier",
                                     "src": "874:6:11"
                                   }
                                 ],
-                                "id": 6013,
+                                "id": 6021,
                                 "name": "IndexAccess",
                                 "src": "853:28:11"
                               },
@@ -3329,12 +3329,12 @@
                                   "type": "int_const 0",
                                   "value": "0"
                                 },
-                                "id": 6014,
+                                "id": 6022,
                                 "name": "Literal",
                                 "src": "885:1:11"
                               }
                             ],
-                            "id": 6015,
+                            "id": 6023,
                             "name": "BinaryOperation",
                             "src": "853:33:11"
                           },
@@ -3371,16 +3371,16 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 6004,
+                                      "referencedDeclaration": 6012,
                                       "type": "uint256[] memory",
                                       "value": "sawmills"
                                     },
-                                    "id": 6016,
+                                    "id": 6024,
                                     "name": "Identifier",
                                     "src": "890:8:11"
                                   }
                                 ],
-                                "id": 6017,
+                                "id": 6025,
                                 "name": "MemberAccess",
                                 "src": "890:15:11"
                               },
@@ -3397,17 +3397,17 @@
                                   "type": "int_const 0",
                                   "value": "0"
                                 },
-                                "id": 6018,
+                                "id": 6026,
                                 "name": "Literal",
                                 "src": "909:1:11"
                               }
                             ],
-                            "id": 6019,
+                            "id": 6027,
                             "name": "BinaryOperation",
                             "src": "890:20:11"
                           }
                         ],
-                        "id": 6020,
+                        "id": 6028,
                         "name": "BinaryOperation",
                         "src": "853:57:11"
                       },
@@ -3442,11 +3442,11 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 5970,
+                                          "referencedDeclaration": 5978,
                                           "type": "mapping(address => uint256)",
                                           "value": "ownerWoodProduceTime"
                                         },
-                                        "id": 6021,
+                                        "id": 6029,
                                         "name": "Identifier",
                                         "src": "926:20:11"
                                       },
@@ -3456,16 +3456,16 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 5998,
+                                          "referencedDeclaration": 6006,
                                           "type": "address",
                                           "value": "_owner"
                                         },
-                                        "id": 6022,
+                                        "id": 6030,
                                         "name": "Identifier",
                                         "src": "947:6:11"
                                       }
                                     ],
-                                    "id": 6023,
+                                    "id": 6031,
                                     "name": "IndexAccess",
                                     "src": "926:28:11"
                                   },
@@ -3475,47 +3475,47 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 7782,
+                                      "referencedDeclaration": 7790,
                                       "type": "uint256",
                                       "value": "now"
                                     },
-                                    "id": 6024,
+                                    "id": 6032,
                                     "name": "Identifier",
                                     "src": "957:3:11"
                                   }
                                 ],
-                                "id": 6025,
+                                "id": 6033,
                                 "name": "Assignment",
                                 "src": "926:34:11"
                               }
                             ],
-                            "id": 6026,
+                            "id": 6034,
                             "name": "ExpressionStatement",
                             "src": "926:34:11"
                           },
                           {
                             "attributes": {
                               "expression": null,
-                              "functionReturnParameters": 6000
+                              "functionReturnParameters": 6008
                             },
-                            "id": 6027,
+                            "id": 6035,
                             "name": "Return",
                             "src": "974:7:11"
                           }
                         ],
-                        "id": 6028,
+                        "id": 6036,
                         "name": "Block",
                         "src": "912:79:11"
                       }
                     ],
-                    "id": 6029,
+                    "id": 6037,
                     "name": "IfStatement",
                     "src": "849:142:11"
                   },
                   {
                     "attributes": {
                       "assignments": [
-                        6031
+                        6039
                       ]
                     },
                     "children": [
@@ -3523,7 +3523,7 @@
                         "attributes": {
                           "constant": false,
                           "name": "periodCounts",
-                          "scope": 6092,
+                          "scope": 6100,
                           "stateVariable": false,
                           "storageLocation": "default",
                           "type": "uint256",
@@ -3536,12 +3536,12 @@
                               "name": "uint",
                               "type": "uint256"
                             },
-                            "id": 6030,
+                            "id": 6038,
                             "name": "ElementaryTypeName",
                             "src": "1000:4:11"
                           }
                         ],
-                        "id": 6031,
+                        "id": 6039,
                         "name": "VariableDeclaration",
                         "src": "1000:17:11"
                       },
@@ -3573,7 +3573,7 @@
                               "isPure": false,
                               "lValueRequested": false,
                               "member_name": "div",
-                              "referencedDeclaration": 5868,
+                              "referencedDeclaration": 5876,
                               "type": "function (uint256,uint256) pure returns (uint256)"
                             },
                             "children": [
@@ -3609,11 +3609,11 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 7782,
+                                          "referencedDeclaration": 7790,
                                           "type": "uint256",
                                           "value": "now"
                                         },
-                                        "id": 6032,
+                                        "id": 6040,
                                         "name": "Identifier",
                                         "src": "1021:3:11"
                                       },
@@ -3633,11 +3633,11 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 5970,
+                                              "referencedDeclaration": 5978,
                                               "type": "mapping(address => uint256)",
                                               "value": "ownerWoodProduceTime"
                                             },
-                                            "id": 6033,
+                                            "id": 6041,
                                             "name": "Identifier",
                                             "src": "1027:20:11"
                                           },
@@ -3647,31 +3647,31 @@
                                               "overloadedDeclarations": [
                                                 null
                                               ],
-                                              "referencedDeclaration": 5998,
+                                              "referencedDeclaration": 6006,
                                               "type": "address",
                                               "value": "_owner"
                                             },
-                                            "id": 6034,
+                                            "id": 6042,
                                             "name": "Identifier",
                                             "src": "1048:6:11"
                                           }
                                         ],
-                                        "id": 6035,
+                                        "id": 6043,
                                         "name": "IndexAccess",
                                         "src": "1027:28:11"
                                       }
                                     ],
-                                    "id": 6036,
+                                    "id": 6044,
                                     "name": "BinaryOperation",
                                     "src": "1021:34:11"
                                   }
                                 ],
-                                "id": 6037,
+                                "id": 6045,
                                 "name": "TupleExpression",
                                 "src": "1020:36:11"
                               }
                             ],
-                            "id": 6038,
+                            "id": 6046,
                             "name": "MemberAccess",
                             "src": "1020:40:11"
                           },
@@ -3688,24 +3688,24 @@
                               "type": "int_const 10",
                               "value": "10"
                             },
-                            "id": 6039,
+                            "id": 6047,
                             "name": "Literal",
                             "src": "1061:10:11"
                           }
                         ],
-                        "id": 6040,
+                        "id": 6048,
                         "name": "FunctionCall",
                         "src": "1020:52:11"
                       }
                     ],
-                    "id": 6041,
+                    "id": 6049,
                     "name": "VariableDeclarationStatement",
                     "src": "1000:72:11"
                   },
                   {
                     "attributes": {
                       "assignments": [
-                        6043
+                        6051
                       ]
                     },
                     "children": [
@@ -3713,7 +3713,7 @@
                         "attributes": {
                           "constant": false,
                           "name": "produceAbilitySum",
-                          "scope": 6092,
+                          "scope": 6100,
                           "stateVariable": false,
                           "storageLocation": "default",
                           "type": "uint256",
@@ -3726,12 +3726,12 @@
                               "name": "uint",
                               "type": "uint256"
                             },
-                            "id": 6042,
+                            "id": 6050,
                             "name": "ElementaryTypeName",
                             "src": "1082:4:11"
                           }
                         ],
-                        "id": 6043,
+                        "id": 6051,
                         "name": "VariableDeclaration",
                         "src": "1082:22:11"
                       },
@@ -3748,12 +3748,12 @@
                           "type": "int_const 0",
                           "value": "0"
                         },
-                        "id": 6044,
+                        "id": 6052,
                         "name": "Literal",
                         "src": "1107:1:11"
                       }
                     ],
-                    "id": 6045,
+                    "id": 6053,
                     "name": "VariableDeclarationStatement",
                     "src": "1082:26:11"
                   },
@@ -3762,7 +3762,7 @@
                       {
                         "attributes": {
                           "assignments": [
-                            6047
+                            6055
                           ]
                         },
                         "children": [
@@ -3770,7 +3770,7 @@
                             "attributes": {
                               "constant": false,
                               "name": "i",
-                              "scope": 6069,
+                              "scope": 6077,
                               "stateVariable": false,
                               "storageLocation": "default",
                               "type": "uint256",
@@ -3783,12 +3783,12 @@
                                   "name": "uint",
                                   "type": "uint256"
                                 },
-                                "id": 6046,
+                                "id": 6054,
                                 "name": "ElementaryTypeName",
                                 "src": "1123:4:11"
                               }
                             ],
-                            "id": 6047,
+                            "id": 6055,
                             "name": "VariableDeclaration",
                             "src": "1123:6:11"
                           },
@@ -3805,12 +3805,12 @@
                               "type": "int_const 0",
                               "value": "0"
                             },
-                            "id": 6048,
+                            "id": 6056,
                             "name": "Literal",
                             "src": "1130:1:11"
                           }
                         ],
-                        "id": 6049,
+                        "id": 6057,
                         "name": "VariableDeclarationStatement",
                         "src": "1123:8:11"
                       },
@@ -3835,11 +3835,11 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 6047,
+                              "referencedDeclaration": 6055,
                               "type": "uint256",
                               "value": "i"
                             },
-                            "id": 6050,
+                            "id": 6058,
                             "name": "Identifier",
                             "src": "1133:1:11"
                           },
@@ -3861,21 +3861,21 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 6004,
+                                  "referencedDeclaration": 6012,
                                   "type": "uint256[] memory",
                                   "value": "sawmills"
                                 },
-                                "id": 6051,
+                                "id": 6059,
                                 "name": "Identifier",
                                 "src": "1135:8:11"
                               }
                             ],
-                            "id": 6052,
+                            "id": 6060,
                             "name": "MemberAccess",
                             "src": "1135:15:11"
                           }
                         ],
-                        "id": 6053,
+                        "id": 6061,
                         "name": "BinaryOperation",
                         "src": "1133:17:11"
                       },
@@ -3899,21 +3899,21 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 6047,
+                                  "referencedDeclaration": 6055,
                                   "type": "uint256",
                                   "value": "i"
                                 },
-                                "id": 6054,
+                                "id": 6062,
                                 "name": "Identifier",
                                 "src": "1152:1:11"
                               }
                             ],
-                            "id": 6055,
+                            "id": 6063,
                             "name": "UnaryOperation",
                             "src": "1152:3:11"
                           }
                         ],
-                        "id": 6056,
+                        "id": 6064,
                         "name": "ExpressionStatement",
                         "src": "1152:3:11"
                       },
@@ -3938,11 +3938,11 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 6043,
+                                      "referencedDeclaration": 6051,
                                       "type": "uint256",
                                       "value": "produceAbilitySum"
                                     },
-                                    "id": 6057,
+                                    "id": 6065,
                                     "name": "Identifier",
                                     "src": "1171:17:11"
                                   },
@@ -3989,7 +3989,7 @@
                                               "isPure": false,
                                               "lValueRequested": false,
                                               "member_name": "getBuildingLevel",
-                                              "referencedDeclaration": 2477,
+                                              "referencedDeclaration": 2485,
                                               "type": "function (uint256) view external returns (uint256)"
                                             },
                                             "children": [
@@ -3999,16 +3999,16 @@
                                                   "overloadedDeclarations": [
                                                     null
                                                   ],
-                                                  "referencedDeclaration": 5946,
+                                                  "referencedDeclaration": 5954,
                                                   "type": "contract BuildingFactory",
                                                   "value": "buildingInstance"
                                                 },
-                                                "id": 6058,
+                                                "id": 6066,
                                                 "name": "Identifier",
                                                 "src": "1192:16:11"
                                               }
                                             ],
-                                            "id": 6059,
+                                            "id": 6067,
                                             "name": "MemberAccess",
                                             "src": "1192:33:11"
                                           },
@@ -4028,11 +4028,11 @@
                                                   "overloadedDeclarations": [
                                                     null
                                                   ],
-                                                  "referencedDeclaration": 6004,
+                                                  "referencedDeclaration": 6012,
                                                   "type": "uint256[] memory",
                                                   "value": "sawmills"
                                                 },
-                                                "id": 6060,
+                                                "id": 6068,
                                                 "name": "Identifier",
                                                 "src": "1226:8:11"
                                               },
@@ -4042,21 +4042,21 @@
                                                   "overloadedDeclarations": [
                                                     null
                                                   ],
-                                                  "referencedDeclaration": 6047,
+                                                  "referencedDeclaration": 6055,
                                                   "type": "uint256",
                                                   "value": "i"
                                                 },
-                                                "id": 6061,
+                                                "id": 6069,
                                                 "name": "Identifier",
                                                 "src": "1235:1:11"
                                               }
                                             ],
-                                            "id": 6062,
+                                            "id": 6070,
                                             "name": "IndexAccess",
                                             "src": "1226:11:11"
                                           }
                                         ],
-                                        "id": 6063,
+                                        "id": 6071,
                                         "name": "FunctionCall",
                                         "src": "1192:46:11"
                                       },
@@ -4066,36 +4066,36 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 5973,
+                                          "referencedDeclaration": 5981,
                                           "type": "uint256",
                                           "value": "produceWoodAbility"
                                         },
-                                        "id": 6064,
+                                        "id": 6072,
                                         "name": "Identifier",
                                         "src": "1241:18:11"
                                       }
                                     ],
-                                    "id": 6065,
+                                    "id": 6073,
                                     "name": "BinaryOperation",
                                     "src": "1192:67:11"
                                   }
                                 ],
-                                "id": 6066,
+                                "id": 6074,
                                 "name": "Assignment",
                                 "src": "1171:88:11"
                               }
                             ],
-                            "id": 6067,
+                            "id": 6075,
                             "name": "ExpressionStatement",
                             "src": "1171:88:11"
                           }
                         ],
-                        "id": 6068,
+                        "id": 6076,
                         "name": "Block",
                         "src": "1157:113:11"
                       }
                     ],
-                    "id": 6069,
+                    "id": 6077,
                     "name": "ForStatement",
                     "src": "1118:152:11"
                   },
@@ -4143,16 +4143,16 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 5944,
+                                  "referencedDeclaration": 5952,
                                   "type": "contract Account",
                                   "value": "accountInstance"
                                 },
-                                "id": 6070,
+                                "id": 6078,
                                 "name": "Identifier",
                                 "src": "1279:15:11"
                               }
                             ],
-                            "id": 6072,
+                            "id": 6080,
                             "name": "MemberAccess",
                             "src": "1279:33:11"
                           },
@@ -4162,11 +4162,11 @@
                               "overloadedDeclarations": [
                                 null
                               ],
-                              "referencedDeclaration": 5998,
+                              "referencedDeclaration": 6006,
                               "type": "address",
                               "value": "_owner"
                             },
-                            "id": 6073,
+                            "id": 6081,
                             "name": "Identifier",
                             "src": "1313:6:11"
                           },
@@ -4223,16 +4223,16 @@
                                           "overloadedDeclarations": [
                                             null
                                           ],
-                                          "referencedDeclaration": 5944,
+                                          "referencedDeclaration": 5952,
                                           "type": "contract Account",
                                           "value": "accountInstance"
                                         },
-                                        "id": 6074,
+                                        "id": 6082,
                                         "name": "Identifier",
                                         "src": "1322:15:11"
                                       }
                                     ],
-                                    "id": 6075,
+                                    "id": 6083,
                                     "name": "MemberAccess",
                                     "src": "1322:33:11"
                                   },
@@ -4242,16 +4242,16 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 5998,
+                                      "referencedDeclaration": 6006,
                                       "type": "address",
                                       "value": "_owner"
                                     },
-                                    "id": 6076,
+                                    "id": 6084,
                                     "name": "Identifier",
                                     "src": "1356:6:11"
                                   }
                                 ],
-                                "id": 6077,
+                                "id": 6085,
                                 "name": "FunctionCall",
                                 "src": "1322:41:11"
                               },
@@ -4276,11 +4276,11 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 6031,
+                                      "referencedDeclaration": 6039,
                                       "type": "uint256",
                                       "value": "periodCounts"
                                     },
-                                    "id": 6078,
+                                    "id": 6086,
                                     "name": "Identifier",
                                     "src": "1366:12:11"
                                   },
@@ -4290,31 +4290,31 @@
                                       "overloadedDeclarations": [
                                         null
                                       ],
-                                      "referencedDeclaration": 6043,
+                                      "referencedDeclaration": 6051,
                                       "type": "uint256",
                                       "value": "produceAbilitySum"
                                     },
-                                    "id": 6079,
+                                    "id": 6087,
                                     "name": "Identifier",
                                     "src": "1381:17:11"
                                   }
                                 ],
-                                "id": 6080,
+                                "id": 6088,
                                 "name": "BinaryOperation",
                                 "src": "1366:32:11"
                               }
                             ],
-                            "id": 6081,
+                            "id": 6089,
                             "name": "BinaryOperation",
                             "src": "1322:76:11"
                           }
                         ],
-                        "id": 6082,
+                        "id": 6090,
                         "name": "FunctionCall",
                         "src": "1279:120:11"
                       }
                     ],
-                    "id": 6083,
+                    "id": 6091,
                     "name": "ExpressionStatement",
                     "src": "1279:120:11"
                   },
@@ -4347,11 +4347,11 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 5970,
+                                  "referencedDeclaration": 5978,
                                   "type": "mapping(address => uint256)",
                                   "value": "ownerWoodProduceTime"
                                 },
-                                "id": 6084,
+                                "id": 6092,
                                 "name": "Identifier",
                                 "src": "1409:20:11"
                               },
@@ -4361,16 +4361,16 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 5998,
+                                  "referencedDeclaration": 6006,
                                   "type": "address",
                                   "value": "_owner"
                                 },
-                                "id": 6085,
+                                "id": 6093,
                                 "name": "Identifier",
                                 "src": "1430:6:11"
                               }
                             ],
-                            "id": 6086,
+                            "id": 6094,
                             "name": "IndexAccess",
                             "src": "1409:28:11"
                           },
@@ -4402,7 +4402,7 @@
                                   "type": "int_const 10",
                                   "value": "10"
                                 },
-                                "id": 6087,
+                                "id": 6095,
                                 "name": "Literal",
                                 "src": "1441:2:11"
                               },
@@ -4412,46 +4412,46 @@
                                   "overloadedDeclarations": [
                                     null
                                   ],
-                                  "referencedDeclaration": 6031,
+                                  "referencedDeclaration": 6039,
                                   "type": "uint256",
                                   "value": "periodCounts"
                                 },
-                                "id": 6088,
+                                "id": 6096,
                                 "name": "Identifier",
                                 "src": "1446:12:11"
                               }
                             ],
-                            "id": 6089,
+                            "id": 6097,
                             "name": "BinaryOperation",
                             "src": "1441:17:11"
                           }
                         ],
-                        "id": 6090,
+                        "id": 6098,
                         "name": "Assignment",
                         "src": "1409:49:11"
                       }
                     ],
-                    "id": 6091,
+                    "id": 6099,
                     "name": "ExpressionStatement",
                     "src": "1409:49:11"
                   }
                 ],
-                "id": 6092,
+                "id": 6100,
                 "name": "Block",
                 "src": "742:723:11"
               }
             ],
-            "id": 6093,
+            "id": 6101,
             "name": "FunctionDefinition",
             "src": "691:774:11"
           }
         ],
-        "id": 6094,
+        "id": 6102,
         "name": "ContractDefinition",
         "src": "92:1375:11"
       }
     ],
-    "id": 6095,
+    "id": 6103,
     "name": "SourceUnit",
     "src": "0:1467:11"
   },
@@ -4705,10 +4705,22 @@
       "links": {},
       "address": "0xA4b38AE94C2F06CAb9C0a8381570FA07C7321B7d",
       "transactionHash": "0x1fd4346756f575e54f0df0d13c3c7b399b24c3039b3121d1c9b1d1f30a5a37dd"
+    },
+    "1624633050556": {
+      "events": {},
+      "links": {},
+      "address": "0x4FF1d33f5F00DdE9204b34e9Db2407ED2ea27191",
+      "transactionHash": "0xa79b273d82ece07c1ccd5eef5e0b5e2acb40b558df1c75bdbd0f7ee084395ec2"
+    },
+    "1624633142512": {
+      "events": {},
+      "links": {},
+      "address": "0xc40C76E1bce6F11bd5Aa1C3f16BEc7D3e9c55835",
+      "transactionHash": "0xf215f41db87d4b18b6c5ae389165a9995500ef2dfb051a9f5610982129ae5154"
     }
   },
   "schemaVersion": "3.4.0",
-  "updatedAt": "2021-06-25T13:53:28.184Z",
+  "updatedAt": "2021-06-25T14:59:16.570Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

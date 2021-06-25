@@ -533,4 +533,9 @@ contract Barrack {
         return SpyInstance.sendSpy(_ownerId, _attackedCastleId);
     }
 
+    function getBattleLog() public returns(string memory){
+        // string memory log = battleLog;
+        return battleLog;
+   }
+
 }
