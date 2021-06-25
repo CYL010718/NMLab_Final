@@ -20,12 +20,12 @@ contract Cannon {
     uint public createCannonTime = 10;
     uint public UpgradeCannonTime = 10;
 
-    uint public cannonHealth = 3;
-    uint public cannonPower = 3;
-    uint public cannonFrequency = 2;
-    uint public cannonArmour = 1;
+    uint public cannonHealth = 100;
+    uint public cannonPower = 100;
+    uint public cannonFrequency = 1;
+    uint public cannonArmour = 0;
     uint public cannonCapacity = 200;
-    uint public cannonSpeed = 3;
+    uint public cannonSpeed = 10;
     
 
     function setCannonLevel(address _owner, uint value) public {

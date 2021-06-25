@@ -20,12 +20,12 @@ contract Protector {
     uint public createProtectorTime = 10;
     uint public UpgradeProtectorTime = 10;
 
-    uint public protectorHealth = 3;
-    uint public protectorPower = 3;
-    uint public protectorFrequency = 2;
-    uint public protectorArmour = 1;
+    uint public protectorHealth = 80;
+    uint public protectorPower = 40;
+    uint public protectorFrequency = 1;
+    uint public protectorArmour = 20;
     uint public protectorCapacity = 200;
-    uint public protectorSpeed = 3;
+    uint public protectorSpeed = 20;
     
 
     function setProtectorLevel(address _owner, uint value) public {

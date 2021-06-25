@@ -19,15 +19,16 @@ contract Soldier {
     mapping (address => uint) public ownerUpgradeSoldierTime;
     uint public createSoldierTime = 10;
     uint public UpgradeSoldierTime = 10;
-
-    uint public soldierHealth = 3;
-    uint public soldierPower = 3;
+    uint public soldierHealth = 50;
+    uint public soldierPower = 30;
     uint public soldierFrequency = 2;
-    uint public soldierArmour = 1;
+    uint public soldierArmour = 10;
     uint public soldierCapacity = 200;
-    uint public soldierSpeed = 3;
+    uint public soldierSpeed = 30;
     
-
+    //for battle function to get other's information
+   
+    //
     function setSoldierLevel(address _owner, uint value) public {
         levelOfSoldier[_owner] = value;
     }
