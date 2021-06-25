@@ -310,7 +310,7 @@ contract Barrack {
         uint effectiveDamage = 0 ;  
         uint requireCulling = 0 ; 
         uint requireKill = 0 ; 
-        */
+        
 
         // 註解部分需要修改，除蟲後改回來
         // 初始化，偽多形性
