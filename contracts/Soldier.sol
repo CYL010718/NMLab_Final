@@ -3,6 +3,8 @@ pragma solidity >=0.4.21 <0.7.0;
 import "./Account.sol";
 
 contract Soldier {
+    
+    using SafeMath for uint;
 
     Account accountInstance;
     constructor(address _account_address) public {
@@ -128,4 +130,41 @@ contract Soldier {
         address attackedCastle = accountInstance.convertCastleToOwner(_attackedCastleId);
         _fight(myCastle, attackedCastle);
     }
+
+    // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
+    function startCreateSoldier(uint number) public returns(uint) {
+        address _owner = msg.sender;
+        if(ownerStartCreateTime[_owner] != 0) return uint(0); // check if there is already creating soldiers
+        bool enoughResource;
+        uint lvOfSoldier;
+        enoughResource = _createSoldier(_owner, number);
+        lvOfSoldier =  levelOfSoldier[_owner];
+        if(enoughResource == false) return uint(0);
+        setStartCreateTime(_owner, uint(now));
+        setCreateSoldierTime(_owner, createSoldierTime * lvOfSoldier * number);
+        return ownerCreateSoldierTime[_owner];
+    }
+
+    function getCreateSoldierTime() public view returns(uint, uint, uint) {
+        return ( ownerStartCreateTime[msg.sender], uint(now) - ownerStartCreateTime[msg.sender], ownerCreateSoldierTime[msg.sender] ) ;
+    }
+
+    // // return 0 if success else return remaining time
+    function updateCreateSoldier(address _owner) public returns(uint) {
+        if (ownerStartCreateTime[_owner] == 0) return 0;
+        if (uint(now) >= ownerStartCreateTime[_owner].add(ownerCreateSoldierTime[_owner])) {
+            uint num;
+            num = ownerCreateSoldierTime[_owner].div( levelOfSoldier[_owner].mul(createSoldierTime) );
+            setNumOfSoldier(_owner, numOfSoldier[_owner] + (num));
+            setStartCreateTime(_owner, 0);
+            setCreateSoldierTime(_owner, 0);
+            _updatePower(_owner);
+            return 0;
+        }
+        else {
+            uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateSoldierTime[_owner]).sub(uint(now));
+            return remainingTime;
+        }
+    }
+
 }

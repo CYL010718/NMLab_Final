@@ -80,7 +80,7 @@ const Quarry = ({ idx, x, y, cellState, contract, account, updateCellState }) =>
               <Header as='h4'>
                 Upgrade progress
               </Header>
-              <Progress progress='percent'  percent={upgradeProgress} indicating />
+              <Progress progress='percent'  percent={upgradeProgress} indicating/>
               <div style={{textAlign: 'center'}}>
                 <Button primary disabled={upgradeProgress !== 100} onClick={() => confirmUpgrade()} >comfirm upgrade</Button>
               </div>

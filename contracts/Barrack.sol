@@ -6,22 +6,31 @@ import "./Soldier.sol";
 import "./Spy.sol";
 import "./Cannon.sol";
 import "./Protector.sol";
+import "./Wall.sol";
 
 contract Barrack {
 
     using SafeMath for uint;
     string battleLog = "戰鬥開始\n" ; 
+
+    mapping (address => uint) public ownerStartMarchTime;
+    mapping (address => uint) public ownerTotalMarchTime;
+
     BuildingFactory buildingInstance;
     Soldier soldierInstance;
     Protector ProtectorInstance;
     Cannon CannonInstance;
     Spy SpyInstance;
-    constructor(address _building_address, address _soldier_address, address _spy_instance, address _cannon_instance, address _protector_instance) public {
+    Account AccountInstance;
+    Wall WallInstance;
+    constructor(address _building_address, address _soldier_address, address _spy_instance, address _cannon_instance, address _protector_instance, address _wall_instance, address _account_instance) public {
         buildingInstance = BuildingFactory(_building_address);
         soldierInstance = Soldier(_soldier_address);
         SpyInstance = Spy(_spy_instance);
         ProtectorInstance = Protector(_protector_instance);
         CannonInstance = Cannon(_cannon_instance);
+        AccountInstance = Account(_account_instance);
+        WallInstance = Wall(_wall_instance);
     }
 
     function createBarrack(uint _x, uint _y) public {
@@ -30,6 +39,7 @@ contract Barrack {
         SpyInstance.setSpyLevel(msg.sender, 1);
         ProtectorInstance.setProtectorLevel(msg.sender, 1);
         CannonInstance.setCannonLevel(msg.sender, 1);
+        WallInstance.setWallLevel(msg.sender, 1);
     }
 
     function concatenate(string memory a, string memory b) public returns(string memory) {
@@ -116,82 +126,44 @@ contract Barrack {
         }
     }
 
-    function getCannonAmount(address _owner) public view returns(uint) {
-        return CannonInstance.getCannonAmount(_owner);
+    // // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
+    
+    function attack(uint _ownerId, uint _attackedCastleId) public {
+        // soldierInstance.attack(_ownerId, _attackedCastleId);
     }
 
-    // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
-    function startCreateCannon(uint number) public returns(uint) {
+    function startMarch(uint _attackedCastleId) public returns(uint) {
         address _owner = msg.sender;
-        if(CannonInstance.ownerStartCreateTime(_owner) != 0) return uint(0); // check if there is already creating Cannons
+        address attackedAddress = AccountInstance.castleToOwner(_attackedCastleId);
+
+        
+        if(ownerStartMarchTime[_owner] != 0) return uint(0); // check if there is already Marching
         bool enoughResource;
-        uint lvOfCannon;
-        enoughResource = CannonInstance._createCannon(_owner, number);
-        lvOfCannon =  CannonInstance.levelOfCannon(_owner);
+        enoughResource = enoughResource = AccountInstance.cost(_owner, 100, uint(0), 100, uint(0), 100);
         if(enoughResource == false) return uint(0);
-        CannonInstance.setStartCreateTime(_owner, uint(now));
-        CannonInstance.setCreateCannonTime(_owner, CannonInstance.createCannonTime() * lvOfCannon * number);
-        return CannonInstance.ownerCreateCannonTime(_owner);
+        ownerStartMarchTime[_owner] = uint(now);
+        ownerTotalMarchTime[_owner] = 20;
+        AccountInstance.setAttackedInfo(attackedAddress, true, _owner, ownerStartMarchTime[_owner], ownerTotalMarchTime[_owner]);
+        return ownerTotalMarchTime[_owner];
     }
 
-    function getCreateCannonTime() public view returns(uint, uint) {
-        return ( now - CannonInstance.ownerStartCreateTime(msg.sender), CannonInstance.ownerCreateCannonTime(msg.sender) ) ;
+    function getMarchTime() public view returns(uint, uint, uint) {
+        return ( ownerStartMarchTime[msg.sender], uint(now) - ownerStartMarchTime[msg.sender], ownerTotalMarchTime[msg.sender] ) ;
     }
 
     // // return 0 if success else return remaining time
-    function updateCreateCannon(address _owner) public returns(uint) {
-        if (CannonInstance.ownerStartCreateTime(_owner) == 0) return 0;
-        if (now >= CannonInstance.ownerStartCreateTime(_owner).add(CannonInstance.ownerCreateCannonTime(_owner))) {
-            uint num;
-            num = CannonInstance.ownerCreateCannonTime(_owner).div(  CannonInstance.levelOfCannon(_owner).mul(CannonInstance.createCannonTime()) );
-            CannonInstance.setNumOfCannon(_owner, CannonInstance.numOfCannon(_owner) + (num));
-            CannonInstance.setStartCreateTime(_owner, 0);
-            CannonInstance.setCreateCannonTime(_owner, 0);
-            CannonInstance._updateCannonPower(_owner);
+    function updateMarch(address _owner) public returns(uint) {
+        if (ownerStartMarchTime[_owner] == 0) return 0;
+        if (uint(now) >= ownerStartMarchTime[_owner].add(ownerTotalMarchTime[_owner])) {
+            // uint num;
+            // num = ownerTotalMarchTime[_owner].div(  MarchInstance.levelOfMarch(_owner).mul(MarchInstance.createMarchTime()) );
+            // MarchInstance.setNumOfMarch(_owner, MarchInstance.numOfMarch(_owner) + (num));
+            ownerStartMarchTime[_owner] = 0;
+            ownerTotalMarchTime[_owner] = 0;
             return 0;
         }
         else {
-            uint remainingTime = (CannonInstance.ownerStartCreateTime(_owner) + CannonInstance.ownerCreateCannonTime(_owner)).sub(now);
-            return remainingTime;
-        }
-    }
-
-    function getProtectorAmount(address _owner) public view returns(uint) {
-        return ProtectorInstance.getProtectorAmount(_owner);
-    }
-
-    // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
-    function startCreateProtector(uint number) public returns(uint) {
-        address _owner = msg.sender;
-        if(ProtectorInstance.ownerStartCreateTime(_owner) != 0) return uint(0); // check if there is already creating Protectors
-        bool enoughResource;
-        uint lvOfProtector;
-        enoughResource = ProtectorInstance._createProtector(_owner, number);
-        lvOfProtector =  ProtectorInstance.levelOfProtector(_owner);
-        if(enoughResource == false) return uint(0);
-        ProtectorInstance.setStartCreateTime(_owner, uint(now));
-        ProtectorInstance.setCreateProtectorTime(_owner, ProtectorInstance.createProtectorTime() * lvOfProtector * number);
-        return ProtectorInstance.ownerCreateProtectorTime(_owner);
-    }
-
-    function getCreateProtectorTime() public view returns(uint, uint) {
-        return ( now - ProtectorInstance.ownerStartCreateTime(msg.sender), ProtectorInstance.ownerCreateProtectorTime(msg.sender) ) ;
-    }
-
-    // // return 0 if success else return remaining time
-    function updateCreateProtector(address _owner) public returns(uint) {
-        if (ProtectorInstance.ownerStartCreateTime(_owner) == 0) return 0;
-        if (now >= ProtectorInstance.ownerStartCreateTime(_owner).add(ProtectorInstance.ownerCreateProtectorTime(_owner))) {
-            uint num;
-            num = ProtectorInstance.ownerCreateProtectorTime(_owner).div(  ProtectorInstance.levelOfProtector(_owner).mul(ProtectorInstance.createProtectorTime()) );
-            ProtectorInstance.setNumOfProtector(_owner, ProtectorInstance.numOfProtector(_owner) + (num));
-            ProtectorInstance.setStartCreateTime(_owner, 0);
-            ProtectorInstance.setCreateProtectorTime(_owner, 0);
-            ProtectorInstance._updateProtectorPower(_owner);
-            return 0;
-        }
-        else {
-            uint remainingTime = (ProtectorInstance.ownerStartCreateTime(_owner) + ProtectorInstance.ownerCreateProtectorTime(_owner)).sub(now);
+            uint remainingTime = (ownerStartMarchTime[_owner] + ownerTotalMarchTime[_owner]).sub(uint(now));
             return remainingTime;
         }
     }
@@ -214,11 +186,114 @@ contract Barrack {
         uint defenderLevel  ; 
         uint defenderHealth ; 
         uint defenderArmour ; 
-        uint defenderInjure  ; 
         uint effectiveDamage  ;  
         uint requireCulling  ; 
         uint requireKill   ; 
     }
+    //fuction battle_army() 一次僅計算單一兩種兵種互打的狀況，回傳剩餘雙方士兵以及受傷士兵血量
+    //attack_id : 進攻者的id
+    //defend_id : 防守者id
+    //attacker/defender_flag  分別用來標示攻擊與被攻擊的兵種 
+    //    守護者:0 神槍手:1 火砲:2
+    //attack_q :本次進攻的士兵數量，進攻後減少但不影響總兵力
+    //defender_q:防守的兵種數量，被進攻後根據損失的數量改變總兵力
+    //injure:用來計算受傷判定
+    function battle_army(address attack_id , address defend_id , uint attacker_flag , uint defender_flag, uint attacker_q, uint defender_q, uint injure ) public returns(uint,uint,uint){
+        battle_info memory info ; 
+        info.attackerLevel = 0 ; 
+        info.defenderLevel = 0 ; 
+
+        if(attacker_flag == 0){
+            info.attackerDamage = 40 + 4 * info.attackerLevel ; 
+            info.attackerFrequency = 1 ; 
+        }else if (attacker_flag == 1 ){
+            info.attackerDamage = 30 + 3 * info.attackerLevel ; 
+            info.attackerFrequency = 2 ; 
+        }else if(attacker_flag ==2){
+            info.attackerDamage = 100 + 10 * info.attackerLevel ; 
+            info.attackerFrequency = 1 ;
+        }
+        if(defender_flag == 0){
+            info.defenderHealth = 80 + 8 * info.defenderLevel ; 
+            info.defenderArmour = 20 + 2 * info.defenderLevel ; 
+        }else if (defender_flag == 1 ){
+            info.defenderHealth = 50 + 5 * info.defenderLevel ; 
+            info.defenderArmour = 10 + 1 * info.defenderLevel ; 
+        }else if(defender_flag ==2){
+            info.defenderHealth = 100 + 10 * info.defenderLevel ; 
+            info.defenderArmour = 0 + 3 * info.defenderLevel ; 
+        }
+        //無效傷害
+        if(info.defenderArmour >= info.attackerDamage){
+            battleLog = concatenate(battleLog,"\n指定兵種護甲過高，進攻者無法造成有效傷害") ; 
+            return (0,defender_q,injure) ; 
+        }else{
+            info.effectiveDamage = (info.attackerDamage - info.defenderArmour) * info.attackerFrequency ; 
+        //  有效傷害
+        //  優先撲殺受傷單位
+            if(injure != info.defenderHealth ){
+                //這兩行可以用ceiling直接變成一行
+                if(injure % info.effectiveDamage == 0 )
+                    info.requireCulling = injure / info.effectiveDamage ; 
+                else    
+                    info.requireCulling = injure / info.effectiveDamage + 1; 
+
+                //可撲殺
+                if(attacker_q >= info.requireCulling){
+                    battleLog = concatenate(battleLog,"\n受傷單位受到擊殺") ; 
+                    attacker_q -= info.requireCulling ;
+                    injure = info.defenderHealth ; 
+                    defender_q -= 1 ; 
+                //不足以撲殺
+                }else{
+                    injure -= attacker_q * info.effectiveDamage ; 
+                    //todo  \n{not_yet_attack}個單位進行攻擊，使受傷單位剩餘{ownSoldierRemain}生命
+                    battleLog = concatenate(battleLog,"\n進攻方全體進行攻擊，使受傷單位剩餘xx生命\n進攻結束") ; 
+                    attacker_q = 0  ;
+                    return(0,defender_q,injure);
+                }
+            }
+            //進行一般進攻判定
+            if(attacker_q == 0){
+                battleLog = concatenate(battleLog,"\n進攻結束") ;
+                return (0,defender_q,injure) ; 
+            }else{
+                if(info.defenderHealth % info.effectiveDamage == 0 )
+                    info.requireKill = info.defenderHealth / info.effectiveDamage ; 
+                else    
+                    info.requireKill = info.defenderHealth / info.effectiveDamage + 1; 
+                //擊殺判定
+                if( attacker_q / info.requireKill != 0 ){
+                    //全殺
+                    if(attacker_q / info.requireKill >= defender_q){
+                        battleLog = concatenate(battleLog,"\n防守方全滅") ;
+                        attacker_q -= info.requireKill * defender_q ; 
+                        defender_q = 0 ; 
+                        return (attacker_q , 0 , info.defenderHealth) ; 
+                    }else{
+                        battleLog = concatenate(battleLog,"\n消滅防守方xx名單位") ;
+                        defender_q -= attacker_q / info.requireKill  ; 
+                        attacker_q %=  info.requireKill  ;
+                    }
+                    if(attacker_q == 0){
+                        battleLog = concatenate(battleLog,"\n進攻結束") ;
+                        return (0,defender_q,info.defenderHealth) ;
+                    }
+                }    
+                //受傷判定
+                injure -= attacker_q * info.effectiveDamage ;
+                battleLog = concatenate(battleLog,"\n防守單位受傷，剩餘xx生命") ; 
+                battleLog = concatenate(battleLog,"\n進攻結束") ;
+                attacker_q = 0 ; 
+                return (attacker_q,defender_q,injure) ; 
+                }
+                
+            }
+
+
+            
+    }
+/*
     function battle_army(address attack_id , address defend_id , uint attacker_flag , uint defender_flag, uint attacker_q, uint defender_q, uint injure ) public returns(uint,uint,uint){
         battle_info memory info ; 
         info.attackerLevel = 0 ; 
@@ -334,7 +409,7 @@ contract Barrack {
 
             
         }
-    }
+    }*/
 
 
 
@@ -452,6 +527,7 @@ contract Barrack {
 
     function sendSpy(uint _ownerId, uint _attackedCastleId) public view returns(bool) {
         //returns TRUE if spy of myCastle > attackedCastle
+        
         return SpyInstance.sendSpy(_ownerId, _attackedCastleId);
     }
 

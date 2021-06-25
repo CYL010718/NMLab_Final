@@ -49,7 +49,7 @@ contract Laboratory {
         ownerLabProduceTime[_owner] += 10 * periodCounts;
     }
 
-        function startUpgradeSoldier() public returns(uint) {
+    function startUpgradeSoldier() public returns(uint) {
         address _owner = msg.sender;
         if(soldierInstance.ownerStartUpgradeTime(_owner) != 0) return uint(0); // check if there is already creating soldiers
         bool enoughResource;
@@ -62,14 +62,14 @@ contract Laboratory {
         return soldierInstance.ownerUpgradeSoldierTime(_owner);
     }
 
-    function getUpgradeSoldierTime() public view returns(uint, uint) {
-        return ( now - soldierInstance.ownerStartUpgradeTime(msg.sender), soldierInstance.ownerUpgradeSoldierTime(msg.sender) ) ;
+    function getUpgradeSoldierTime() public view returns(uint, uint, uint) {
+        return ( soldierInstance.ownerStartUpgradeTime(msg.sender), uint(now) - soldierInstance.ownerStartUpgradeTime(msg.sender), soldierInstance.ownerUpgradeSoldierTime(msg.sender) ) ;
     }
 
     // // return 0 if success else return remaining time
     function updateUpgradeSoldier(address _owner) public returns(uint) {
         if (soldierInstance.ownerStartUpgradeTime(_owner) == 0) return 0;
-        if (now >= soldierInstance.ownerStartUpgradeTime(_owner).add(soldierInstance.ownerUpgradeSoldierTime(_owner))) {
+        if (uint(now) >= soldierInstance.ownerStartUpgradeTime(_owner).add(soldierInstance.ownerUpgradeSoldierTime(_owner))) {
             uint num;
             num = soldierInstance.ownerUpgradeSoldierTime(_owner).div(  soldierInstance.levelOfSoldier(_owner).mul(soldierInstance.UpgradeSoldierTime()) );
             soldierInstance.setNumOfSoldier(_owner, soldierInstance.numOfSoldier(_owner) + (num));
@@ -79,7 +79,7 @@ contract Laboratory {
             return 0;
         }
         else {
-            uint remainingTime = (soldierInstance.ownerStartUpgradeTime(_owner) + soldierInstance.ownerUpgradeSoldierTime(_owner)).sub(now);
+            uint remainingTime = (soldierInstance.ownerStartUpgradeTime(_owner) + soldierInstance.ownerUpgradeSoldierTime(_owner)).sub(uint(now));
             return remainingTime;
         }
     }
@@ -97,14 +97,14 @@ contract Laboratory {
         return ProtectorInstance.ownerUpgradeProtectorTime(_owner);
     }
 
-    function getUpgradeProtectorTime() public view returns(uint, uint) {
-        return ( now - ProtectorInstance.ownerStartUpgradeTime(msg.sender), ProtectorInstance.ownerUpgradeProtectorTime(msg.sender) ) ;
+    function getUpgradeProtectorTime() public view returns(uint, uint, uint) {
+        return ( ProtectorInstance.ownerStartUpgradeTime(msg.sender), uint(now) - ProtectorInstance.ownerStartUpgradeTime(msg.sender), ProtectorInstance.ownerUpgradeProtectorTime(msg.sender) ) ;
     }
 
     // // return 0 if success else return remaining time
     function updateUpgradeProtector(address _owner) public returns(uint) {
         if (ProtectorInstance.ownerStartUpgradeTime(_owner) == 0) return 0;
-        if (now >= ProtectorInstance.ownerStartUpgradeTime(_owner).add(ProtectorInstance.ownerUpgradeProtectorTime(_owner))) {
+        if (uint(now) >= ProtectorInstance.ownerStartUpgradeTime(_owner).add(ProtectorInstance.ownerUpgradeProtectorTime(_owner))) {
             uint num;
             num = ProtectorInstance.ownerUpgradeProtectorTime(_owner).div(  ProtectorInstance.levelOfProtector(_owner).mul(ProtectorInstance.UpgradeProtectorTime()) );
             ProtectorInstance.setNumOfProtector(_owner, ProtectorInstance.numOfProtector(_owner) + (num));
@@ -114,7 +114,7 @@ contract Laboratory {
             return 0;
         }
         else {
-            uint remainingTime = (ProtectorInstance.ownerStartUpgradeTime(_owner) + ProtectorInstance.ownerUpgradeProtectorTime(_owner)).sub(now);
+            uint remainingTime = (ProtectorInstance.ownerStartUpgradeTime(_owner) + ProtectorInstance.ownerUpgradeProtectorTime(_owner)).sub(uint(now));
             return remainingTime;
         }
     }
@@ -132,14 +132,14 @@ contract Laboratory {
         return CannonInstance.ownerUpgradeCannonTime(_owner);
     }
 
-    function getUpgradeCannonTime() public view returns(uint, uint) {
-        return ( now - CannonInstance.ownerStartUpgradeTime(msg.sender), CannonInstance.ownerUpgradeCannonTime(msg.sender) ) ;
+    function getUpgradeCannonTime() public view returns(uint, uint, uint) {
+        return ( CannonInstance.ownerStartUpgradeTime(msg.sender), uint(now) - CannonInstance.ownerStartUpgradeTime(msg.sender), CannonInstance.ownerUpgradeCannonTime(msg.sender) ) ;
     }
 
     // // return 0 if success else return remaining time
     function updateUpgradeCannon(address _owner) public returns(uint) {
         if (CannonInstance.ownerStartUpgradeTime(_owner) == 0) return 0;
-        if (now >= CannonInstance.ownerStartUpgradeTime(_owner).add(CannonInstance.ownerUpgradeCannonTime(_owner))) {
+        if (uint(now) >= CannonInstance.ownerStartUpgradeTime(_owner).add(CannonInstance.ownerUpgradeCannonTime(_owner))) {
             uint num;
             num = CannonInstance.ownerUpgradeCannonTime(_owner).div(  CannonInstance.levelOfCannon(_owner).mul(CannonInstance.UpgradeCannonTime()) );
             CannonInstance.setNumOfCannon(_owner, CannonInstance.numOfCannon(_owner) + (num));
@@ -149,7 +149,7 @@ contract Laboratory {
             return 0;
         }
         else {
-            uint remainingTime = (CannonInstance.ownerStartUpgradeTime(_owner) + CannonInstance.ownerUpgradeCannonTime(_owner)).sub(now);
+            uint remainingTime = (CannonInstance.ownerStartUpgradeTime(_owner) + CannonInstance.ownerUpgradeCannonTime(_owner)).sub(uint(now));
             return remainingTime;
         }
     }
@@ -167,14 +167,14 @@ contract Laboratory {
         return SpyInstance.ownerUpgradeSpyTime(_owner);
     }
 
-    function getUpgradeSpyTime() public view returns(uint, uint) {
-        return ( now - SpyInstance.ownerStartUpgradeTime(msg.sender), SpyInstance.ownerUpgradeSpyTime(msg.sender) ) ;
+    function getUpgradeSpyTime() public view returns(uint, uint, uint) {
+        return ( SpyInstance.ownerStartUpgradeTime(msg.sender), uint(now) - SpyInstance.ownerStartUpgradeTime(msg.sender), SpyInstance.ownerUpgradeSpyTime(msg.sender) ) ;
     }
 
     // // return 0 if success else return remaining time
     function updateUpgradeSpy(address _owner) public returns(uint) {
         if (SpyInstance.ownerStartUpgradeTime(_owner) == 0) return 0;
-        if (now >= SpyInstance.ownerStartUpgradeTime(_owner).add(SpyInstance.ownerUpgradeSpyTime(_owner))) {
+        if (uint(now) >= SpyInstance.ownerStartUpgradeTime(_owner).add(SpyInstance.ownerUpgradeSpyTime(_owner))) {
             uint num;
             num = SpyInstance.ownerUpgradeSpyTime(_owner).div(  SpyInstance.levelOfSpy(_owner).mul(SpyInstance.UpgradeSpyTime()) );
             SpyInstance.setNumOfSpy(_owner, SpyInstance.numOfSpy(_owner) + (num));
@@ -184,7 +184,7 @@ contract Laboratory {
             return 0;
         }
         else {
-            uint remainingTime = (SpyInstance.ownerStartUpgradeTime(_owner) + SpyInstance.ownerUpgradeSpyTime(_owner)).sub(now);
+            uint remainingTime = (SpyInstance.ownerStartUpgradeTime(_owner) + SpyInstance.ownerUpgradeSpyTime(_owner)).sub(uint(now));
             return remainingTime;
         }
     }

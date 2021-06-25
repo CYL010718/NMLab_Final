@@ -32,7 +32,7 @@ const Cell = ({ upgradingIdx, idx , x, y, initialized,  cellState, updateCellSta
       onMouseEnter={() => onHover()} 
       onMouseLeave={() => unHover()} 
       onClick={() => setOpen(true)}>
-      <Building type={initialized? cellState.type : "undefined"} />
+      <Building type={initialized? cellState.type : "undefined"} page = {page}/>
     </div>
 
     <Modal

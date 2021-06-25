@@ -4,6 +4,8 @@ import "./Account.sol";
 
 contract Spy {
 
+    using SafeMath for uint;
+
     Account accountInstance;
     constructor(address _account_address) public {
         accountInstance = Account(_account_address);
@@ -98,11 +100,48 @@ contract Spy {
     }
 
     function sendSpy(uint _ownerId, uint _attackedCastleId) public view returns(bool) {
-        require(msg.sender == accountInstance.convertCastleToOwner(_ownerId));
+        //require(msg.sender == accountInstance.convertCastleToOwner(_ownerId));
         address myCastle = accountInstance.convertCastleToOwner(_ownerId);
         address attackedCastle = accountInstance.convertCastleToOwner(_attackedCastleId);
 
         //returns TRUE if spy of myCastle > attackedCastle
         return _spy(myCastle, attackedCastle);
+    }
+
+
+    // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
+    function startCreateSpy(uint number) public returns(uint) {
+        address _owner = msg.sender;
+        if(ownerStartCreateTime[_owner] != 0) return uint(0); // check if there is already creating spys
+        bool enoughResource;
+        uint lvOfSpy;
+        enoughResource = _createSpy(_owner, number);
+        lvOfSpy =  levelOfSpy[_owner];
+        if(enoughResource == false) return uint(0);
+        setStartCreateTime(_owner, uint(now));
+        setCreateSpyTime(_owner, createSpyTime * lvOfSpy * number);
+        return ownerCreateSpyTime[_owner];
+    }
+
+    function getCreateSpyTime() public view returns(uint, uint, uint) {
+        return ( ownerStartCreateTime[msg.sender], uint(now) - ownerStartCreateTime[msg.sender], ownerCreateSpyTime[msg.sender] ) ;
+    }
+
+    // // return 0 if success else return remaining time
+    function updateCreateSpy(address _owner) public returns(uint) {
+        if (ownerStartCreateTime[_owner] == 0) return 0;
+        if (uint(now) >= ownerStartCreateTime[_owner].add(ownerCreateSpyTime[_owner])) {
+            uint num;
+            num = ownerCreateSpyTime[_owner].div(  levelOfSpy[_owner].mul(createSpyTime) );
+            setNumOfSpy(_owner, numOfSpy[_owner] + (num));
+            setStartCreateTime(_owner, 0);
+            setCreateSpyTime(_owner, 0);
+            _updateSpyPower(_owner);
+            return 0;
+        }
+        else {
+            uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateSpyTime[_owner]).sub(uint(now));
+            return remainingTime;
+        }
     }
 }

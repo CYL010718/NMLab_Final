@@ -18,8 +18,49 @@ contract Account {
     mapping (uint => address) public castleToOwner;
     mapping (address => uint) public ownerCastleCount;
 
+    mapping (address => bool) public ownerIsAttacked;
+    mapping (address => address) public ownerAttackerAddress;
+    mapping (address => uint) public ownerAttackStartTime;
+    mapping (address => uint) public ownerAttackTotalTime;
+
+
+
     uint IdDigits = 16;
     uint IdModulus = 10 ** IdDigits;
+
+    function setAttackedInfo(address _attacked, bool _isAttack, address _attacker, uint _attackstarttime, uint _attacktotaltime) public {
+        ownerIsAttacked[_attacked] = _isAttack;
+        ownerAttackerAddress[_attacked] = _attacker;
+        ownerAttackStartTime[_attacked] = _attackstarttime;
+        ownerAttackTotalTime[_attacked] = _attacktotaltime;
+    }
+
+    function getMarchTime(address _owner) public view returns(uint, uint, uint) {
+        return ( ownerAttackStartTime[_owner], uint(now) - ownerAttackStartTime[_owner], ownerAttackTotalTime[_owner] ) ;
+    }
+
+    function getAttackerInfo(address _owner) public returns(bool,address) {
+        return (ownerIsAttacked[_owner], ownerAttackerAddress[_owner]);
+    }
+
+    // // return 0 if success else return remaining time
+    function updateMarch(address _owner) public returns(uint) {
+        if (ownerAttackStartTime[_owner] == 0) return 0;
+        if (uint(now) >= ownerAttackStartTime[_owner].add(ownerAttackTotalTime[_owner])) {
+            // uint num;
+            // num = ownerTotalMarchTime[_owner].div(  MarchInstance.levelOfMarch(_owner).mul(MarchInstance.createMarchTime()) );
+            // MarchInstance.setNumOfMarch(_owner, MarchInstance.numOfMarch(_owner) + (num));
+            ownerIsAttacked[_owner] = false;
+            ownerAttackerAddress[_owner] = _owner;
+            ownerAttackStartTime[_owner] = 0;
+            ownerAttackTotalTime[_owner] = 0;
+            return 0;
+        }
+        else {
+            uint remainingTime = (ownerAttackStartTime[_owner] + ownerAttackTotalTime[_owner]).sub(uint(now));
+            return remainingTime;
+        }
+    }
 
     function checkUserAddress() public view returns(bool) {
         if(ownerCastleCount[msg.sender] > 0) return true;
@@ -129,6 +170,9 @@ contract Account {
         power[_owner] = 0;
         health[_owner] = 0;
         spyPower[_owner] = 0;
+        ownerIsAttacked[_owner] = false;
+        ownerAttackStartTime[_owner] = 0;
+        ownerAttackTotalTime[_owner] = 0;
     }
 
     function cost(address _owner, uint food, uint wood, uint iron, uint stone, uint coin) public returns (bool){

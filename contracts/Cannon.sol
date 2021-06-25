@@ -4,6 +4,8 @@ import "./Account.sol";
 
 contract Cannon {
 
+    using SafeMath for uint;
+    
     Account accountInstance;
     constructor(address _account_address) public {
         accountInstance = Account(_account_address);
@@ -126,5 +128,42 @@ contract Cannon {
         address myCastle = accountInstance.convertCastleToOwner(_ownerId);
         address attackedCastle = accountInstance.convertCastleToOwner(_attackedCastleId);
         _fight(myCastle, attackedCastle);
+    }
+
+
+    // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
+    function startCreateCannon(uint number) public returns(uint) {
+        address _owner = msg.sender;
+        if(ownerStartCreateTime[_owner] != 0) return uint(0); // check if there is already creating Cannons
+        bool enoughResource;
+        uint lvOfCannon;
+        enoughResource = _createCannon(_owner, number);
+        lvOfCannon =  levelOfCannon[_owner];
+        if(enoughResource == false) return uint(0);
+        setStartCreateTime(_owner, uint(now));
+        setCreateCannonTime(_owner, createCannonTime * lvOfCannon * number);
+        return ownerCreateCannonTime[_owner];
+    }
+
+    function getCreateCannonTime() public view returns(uint, uint, uint) {
+        return ( ownerStartCreateTime[msg.sender], uint(now) - ownerStartCreateTime[msg.sender], ownerCreateCannonTime[msg.sender] ) ;
+    }
+
+    // // return 0 if success else return remaining time
+    function updateCreateCannon(address _owner) public returns(uint) {
+        if (ownerStartCreateTime[_owner] == 0) return 0;
+        if (uint(now) >= ownerStartCreateTime[_owner].add(ownerCreateCannonTime[_owner])) {
+            uint num;
+            num = ownerCreateCannonTime[_owner].div(  levelOfCannon[_owner].mul(createCannonTime));
+            setNumOfCannon(_owner, numOfCannon[_owner] + (num));
+            setStartCreateTime(_owner, 0);
+            setCreateCannonTime(_owner, 0);
+            _updateCannonPower(_owner);
+            return 0;
+        }
+        else {
+            uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateCannonTime[_owner]).sub(uint(now));
+            return remainingTime;
+        }
     }
 }
