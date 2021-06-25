@@ -219,7 +219,7 @@ const Map = () => {
         setCellStateList(result);
         setInitialized(true);
         setUpgradingIdx(upgIdx);
-        setProducingIdx(pdIdx);
+        //setProducingIdx(pdIdx);
         // updateProgress();
       })
     }

@@ -11,7 +11,7 @@ import "./Wall.sol";
 contract Barrack {
 
     using SafeMath for uint;
-    string battleLog = "戰鬥開始\n" ; 
+    string battleLog; 
 
     mapping (address => uint) public ownerStartMarchTime;
     mapping (address => uint) public ownerTotalMarchTime;
@@ -46,9 +46,6 @@ contract Barrack {
         return string(abi.encodePacked(a, b));
     }
 
-    function getSoldierAmount(address _owner) public view returns(uint) {
-        return soldierInstance.getSoldierAmount(_owner);
-    }
     
 
     // // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
@@ -88,51 +85,13 @@ contract Barrack {
     // }
     
 
-    function getSpyAmount(address _owner) public view returns(uint) {
-        return SpyInstance.getSpyAmount(_owner);
-    }
-
-    // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
-    function startCreateSpy(uint number) public returns(uint) {
-        address _owner = msg.sender;
-        if(SpyInstance.ownerStartCreateTime(_owner) != 0) return uint(0); // check if there is already creating spys
-        bool enoughResource;
-        uint lvOfSpy;
-        enoughResource = SpyInstance._createSpy(_owner, number);
-        lvOfSpy =  SpyInstance.levelOfSpy(_owner);
-        if(enoughResource == false) return uint(0);
-        SpyInstance.setStartCreateTime(_owner, uint(now));
-        SpyInstance.setCreateSpyTime(_owner, SpyInstance.createSpyTime() * lvOfSpy * number);
-        return SpyInstance.ownerCreateSpyTime(_owner);
-    }
-
-    function getCreateSpyTime() public view returns(uint, uint) {
-        return ( now - SpyInstance.ownerStartCreateTime(msg.sender), SpyInstance.ownerCreateSpyTime(msg.sender) ) ;
-    }
-
-    // // return 0 if success else return remaining time
-    function updateCreateSpy(address _owner) public returns(uint) {
-        if (SpyInstance.ownerStartCreateTime(_owner) == 0) return 0;
-        if (now >= SpyInstance.ownerStartCreateTime(_owner).add(SpyInstance.ownerCreateSpyTime(_owner))) {
-            uint num;
-            num = SpyInstance.ownerCreateSpyTime(_owner).div(  SpyInstance.levelOfSpy(_owner).mul(SpyInstance.createSpyTime()) );
-            SpyInstance.setNumOfSpy(_owner, SpyInstance.numOfSpy(_owner) + (num));
-            SpyInstance.setStartCreateTime(_owner, 0);
-            SpyInstance.setCreateSpyTime(_owner, 0);
-            SpyInstance._updateSpyPower(_owner);
-            return 0;
-        }
-        else {
-            uint remainingTime = (SpyInstance.ownerStartCreateTime(_owner) + SpyInstance.ownerCreateSpyTime(_owner)).sub(now);
-            return remainingTime;
-        }
-    }
 
     // // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
-    
+    /*
     function attack(uint _ownerId, uint _attackedCastleId) public {
         // soldierInstance.attack(_ownerId, _attackedCastleId);
     }
+    */
 
     function startMarch(uint _attackedCastleId) public returns(uint) {
         address _owner = msg.sender;
@@ -154,6 +113,7 @@ contract Barrack {
     }
 
     // // return 0 if success else return remaining time
+    /*
     function updateMarch(address _owner) public returns(uint) {
         if (ownerStartMarchTime[_owner] == 0) return 0;
         if (uint(now) >= ownerStartMarchTime[_owner].add(ownerTotalMarchTime[_owner])) {
@@ -169,6 +129,7 @@ contract Barrack {
             return remainingTime;
         }
     }
+    */
     function is_annihilated(uint a , uint b , uint c) public returns(bool){
         if(a+b+c==0)
             return true ; 
@@ -417,9 +378,18 @@ contract Barrack {
 
 
 
-    function attack(address _ownerId, address _attackedCastleId) public returns(uint){
+    function attack(uint _owner, uint _attackedCastle) public returns(uint){
         //soldierInstance.attack(_ownerId, _attackedCastleId);
         //uint ownSoldierQuantity = soldierInstance.getSoldierAmount(_ownerId);
+        battleLog = "戰鬥開始\n" ; 
+        
+
+        address _ownerId = AccountInstance.castleToOwner(_owner) ;
+        address _attackedCastleId = AccountInstance.castleToOwner(_attackedCastle) ;
+        
+        ownerStartMarchTime[_ownerId] = 0;
+        ownerTotalMarchTime[_ownerId] = 0;
+
         uint dummyQuantityAttacker ; 
         uint dummyQuantityDefender ; 
         uint ownSoldierInjure = 50 + soldierInstance.levelOfSoldier(_ownerId) * 5  ; 
@@ -525,12 +495,8 @@ contract Barrack {
             
 
         }
-    }
-
-    function sendSpy(uint _ownerId, uint _attackedCastleId) public view returns(bool) {
-        //returns TRUE if spy of myCastle > attackedCastle
         
-        return SpyInstance.sendSpy(_ownerId, _attackedCastleId);
+            
     }
 
     function getBattleLog() public returns(string memory){
