@@ -25,8 +25,8 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
     const startCreateSoldier = async () => {
         await soldierContract.methods.startCreateSoldier(soldierProduceAmount).send({from: account});
         const getCreateTime = await soldierContract.methods.getCreateSoldierTime().call({from: account});
-        const nowStartPeriod = parseInt( getCreateTime[0] );
-        const createTimeNeed = parseInt( getCreateTime[1] );
+        const nowStartPeriod = parseInt( getCreateTime[1] );
+        const createTimeNeed = parseInt( getCreateTime[2] );
         console.log("createSoldier: ", nowStartPeriod, createTimeNeed);
         if(createTimeNeed == 0) {
             alert("Not enough resource!");
@@ -41,8 +41,9 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
     const confirmCreateSoldier = async () => {
         await soldierContract.methods.updateCreateSoldier(account).send({from: account});
         const getCreateTime = await soldierContract.methods.getCreateSoldierTime().call({from: account});
-        const nowStartPeriod = parseInt( getCreateTime[0] );
-        const createTimeNeed = parseInt( getCreateTime[1] );
+        const nowStartPeriod = parseInt( getCreateTime[1] );
+        const createTimeNeed = parseInt( getCreateTime[2] );
+        console.log(getCreateTime);
         if(createTimeNeed != 0) {
             alert("confirm failed");
             return;
@@ -53,12 +54,11 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
     }
 
     const startCreateCannon = async () => {
-        const test = await cannonContract.methods.startCreateCannon(cannonProduceAmount).send({from: account});
-        console.log("test: ", test);
+        await cannonContract.methods.startCreateCannon(cannonProduceAmount).send({from: account});
         const getCreateTime = await cannonContract.methods.getCreateCannonTime().call({from: account});
-        const nowStartPeriod = parseInt( getCreateTime[0] );
-        const createTimeNeed = parseInt( getCreateTime[1] );
-        console.log("createCannon: ", nowStartPeriod, createTimeNeed);
+        const nowStartPeriod = parseInt( getCreateTime[1] );
+        const createTimeNeed = parseInt( getCreateTime[2] );
+        console.log(getCreateTime);
         if(createTimeNeed == 0) {
             alert("Not enough resource!");
             return;
@@ -72,8 +72,9 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
     const confirmCreateCannon = async () => {
         await cannonContract.methods.updateCreateCannon(account).send({from: account});
         const getCreateTime = await cannonContract.methods.getCreateCannonTime().call({from: account});
-        const nowStartPeriod = parseInt( getCreateTime[0] );
-        const createTimeNeed = parseInt( getCreateTime[1] );
+        const nowStartPeriod = parseInt( getCreateTime[1] );
+        const createTimeNeed = parseInt( getCreateTime[2] );
+        console.log(getCreateTime);
         if(createTimeNeed != 0) {
             alert("confirm failed");
             return;
@@ -86,8 +87,8 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
     const startCreateProtector = async () => {
         await protectorContract.methods.startCreateProtector(protectorProduceAmount).send({from: account});
         const getCreateTime = await protectorContract.methods.getCreateProtectorTime().call({from: account});
-        const nowStartPeriod = parseInt( getCreateTime[0] );
-        const createTimeNeed = parseInt( getCreateTime[1] );
+        const nowStartPeriod = parseInt( getCreateTime[1] );
+        const createTimeNeed = parseInt( getCreateTime[2] );
         console.log("createProtector: ", nowStartPeriod, createTimeNeed);
         if(createTimeNeed == 0) {
             alert("Not enough resource!");
@@ -102,8 +103,8 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
     const confirmCreateProtector = async () => {
         await protectorContract.methods.updateCreateProtector(account).send({from: account});
         const getCreateTime = await protectorContract.methods.getCreateProtectorTime().call({from: account});
-        const nowStartPeriod = parseInt( getCreateTime[0] );
-        const createTimeNeed = parseInt( getCreateTime[1] );
+        const nowStartPeriod = parseInt( getCreateTime[1] );
+        const createTimeNeed = parseInt( getCreateTime[2] );
         console.log("Confirm: ", nowStartPeriod, createTimeNeed);
         if(createTimeNeed != 0) {
             alert("confirm failed");
@@ -117,8 +118,8 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
     const startCreateSpy = async () => {
         await spyContract.methods.startCreateSpy(spyProduceAmount).send({from: account});
         const getCreateTime = await spyContract.methods.getCreateSpyTime().call({from: account});
-        const nowStartPeriod = parseInt( getCreateTime[0] );
-        const createTimeNeed = parseInt( getCreateTime[1] );
+        const nowStartPeriod = parseInt( getCreateTime[1] );
+        const createTimeNeed = parseInt( getCreateTime[2] );
         console.log("createSpy: ", nowStartPeriod, createTimeNeed);
         if(createTimeNeed == 0) {
             alert("Not enough resource!");
@@ -133,8 +134,8 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
     const confirmCreateSpy = async () => {
         await spyContract.methods.updateCreateSpy(account).send({from: account});
         const getCreateTime = await spyContract.methods.getCreateSpyTime().call({from: account});
-        const nowStartPeriod = parseInt( getCreateTime[0] );
-        const createTimeNeed = parseInt( getCreateTime[1] );
+        const nowStartPeriod = parseInt( getCreateTime[1] );
+        const createTimeNeed = parseInt( getCreateTime[2] );
         if(createTimeNeed != 0) {
             alert("confirm failed");
             return;
@@ -147,8 +148,8 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
     const startCreateWall = async () => {
         await wallContract.methods.startCreateWall(wallProduceAmount).send({from: account});
         const getCreateTime = await wallContract.methods.getCreateWallTime().call({from: account});
-        const nowStartPeriod = parseInt( getCreateTime[0] );
-        const createTimeNeed = parseInt( getCreateTime[1] );
+        const nowStartPeriod = parseInt( getCreateTime[1] );
+        const createTimeNeed = parseInt( getCreateTime[2] );
         //console.log("createSpy: ", nowStartPeriod, createTimeNeed);
         if(createTimeNeed == 0) {
             alert("Not enough resource!");
@@ -163,8 +164,8 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
     const confirmCreateWall = async () => {
         await wallContract.methods.updateCreateWall(account).send({from: account});
         const getCreateTime = await wallContract.methods.getCreateWallTime().call({from: account});
-        const nowStartPeriod = parseInt( getCreateTime[0] );
-        const createTimeNeed = parseInt( getCreateTime[1] );
+        const nowStartPeriod = parseInt( getCreateTime[1] );
+        const createTimeNeed = parseInt( getCreateTime[2] );
         if(createTimeNeed != 0) {
             alert("confirm failed");
             return;
@@ -346,9 +347,7 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
                 <Header as='h4'>
                 Produce soldier progress
                 </Header>
-                <Progress progress='percent'  progress='percent'  percent={soldierProduceProgress} indicating>
-                    Produce soldier progress
-                </Progress>
+                <Progress progress='percent'   percent={soldierProduceProgress} indicating/>
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={soldierProduceProgress !== 100} primary onClick={() => confirmCreateSoldier()} >
                     confirm
@@ -393,9 +392,7 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
                 <Header as='h4'>
                 Produce cannon progress
                 </Header>
-                <Progress  progress='percent'  percent={cannonProduceProgress} indicating>
-                    Produce cannon progress
-                </Progress>
+                <Progress  progress='percent'  percent={cannonProduceProgress} indicating/>
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={cannonProduceProgress !== 100} primary onClick={() => confirmCreateCannon()} >
                     confirm
@@ -440,9 +437,7 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
                 <Header as='h4'>
                 Produce protector progress
                 </Header>
-                <Progress progress='percent'  percent={protectorProduceProgress} indicating>
-                    Produce protector progress
-                </Progress>
+                <Progress progress='percent'  percent={protectorProduceProgress} indicating/>
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={protectorProduceProgress !== 100} primary onClick={() => confirmCreateProtector()} >
                     confirm
@@ -487,9 +482,7 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
                 <Header as='h4'>
                 Produce spy progress
                 </Header>
-                <Progress progress='percent'  percent={spyProduceProgress} indicating>
-                    Produce spy progress
-                </Progress>
+                <Progress progress='percent'  percent={spyProduceProgress} indicating/>
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={spyProduceProgress !== 100} primary onClick={() => confirmCreateSpy()} >
                     confirm
@@ -534,9 +527,7 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
                 <Header as='h4'>
                 Produce wall progress
                 </Header>
-                <Progress progress='percent'  percent={wallProduceProgress} indicating>
-                    Produce wall progress
-                </Progress>
+                <Progress progress='percent'  percent={wallProduceProgress} indicating/>
                 <div style={{textAlign: 'center'}}>
                 <Button disabled={wallProduceProgress !== 100} primary onClick={() => confirmCreateWall()} >
                     confirm

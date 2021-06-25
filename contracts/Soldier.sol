@@ -144,14 +144,14 @@ contract Soldier {
         return ownerCreateSoldierTime[_owner];
     }
 
-    function getCreateSoldierTime() public view returns(uint, uint) {
-        return ( now - ownerStartCreateTime[msg.sender], ownerCreateSoldierTime[msg.sender] ) ;
+    function getCreateSoldierTime() public view returns(uint, uint, uint) {
+        return ( ownerStartCreateTime[msg.sender], uint(now) - ownerStartCreateTime[msg.sender], ownerCreateSoldierTime[msg.sender] ) ;
     }
 
     // // return 0 if success else return remaining time
     function updateCreateSoldier(address _owner) public returns(uint) {
         if (ownerStartCreateTime[_owner] == 0) return 0;
-        if (now >= ownerStartCreateTime[_owner].add(ownerCreateSoldierTime[_owner])) {
+        if (uint(now) >= ownerStartCreateTime[_owner].add(ownerCreateSoldierTime[_owner])) {
             uint num;
             num = ownerCreateSoldierTime[_owner].div( levelOfSoldier[_owner].mul(createSoldierTime) );
             setNumOfSoldier(_owner, numOfSoldier[_owner] + (num));
@@ -161,7 +161,7 @@ contract Soldier {
             return 0;
         }
         else {
-            uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateSoldierTime[_owner]).sub(now);
+            uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateSoldierTime[_owner]).sub(uint(now));
             return remainingTime;
         }
     }

@@ -123,14 +123,14 @@ contract Spy {
         return ownerCreateSpyTime[_owner];
     }
 
-    function getCreateSpyTime() public view returns(uint, uint) {
-        return ( now - ownerStartCreateTime[msg.sender], ownerCreateSpyTime[msg.sender] ) ;
+    function getCreateSpyTime() public view returns(uint, uint, uint) {
+        return ( ownerStartCreateTime[msg.sender], uint(now) - ownerStartCreateTime[msg.sender], ownerCreateSpyTime[msg.sender] ) ;
     }
 
     // // return 0 if success else return remaining time
     function updateCreateSpy(address _owner) public returns(uint) {
         if (ownerStartCreateTime[_owner] == 0) return 0;
-        if (now >= ownerStartCreateTime[_owner].add(ownerCreateSpyTime[_owner])) {
+        if (uint(now) >= ownerStartCreateTime[_owner].add(ownerCreateSpyTime[_owner])) {
             uint num;
             num = ownerCreateSpyTime[_owner].div(  levelOfSpy[_owner].mul(createSpyTime) );
             setNumOfSpy(_owner, numOfSpy[_owner] + (num));
@@ -140,7 +140,7 @@ contract Spy {
             return 0;
         }
         else {
-            uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateSpyTime[_owner]).sub(now);
+            uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateSpyTime[_owner]).sub(uint(now));
             return remainingTime;
         }
     }

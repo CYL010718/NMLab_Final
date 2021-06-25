@@ -145,14 +145,14 @@ contract Cannon {
         return ownerCreateCannonTime[_owner];
     }
 
-    function getCreateCannonTime() public view returns(uint, uint) {
-        return ( now - ownerStartCreateTime[msg.sender], ownerCreateCannonTime[msg.sender] ) ;
+    function getCreateCannonTime() public view returns(uint, uint, uint) {
+        return ( ownerStartCreateTime[msg.sender], uint(now) - ownerStartCreateTime[msg.sender], ownerCreateCannonTime[msg.sender] ) ;
     }
 
     // // return 0 if success else return remaining time
     function updateCreateCannon(address _owner) public returns(uint) {
         if (ownerStartCreateTime[_owner] == 0) return 0;
-        if (now >= ownerStartCreateTime[_owner].add(ownerCreateCannonTime[_owner])) {
+        if (uint(now) >= ownerStartCreateTime[_owner].add(ownerCreateCannonTime[_owner])) {
             uint num;
             num = ownerCreateCannonTime[_owner].div(  levelOfCannon[_owner].mul(createCannonTime));
             setNumOfCannon(_owner, numOfCannon[_owner] + (num));
@@ -162,7 +162,7 @@ contract Cannon {
             return 0;
         }
         else {
-            uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateCannonTime[_owner]).sub(now);
+            uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateCannonTime[_owner]).sub(uint(now));
             return remainingTime;
         }
     }

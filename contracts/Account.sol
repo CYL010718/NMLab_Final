@@ -35,8 +35,8 @@ contract Account {
         ownerAttackTotalTime[_attacked] = _attacktotaltime;
     }
 
-    function getMarchTime(address _owner) public view returns(uint, uint) {
-        return ( now - ownerAttackStartTime[_owner], ownerAttackTotalTime[_owner] ) ;
+    function getMarchTime(address _owner) public view returns(uint, uint, uint) {
+        return ( ownerAttackStartTime[_owner], uint(now) - ownerAttackStartTime[_owner], ownerAttackTotalTime[_owner] ) ;
     }
 
     function getAttackerInfo(address _owner) public returns(bool,address) {
@@ -46,7 +46,7 @@ contract Account {
     // // return 0 if success else return remaining time
     function updateMarch(address _owner) public returns(uint) {
         if (ownerAttackStartTime[_owner] == 0) return 0;
-        if (now >= ownerAttackStartTime[_owner].add(ownerAttackTotalTime[_owner])) {
+        if (uint(now) >= ownerAttackStartTime[_owner].add(ownerAttackTotalTime[_owner])) {
             // uint num;
             // num = ownerTotalMarchTime[_owner].div(  MarchInstance.levelOfMarch(_owner).mul(MarchInstance.createMarchTime()) );
             // MarchInstance.setNumOfMarch(_owner, MarchInstance.numOfMarch(_owner) + (num));
@@ -57,7 +57,7 @@ contract Account {
             return 0;
         }
         else {
-            uint remainingTime = (ownerAttackStartTime[_owner] + ownerAttackTotalTime[_owner]).sub(now);
+            uint remainingTime = (ownerAttackStartTime[_owner] + ownerAttackTotalTime[_owner]).sub(uint(now));
             return remainingTime;
         }
     }

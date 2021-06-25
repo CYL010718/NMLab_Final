@@ -12,7 +12,7 @@ import {
 } from 'semantic-ui-react'
 
 
-const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPower }) => {
+const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPower, spyedList, setSpyedList }) => {
   const state = useContext(ContractContext);
   const {accountContract, barrackContract, accounts} = state;
   const [initialized, setInitialize] = useState(false);
@@ -30,8 +30,8 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
   const march = async() => {
     await barrackContract.methods.startMarch(userIdx).send({from: accounts[0]});
     const getMarchTime = await barrackContract.methods.getMarchTime().call({from: accounts[0]});
-    const nowStartPeriod = parseInt( getMarchTime[0] );
-    const marchingTimeNeed = parseInt( getMarchTime[1] );
+    const nowStartPeriod = parseInt( getMarchTime[1] );
+    const marchingTimeNeed = parseInt( getMarchTime[2] );
     //console.log("createSoldier: ", nowStartPeriod, createTimeNeed);
     if(marchingTimeNeed == 0) {
         alert("Not enough resource!");
@@ -44,6 +44,7 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
   const goBattle = async () => {
     await barrackContract.methods.attack(myIdx, userIdx).send({from: accounts[0]});
     await barrackContract.methods.updateMarch(accounts[0]).send({from: accounts[0]});
+    console.log("Battle");
     // const log = await barrackContract.methods.getBattleLog().call({from: accounts[0]});
     // const myNewPower = await accountContract.methods.getUserPowerById(myIdx).call({from: accounts[0]});
     // const userNewPower = await accountContract.methods.getUserPowerById(userIdx).call({from: accounts[0]});
@@ -61,17 +62,20 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
     console.log(barrackContract);
     const spyResult = await barrackContract.methods.sendSpy(myIdx, userIdx).call({from: accounts[0]});
 
-    
     setSpyed(true);
     if(spyResult){
       const myNewPower = await accountContract.methods.getUserPowerById(myIdx).call({from: accounts[0]});
       const userNewPower = await accountContract.methods.getUserPowerById(userIdx).call({from: accounts[0]});
       setSpyResult(true);
+      setSpyedList([...spyedList.slice(0, userIdx), true, ...spyedList.slice(userIdx + 1)]);
+      console.log(spyedList)
+      console.log([...spyedList.slice(0, userIdx), true, ...spyedList.slice(userIdx + 1)]);
       setMyPower(myNewPower);
       setUserPower(userNewPower);
     }
   }
   const updateMarch = () => {
+    console.log("updating march")
     if(!marching){
       console.log("???")
       return 
@@ -79,35 +83,62 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
     if(marchPeriod < marchTimeNeed){
         setMarchPeriod(marchPeriod + 3);
     }
-    else goBattle();
+    else {
+      console.log("goBattle")
+      //goBattle();
+    }
   }
 
   useEffect(() => {
     const init = async () => {
-      const getMarchTime = await barrackContract.methods.getMarchTime().call({from: accounts[0]});
-      const nowStartPeriod = parseInt( getMarchTime[0] );
-      const marchingTimeNeed = parseInt( getMarchTime[1] );
 
-      setMarchPeriod(nowStartPeriod);
-      setMarchTimeNeed(marchingTimeNeed);
-      if(marchingTimeNeed !== 0) setMarching(true);
-      setInitialize(true);
-    }
-    if(barrackContract && accounts.length > 0) {
-      if(!initialized) {
-        init();
+      const getMarchTime = await barrackContract.methods.getMarchTime().call({from: accounts[0]});
+      const startMarchTime = parseInt( getMarchTime[0] );
+      const totalMarchTimeNeed = parseInt( getMarchTime[2] );
+      console.log(getMarchTime);
+      console.log(parseInt(Date.now() / 1000));
+      if(totalMarchTimeNeed > 0) {
+        await setMarching(true);
+        await setMarchPeriod(parseInt(Date.now() / 1000) - startMarchTime);
+        await setMarchTimeNeed(totalMarchTimeNeed);
+        return true;
       }
+      await setMarchPeriod(parseInt(Date.now() / 1000) - startMarchTime);
+      await setMarchTimeNeed(totalMarchTimeNeed);
+      return false;
+    }
+    
+    const update = async () => {
+      if(!initialized) {
+        const marchingValue = await init();
+        if(marchingValue) {
+          await setMarching(true);
+          console.log("marching?", marching)
+          setMarchProgress(marching ? marchTimeNeed === 0 ? 100 : marchPeriod/marchTimeNeed*100 > 100 ? 
+            100:marchPeriod/ marchTimeNeed*100 : 0);
+          handle = setTimeout(() => {
+            updateMarch();
+          }, 3000);
+        }
+        await setInitialize(true);
+        return
+      }
+      else{
+        setMarchProgress(marching ? marchTimeNeed === 0 ? 100 : marchPeriod/marchTimeNeed*100 > 100 ? 
+          100:marchPeriod/ marchTimeNeed*100: 0);
+        console.log("marching?", marching)
+        if(marching) {
+          handle = setTimeout(() => {
+            updateMarch();
+          }, 3000);
+        }
+      }
+
+      
     }
 
     var handle;
-    setMarchProgress(marching ? marchTimeNeed === 0 ? 100 : marchPeriod/marchTimeNeed*100 > 100 ? 
-                    100:marchPeriod/ marchTimeNeed*100: 0);
-
-    if(marching) {
-      handle = setTimeout(() => {
-        updateMarch();
-      }, 3000);
-    }
+    update();
 
     return () => {
       clearTimeout(handle);
@@ -115,7 +146,18 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
   }, [state, marchPeriod, marchTimeNeed])
 
   return <>
-  {!marching ?
+  { battled ? 
+    <Modal.Content>
+      <Grid columns='equal' divided padded>
+        <Grid.Row stretch = "true">
+          <Grid.Column>
+            {battleLog}
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Modal.Content>
+    :
+    !marching ?
     <Modal.Content>
       <Segment placeholder>
         <Grid columns={2} stackable textAlign='center'>
@@ -170,7 +212,7 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
       {
         !spyed ?
         <Button animated='fade' color='red' fluid inverted attached='bottom' onClick={() => sendSpy()}>
-          <Button.Content visible>Send Spy</Button.Content>
+          <Button.Content visible >Send Spy</Button.Content>
           <Button.Content hidden>
             <Icon name='fire' />
           </Button.Content>
@@ -187,34 +229,23 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
       }
     </Modal.Content>
     :
-      battled ?
-      <Modal.Content>
-        <Grid columns='equal' divided padded>
-          <Grid.Row stretch>
-            <Grid.Column>
-              {battleLog}
-            </Grid.Column>
-          </Grid.Row>
-        </Grid>
-      </Modal.Content>
-      :
-      <Modal.Content>
-        <Grid columns='equal' divided padded>
-          <Grid.Row stretch>
-              <Header as='h4'>
-                March progress
-              </Header>
-              <Progress progress='percent'  percent={marchProgress} indicating>
-                March progress
-              </Progress>
-              <div style={{textAlign: 'center'}}>
+    <Modal.Content>
+      <Grid columns='equal' divided padded>
+        <Grid.Row stretch = "true">
+          <Grid.Column>
+            <Header as='h4' textAlign='center'>
+              March progress
+            </Header>
+            <Progress progress='percent'  percent={marchProgress} indicating/>
+            <div style={{textAlign: 'center'}}>
               <Button disabled={marchProgress !== 100} primary onClick={() => goBattle()} >
-                  Battle!
+                  Attack!
               </Button>
-              </div>
-          </Grid.Row>
-        </Grid>
-      </Modal.Content>
+            </div>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Modal.Content>
     
     }
   </>

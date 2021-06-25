@@ -1,16 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Icon, Image } from 'semantic-ui-react';
+import { Icon, Image, Button } from 'semantic-ui-react';
 import { ContractContext } from "../App";
+import { Battle } from './index'
 import { useMeasure } from 'react-use'
 import Cell from './Cell';
 import "../styles/Map.css";
-import gameBackground from '../images/main_map_small.png';
+import gameBackground from '../images/map.JPG';
 import Draggable from 'react-draggable';
 
 
-const imgWidth = 1700;//1803
-const imgHeight = 1086;//1086
-const cellAry = [[188, 278], [360, 364], [801, 163], [1092, 166], [1384, 364], [1500, 250], [1597, 428], [1500, 723], [1560, 903], [1264, 813], [842, 663], [842, 563], [131, 708], [310, 843], [554, 940]];
+const imgWidth = 1512//1021;//1803
+const imgHeight = 1050//700;//1086 
+const cellAry = [[420, 860], [180, 530], [1000, 390], [900, 440], [500, 430], [1050, 500], [695, 520], [360, 380], [812, 390], [715, 435], [1175, 525], [745, 880],  [220, 708], [980, 290], [650, 645]];
 
 const Map = () => {
   const state = useContext(ContractContext);
@@ -20,7 +21,7 @@ const Map = () => {
   const [ upgradingIdx, setUpgradingIdx ] = useState(0);
   const [ producingIdx, setProducingIdx ] = useState(0);
   const [ reload, setReload ] = useState(false);
-  // console.log(width, height);
+  console.log(width, height);
 
   const updateCellState = (idx, newState) => {
     console.log("update: ", idx);
@@ -130,72 +131,71 @@ const Map = () => {
       if(loadType === "Barrack") {
         const getSoldierCreateTime = await soldierContract.methods.getCreateSoldierTime().call({from: accounts[0]});
         console.log(getSoldierCreateTime)
-        const soldierStartPeriod = parseInt( getSoldierCreateTime[0] );
-        const createSoldierTimeNeed = parseInt( getSoldierCreateTime[1] );
+        const soldierStartTime= parseInt( getSoldierCreateTime[0] );
+        const createSoldierTimeNeed = parseInt( getSoldierCreateTime[2] );
         if(createSoldierTimeNeed != 0) {
           pdIdx = idx;
-          newState = { ...newState, soldierProduce: [ soldierStartPeriod, createSoldierTimeNeed ] };
+          newState = { ...newState, soldierProduce: [ parseInt(Date.now() / 1000) - soldierStartTime, createSoldierTimeNeed ] };
         }
         const getSpyCreateTime = await spyContract.methods.getCreateSpyTime().call({from: accounts[0]});
-        const spyStartPeriod = parseInt( getSpyCreateTime[0] );
-        const createSpyTimeNeed = parseInt( getSpyCreateTime[1] );
+        const spyStartTime = parseInt( getSpyCreateTime[0] );
+        const createSpyTimeNeed = parseInt( getSpyCreateTime[2] );
         if(createSpyTimeNeed != 0) {
           pdIdx = idx;
-          newState = { ...newState, spyProduce: [ spyStartPeriod, createSpyTimeNeed ] };
+          newState = { ...newState, spyProduce: [ parseInt(Date.now() / 1000) - spyStartTime, createSpyTimeNeed ] };
         }
+        //await cannonContract.methods.updateCreateCannon(accounts[0]).send({from: accounts[0]});
         const getCannonCreateTime = await cannonContract.methods.getCreateCannonTime().call({from: accounts[0]});
-        const cannonStartPeriod = parseInt( getCannonCreateTime[0] );
-        const createCannonTimeNeed = parseInt( getCannonCreateTime[1] );
+        const cannonStartTime = parseInt( getCannonCreateTime[0] );
+        const createCannonTimeNeed = parseInt( getCannonCreateTime[2] );
         if(createCannonTimeNeed != 0) {
           pdIdx = idx;
-          newState = { ...newState, cannonProduce: [ cannonStartPeriod, createCannonTimeNeed ] };
+          newState = { ...newState, cannonProduce: [ parseInt(Date.now() / 1000) - cannonStartTime, createCannonTimeNeed ] };
         }
         const getProtectorCreateTime = await protectorContract.methods.getCreateProtectorTime().call({from: accounts[0]});
-        const protectorStartPeriod = parseInt( getProtectorCreateTime[0] );
-        const createProtectorTimeNeed = parseInt( getProtectorCreateTime[1] );
-        console.log("protector:", protectorStartPeriod, createProtectorTimeNeed);
+        const protectorStartTime = parseInt( getProtectorCreateTime[0] );
+        const createProtectorTimeNeed = parseInt( getProtectorCreateTime[2] );
+        console.log(parseInt(Date.now() / 1000))
         if(createProtectorTimeNeed != 0) {
           pdIdx = idx;
-          newState = { ...newState, protectorProduce: [ protectorStartPeriod, createProtectorTimeNeed ] };
+          newState = { ...newState, protectorProduce: [ parseInt(Date.now() / 1000) - protectorStartTime, createProtectorTimeNeed ] };
         }
         const getWallCreateTime = await wallContract.methods.getCreateWallTime().call({from: accounts[0]});
-        const wallStartPeriod = parseInt( getWallCreateTime[0] );
-        const createWallTimeNeed = parseInt( getWallCreateTime[1] );
-        console.log("wall:", wallStartPeriod, createWallTimeNeed);
+        const wallStartTime = parseInt( getWallCreateTime[0] );
+        const createWallTimeNeed = parseInt( getWallCreateTime[2] );
         if(createWallTimeNeed != 0) {
           pdIdx = idx;
-          newState = { ...newState, wallProduce: [ wallStartPeriod, createWallTimeNeed ] };
+          newState = { ...newState, wallProduce: [ parseInt(Date.now() / 1000) - wallStartTime, createWallTimeNeed ] };
         }
       }
       if(loadType === "Laboratory"){
         const getSoldierUpgradeTime = await labContract.methods.getUpgradeSoldierTime().call({from: accounts[0]});
-        const soldierStartPeriod = parseInt( getSoldierUpgradeTime[0] );
-        const upgradeSoldierTimeNeed = parseInt( getSoldierUpgradeTime[1] );
+        const soldierStartTime = parseInt( getSoldierUpgradeTime[0] );
+        const upgradeSoldierTimeNeed = parseInt( getSoldierUpgradeTime[2] );
         if(upgradeSoldierTimeNeed != 0) {
           pdIdx = idx;
-          newState = { ...newState, soldierUpgrade: [ soldierStartPeriod, upgradeSoldierTimeNeed ] };
+          newState = { ...newState, soldierUpgrade: [ parseInt(Date.now() / 1000) - soldierStartTime, upgradeSoldierTimeNeed ] };
         }
         const getSpyUpgradeTime = await labContract.methods.getUpgradeSpyTime().call({from: accounts[0]});
-        const spyStartPeriod = parseInt( getSpyUpgradeTime[0] );
-        const upgradeSpyTimeNeed = parseInt( getSpyUpgradeTime[1] );
+        const spyStartTime = parseInt( getSpyUpgradeTime[0] );
+        const upgradeSpyTimeNeed = parseInt( getSpyUpgradeTime[2] );
         if(upgradeSpyTimeNeed != 0) {
           pdIdx = idx;
-          newState = { ...newState, spyUpgrade: [ spyStartPeriod, upgradeSpyTimeNeed ] };
+          newState = { ...newState, spyUpgrade: [ parseInt(Date.now() / 1000) - spyStartTime, upgradeSpyTimeNeed ] };
         }
         const getCannonUpgradeTime = await labContract.methods.getUpgradeCannonTime().call({from: accounts[0]});
-        const cannonStartPeriod = parseInt( getCannonUpgradeTime[0] );
-        const upgradeCannonTimeNeed = parseInt( getCannonUpgradeTime[1] );
+        const cannonStartTime= parseInt( getCannonUpgradeTime[0] );
+        const upgradeCannonTimeNeed = parseInt( getCannonUpgradeTime[2] );
         if(upgradeCannonTimeNeed != 0) {
           pdIdx = idx;
-          newState = { ...newState, cannonUpgrade: [ cannonStartPeriod, upgradeCannonTimeNeed ] };
+          newState = { ...newState, cannonUpgrade: [ parseInt(Date.now() / 1000) - cannonStartTime, upgradeCannonTimeNeed ] };
         }
         const getProtectorUpgradeTime = await labContract.methods.getUpgradeProtectorTime().call({from: accounts[0]});
-        const protectorStartPeriod = parseInt( getProtectorUpgradeTime[0] );
-        const upgradeProtectorTimeNeed = parseInt( getProtectorUpgradeTime[1] );
-        console.log("protector:", protectorStartPeriod, upgradeProtectorTimeNeed);
+        const protectorStartTime = parseInt( getProtectorUpgradeTime[0] );
+        const upgradeProtectorTimeNeed = parseInt( getProtectorUpgradeTime[2] );
         if(upgradeProtectorTimeNeed != 0) {
           pdIdx = idx;
-          newState = { ...newState, protectorUpgrade: [ protectorStartPeriod, upgradeProtectorTimeNeed ] };
+          newState = { ...newState, protectorUpgrade: [ parseInt(Date.now() / 1000) - protectorStartTime, upgradeProtectorTimeNeed ] };
         }
       }
       if(loadIndex === upgradingId && upgradingId !== 0) {
@@ -250,7 +250,7 @@ const Map = () => {
               cellAry.map((xy_list, idx) => {
                 const [x, y] = xy_list;
                 if(idx === 10){
-                  return <Cell key={idx} upgradingIdx={upgradingIdx} idx={idx} x={x} y={y} initialized={initialized} cellState={cellStateList[idx]} updateCellState={updateCellState} page = {1}/>
+                  return <Cell key={idx} upgradingIdx={upgradingIdx} idx={idx} x={x} y={y} initialized={initialized} cellState={cellStateList[idx]} updateCellState={updateCellState} page = {1} />
                 }
                 else if(idx === 11){
                   return <Cell key={idx} upgradingIdx={upgradingIdx} idx={idx} x={x} y={y} initialized={initialized} cellState={cellStateList[idx]} updateCellState={updateCellState} page = {2}/>

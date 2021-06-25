@@ -71,17 +71,18 @@ const Navbar = ({ makeReload }) => {
       getResource();
 
       const getMarchTime = await accountContract.methods.getMarchTime(accounts[0]).call({from: accounts[0]}); //Modify
-      const nowStartPeriod = parseInt( getMarchTime[0] );
-      const marchingTimeNeed = parseInt( getMarchTime[1] );
+      const marchStartTime = parseInt( getMarchTime[0] );
+      const marchingTimeNeed = parseInt( getMarchTime[2] );
       const attackerInfo = await accountContract.methods.getAttackerInfo(accounts[0]).call({from: accounts[0]});
       const isAttacked = attackerInfo[0];
-      const attackerAddress = attackerInfo[0];
+      const attackerAddress = attackerInfo[1];
       
-      setMarchPeriod(nowStartPeriod);
-      setMarchTimeNeed(marchingTimeNeed);
-      if(marchingTimeNeed !== 0) setBeingAttacked(true);
-      setAttacker(attackerAddress);
-      setInitialized(true);
+      console.log(attackerAddress);
+      await setMarchPeriod(parseInt(Date.now() / 1000) - marchStartTime);
+      await setMarchTimeNeed(marchingTimeNeed);
+      if(marchingTimeNeed !== 0)  await setBeingAttacked(true);
+      await setAttacker(attackerAddress);
+      await setInitialized(true);
     }
 
     if(barrackContract && accounts.length > 0) {
@@ -109,34 +110,35 @@ const Navbar = ({ makeReload }) => {
       clearTimeout(handle);
     }
     //updateResource();  
-  }, [state, marchPeriod, marchTimeNeed]);
+  }, [state, beingAttacked, marchPeriod, marchTimeNeed]);
 
   return (
     <div className="navbar">
+      
       <Menu secondary className="welcome-menu" >
+        {beingAttacked ?
+              <>
+                <Button size = "huge" icon = "warning sign" color = 'red'  onClick = {() => setShowCountdown(true)}>
+                </Button>
+                <Modal open = {showCountdown}>
+                  <Modal.Content>
+                      <Header> Attack by User {attacker} </Header>
+                      <Progress  progress='percent'  percent={countdownProgress} indicating>
+                          Attack countdown
+                      </Progress>
+                      <Modal.Actions>
+                        <Button onClick = {() => setShowCountdown(false)} fluid color = 'red'>
+                          <Icon name='close' /> close
+                        </Button>
+                      </Modal.Actions>
+                  </Modal.Content>
+                </Modal>
+              </>
+              :
+              <></>
+        }
         <Menu.Menu position='right'>
-          {beingAttacked ?
-            <>
-              <Button icon = 'warning sign' color = 'red' floated = 'left' onClick = {() => setShowCountdown(true)}>
-                  View attacker information
-              </Button>
-              <Modal open = {showCountdown}>
-                 <Modal.Content>
-                    <Header> Attack by {attacker} </Header>
-                    <Progress  progress='percent'  percent={countdownProgress} indicating>
-                        Attack countdown
-                    </Progress>
-                    <Modal.Actions>
-                      <Button onClick = {() => setShowCountdown(false)} color = 'red'>
-                        <Icon name='close' /> close
-                      </Button>
-                    </Modal.Actions>
-                 </Modal.Content>
-              </Modal>
-            </>
-            :
-            <></>
-          }
+          
           <Button.Group floated='right'>
             <Button animated='fade' circular onClick={() => updateResource()} inverted color='teal'>
               <Button.Content hidden>Refresh</Button.Content>

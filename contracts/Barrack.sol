@@ -58,19 +58,19 @@ contract Barrack {
         enoughResource = enoughResource = AccountInstance.cost(_owner, 100, uint(0), 100, uint(0), 100);
         if(enoughResource == false) return uint(0);
         ownerStartMarchTime[_owner] = uint(now);
-        ownerTotalMarchTime[_owner] = 10;
+        ownerTotalMarchTime[_owner] = 20;
         AccountInstance.setAttackedInfo(attackedAddress, true, _owner, ownerStartMarchTime[_owner], ownerTotalMarchTime[_owner]);
         return ownerTotalMarchTime[_owner];
     }
 
-    function getMarchTime() public view returns(uint, uint) {
-        return ( now - ownerStartMarchTime[msg.sender], ownerTotalMarchTime[msg.sender] ) ;
+    function getMarchTime() public view returns(uint, uint, uint) {
+        return ( ownerStartMarchTime[msg.sender], uint(now) - ownerStartMarchTime[msg.sender], ownerTotalMarchTime[msg.sender] ) ;
     }
 
     // // return 0 if success else return remaining time
     function updateMarch(address _owner) public returns(uint) {
         if (ownerStartMarchTime[_owner] == 0) return 0;
-        if (now >= ownerStartMarchTime[_owner].add(ownerTotalMarchTime[_owner])) {
+        if (uint(now) >= ownerStartMarchTime[_owner].add(ownerTotalMarchTime[_owner])) {
             // uint num;
             // num = ownerTotalMarchTime[_owner].div(  MarchInstance.levelOfMarch(_owner).mul(MarchInstance.createMarchTime()) );
             // MarchInstance.setNumOfMarch(_owner, MarchInstance.numOfMarch(_owner) + (num));
@@ -79,7 +79,7 @@ contract Barrack {
             return 0;
         }
         else {
-            uint remainingTime = (ownerStartMarchTime[_owner] + ownerTotalMarchTime[_owner]).sub(now);
+            uint remainingTime = (ownerStartMarchTime[_owner] + ownerTotalMarchTime[_owner]).sub(uint(now));
             return remainingTime;
         }
     }

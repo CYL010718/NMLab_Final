@@ -8,6 +8,7 @@ const ModalContent = ({ upgradingIdx, idx, x, y, cellState, index, updateCellSta
   const state = useContext(ContractContext);
   if(!cellState) return <></>
   const { type } = cellState;
+  console.log(x,y);
 
   if(type === "None") {
     return <>

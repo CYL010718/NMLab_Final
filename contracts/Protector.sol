@@ -144,14 +144,14 @@ contract Protector {
         return ownerCreateProtectorTime[_owner];
     }
 
-    function getCreateProtectorTime() public view returns(uint, uint) {
-        return ( now - ownerStartCreateTime[msg.sender], ownerCreateProtectorTime[msg.sender] ) ;
+    function getCreateProtectorTime() public view returns(uint, uint, uint) {
+        return ( ownerStartCreateTime[msg.sender], uint(now) - ownerStartCreateTime[msg.sender], ownerCreateProtectorTime[msg.sender] ) ;
     }
 
     // // return 0 if success else return remaining time
     function updateCreateProtector(address _owner) public returns(uint) {
          if (ownerStartCreateTime[_owner] == 0) return 0;
-         if (now >= ownerStartCreateTime[_owner].add(ownerCreateProtectorTime[_owner])) {
+         if (uint(now) >= ownerStartCreateTime[_owner].add(ownerCreateProtectorTime[_owner])) {
              uint num;
              num = ownerCreateProtectorTime[_owner].div(  levelOfProtector[_owner].mul(createProtectorTime) );
              setNumOfProtector(_owner, numOfProtector[_owner] + (num));
@@ -161,7 +161,7 @@ contract Protector {
              return 0;
          }
          else {
-             uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateProtectorTime[_owner]).sub(now);
+             uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateProtectorTime[_owner]).sub(uint(now));
              return remainingTime;
          }
      }

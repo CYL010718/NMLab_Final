@@ -96,14 +96,14 @@ contract Wall {
         return ownerCreateWallTime[_owner];
     }
 
-    function getCreateWallTime() public view returns(uint, uint) {
-        return ( now - ownerStartCreateTime[msg.sender], ownerCreateWallTime[msg.sender] ) ;
+    function getCreateWallTime() public view returns(uint, uint, uint) {
+        return ( ownerStartCreateTime[msg.sender], uint(now) - ownerStartCreateTime[msg.sender], ownerCreateWallTime[msg.sender] ) ;
     }
 
      // // return 0 if success else return remaining time
     function updateCreateWall(address _owner) public returns(uint) {
         if (ownerStartCreateTime[_owner] == 0) return 0;
-        if (now >= ownerStartCreateTime[_owner].add(ownerCreateWallTime[_owner])) {
+        if (uint(now) >= ownerStartCreateTime[_owner].add(ownerCreateWallTime[_owner])) {
             uint num;
             num = ownerCreateWallTime[_owner].div(levelOfWall[_owner].mul(createWallTime) );
             setNumOfWall(_owner, numOfWall[_owner] + (num));
@@ -113,7 +113,7 @@ contract Wall {
             return 0;
         }
         else {
-            uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateWallTime[_owner]).sub(now);
+            uint remainingTime = (ownerStartCreateTime[_owner] + ownerCreateWallTime[_owner]).sub(uint(now));
             return remainingTime;
         }
      }

@@ -31,8 +31,8 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
     const startUpgradeSoldier = async () => {
         await contract.methods.startUpgradeSoldier().send({from: account});
         const getUpgradeTime = await contract.methods.getUpgradeSoldierTime().call({from: account});
-        const nowStartPeriod = parseInt( getUpgradeTime[0] );
-        const UpgradeTimeNeed = parseInt( getUpgradeTime[1] );
+        const nowStartPeriod = parseInt( getUpgradeTime[1] );
+        const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
         console.log("upgradeSoldier: ", nowStartPeriod, UpgradeTimeNeed);
         if(UpgradeTimeNeed == 0) {
             alert("Not enough resource!");
@@ -47,8 +47,8 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
     const confirmUpgradeSoldier = async () => {
         await contract.methods.updateUpgradeSoldier(account).send({from: account});
         const getUpgradeTime = await contract.methods.getUpgradeSoldierTime().call({from: account});
-        const nowStartPeriod = parseInt( getUpgradeTime[0] );
-        const UpgradeTimeNeed = parseInt( getUpgradeTime[1] );
+        const nowStartPeriod = parseInt( getUpgradeTime[1] );
+        const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
         if(UpgradeTimeNeed != 0) {
             alert("confirm failed");
             return;
@@ -61,8 +61,8 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
     const startUpgradeCannon = async () => {
         await contract.methods.startUpgradeCannon().send({from: account});
         const getUpgradeTime = await contract.methods.getUpgradeCannonTime().call({from: account});
-        const nowStartPeriod = parseInt( getUpgradeTime[0] );
-        const UpgradeTimeNeed = parseInt( getUpgradeTime[1] );
+        const nowStartPeriod = parseInt( getUpgradeTime[1] );
+        const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
         console.log("UpgradeCannon: ", nowStartPeriod, UpgradeTimeNeed);
         if(UpgradeTimeNeed == 0) {
             alert("Not enough resource!");
@@ -77,8 +77,8 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
     const confirmUpgradeCannon = async () => {
         await contract.methods.updateUpgradeCannon(account).send({from: account});
         const getUpgradeTime = await contract.methods.getUpgradeCannonTime().call({from: account});
-        const nowStartPeriod = parseInt( getUpgradeTime[0] );
-        const UpgradeTimeNeed = parseInt( getUpgradeTime[1] );
+        const nowStartPeriod = parseInt( getUpgradeTime[1] );
+        const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
         if(UpgradeTimeNeed != 0) {
             alert("confirm failed");
             return;
@@ -91,8 +91,8 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
     const startUpgradeProtector = async () => {
         await contract.methods.startUpgradeProtector().send({from: account});
         const getUpgradeTime = await contract.methods.getUpgradeProtectorTime().call({from: account});
-        const nowStartPeriod = parseInt( getUpgradeTime[0] );
-        const UpgradeTimeNeed = parseInt( getUpgradeTime[1] );
+        const nowStartPeriod = parseInt( getUpgradeTime[1] );
+        const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
         console.log("UpgradeProtector: ", nowStartPeriod, UpgradeTimeNeed);
         if(UpgradeTimeNeed == 0) {
             alert("Not enough resource!");
@@ -107,8 +107,8 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
     const confirmUpgradeProtector = async () => {
         await contract.methods.updateUpgradeProtector(account).send({from: account});
         const getUpgradeTime = await contract.methods.getUpgradeProtectorTime().call({from: account});
-        const nowStartPeriod = parseInt( getUpgradeTime[0] );
-        const UpgradeTimeNeed = parseInt( getUpgradeTime[1] );
+        const nowStartPeriod = parseInt( getUpgradeTime[1] );
+        const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
         console.log("Confirm: ", nowStartPeriod, UpgradeTimeNeed);
         if(UpgradeTimeNeed != 0) {
             alert("confirm failed");
@@ -122,8 +122,8 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
     const startUpgradeSpy = async () => {
         await contract.methods.startUpgradeSpy().send({from: account});
         const getUpgradeTime = await contract.methods.getUpgradeSpyTime().call({from: account});
-        const nowStartPeriod = parseInt( getUpgradeTime[0] );
-        const UpgradeTimeNeed = parseInt( getUpgradeTime[1] );
+        const nowStartPeriod = parseInt( getUpgradeTime[1] );
+        const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
         console.log("UpgradeSpy: ", nowStartPeriod, UpgradeTimeNeed);
         if(UpgradeTimeNeed == 0) {
             alert("Not enough resource!");
@@ -138,8 +138,8 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
     const confirmUpgradeSpy = async () => {
         await contract.methods.updateUpgradeSpy(account).send({from: account});
         const getUpgradeTime = await contract.methods.getUpgradeSpyTime().call({from: account});
-        const nowStartPeriod = parseInt( getUpgradeTime[0] );
-        const UpgradeTimeNeed = parseInt( getUpgradeTime[1] );
+        const nowStartPeriod = parseInt( getUpgradeTime[1] );
+        const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
         if(UpgradeTimeNeed != 0) {
             alert("confirm failed");
             return;
@@ -271,9 +271,6 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
             {
                 soldierUpgrading ?
                 <>
-                <Header as='h4' textAlign='center'>
-                Upgrade Progress
-                </Header>
                 <Progress progress='percent' percent={soldierUpgradeProgress} indicating>
                     Upgrade Progress
                 </Progress>
@@ -298,9 +295,6 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
             {
                 cannonUpgrading ?
                 <>
-                <Header as='h4' textAlign='center'>
-                Upgrade Progress
-                </Header>
                 <Progress progress='percent' percent={cannonUpgradeProgress} indicating>
                     Upgrade Progress
                 </Progress>
@@ -325,9 +319,6 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
             {
                 protectorUpgrading ?
                 <>
-                <Header as='h4' textAlign='center'>
-                Upgrade Progress
-                </Header>
                 <Progress progress='percent' percent={protectorUpgradeProgress} indicating>
                     Upgrade Progress
                 </Progress>
@@ -352,9 +343,6 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
             {
                 spyUpgrading ?
                 <>
-                <Header as='h4' textAlign='center'>
-                Upgrade Progress
-                </Header>
                 <Progress progress='percent' percent={spyUpgradeProgress} indicating>
                     Upgrade Progress
                 </Progress>
