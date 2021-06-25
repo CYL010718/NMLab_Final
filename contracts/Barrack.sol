@@ -49,42 +49,44 @@ contract Barrack {
     function getSoldierAmount(address _owner) public view returns(uint) {
         return soldierInstance.getSoldierAmount(_owner);
     }
+    
 
-    // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
-    function startCreateSoldier(uint number) public returns(uint) {
-        address _owner = msg.sender;
-        if(soldierInstance.ownerStartCreateTime(_owner) != 0) return uint(0); // check if there is already creating soldiers
-        bool enoughResource;
-        uint lvOfSoldier;
-        enoughResource = soldierInstance._createSoldier(_owner, number);
-        lvOfSoldier =  soldierInstance.levelOfSoldier(_owner);
-        if(enoughResource == false) return uint(0);
-        soldierInstance.setStartCreateTime(_owner, uint(now));
-        soldierInstance.setCreateSoldierTime(_owner, soldierInstance.createSoldierTime() * lvOfSoldier * number);
-        return soldierInstance.ownerCreateSoldierTime(_owner);
-    }
+    // // return 0 if failed (maybe already creating or not enough resource) otherwise return createtime
+    // function startCreateSoldier(uint number) public returns(uint) {
+    //     address _owner = msg.sender;
+    //     if(soldierInstance.ownerStartCreateTime(_owner) != 0) return uint(0); // check if there is already creating soldiers
+    //     bool enoughResource;
+    //     uint lvOfSoldier;
+    //     enoughResource = soldierInstance._createSoldier(_owner, number);
+    //     lvOfSoldier =  soldierInstance.levelOfSoldier(_owner);
+    //     if(enoughResource == false) return uint(0);
+    //     soldierInstance.setStartCreateTime(_owner, uint(now));
+    //     soldierInstance.setCreateSoldierTime(_owner, soldierInstance.createSoldierTime() * lvOfSoldier * number);
+    //     return soldierInstance.ownerCreateSoldierTime(_owner);
+    // }
 
-    function getCreateSoldierTime() public view returns(uint, uint) {
-        return ( now - soldierInstance.ownerStartCreateTime(msg.sender), soldierInstance.ownerCreateSoldierTime(msg.sender) ) ;
-    }
+    // function getCreateSoldierTime() public view returns(uint, uint) {
+    //     return ( now - soldierInstance.ownerStartCreateTime(msg.sender), soldierInstance.ownerCreateSoldierTime(msg.sender) ) ;
+    // }
 
-    // // return 0 if success else return remaining time
-    function updateCreateSoldier(address _owner) public returns(uint) {
-        if (soldierInstance.ownerStartCreateTime(_owner) == 0) return 0;
-        if (now >= soldierInstance.ownerStartCreateTime(_owner).add(soldierInstance.ownerCreateSoldierTime(_owner))) {
-            uint num;
-            num = soldierInstance.ownerCreateSoldierTime(_owner).div(  soldierInstance.levelOfSoldier(_owner).mul(soldierInstance.createSoldierTime()) );
-            soldierInstance.setNumOfSoldier(_owner, soldierInstance.numOfSoldier(_owner) + (num));
-            soldierInstance.setStartCreateTime(_owner, 0);
-            soldierInstance.setCreateSoldierTime(_owner, 0);
-            soldierInstance._updatePower(_owner);
-            return 0;
-        }
-        else {
-            uint remainingTime = (soldierInstance.ownerStartCreateTime(_owner) + soldierInstance.ownerCreateSoldierTime(_owner)).sub(now);
-            return remainingTime;
-        }
-    }
+    // // // return 0 if success else return remaining time
+    // function updateCreateSoldier(address _owner) public returns(uint) {
+    //     if (soldierInstance.ownerStartCreateTime(_owner) == 0) return 0;
+    //     if (now >= soldierInstance.ownerStartCreateTime(_owner).add(soldierInstance.ownerCreateSoldierTime(_owner))) {
+    //         uint num;
+    //         num = soldierInstance.ownerCreateSoldierTime(_owner).div(  soldierInstance.levelOfSoldier(_owner).mul(soldierInstance.createSoldierTime()) );
+    //         soldierInstance.setNumOfSoldier(_owner, soldierInstance.numOfSoldier(_owner) + (num));
+    //         soldierInstance.setStartCreateTime(_owner, 0);
+    //         soldierInstance.setCreateSoldierTime(_owner, 0);
+    //         soldierInstance._updatePower(_owner);
+    //         return 0;
+    //     }
+    //     else {
+    //         uint remainingTime = (soldierInstance.ownerStartCreateTime(_owner) + soldierInstance.ownerCreateSoldierTime(_owner)).sub(now);
+    //         return remainingTime;
+    //     }
+    // }
+    
 
     function getSpyAmount(address _owner) public view returns(uint) {
         return SpyInstance.getSpyAmount(_owner);
