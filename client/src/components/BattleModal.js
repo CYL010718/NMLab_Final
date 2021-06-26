@@ -34,7 +34,7 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
     const nowStartPeriod = parseInt( getMarchTime[1] );
     const marchingTimeNeed = parseInt( getMarchTime[2] );
     //console.log("createSoldier: ", nowStartPeriod, createTimeNeed);
-    if(marchingTimeNeed == 0) {
+    if(marchingTimeNeed === 0) {
         alert("Not enough resource!");
         return;
     }
@@ -44,12 +44,14 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
   }
 
   const sliceBattleLog = async (log) => {
+    let logAry = [];
     while(log.search("\n") !== -1){
-      await battleLog.push(log.slice(0, log.search("\n")));
+      await logAry.push(log.slice(0, log.search("\n")));
       log = log.slice(log.search("\n") + 1);
     }
-    console.log(battleLog);
-    return log 
+    logAry.push(log);
+    console.log(logAry);
+    return logAry
   }
   const goBattle = async () => {
     console.log("Battle");
@@ -63,11 +65,12 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
     setMarchPeriod(0);
     setMarchTimeNeed(0);
     const returnLog = await sliceBattleLog(log);
-    battleLog.push(returnLog);
+    setBattleLog(returnLog);
+    //battleLog.push(returnLog);
     console.log(battleLog);
     //setBattleLog(log);
-    // setMyPower(myNewPower);
-    // setUserPower(userNewPower);
+    setMyPower(myNewPower);
+    setUserPower(userNewPower);
   }
 
   const sendSpy = async () => {
@@ -157,19 +160,27 @@ const BattleModal = ({ myIdx, userIdx, myPower, userPower, setMyPower, setUserPo
       clearTimeout(handle);
     }
   }, [state, marchPeriod, marchTimeNeed])
-
+/*
   const outputLog = battleLog.map((log, idx) => {
     //console.log(log);
     return <div key = {idx}> {log} </div>
   });
   console.log(outputLog);
+  */
   return <>
   { battled ? 
     <Modal.Content>
       <Grid columns='equal' divided padded>
         <Grid.Row stretch = "true">
           <Grid.Column textAlign = "center">
-            <div>{outputLog}</div>
+            <div>
+              {
+                battleLog.map((log, idx) => {
+                  return <p key = {idx}> {log} </p>
+                })
+                
+              }
+            </div>
           </Grid.Column>
         </Grid.Row>
       </Grid>

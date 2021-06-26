@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Modal, Grid, Icon, Segment, Header, Progress, Image } from 'semantic-ui-react';
+import { Button, Modal, Grid, Segment, Header, Progress, Image } from 'semantic-ui-react';
 import foodpng from '../../images/food_noback.png';
 
 const PRODUCTION_RATE = 10;

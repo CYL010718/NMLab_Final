@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Modal, Grid, Icon, Segment, Header, Input, Progress, Image, GridColumn } from 'semantic-ui-react';
-import soldierpng from '../../images/soldier_noback.png';
+import { Button,  Grid,  Segment, Header, Progress} from 'semantic-ui-react';
+//import soldierpng from '../../images/soldier_noback.png';
 
 const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
     const [ soldierUpgrading, setSoldierUpgrading ] = useState(false);
@@ -34,7 +34,7 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
         const nowStartPeriod = parseInt( getUpgradeTime[1] );
         const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
         console.log("upgradeSoldier: ", nowStartPeriod, UpgradeTimeNeed);
-        if(UpgradeTimeNeed == 0) {
+        if(UpgradeTimeNeed === 0) {
             alert("Not enough resource!");
             return;
         }
@@ -47,9 +47,9 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
     const confirmUpgradeSoldier = async () => {
         await contract.methods.updateUpgradeSoldier(account).send({from: account});
         const getUpgradeTime = await contract.methods.getUpgradeSoldierTime().call({from: account});
-        const nowStartPeriod = parseInt( getUpgradeTime[1] );
+        //const nowStartPeriod = parseInt( getUpgradeTime[1] );
         const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
-        if(UpgradeTimeNeed != 0) {
+        if(UpgradeTimeNeed !== 0) {
             alert("confirm failed");
             return;
         }
@@ -64,7 +64,7 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
         const nowStartPeriod = parseInt( getUpgradeTime[1] );
         const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
         console.log("UpgradeCannon: ", nowStartPeriod, UpgradeTimeNeed);
-        if(UpgradeTimeNeed == 0) {
+        if(UpgradeTimeNeed === 0) {
             alert("Not enough resource!");
             return;
         }
@@ -77,9 +77,9 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
     const confirmUpgradeCannon = async () => {
         await contract.methods.updateUpgradeCannon(account).send({from: account});
         const getUpgradeTime = await contract.methods.getUpgradeCannonTime().call({from: account});
-        const nowStartPeriod = parseInt( getUpgradeTime[1] );
+        //const nowStartPeriod = parseInt( getUpgradeTime[1] );
         const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
-        if(UpgradeTimeNeed != 0) {
+        if(UpgradeTimeNeed !== 0) {
             alert("confirm failed");
             return;
         }
@@ -94,7 +94,7 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
         const nowStartPeriod = parseInt( getUpgradeTime[1] );
         const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
         console.log("UpgradeProtector: ", nowStartPeriod, UpgradeTimeNeed);
-        if(UpgradeTimeNeed == 0) {
+        if(UpgradeTimeNeed === 0) {
             alert("Not enough resource!");
             return;
         }
@@ -110,7 +110,7 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
         const nowStartPeriod = parseInt( getUpgradeTime[1] );
         const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
         console.log("Confirm: ", nowStartPeriod, UpgradeTimeNeed);
-        if(UpgradeTimeNeed != 0) {
+        if(UpgradeTimeNeed !== 0) {
             alert("confirm failed");
             return;
         }
@@ -125,7 +125,7 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
         const nowStartPeriod = parseInt( getUpgradeTime[1] );
         const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
         console.log("UpgradeSpy: ", nowStartPeriod, UpgradeTimeNeed);
-        if(UpgradeTimeNeed == 0) {
+        if(UpgradeTimeNeed === 0) {
             alert("Not enough resource!");
             return;
         }
@@ -138,9 +138,9 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
     const confirmUpgradeSpy = async () => {
         await contract.methods.updateUpgradeSpy(account).send({from: account});
         const getUpgradeTime = await contract.methods.getUpgradeSpyTime().call({from: account});
-        const nowStartPeriod = parseInt( getUpgradeTime[1] );
+        //const nowStartPeriod = parseInt( getUpgradeTime[1] );
         const UpgradeTimeNeed = parseInt( getUpgradeTime[2] );
-        if(UpgradeTimeNeed != 0) {
+        if(UpgradeTimeNeed !== 0) {
             alert("confirm failed");
             return;
         }
@@ -159,8 +159,6 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
         if(a < b){
             console.log("Hii");
             return [a + 3, b];
-            const newState = { ...cellState, soldierUpgrade: [a + 3, b]};
-            updateCellState(idx, newState);
         } 
         else{
             console.log(a,b);
@@ -175,8 +173,6 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
         const [ a,b ] = cellState.cannonUpgrade;
         if(a < b){
             return [a + 3, b];
-            const newState = { ...cellState, cannonUpgrade: [a + 3, b]};
-            updateCellState(idx, newState);
         } 
         else{
             return [a,b];
@@ -190,33 +186,22 @@ const LabPage = ({ idx, contract, account, cellState, updateCellState }) => {
         const [ a,b ] = cellState.protectorUpgrade;
         console.log(a,b);
         if(a < b){
-            console.log("Hii")
             return [a + 3, b];
-            const newState = { ...cellState, protectorUpgrade: [a + 3, b]};
-            updateCellState(idx, newState);
         } 
         else{
-            console.log("Hiii")
             return [a,b];
         } 
     }
 
     const updateSpyUpgrade = () => {
-        console.log(cellState.spyUpgrade);
         if(cellState.spyUpgrade === false || cellState.spyUpgrade === undefined){
-            console.log(1);
             return cellState.spyUpgrade;
         }
         const [ a,b ] = cellState.spyUpgrade;
         if(a < b){
-            console.log(2);
             return [a + 3, b];
-            const newState = { ...cellState, spyUpgrade: [a + 3, b]};
-            updateCellState(idx, newState);
         }
         else{
-            console.log(3);
-            console.log(a,b);
             return [a,b];
         } 
     }

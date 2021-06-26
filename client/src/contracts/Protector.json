@@ -21100,10 +21100,16 @@
       "links": {},
       "address": "0x559962E60C88B18663C94889aB1C87cCed7Fb372",
       "transactionHash": "0xdff9ab8334588dbaf292cdcf006f6662c3cd9734489f82b98b9b563f92413e7c"
+    },
+    "1624679942100": {
+      "events": {},
+      "links": {},
+      "address": "0x1906Aca10e8bC4Fa900E7a08BC934a1C1a7D3298",
+      "transactionHash": "0x5c7d11ca01ba9b183b31c0a52715cf4139bf540a61e9a8e338a62cbd7b965751"
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2021-06-25T16:59:18.369Z",
+  "updatedAt": "2021-06-26T04:00:34.588Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}

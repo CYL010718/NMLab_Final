@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Image } from 'semantic-ui-react';
+import { Image } from 'semantic-ui-react';
 import farm from '../images/farm.png';
 import mine from '../images/mine.png';
 import quarry from '../images/quarry.png';

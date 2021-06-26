@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Button, Modal, Grid, Icon, Segment, Header, Menu, Pagination } from 'semantic-ui-react';
+import React from 'react';
+import {  Modal, Grid } from 'semantic-ui-react';
 import { Page } from './index'
 
 const None = ({ upgradingIdx, idx, x, y, produceContract, buildingContract, barrackContract, labContract, account, updateCellState, page }) => {

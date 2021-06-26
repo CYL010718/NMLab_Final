@@ -26,7 +26,7 @@ const Navbar = ({ makeReload }) => {
     stone: "--",
     coin: "--"
   });
-  const [ updateTimes, setUpdateTimes ] = useState(0);
+  //const [ updateTimes, setUpdateTimes ] = useState(0);
 
   const updateCountdown = async() => {
     if(!beingAttacked){
@@ -74,7 +74,7 @@ const Navbar = ({ makeReload }) => {
       const marchStartTime = parseInt( getMarchTime[0] );
       const marchingTimeNeed = parseInt( getMarchTime[2] );
       const attackerInfo = await accountContract.methods.getAttackerInfo(accounts[0]).call({from: accounts[0]});
-      const isAttacked = attackerInfo[0];
+      //const isAttacked = attackerInfo[0];
       const attackerAddress = attackerInfo[1];
       
       console.log(attackerAddress);

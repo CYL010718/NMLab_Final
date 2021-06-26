@@ -11,12 +11,11 @@ import ProtectorContract from "./contracts/Protector.json"
 import SpyContract from "./contracts/Spy.json"
 
 import getWeb3 from "./getWeb3";
-import { Navbar, GameScene } from './components';
+import { GameScene } from './components';
 
 // import "./App.css";
 
 import 'semantic-ui-css/semantic.min.css';
-import Building from "./components/Building";
 
 export const ContractContext = React.createContext();
 const App = () => {

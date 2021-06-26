@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import BarrackPage from './BarrackPage'
 import { ContractContext } from '../../App';
-import { Button, Modal, Grid, Icon, Segment, Header, Input, Progress, Menu, Image } from 'semantic-ui-react';
+import { Button, Modal, Grid, Segment, Header, Progress, Menu, Image } from 'semantic-ui-react';
 import soldierpng from '../../images/soldier_noback.png';
 
 const Barrack = ({ idx, x, y, cellState, account, updateCellState }) => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Button, Modal, Grid, Icon, Segment, Header, Input, Progress, Image } from 'semantic-ui-react';
+import { Button, Grid, Segment, Header, Input, Progress } from 'semantic-ui-react';
 import { ContractContext } from '../../App';
-import soldierpng from '../../images/soldier_noback.png';
+//import soldierpng from '../../images/soldier_noback.png';
 
 const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCellState }) => {
     const state = useContext(ContractContext);
@@ -28,7 +28,7 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
         const nowStartPeriod = parseInt( getCreateTime[1] );
         const createTimeNeed = parseInt( getCreateTime[2] );
         console.log("createSoldier: ", nowStartPeriod, createTimeNeed);
-        if(createTimeNeed == 0) {
+        if(createTimeNeed === 0) {
             alert("Not enough resource!");
             return;
         }
@@ -41,10 +41,10 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
     const confirmCreateSoldier = async () => {
         await soldierContract.methods.updateCreateSoldier(account).send({from: account});
         const getCreateTime = await soldierContract.methods.getCreateSoldierTime().call({from: account});
-        const nowStartPeriod = parseInt( getCreateTime[1] );
+        //const nowStartPeriod = parseInt( getCreateTime[1] );
         const createTimeNeed = parseInt( getCreateTime[2] );
         console.log(getCreateTime);
-        if(createTimeNeed != 0) {
+        if(createTimeNeed !== 0) {
             alert("confirm failed");
             return;
         }
@@ -59,7 +59,7 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
         const nowStartPeriod = parseInt( getCreateTime[1] );
         const createTimeNeed = parseInt( getCreateTime[2] );
         console.log(getCreateTime);
-        if(createTimeNeed == 0) {
+        if(createTimeNeed === 0) {
             alert("Not enough resource!");
             return;
         }
@@ -72,10 +72,10 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
     const confirmCreateCannon = async () => {
         await cannonContract.methods.updateCreateCannon(account).send({from: account});
         const getCreateTime = await cannonContract.methods.getCreateCannonTime().call({from: account});
-        const nowStartPeriod = parseInt( getCreateTime[1] );
+        //const nowStartPeriod = parseInt( getCreateTime[1] );
         const createTimeNeed = parseInt( getCreateTime[2] );
         console.log(getCreateTime);
-        if(createTimeNeed != 0) {
+        if(createTimeNeed !== 0) {
             alert("confirm failed");
             return;
         }
@@ -90,7 +90,7 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
         const nowStartPeriod = parseInt( getCreateTime[1] );
         const createTimeNeed = parseInt( getCreateTime[2] );
         console.log("createProtector: ", nowStartPeriod, createTimeNeed);
-        if(createTimeNeed == 0) {
+        if(createTimeNeed === 0) {
             alert("Not enough resource!");
             return;
         }
@@ -106,7 +106,7 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
         const nowStartPeriod = parseInt( getCreateTime[1] );
         const createTimeNeed = parseInt( getCreateTime[2] );
         console.log("Confirm: ", nowStartPeriod, createTimeNeed);
-        if(createTimeNeed != 0) {
+        if(createTimeNeed !== 0) {
             alert("confirm failed");
             return;
         }
@@ -121,7 +121,7 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
         const nowStartPeriod = parseInt( getCreateTime[1] );
         const createTimeNeed = parseInt( getCreateTime[2] );
         console.log("createSpy: ", nowStartPeriod, createTimeNeed);
-        if(createTimeNeed == 0) {
+        if(createTimeNeed === 0) {
             alert("Not enough resource!");
             return;
         }
@@ -134,9 +134,9 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
     const confirmCreateSpy = async () => {
         await spyContract.methods.updateCreateSpy(account).send({from: account});
         const getCreateTime = await spyContract.methods.getCreateSpyTime().call({from: account});
-        const nowStartPeriod = parseInt( getCreateTime[1] );
+        //const nowStartPeriod = parseInt( getCreateTime[1] );
         const createTimeNeed = parseInt( getCreateTime[2] );
-        if(createTimeNeed != 0) {
+        if(createTimeNeed !== 0) {
             alert("confirm failed");
             return;
         }
@@ -151,7 +151,7 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
         const nowStartPeriod = parseInt( getCreateTime[1] );
         const createTimeNeed = parseInt( getCreateTime[2] );
         //console.log("createSpy: ", nowStartPeriod, createTimeNeed);
-        if(createTimeNeed == 0) {
+        if(createTimeNeed === 0) {
             alert("Not enough resource!");
             return;
         }
@@ -164,9 +164,9 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
     const confirmCreateWall = async () => {
         await wallContract.methods.updateCreateWall(account).send({from: account});
         const getCreateTime = await wallContract.methods.getCreateWallTime().call({from: account});
-        const nowStartPeriod = parseInt( getCreateTime[1] );
+        //const nowStartPeriod = parseInt( getCreateTime[1] );
         const createTimeNeed = parseInt( getCreateTime[2] );
-        if(createTimeNeed != 0) {
+        if(createTimeNeed !== 0) {
             alert("confirm failed");
             return;
         }
@@ -185,8 +185,6 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
         if(a < b){
             console.log("Hii");
             return [a + 3, b];
-            const newState = { ...cellState, soldierProduce: [a + 3, b]};
-            updateCellState(idx, newState);
         } 
         else{
             console.log(a,b);
@@ -201,8 +199,6 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
         const [ a,b ] = cellState.cannonProduce;
         if(a < b){
             return [a + 3, b];
-            const newState = { ...cellState, cannonProduce: [a + 3, b]};
-            updateCellState(idx, newState);
         } 
         else{
             return [a,b];
@@ -218,8 +214,6 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
         if(a < b){
             console.log("Hii")
             return [a + 3, b];
-            const newState = { ...cellState, protectorProduce: [a + 3, b]};
-            updateCellState(idx, newState);
         } 
         else{
             console.log("Hiii")
@@ -237,8 +231,6 @@ const BarrackPage = ({ page, idx, level, upgrading, account, cellState, updateCe
         if(a < b){
             console.log(2);
             return [a + 3, b];
-            const newState = { ...cellState, spyProduce: [a + 3, b]};
-            updateCellState(idx, newState);
         }
         else{
             console.log(3);

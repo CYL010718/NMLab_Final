@@ -4,7 +4,7 @@ import { Modal } from 'semantic-ui-react';
 import "../styles/Map.css";
 import { None, Farm, Sawmill, Mine, Manor, Quarry, Barrack, Laboratory } from './ModalComponents/index';
 
-const ModalContent = ({ upgradingIdx, idx, x, y, cellState, index, updateCellState, page = {page} }) => {
+const ModalContent = ({ upgradingIdx, idx, x, y, cellState, index, updateCellState, page }) => {
   const state = useContext(ContractContext);
   if(!cellState) return <></>
   const { type } = cellState;

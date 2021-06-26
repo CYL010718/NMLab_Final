@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Grid, Icon, Segment, Header, Image } from 'semantic-ui-react';
+import { Button, Grid, Segment, Header, Image } from 'semantic-ui-react';
 import woodpng from '../../images/wood_noback.png';
 import ironpng from '../../images/iron_noback.png';
 import stonepng from '../../images/stone_noback.png';

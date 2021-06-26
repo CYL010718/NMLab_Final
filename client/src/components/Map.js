@@ -1,7 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Icon, Image, Button } from 'semantic-ui-react';
 import { ContractContext } from "../App";
-import { Battle } from './index'
 import { useMeasure } from 'react-use'
 import Cell from './Cell';
 import "../styles/Map.css";
@@ -133,14 +131,14 @@ const Map = () => {
         console.log(getSoldierCreateTime)
         const soldierStartTime= parseInt( getSoldierCreateTime[0] );
         const createSoldierTimeNeed = parseInt( getSoldierCreateTime[2] );
-        if(createSoldierTimeNeed != 0) {
+        if(createSoldierTimeNeed !== 0) {
           pdIdx = idx;
           newState = { ...newState, soldierProduce: [ parseInt(Date.now() / 1000) - soldierStartTime, createSoldierTimeNeed ] };
         }
         const getSpyCreateTime = await spyContract.methods.getCreateSpyTime().call({from: accounts[0]});
         const spyStartTime = parseInt( getSpyCreateTime[0] );
         const createSpyTimeNeed = parseInt( getSpyCreateTime[2] );
-        if(createSpyTimeNeed != 0) {
+        if(createSpyTimeNeed !== 0) {
           pdIdx = idx;
           newState = { ...newState, spyProduce: [ parseInt(Date.now() / 1000) - spyStartTime, createSpyTimeNeed ] };
         }
@@ -148,7 +146,7 @@ const Map = () => {
         const getCannonCreateTime = await cannonContract.methods.getCreateCannonTime().call({from: accounts[0]});
         const cannonStartTime = parseInt( getCannonCreateTime[0] );
         const createCannonTimeNeed = parseInt( getCannonCreateTime[2] );
-        if(createCannonTimeNeed != 0) {
+        if(createCannonTimeNeed !== 0) {
           pdIdx = idx;
           newState = { ...newState, cannonProduce: [ parseInt(Date.now() / 1000) - cannonStartTime, createCannonTimeNeed ] };
         }
@@ -156,14 +154,14 @@ const Map = () => {
         const protectorStartTime = parseInt( getProtectorCreateTime[0] );
         const createProtectorTimeNeed = parseInt( getProtectorCreateTime[2] );
         console.log(parseInt(Date.now() / 1000))
-        if(createProtectorTimeNeed != 0) {
+        if(createProtectorTimeNeed !== 0) {
           pdIdx = idx;
           newState = { ...newState, protectorProduce: [ parseInt(Date.now() / 1000) - protectorStartTime, createProtectorTimeNeed ] };
         }
         const getWallCreateTime = await wallContract.methods.getCreateWallTime().call({from: accounts[0]});
         const wallStartTime = parseInt( getWallCreateTime[0] );
         const createWallTimeNeed = parseInt( getWallCreateTime[2] );
-        if(createWallTimeNeed != 0) {
+        if(createWallTimeNeed !== 0) {
           pdIdx = idx;
           newState = { ...newState, wallProduce: [ parseInt(Date.now() / 1000) - wallStartTime, createWallTimeNeed ] };
         }
@@ -172,28 +170,28 @@ const Map = () => {
         const getSoldierUpgradeTime = await labContract.methods.getUpgradeSoldierTime().call({from: accounts[0]});
         const soldierStartTime = parseInt( getSoldierUpgradeTime[0] );
         const upgradeSoldierTimeNeed = parseInt( getSoldierUpgradeTime[2] );
-        if(upgradeSoldierTimeNeed != 0) {
+        if(upgradeSoldierTimeNeed !== 0) {
           pdIdx = idx;
           newState = { ...newState, soldierUpgrade: [ parseInt(Date.now() / 1000) - soldierStartTime, upgradeSoldierTimeNeed ] };
         }
         const getSpyUpgradeTime = await labContract.methods.getUpgradeSpyTime().call({from: accounts[0]});
         const spyStartTime = parseInt( getSpyUpgradeTime[0] );
         const upgradeSpyTimeNeed = parseInt( getSpyUpgradeTime[2] );
-        if(upgradeSpyTimeNeed != 0) {
+        if(upgradeSpyTimeNeed !== 0) {
           pdIdx = idx;
           newState = { ...newState, spyUpgrade: [ parseInt(Date.now() / 1000) - spyStartTime, upgradeSpyTimeNeed ] };
         }
         const getCannonUpgradeTime = await labContract.methods.getUpgradeCannonTime().call({from: accounts[0]});
         const cannonStartTime= parseInt( getCannonUpgradeTime[0] );
         const upgradeCannonTimeNeed = parseInt( getCannonUpgradeTime[2] );
-        if(upgradeCannonTimeNeed != 0) {
+        if(upgradeCannonTimeNeed !== 0) {
           pdIdx = idx;
           newState = { ...newState, cannonUpgrade: [ parseInt(Date.now() / 1000) - cannonStartTime, upgradeCannonTimeNeed ] };
         }
         const getProtectorUpgradeTime = await labContract.methods.getUpgradeProtectorTime().call({from: accounts[0]});
         const protectorStartTime = parseInt( getProtectorUpgradeTime[0] );
         const upgradeProtectorTimeNeed = parseInt( getProtectorUpgradeTime[2] );
-        if(upgradeProtectorTimeNeed != 0) {
+        if(upgradeProtectorTimeNeed !== 0) {
           pdIdx = idx;
           newState = { ...newState, protectorUpgrade: [ parseInt(Date.now() / 1000) - protectorStartTime, upgradeProtectorTimeNeed ] };
         }

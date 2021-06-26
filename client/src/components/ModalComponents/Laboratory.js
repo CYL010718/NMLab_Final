@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import LabPage from './LabPage'
-import { Button, Modal, Grid, Icon, Segment, Header, Input, Progress, Menu, Image } from 'semantic-ui-react';
+import { Modal, Grid, Header, Image } from 'semantic-ui-react';
 import soldierpng from '../../images/soldier_noback.png';
 
 const Laboratory = ({ idx, x, y, cellState, buildingContract, labContract, account, updateCellState }) => {
