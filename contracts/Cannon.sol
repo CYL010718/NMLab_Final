@@ -32,6 +32,7 @@ contract Cannon {
 
     function setCannonLevel(address _owner, uint value) public {
         levelOfCannon[_owner] = value;
+        _updateCannonPower(_owner);
     }
 
     function setStartCreateTime(address _owner, uint value) public {
@@ -52,6 +53,7 @@ contract Cannon {
 
     function setNumOfCannon(address _owner, uint value) public {
         numOfCannon[_owner] = value;
+        _updateCannonPower(_owner);
     }
 
     // function getCannonStartCreateTime(address _owner) public view return(uint) {
@@ -60,15 +62,15 @@ contract Cannon {
 
 
     function _updateCannonPower(address _owner) public {
-        accountInstance.setUserPower(_owner, numOfCannon[_owner] * levelOfCannon[_owner] * cannonPower);
-        accountInstance.setUserHealth(_owner, numOfCannon[_owner] * levelOfCannon[_owner] * cannonHealth);
-
+        accountInstance.setUserCannonPower(_owner, numOfCannon[_owner] * levelOfCannon[_owner] * cannonPower);
+        // accountInstance.setUserHealth(_owner, numOfCannon[_owner] * levelOfCannon[_owner] * cannonHealth);
     }
 
     function _createCannon(address _owner, uint number) public returns(bool) {
         uint foodCost = (25* levelOfCannon[_owner] - 5) * number;
         uint ironCost = (25* levelOfCannon[_owner] - 5) * number;
         uint coinCost = (25* levelOfCannon[_owner] - 5) * number;
+        
        
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
@@ -140,6 +142,7 @@ contract Cannon {
         enoughResource = _createCannon(_owner, number);
         lvOfCannon =  levelOfCannon[_owner];
         if(enoughResource == false) return uint(0);
+        _updateCannonPower(_owner);
         setStartCreateTime(_owner, uint(now));
         setCreateCannonTime(_owner, createCannonTime * lvOfCannon * number);
         return ownerCreateCannonTime[_owner];

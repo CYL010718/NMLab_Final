@@ -32,6 +32,7 @@ contract Protector {
 
     function setProtectorLevel(address _owner, uint value) public {
         levelOfProtector[_owner] = value;
+        _updateProtectorPower(_owner);
     }
 
     function setStartCreateTime(address _owner, uint value) public {
@@ -52,6 +53,7 @@ contract Protector {
 
     function setNumOfProtector(address _owner, uint value) public {
         numOfProtector[_owner] = value;
+        _updateProtectorPower(_owner);
     }
 
     // function getProtectorStartCreateTime(address _owner) public view return(uint) {
@@ -60,8 +62,8 @@ contract Protector {
 
 
     function _updateProtectorPower(address _owner) public {
-        accountInstance.setUserPower(_owner, numOfProtector[_owner] * levelOfProtector[_owner] * protectorPower);
-        accountInstance.setUserHealth(_owner, numOfProtector[_owner] * levelOfProtector[_owner] * protectorHealth);
+        accountInstance.setUserProtectorPower(_owner, numOfProtector[_owner] * levelOfProtector[_owner] * protectorPower);
+        // accountInstance.setUserHealth(_owner, numOfProtector[_owner] * levelOfProtector[_owner] * protectorHealth);
 
     }
 
@@ -78,6 +80,7 @@ contract Protector {
         uint ironCost = 500* levelOfProtector[_owner] - 125;
         uint coinCost = 500* levelOfProtector[_owner] - 125;
         levelOfProtector[_owner] += 1;
+        _updateProtectorPower(_owner);
         return accountInstance.cost(_owner, foodCost, uint(0), ironCost, uint(0), coinCost);
     }
 
@@ -139,6 +142,7 @@ contract Protector {
         enoughResource = _createProtector(_owner, number);
         lvOfProtector =  levelOfProtector[_owner];
         if(enoughResource == false) return uint(0);
+        _updateProtectorPower(_owner);
         setStartCreateTime(_owner, uint(now));
         setCreateProtectorTime(_owner, createProtectorTime * lvOfProtector * number);
         return ownerCreateProtectorTime[_owner];
