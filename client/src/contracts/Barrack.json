@@ -38341,10 +38341,17 @@
       "links": {},
       "address": "0x3C0266294949613a22c3De542FB5830AC9d12bAb",
       "transactionHash": "0x4c012c0cdab1926fa167a56cad0a723f96e803a94491afb28a92accab91d6f88"
+    },
+    "1624713360960": {
+      "events": {},
+      "links": {},
+      "address": "0xd6B82Aa81A23b731D5A69719A81BC64B0dcD79C1",
+      "transactionHash": "0xb77b50d5fe101ad57b49db20d00e33a93514048e4c8febafbec0b3c35a7311f9"
     }
   },
   "schemaVersion": "3.4.0",
-  "updatedAt": "2021-06-26T09:21:17.936Z",
+  "updatedAt": "2021-06-26T13:16:21.878Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },

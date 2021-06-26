@@ -31584,10 +31584,17 @@
       "links": {},
       "address": "0xC985D15DaC7a2e19dC9043D21C94988de92dA2d8",
       "transactionHash": "0x37587e561878de4693960a49b778401b153f78e233c7eab53e53a62002aa61aa"
+    },
+    "1624713360960": {
+      "events": {},
+      "links": {},
+      "address": "0x30826A904cCDA3447C17a0fd995b98b8c2138055",
+      "transactionHash": "0xdde0cd5f98b574fa3ef96d81081f6bbe766e179dc035b2b51b6ddea5f25d4bee"
     }
   },
   "schemaVersion": "3.4.0",
-  "updatedAt": "2021-06-26T09:21:18.018Z",
+  "updatedAt": "2021-06-26T13:16:21.943Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },

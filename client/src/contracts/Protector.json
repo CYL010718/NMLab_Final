@@ -21148,10 +21148,17 @@
       "links": {},
       "address": "0xB0Db2D80cf802663BED18A3FA922724A2B063D74",
       "transactionHash": "0xf33bdfa0e389c86f574dc2d8f0947183ae5bf8422da8e24722bf3e187ad5b0bf"
+    },
+    "1624713360960": {
+      "events": {},
+      "links": {},
+      "address": "0xA90dBDF0e783fb87d026852fd72734ba41d6a7C5",
+      "transactionHash": "0x9015ab2dc9fe72b7cfda07ed3f45f71cfa2a6c0899a139adc93210bd8b8fd734"
     }
   },
   "schemaVersion": "3.4.0",
-  "updatedAt": "2021-06-26T09:21:18.046Z",
+  "updatedAt": "2021-06-26T13:16:21.776Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },

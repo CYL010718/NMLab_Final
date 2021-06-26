@@ -21094,10 +21094,17 @@
       "links": {},
       "address": "0x9B65601718c2432e07E5Ea46Ba3f2D379C5cf168",
       "transactionHash": "0x698b779bfc36ac902eeb807b3117f0510814bf3924b9e4bdd28712b7b35471d2"
+    },
+    "1624713360960": {
+      "events": {},
+      "links": {},
+      "address": "0xedfCa1bb30C59736F310AfE6491f0aBA607Ede58",
+      "transactionHash": "0xd4b7bdbcfef9e32ef0d8eb7211e2b0a6ef5e8e14f0087299231bf657ba6450b3"
     }
   },
   "schemaVersion": "3.4.0",
-  "updatedAt": "2021-06-26T09:21:18.069Z",
+  "updatedAt": "2021-06-26T13:16:21.734Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },

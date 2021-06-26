@@ -31260,10 +31260,17 @@
       "links": {},
       "address": "0xe76e74864DA2a1FE21084acf227B9C249307B742",
       "transactionHash": "0xbc77e1b0d4357271a870276c3db9ab00c841ef92eafa7460c0e5c30e01a3dc6f"
+    },
+    "1624713360960": {
+      "events": {},
+      "links": {},
+      "address": "0x7183078c0A66Bb67ae398505EadC8844C914f7cD",
+      "transactionHash": "0xf3f078898c2bd2dbbb1e02ce5307e9cfb719674218af85fd0520ad6317a065a9"
     }
   },
   "schemaVersion": "3.4.0",
-  "updatedAt": "2021-06-26T09:21:17.968Z",
+  "updatedAt": "2021-06-26T13:16:21.831Z",
+  "networkType": "ethereum",
   "devdoc": {
     "methods": {}
   },
