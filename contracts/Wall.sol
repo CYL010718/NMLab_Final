@@ -29,6 +29,7 @@ contract Wall {
 
     function setWallLevel(address _owner, uint value) public {
         levelOfWall[_owner] = value;
+        _updateWallPower(_owner);
     }
 
     function setStartCreateTime(address _owner, uint value) public {
@@ -49,6 +50,7 @@ contract Wall {
 
     function setNumOfWall(address _owner, uint value) public {
         numOfWall[_owner] = value;
+        _updateWallPower(_owner);
     }
 
     // function getWallStartCreateTime(address _owner) public view return(uint) {
@@ -56,11 +58,11 @@ contract Wall {
     // }
 
 
-    // function _updateWallPower(address _owner) public {
-        // accountInstance.setUserPower(_owner, numOfWall[_owner] * levelOfWall[_owner] * WallPower);
+    function _updateWallPower(address _owner) public {
+        accountInstance.setUserWallPower(_owner, numOfWall[_owner] * levelOfWall[_owner] * WallPower);
         // accountInstance.setUserHealth(_owner, numOfWall[_owner] * levelOfWall[_owner] * WallHealth);
 
-    // }
+    }
 
     function _createWall(address _owner, uint number) public returns(bool) {
         uint foodCost = (25* levelOfWall[_owner] - 5) * number;
@@ -91,6 +93,7 @@ contract Wall {
         enoughResource = _createWall(_owner, number);
         lvOfWall = levelOfWall[_owner];
         if(enoughResource == false) return uint(0);
+        _updateWallPower(_owner);
         setStartCreateTime(_owner, uint(now));
         setCreateWallTime(_owner, createWallTime * lvOfWall * number);
         return ownerCreateWallTime[_owner];

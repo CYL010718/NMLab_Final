@@ -13,6 +13,11 @@ contract Account {
     mapping (address => uint) public power;
     mapping (address => uint) public health;
     mapping (address => uint) public spyPower;
+    mapping (address => uint) public cannonPower;
+    mapping (address => uint) public soldierPower;
+    mapping (address => uint) public protectorPower;
+    mapping (address => uint) public wallPower;
+
     uint public kingdomAmount;
 
     mapping (uint => address) public castleToOwner;
@@ -117,20 +122,48 @@ contract Account {
         return kingdomAmount;
     }
 
-    function getUserPowerById(uint idx) public view returns(uint) {
+    function getUserPowerById(uint idx) public returns(uint) {
         if(idx < kingdomAmount) {
-            return power[castleToOwner[idx]];
+            address idx = castleToOwner[idx];
+            power[idx] = soldierPower[idx] + wallPower[idx] + protectorPower[idx] + cannonPower[idx];
+            return power[idx];
         }
         return 0;
     }
 
-    function getUserPower(address idx) public view returns(uint) {
+    function getUserPower(address idx) public returns(uint) {
+        power[idx] = soldierPower[idx] + wallPower[idx] + protectorPower[idx] + cannonPower[idx];
         return power[idx];
     }
 
     function setUserPower(address idx, uint value) public {
         power[idx] = value;
     }
+
+
+
+    function setUserSoldierPower(address idx, uint value) public {
+        power[idx] = value;
+    }
+
+
+
+    function setUserProtectorPower(address idx, uint value) public {
+        power[idx] = value;
+    }
+
+
+
+    function setUserCannonPower(address idx, uint value) public {
+        power[idx] = value;
+    }
+
+
+
+    function setUserWallPower(address idx, uint value) public {
+        power[idx] = value;
+    }
+
 
     function getUserHealth(address idx) public view returns(uint) {
         return health[idx];

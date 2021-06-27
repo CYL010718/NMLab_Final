@@ -33,6 +33,7 @@ contract Soldier {
     //
     function setSoldierLevel(address _owner, uint value) public {
         levelOfSoldier[_owner] = value;
+        _updatePower(_owner);
     }
 
     function setStartCreateTime(address _owner, uint value) public {
@@ -53,6 +54,7 @@ contract Soldier {
 
     function setNumOfSoldier(address _owner, uint value) public {
         numOfSoldier[_owner] = value;
+        _updatePower(_owner);
     }
 
     // function getSoldierStartCreateTime(address _owner) public view return(uint) {
@@ -61,9 +63,7 @@ contract Soldier {
 
 
     function _updatePower(address _owner) public {
-        accountInstance.setUserPower(_owner, numOfSoldier[_owner] * levelOfSoldier[_owner] * soldierPower);
-        accountInstance.setUserHealth(_owner, numOfSoldier[_owner] * levelOfSoldier[_owner] * soldierHealth);
-
+        accountInstance.setUserSoldierPower(_owner, numOfSoldier[_owner] * levelOfSoldier[_owner] * soldierPower);
     }
 
     function _createSoldier(address _owner, uint number) public returns(bool) {
@@ -140,6 +140,7 @@ contract Soldier {
         enoughResource = _createSoldier(_owner, number);
         lvOfSoldier =  levelOfSoldier[_owner];
         if(enoughResource == false) return uint(0);
+        _updatePower(_owner);
         setStartCreateTime(_owner, uint(now));
         setCreateSoldierTime(_owner, createSoldierTime * lvOfSoldier * number);
         return ownerCreateSoldierTime[_owner];

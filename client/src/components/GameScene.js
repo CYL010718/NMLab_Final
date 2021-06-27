@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext} from 'react';
 import { Map, Battle, Navbar } from './index';
 import { ContractContext } from '../App'
 import { Grid, Button, Image } from 'semantic-ui-react';
-import castlepng from '../images/castle.png';
+import castlepng from '../images/newCastle.png';
 
 
 const GameScene = () => {
@@ -42,10 +42,10 @@ const GameScene = () => {
     <br/>
     <br/>
     <br/>
-    <Image src={castlepng} size="medium" />
+    <Image src={castlepng} size="large" />
     <br/>
     <Button primary size="massive" onClick={() => initializeKingdom()}>
-      Initialize your kingdom!
+      Start building your kingdom!
     </Button>
     </>
     :
