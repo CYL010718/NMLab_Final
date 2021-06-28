@@ -531,7 +531,57 @@ contract Barrack {
                         (dummyQuantityAttacker,dummyQuantityDefender,rivalCannonInjure) = battle_army(_ownerId,_attackedCastleId,0,2,dummyQuantityAttacker,dummyQuantityDefender,rivalCannonInjure) ;    
                         CannonInstance.setNumOfCannon(_attackedCastleId,dummyQuantityDefender) ; 
                     }
-                } 
+                }
+                //5
+                dummyQuantityAttacker = CannonInstance.getCannonAmount(_attackedCastleId);
+                if( dummyQuantityAttacker != 0  ){
+                    battleLog = concatenate(battleLog,"\n敵方火砲攻擊") ; 
+                    dummyQuantityDefender = soldierInstance.getSoldierAmount(_ownerId) ; 
+                    if( dummyQuantityDefender != 0 ){
+                        battleLog = concatenate(battleLog,",攻擊我方神槍手") ; 
+                        (dummyQuantityAttacker,dummyQuantityDefender,ownSoldierInjure) = battle_army(_attackedCastleId,_ownerId,2,1,dummyQuantityAttacker,dummyQuantityDefender,ownSoldierInjure) ; 
+                        soldierInstance.setNumOfSoldier(_ownerId,dummyQuantityDefender) ; 
+                    }
+                    // 第二優先攻擊  
+                    dummyQuantityDefender = ProtectorInstance.getProtectorAmount(_ownerId) ; 
+                    if( dummyQuantityAttacker != 0 && dummyQuantityDefender != 0){       
+                        battleLog = concatenate(battleLog,"\n尚有進攻單位，繼續攻擊我方守衛者") ; 
+                        (dummyQuantityAttacker,dummyQuantityDefender,ownProtectorInjure) = battle_army(_ownerId,_attackedCastleId,2,0,dummyQuantityAttacker,dummyQuantityDefender,ownProtectorInjure) ;
+                        ProtectorInstance.setNumOfProtector(_ownerId,dummyQuantityDefender) ; 
+                    }
+                    // 第三優先攻擊
+                    dummyQuantityDefender = CannonInstance.getCannonAmount(_ownerId) ; 
+                    if( dummyQuantityAttacker != 0 && dummyQuantityDefender != 0){    
+                        battleLog = concatenate(battleLog,"\n尚有進攻單位，繼續攻擊我方火砲") ;
+                        (dummyQuantityAttacker,dummyQuantityDefender,ownCannonInjure) = battle_army(_ownerId,_attackedCastleId,2,2,dummyQuantityAttacker,dummyQuantityDefender,ownCannonInjure) ;    
+                        CannonInstance.setNumOfCannon(_ownerId,dummyQuantityDefender) ; 
+                    }
+                }
+                //6
+                dummyQuantityAttacker = CannonInstance.getCannonAmount(_ownerId);
+                if( dummyQuantityAttacker != 0  ){
+                    battleLog = concatenate(battleLog,"\n我方火砲攻擊") ; 
+                    dummyQuantityDefender = soldierInstance.getSoldierAmount(_attackedCastleId) ; 
+                    if( dummyQuantityDefender != 0 ){
+                        battleLog = concatenate(battleLog,",攻擊敵方神槍手") ; 
+                        (dummyQuantityAttacker,dummyQuantityDefender,rivalSoldierInjure) = battle_army(_ownerId,_attackedCastleId,2,1,dummyQuantityAttacker,dummyQuantityDefender,rivalSoldierInjure) ; 
+                        soldierInstance.setNumOfSoldier(_attackedCastleId,dummyQuantityDefender) ; 
+                    }
+                    // 第二優先攻擊  
+                    dummyQuantityDefender = ProtectorInstance.getProtectorAmount(_attackedCastleId) ; 
+                    if( dummyQuantityAttacker != 0 && dummyQuantityDefender != 0){       
+                        battleLog = concatenate(battleLog,"\n尚有進攻單位，繼續攻擊敵方守衛者") ; 
+                        (dummyQuantityAttacker,dummyQuantityDefender,rivalProtectorInjure) = battle_army(_ownerId,_attackedCastleId,2,0,dummyQuantityAttacker,dummyQuantityDefender,rivalProtectorInjure) ;
+                        ProtectorInstance.setNumOfProtector(_attackedCastleId,dummyQuantityDefender) ; 
+                    }
+                    // 第三優先攻擊
+                    dummyQuantityDefender = CannonInstance.getCannonAmount(_attackedCastleId) ; 
+                    if( dummyQuantityAttacker != 0 && dummyQuantityDefender != 0){    
+                        battleLog = concatenate(battleLog,"\n尚有進攻單位，繼續攻擊敵方火砲") ;
+                        (dummyQuantityAttacker,dummyQuantityDefender,rivalCannonInjure) = battle_army(_ownerId,_attackedCastleId,2,2,dummyQuantityAttacker,dummyQuantityDefender,rivalCannonInjure) ;    
+                        CannonInstance.setNumOfCannon(_attackedCastleId,dummyQuantityDefender) ; 
+                    }
+                }  
                 /*
                 
                 if( ownProtectorQuantity != 0){
