@@ -163,26 +163,32 @@ contract Barrack {
     //injure:用來計算受傷判定
     function battle_army(address attack_id , address defend_id , uint attacker_flag , uint defender_flag, uint attacker_q, uint defender_q, uint injure ) public returns(uint,uint,uint){
         battle_info memory info ; 
-        info.attackerLevel = 0 ; 
+        info.attackerLevel = 0; 
         info.defenderLevel = 0 ; 
 
         if(attacker_flag == 0){
+            info.attackerLevel = ProtectorInstance.levelOfProtector(attack_id) ; 
             info.attackerDamage = 40 + 4 * info.attackerLevel ; 
             info.attackerFrequency = 1 ; 
         }else if (attacker_flag == 1 ){
+            info.attackerLevel = soldierInstance.levelOfSoldier(attack_id) ; 
             info.attackerDamage = 30 + 3 * info.attackerLevel ; 
             info.attackerFrequency = 2 ; 
         }else if(attacker_flag ==2){
+            info.attackerLevel = CannonInstance.levelOfCannon(attack_id) ; 
             info.attackerDamage = 100 + 10 * info.attackerLevel ; 
             info.attackerFrequency = 1 ;
         }
         if(defender_flag == 0){
+            info.defenderLevel = ProtectorInstance.levelOfProtector(defend_id) ; 
             info.defenderHealth = 80 + 8 * info.defenderLevel ; 
             info.defenderArmour = 20 + 2 * info.defenderLevel ; 
         }else if (defender_flag == 1 ){
+            info.defenderLevel = soldierInstance.levelOfSoldier(defend_id) ; 
             info.defenderHealth = 50 + 5 * info.defenderLevel ; 
             info.defenderArmour = 10 + 1 * info.defenderLevel ; 
         }else if(defender_flag ==2){
+            info.defenderLevel = CannonInstance.levelOfCannon(defend_id) ; 
             info.defenderHealth = 100 + 10 * info.defenderLevel ; 
             info.defenderArmour = 0 + 3 * info.defenderLevel ; 
         }
@@ -211,7 +217,7 @@ contract Barrack {
                 }else{
                     injure -= attacker_q * info.effectiveDamage ; 
                     //todo  \n{not_yet_attack}個單位進行攻擊，使受傷單位剩餘{ownSoldierRemain}生命
-                    battleLog = concatenate(battleLog,"\n進攻方全體進行攻擊，使受傷單位剩餘xx生命\n進攻結束") ; 
+                    battleLog = concatenate(battleLog,"\n進攻方全體進行攻擊，僅使一位單位受到傷害，無法造成有效擊殺\n進攻結束") ; 
                     attacker_q = 0  ;
                     return(0,defender_q,injure);
                 }
@@ -234,7 +240,7 @@ contract Barrack {
                         defender_q = 0 ; 
                         return (attacker_q , 0 , info.defenderHealth) ; 
                     }else{
-                        battleLog = concatenate(battleLog,"\n消滅防守方xx名單位") ;
+                        battleLog = concatenate(battleLog,"\n消滅防守方數名單位，尚有殘存部隊") ;
                         defender_q -= attacker_q / info.requireKill  ; 
                         attacker_q %=  info.requireKill  ;
                     }
@@ -245,7 +251,7 @@ contract Barrack {
                 }    
                 //受傷判定
                 injure -= attacker_q * info.effectiveDamage ;
-                battleLog = concatenate(battleLog,"\n防守單位受傷，剩餘xx生命") ; 
+                battleLog = concatenate(battleLog,"\n進攻方剩餘士兵集中火力攻擊一位防守單位，使其受到傷害，但無法造成擊殺") ; 
                 battleLog = concatenate(battleLog,"\n進攻結束") ;
                 attacker_q = 0 ; 
                 return (attacker_q,defender_q,injure) ; 
@@ -475,10 +481,59 @@ contract Barrack {
                         CannonInstance.setNumOfCannon(_attackedCastleId,dummyQuantityDefender) ; 
                     }
                 }
-                /*
-                if( rivalSoldierQuantity != 0){
 
+                //3
+                dummyQuantityAttacker = soldierInstance.getSoldierAmount(_attackedCastleId);
+                if( dummyQuantityAttacker != 0  ){
+                    battleLog = concatenate(battleLog,"\n敵方神槍手攻擊") ; 
+                    dummyQuantityDefender = soldierInstance.getSoldierAmount(_ownerId) ; 
+                    if( dummyQuantityDefender != 0 ){
+                        battleLog = concatenate(battleLog,",攻擊我方神槍手") ; 
+                        (dummyQuantityAttacker,dummyQuantityDefender,ownSoldierInjure) = battle_army(_attackedCastleId,_ownerId,1,1,dummyQuantityAttacker,dummyQuantityDefender,ownSoldierInjure) ; 
+                        soldierInstance.setNumOfSoldier(_ownerId,dummyQuantityDefender) ; 
+                    }
+                    // 第二優先攻擊  
+                    dummyQuantityDefender = ProtectorInstance.getProtectorAmount(_ownerId) ; 
+                    if( dummyQuantityAttacker != 0 && dummyQuantityDefender != 0){       
+                        battleLog = concatenate(battleLog,"\n尚有進攻單位，繼續攻擊我方守衛者") ; 
+                        (dummyQuantityAttacker,dummyQuantityDefender,ownProtectorInjure) = battle_army(_ownerId,_attackedCastleId,1,0,dummyQuantityAttacker,dummyQuantityDefender,ownProtectorInjure) ;
+                        ProtectorInstance.setNumOfProtector(_ownerId,dummyQuantityDefender) ; 
+                    }
+                    // 第三優先攻擊
+                    dummyQuantityDefender = CannonInstance.getCannonAmount(_ownerId) ; 
+                    if( dummyQuantityAttacker != 0 && dummyQuantityDefender != 0){    
+                        battleLog = concatenate(battleLog,"\n尚有進攻單位，繼續攻擊我方火砲") ;
+                        (dummyQuantityAttacker,dummyQuantityDefender,ownCannonInjure) = battle_army(_ownerId,_attackedCastleId,1,2,dummyQuantityAttacker,dummyQuantityDefender,ownCannonInjure) ;    
+                        CannonInstance.setNumOfCannon(_ownerId,dummyQuantityDefender) ; 
+                    }
                 }
+                //4
+                dummyQuantityAttacker = ProtectorInstance.getProtectorAmount(_ownerId);
+                if( dummyQuantityAttacker != 0  ){
+                    battleLog = concatenate(battleLog,"\n我方守衛者攻擊") ; 
+                    dummyQuantityDefender = soldierInstance.getSoldierAmount(_attackedCastleId) ; 
+                    if( dummyQuantityDefender != 0 ){
+                        battleLog = concatenate(battleLog,",攻擊敵方神槍手") ; 
+                        (dummyQuantityAttacker,dummyQuantityDefender,rivalSoldierInjure) = battle_army(_ownerId,_attackedCastleId,0,1,dummyQuantityAttacker,dummyQuantityDefender,rivalSoldierInjure) ; 
+                        soldierInstance.setNumOfSoldier(_attackedCastleId,dummyQuantityDefender) ; 
+                    }
+                    // 第二優先攻擊  
+                    dummyQuantityDefender = ProtectorInstance.getProtectorAmount(_attackedCastleId) ; 
+                    if( dummyQuantityAttacker != 0 && dummyQuantityDefender != 0){       
+                        battleLog = concatenate(battleLog,"\n尚有進攻單位，繼續攻擊敵方守衛者") ; 
+                        (dummyQuantityAttacker,dummyQuantityDefender,rivalProtectorInjure) = battle_army(_ownerId,_attackedCastleId,0,0,dummyQuantityAttacker,dummyQuantityDefender,rivalProtectorInjure) ;
+                        ProtectorInstance.setNumOfProtector(_attackedCastleId,dummyQuantityDefender) ; 
+                    }
+                    // 第三優先攻擊
+                    dummyQuantityDefender = CannonInstance.getCannonAmount(_attackedCastleId) ; 
+                    if( dummyQuantityAttacker != 0 && dummyQuantityDefender != 0){    
+                        battleLog = concatenate(battleLog,"\n尚有進攻單位，繼續攻擊敵方火砲") ;
+                        (dummyQuantityAttacker,dummyQuantityDefender,rivalCannonInjure) = battle_army(_ownerId,_attackedCastleId,0,2,dummyQuantityAttacker,dummyQuantityDefender,rivalCannonInjure) ;    
+                        CannonInstance.setNumOfCannon(_attackedCastleId,dummyQuantityDefender) ; 
+                    }
+                } 
+                /*
+                
                 if( ownProtectorQuantity != 0){
 
                 }
