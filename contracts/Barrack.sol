@@ -533,6 +533,7 @@ contract Barrack {
                     }
                 }
                 //5
+                /*
                 dummyQuantityAttacker = CannonInstance.getCannonAmount(_attackedCastleId);
                 if( dummyQuantityAttacker != 0  ){
                     battleLog = concatenate(battleLog,"\n敵方火砲攻擊") ; 
@@ -581,7 +582,8 @@ contract Barrack {
                         (dummyQuantityAttacker,dummyQuantityDefender,rivalCannonInjure) = battle_army(_ownerId,_attackedCastleId,2,2,dummyQuantityAttacker,dummyQuantityDefender,rivalCannonInjure) ;    
                         CannonInstance.setNumOfCannon(_attackedCastleId,dummyQuantityDefender) ; 
                     }
-                }  
+                } 
+                */ 
                 /*
                 
                 if( ownProtectorQuantity != 0){
