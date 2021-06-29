@@ -44,7 +44,7 @@ contract Account {
         return ( ownerAttackStartTime[_owner], uint(now) - ownerAttackStartTime[_owner], ownerAttackTotalTime[_owner] ) ;
     }
 
-    function getAttackerInfo(address _owner) public returns(bool,address) {
+    function getAttackerInfo(address _owner) public view returns(bool,address) {
         return (ownerIsAttacked[_owner], ownerAttackerAddress[_owner]);
     }
 
@@ -124,9 +124,9 @@ contract Account {
 
     function getUserPowerById(uint idx) public returns(uint) {
         if(idx < kingdomAmount) {
-            address idx = castleToOwner[idx];
-            power[idx] = soldierPower[idx] + wallPower[idx] + protectorPower[idx] + cannonPower[idx];
-            return power[idx];
+            address addr = castleToOwner[idx];
+            power[addr] = soldierPower[addr] + wallPower[addr] + protectorPower[addr] + cannonPower[addr];
+            return power[addr];
         }
         return 0;
     }
