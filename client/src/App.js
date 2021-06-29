@@ -2,17 +2,25 @@ import React, { useState, useEffect } from "react";
 import ProduceContract from "./contracts/Produce.json";
 import BarrackContract from "./contracts/Barrack.json";
 import LaboratoryContract from "./contracts/Laboratory.json"
+import BuildingContract from "./contracts/BuildingFactory.json"
+import AccountContract from "./contracts/Account.json"
+import WallContract from "./contracts/Wall.json"
+import SoldierContract from "./contracts/Soldier.json"
+import CannonContract from "./contracts/Cannon.json"
+import ProtectorContract from "./contracts/Protector.json"
+import SpyContract from "./contracts/Spy.json"
+
 import getWeb3 from "./getWeb3";
-import { Navbar, GameScene } from './components';
+import { GameScene } from './components';
 
 // import "./App.css";
 
 import 'semantic-ui-css/semantic.min.css';
-import Building from "./components/Building";
 
 export const ContractContext = React.createContext();
 const App = () => {
-  const [ state, setState ] = useState({ storageValue: 0, web3: null, accounts: null, contract: null, barrackContract: null,  labContract: null});
+  const [ state, setState ] = useState({ storageValue: 0, web3: null, accounts: null, produceContract: null, barrackContract: null,  buildingContract: null, accountContract: null, labContract: null, 
+                                         wallContract: null, soldierContract: null, cannonContract: null, protectorContract: null, spyContract: null});
   useEffect(() => {
     async function getState() {
       try {
@@ -28,19 +36,56 @@ const App = () => {
           ProduceContract.abi,
           deployedNetworkP && deployedNetworkP.address,
         );
-        const deployedNetworkB = BarrackContract.networks[networkId];
-        const instanceB = new web3.eth.Contract(
+        const deployedNetworkBa = BarrackContract.networks[networkId];
+        const instanceBa = new web3.eth.Contract(
           BarrackContract.abi,
-          deployedNetworkB && deployedNetworkB.address,
+          deployedNetworkBa && deployedNetworkBa.address,
+        );
+        const deployedNetworkBu = BuildingContract.networks[networkId];
+        const instanceBu = new web3.eth.Contract(
+          BuildingContract.abi,
+          deployedNetworkBu && deployedNetworkBu.address,
+        );
+        const deployedNetworkA = AccountContract.networks[networkId];
+        const instanceA = new web3.eth.Contract(
+          AccountContract.abi,
+          deployedNetworkA && deployedNetworkA.address,
         );
         const deployedNetworkL = LaboratoryContract.networks[networkId];
         const instanceL = new web3.eth.Contract(
           LaboratoryContract.abi,
           deployedNetworkL && deployedNetworkL.address,
         );
+        const deployedNetworkW = WallContract.networks[networkId];
+        const instanceW = new web3.eth.Contract(
+          WallContract.abi,
+          deployedNetworkW && deployedNetworkW.address,
+        );
+        const deployedNetworkSol = SoldierContract.networks[networkId];
+        const instanceSol = new web3.eth.Contract(
+          SoldierContract.abi,
+          deployedNetworkSol && deployedNetworkSol.address,
+        );
+        const deployedNetworkCan = CannonContract.networks[networkId];
+        const instanceCan = new web3.eth.Contract(
+          CannonContract.abi,
+          deployedNetworkCan && deployedNetworkCan.address,
+        );
+        const deployedNetworkPro = ProtectorContract.networks[networkId];
+        const instancePro = new web3.eth.Contract(
+          ProtectorContract.abi,
+          deployedNetworkPro && deployedNetworkPro.address,
+        );
+        const deployedNetworkSpy = SpyContract.networks[networkId];
+        const instanceSpy = new web3.eth.Contract(
+          SpyContract.abi,
+          deployedNetworkSpy && deployedNetworkSpy.address,
+        );
+
         // Set web3, accounts, and contract to the state, and then proceed with an
         // example of interacting with the contract's methods.
-        setState({ web3, accounts, contract: instanceP, barrackContract: instanceB , labContract: instanceL});
+        setState({ web3, accounts, produceContract: instanceP, barrackContract: instanceBa , buildingContract: instanceBu, accountContract: instanceA, labContract: instanceL, 
+                                   wallContract: instanceW, soldierContract: instanceSol, cannonContract: instanceCan, protectorContract: instancePro, spyContract: instanceSpy});
       } catch (error) {
         // Catch any errors for any of the above operations.
         alert(
@@ -57,7 +102,8 @@ const App = () => {
 
   return <>
     {
-      (state.contract && state.barrackContract && state.labContract && state.accounts.length>0)
+      (state.produceContract && state.barrackContract && state.buildingContract && state.accountContract && state.labContract && 
+       state.wallContract && state.soldierContract && state.cannonContract && state.protectorContract && state.spyContract && state.accounts.length > 0)
       ? 
       <ContractContext.Provider value={state}>
         <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>

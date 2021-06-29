@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Modal, Grid, Icon, Segment, Header, Progress, Image } from 'semantic-ui-react';
+import { Button, Modal, Grid, Segment, Header, Progress, Image } from 'semantic-ui-react';
 import stonepng from '../../images/stone_noback.png';
 
 const PRODUCTION_RATE = 10;
@@ -80,7 +80,7 @@ const Quarry = ({ idx, x, y, cellState, contract, account, updateCellState }) =>
               <Header as='h4'>
                 Upgrade progress
               </Header>
-              <Progress percent={upgradeProgress} indicating />
+              <Progress progress='percent'  percent={upgradeProgress} indicating/>
               <div style={{textAlign: 'center'}}>
                 <Button primary disabled={upgradeProgress !== 100} onClick={() => confirmUpgrade()} >comfirm upgrade</Button>
               </div>

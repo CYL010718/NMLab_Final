@@ -1,12 +1,12 @@
 import React from 'react';
-import { Button, Grid, Icon, Segment, Header, Image } from 'semantic-ui-react';
+import { Button, Grid, Segment, Header, Image } from 'semantic-ui-react';
 import woodpng from '../../images/wood_noback.png';
 import ironpng from '../../images/iron_noback.png';
 import stonepng from '../../images/stone_noback.png';
 import coinpng from '../../images/coin_noback.png';
 import foodpng from '../../images/food_noback.png';
 import soldierpng from '../../images/soldier_noback.png';
-import spypng from '../../images/soldier_noback.png'
+import labpng from '../../images/soldier_noback.png'
 
 const Page = ({ page, build }) => {
   if(page === 0) {
@@ -77,12 +77,16 @@ const Page = ({ page, build }) => {
           <Button primary onClick={() => build("Barrack")}>Build</Button>
         </Segment>
       </Grid.Column>
+    </>
+  }
+  if(page === 2) {
+    return <>
       <Grid.Column>
         <Segment placeholder>
           <Header icon>
             Laboratory
             <br/>
-            <Image size='massive' src={spypng} />
+            <Image size='massive' src={labpng} />
           </Header>
           <Button primary onClick={() => build("Laboratory")}>Build</Button>
         </Segment>

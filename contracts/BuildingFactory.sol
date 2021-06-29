@@ -3,11 +3,13 @@ pragma solidity >=0.4.21 <0.7.0;
 import "./SafeMath.sol";
 import "./Account.sol";
 
-contract BuildingFactory {
+contract BuildingFactory{
     
     using SafeMath for uint;
 
     Account accountInstance;
+
+    
     constructor(address _account_address) public {
         accountInstance = Account(_account_address);
     }
@@ -37,8 +39,12 @@ contract BuildingFactory {
     mapping (address => uint) ownerBarrackCount;
     mapping (address => uint) ownerLaboratoryCount;
 
+    function getBuildingLevel(uint buildingId) public view returns(uint){
+        return buildings[buildingId].level;
+    }
 
-    function _createBuilding(address _creator, string memory _name, uint _x, uint _y) internal returns(uint){
+
+    function _createBuilding(address _creator, string memory _name, uint _x, uint _y) public returns(uint){
         if(buildings.length == 0) {
             buildings.push(Building("first_building!", 0, 0, 1000));
             buildingToOwner[0] = address(0);
@@ -190,6 +196,18 @@ contract BuildingFactory {
             }
         }
         return result;
+    }
+
+    function createCastle(uint _x, uint _y) public {
+        _createBuilding(msg.sender, "Castle", _x, _y);
+        accountInstance.initializeKingdom(msg.sender);
+        castleLevel[msg.sender] = 1;
+    }
+
+
+    modifier lessThanCastle(address _owner, uint _buildingID) {
+        require(buildings[_buildingID].level.add(1) <= castleLevel[_owner]);
+        _;
     }
     
 }

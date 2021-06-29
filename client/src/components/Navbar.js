@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import { ContractContext } from "../App";
-import { Menu, Icon, Button, Image } from 'semantic-ui-react';
+import { Menu, Icon, Button, Image, Modal, Progress, Header } from 'semantic-ui-react';
 import "../styles/Navbar.css";
 import woodpng from '../images/wood_noback.png';
 import ironpng from '../images/iron_noback.png';
@@ -11,6 +11,14 @@ import foodpng from '../images/food_noback.png';
 
 const Navbar = ({ makeReload }) => { 
   const state = useContext(ContractContext);
+  const { accountContract, produceContract, barrackContract, accounts } = state;
+  const [ initialized, setInitialized ] = useState(false);
+  const [ beingAttacked, setBeingAttacked ] = useState(false);
+  const [ attacker, setAttacker ] = useState("");
+  const [ showCountdown, setShowCountdown ] = useState(false);
+  const [ marchPeriod, setMarchPeriod ] = useState(0);
+  const [ marchTimeNeed, setMarchTimeNeed ] = useState(0);
+  const [ countdownProgress, setCountdownProgress ] = useState(100);
   const [ resources, setResources ] = useState({
     wood: "--",
     food: "--",
@@ -18,43 +26,121 @@ const Navbar = ({ makeReload }) => {
     stone: "--",
     coin: "--"
   });
-  const [ updateTimes, setUpdateTimes ] = useState(0);
+  //const [ updateTimes, setUpdateTimes ] = useState(0);
+
+  const updateCountdown = async() => {
+    if(!beingAttacked){
+      console.log("???")
+      return 
+    }
+    if(marchPeriod < marchTimeNeed){
+        setMarchPeriod(marchPeriod + 3);
+    }
+    else{
+      await accountContract.methods.updateMarch(accounts[0]).send({from: accounts[0]});
+      setBeingAttacked(false);
+      setMarchPeriod(0);
+      setMarchTimeNeed(0);
+    }
+  }
+
+  const updateResource = async () => {
+    const result = await produceContract.methods.updateProduce(accounts[0]).send({from: accounts[0]});
+    console.log(result);
+    const wood = await accountContract.methods.getWoodAmount().call({from: accounts[0]});
+    const food = await accountContract.methods.getFoodAmount().call({from: accounts[0]});
+    const iron = await accountContract.methods.getIronAmount().call({from: accounts[0]});
+    const stone = await accountContract.methods.getStoneAmount().call({from: accounts[0]});
+    const coin = await accountContract.methods.getCoinAmount().call({from: accounts[0]});
+    setResources({ wood, food, iron, stone, coin });
+    makeReload();
+  }
 
   useEffect(() => {
-    const { contract, accounts } = state;
-    if(!contract || accounts.length < 1) return;
-    const updateResource = async () => {
-      const result = await contract.methods.updateProduce(accounts[0]).send({from: accounts[0]});
-      console.log(result);
-      const wood = await contract.methods.getWoodAmount().call({from: accounts[0]});
-      const food = await contract.methods.getFoodAmount().call({from: accounts[0]});
-      const iron = await contract.methods.getIronAmount().call({from: accounts[0]});
-      const stone = await contract.methods.getStoneAmount().call({from: accounts[0]});
-      const coin = await contract.methods.getCoinAmount().call({from: accounts[0]});
-      setResources({ wood, food, iron, stone, coin });
-    }
+    if(!produceContract || accounts.length < 1) return;
+    
     const getResource = async () => {
-      const wood = await contract.methods.getWoodAmount().call({from: accounts[0]});
-      const food = await contract.methods.getFoodAmount().call({from: accounts[0]});
-      const iron = await contract.methods.getIronAmount().call({from: accounts[0]});
-      const stone = await contract.methods.getStoneAmount().call({from: accounts[0]});
-      const coin = await contract.methods.getCoinAmount().call({from: accounts[0]});
+      const wood = await accountContract.methods.getWoodAmount().call({from: accounts[0]});
+      const food = await accountContract.methods.getFoodAmount().call({from: accounts[0]});
+      const iron = await accountContract.methods.getIronAmount().call({from: accounts[0]});
+      const stone = await accountContract.methods.getStoneAmount().call({from: accounts[0]});
+      const coin = await accountContract.methods.getCoinAmount().call({from: accounts[0]});
       setResources({ wood, food, iron, stone, coin });
     }
+    const init = async () => {
+      getResource();
+
+      const getMarchTime = await accountContract.methods.getMarchTime(accounts[0]).call({from: accounts[0]}); //Modify
+      const marchStartTime = parseInt( getMarchTime[0] );
+      const marchingTimeNeed = parseInt( getMarchTime[2] );
+      const attackerInfo = await accountContract.methods.getAttackerInfo(accounts[0]).call({from: accounts[0]});
+      //const isAttacked = attackerInfo[0];
+      const attackerAddress = attackerInfo[1];
+      
+      console.log(attackerAddress);
+      await setMarchPeriod(parseInt(Date.now() / 1000) - marchStartTime);
+      await setMarchTimeNeed(marchingTimeNeed);
+      if(marchingTimeNeed !== 0)  await setBeingAttacked(true);
+      await setAttacker(attackerAddress);
+      await setInitialized(true);
+    }
+
+    if(barrackContract && accounts.length > 0) {
+      if(!initialized) {
+        init();
+      }
+    }
+    /*
     if(updateTimes === 0) {
       getResource();
       return;
     };
-    updateResource();
+    */
+    setCountdownProgress(100 - (beingAttacked ? 100 - marchTimeNeed === 0 ? 100 : marchPeriod/marchTimeNeed*100 > 100 ? 
+      100:marchPeriod/ marchTimeNeed*100: 0));
+    
+    var handle;
+    if(beingAttacked) {
+      handle = setTimeout(() => {
+        updateCountdown();
+      }, 3000);
+    }
     makeReload();
-  }, [updateTimes, state]);
+    return () => {
+      clearTimeout(handle);
+    }
+    //updateResource();  
+  }, [state, beingAttacked, marchPeriod, marchTimeNeed]);
 
   return (
     <div className="navbar">
+      
       <Menu secondary className="welcome-menu" >
+        {beingAttacked ?
+              <>
+                <Button size = "huge" icon = "warning sign" color = 'red'  onClick = {() => setShowCountdown(true)}>
+                </Button>
+                <Modal open = {showCountdown}>
+                  <Modal.Content>
+                      <Header> Attack by User {attacker} </Header>
+                      <Progress  progress='percent'  percent={countdownProgress} indicating>
+                          Attack countdown
+                      </Progress>
+                      <Modal.Actions>
+                        <Button onClick = {() => setShowCountdown(false)} fluid color = 'red'>
+                          <Icon name='close' /> close
+                        </Button>
+                      </Modal.Actions>
+                  </Modal.Content>
+                </Modal>
+              </>
+              :
+              <></>
+        }
         <Menu.Menu position='right'>
+          
           <Button.Group floated='right'>
-            <Button animated='fade' circular onClick={() => setUpdateTimes(updateTimes+1)} inverted color='teal'>
+            <Button animated='fade' circular onClick={() => updateResource()} inverted color='teal'>
               <Button.Content hidden>Refresh</Button.Content>
               <Button.Content visible  >
                 <Icon name='sync' />

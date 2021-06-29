@@ -5,7 +5,7 @@ import Building from "./Building"
 import ModalContent from './ModalContent'
 
 
-const Cell = ({ upgradingIdx, idx , x, y, initialized,  cellState, updateCellState }) => {
+const Cell = ({ upgradingIdx, idx , x, y, initialized,  cellState, updateCellState, page }) => {
   const [ open, setOpen ] = useState(false);
   const [ CellStyle, setCellStyle ] = useState({
     left: `${x}px`,
@@ -32,7 +32,7 @@ const Cell = ({ upgradingIdx, idx , x, y, initialized,  cellState, updateCellSta
       onMouseEnter={() => onHover()} 
       onMouseLeave={() => unHover()} 
       onClick={() => setOpen(true)}>
-      <Building type={initialized? cellState.type : "undefined"} />
+      <Building type={initialized? cellState.type : "undefined"} page = {page}/>
     </div>
 
     <Modal
@@ -41,7 +41,7 @@ const Cell = ({ upgradingIdx, idx , x, y, initialized,  cellState, updateCellSta
       onOpen={() => setOpen(true)}
       open={open}
     >
-      <ModalContent upgradingIdx={upgradingIdx} idx={idx} x={x} y={y} cellState={initialized? cellState : null} type={initialized? cellState.type : "undefined"} index={initialized? cellState.index : "undefined"} updateCellState={updateCellState} />
+      <ModalContent upgradingIdx={upgradingIdx} idx={idx} x={x} y={y} cellState={initialized? cellState : null} type={initialized? cellState.type : "undefined"} index={initialized? cellState.index : "undefined"} updateCellState={updateCellState} page = {page}/>
       <Modal.Actions>
         <Button onClick={() => setOpen(false)} color='red'>
           <Icon name='close' /> close

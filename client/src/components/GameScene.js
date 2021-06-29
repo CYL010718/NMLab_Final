@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext} from 'react';
 import { Map, Battle, Navbar } from './index';
 import { ContractContext } from '../App'
 import { Grid, Button, Image } from 'semantic-ui-react';
-import castlepng from '../images/castle.png';
+import castlepng from '../images/newCastle.png';
 
 
 const GameScene = () => {
@@ -11,23 +11,23 @@ const GameScene = () => {
   const state = useContext(ContractContext);
 
   useEffect(() => {
-    const { contract, accounts } = state;
+    const { accountContract, accounts } = state;
     const load = async () => {
-      const checkUser = await contract.methods.checkUserAddress().call({from:accounts[0]});
+      const checkUser = await accountContract.methods.checkUserAddress().call({from:accounts[0]});
       setNewUser(!checkUser)
     }
-    if(contract !== null && accounts.length > 0) {
+    if(accountContract !== null && accounts.length > 0) {
       load();
     }
   }, [state])
   
   const initializeKingdom = async () => {
-    const { contract, accounts } = state;
-    if(contract == null || accounts.length < 1) {
+    const { buildingContract, accounts } = state;
+    if(buildingContract == null || accounts.length < 1) {
       alert("contract error!");
       return;
     }
-    const create = await contract.methods.createCastle(650, 300).send({from: accounts[0]});
+    const create = await buildingContract.methods.createCastle(650, 300).send({from: accounts[0]});
     console.log(create);
     setNewUser(false);
   }
@@ -42,10 +42,10 @@ const GameScene = () => {
     <br/>
     <br/>
     <br/>
-    <Image src={castlepng} size="medium" />
+    <Image src={castlepng} size="large" />
     <br/>
     <Button primary size="massive" onClick={() => initializeKingdom()}>
-      Initialize your kingdom!
+      Start building your kingdom!
     </Button>
     </>
     :
@@ -53,10 +53,10 @@ const GameScene = () => {
       <Navbar makeReload={makeReload} />
       <Grid celled style={{margin: "0"}}>
         <Grid.Row>
-          <Grid.Column width={3}>
+          <Grid.Column width={2}>
             <Battle />
           </Grid.Column>
-          <Grid.Column width={13}>
+          <Grid.Column width={14}>
             <Map reload={reload} />
           </Grid.Column>
         </Grid.Row>
@@ -65,3 +65,9 @@ const GameScene = () => {
 }
 
 export default GameScene;
+
+/*
+<Grid.Column width={3}>
+            <Battle />
+          </Grid.Column>
+*/

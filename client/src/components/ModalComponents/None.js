@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { Button, Modal, Grid, Icon, Segment, Header, Menu, Pagination } from 'semantic-ui-react';
+import React from 'react';
+import {  Modal, Grid } from 'semantic-ui-react';
 import { Page } from './index'
 
-const None = ({ upgradingIdx, idx, x, y, contract, account, updateCellState }) => {
-  const [ page, setPage ] = useState(0);
+const None = ({ upgradingIdx, idx, x, y, produceContract, buildingContract, barrackContract, labContract, account, updateCellState, page }) => {
+  //const [ page, setPage ] = useState(0);
 
   const build = async (buildType) => {
-    if(!contract || !account) {
+    if(!buildingContract || !barrackContract && !account) {
       alert("please wait a minute and try again");
       return;
     }
@@ -16,70 +16,57 @@ const None = ({ upgradingIdx, idx, x, y, contract, account, updateCellState }) =
       return;
     }
     let newBuildingId;
-    const { createSawmill, createFarm, createMine, createQuarry, createManor, createBarrack, createLaboratory } = contract.methods;
     // const {  } = contractB.methods;
     switch (buildType) {
       case "Sawmill":
-        newBuildingId = await createSawmill(x, y).send({from: account});
+        newBuildingId = await produceContract.methods.createBuilding(account, "Sawmill", x, y).send({from: account});
         break;
       case "Farm":
-        newBuildingId = await createFarm(x, y).send({from: account});
+        newBuildingId = await produceContract.methods.createBuilding(account, "Farm", x, y).send({from: account});
         break;
       case "Mine":
-        newBuildingId = await createMine(x, y).send({from: account});
+        newBuildingId = await produceContract.methods.createBuilding(account, "Mine", x, y).send({from: account});
         break;
       case "Quarry":
-        newBuildingId = await createQuarry(x, y).send({from: account});
+        newBuildingId = await produceContract.methods.createBuilding(account, "Quarry", x, y).send({from: account});
         break;
       case "Manor":
-        newBuildingId = await createManor(x, y).send({from: account});
+        newBuildingId = await produceContract.methods.createBuilding(account, "Manor", x, y).send({from: account});
         break;
       case "Barrack":
+        /*
         const haveBuilding = await contract.methods.getSpecificBuildingByOwner(account, "Barrack").call({from:account});
         if(haveBuilding.length > 0) {
           alert("Already have Barrack!");
           break;
         }
-        newBuildingId = await createBarrack(x, y).send({from: account});
+        */
+        newBuildingId = await barrackContract.methods.createBarrack(x, y).send({from: account});
         break;
       case "Laboratory":
-        const haveLab = await contract.methods.getSpecificBuildingByOwner(account, "Laboratory").call({from:account});
-        if(haveLab.length > 0) {
-          alert("Already have Lab!");
+        const haveBarrack = await buildingContract.methods.getSpecificBuildingByOwner(account, "Barrack").call({from:account});
+        if(haveBarrack.length === 0){
+          alert("Does not have a barrack! Build barrack before laboratory!")
           break;
         }
-        newBuildingId = await createLaboratory(x, y).send({from: account});
+        newBuildingId = await labContract.methods.createLaboratory(x, y).send({from: account});
         break;
       default:
         console.alert("invalid buildingType");
         break;
     }
-    const building = await contract.methods.getBuildingByOwner(account, x, y).call({from: account});
+    const building = await buildingContract.methods.getBuildingByOwner(account, x, y).call({from: account});
     const loadIndex = parseInt(building[0]);
     const loadType = building[1];
     const newState = { type: loadType, index:loadIndex, others: null }
     updateCellState(idx, newState);
-    const buildingLen = await contract.methods.getBuildingsLen().call({from: account});
+    const buildingLen = await buildingContract.methods.getBuildingsLen().call({from: account});
     console.log(buildingLen);
   }
 
   return <>
     <Modal.Content image>
       <Grid columns='equal' divided inverted padded>
-        <Grid.Row centered>
-          <Menu pointing secondary>
-            <Menu.Item
-              name='Resource related'
-              active={page === 0}
-              onClick={()=>setPage(0)}
-            />
-            <Menu.Item
-              name='Battle related'
-              active={page === 1}
-              onClick={()=>setPage(1)}
-            />
-          </Menu>
-        </Grid.Row>
         <Grid.Row>
           <Page page={page} build={build}/>
         </Grid.Row>

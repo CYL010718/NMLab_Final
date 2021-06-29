@@ -13,13 +13,59 @@ contract Account {
     mapping (address => uint) public power;
     mapping (address => uint) public health;
     mapping (address => uint) public spyPower;
+    mapping (address => uint) public cannonPower;
+    mapping (address => uint) public soldierPower;
+    mapping (address => uint) public protectorPower;
+    mapping (address => uint) public wallPower;
+
     uint public kingdomAmount;
 
     mapping (uint => address) public castleToOwner;
     mapping (address => uint) public ownerCastleCount;
 
+    mapping (address => bool) public ownerIsAttacked;
+    mapping (address => address) public ownerAttackerAddress;
+    mapping (address => uint) public ownerAttackStartTime;
+    mapping (address => uint) public ownerAttackTotalTime;
+
+
+
     uint IdDigits = 16;
     uint IdModulus = 10 ** IdDigits;
+
+    function setAttackedInfo(address _attacked, bool _isAttack, address _attacker, uint _attackstarttime, uint _attacktotaltime) public {
+        ownerIsAttacked[_attacked] = _isAttack;
+        ownerAttackerAddress[_attacked] = _attacker;
+        ownerAttackStartTime[_attacked] = _attackstarttime;
+        ownerAttackTotalTime[_attacked] = _attacktotaltime;
+    }
+
+    function getMarchTime(address _owner) public view returns(uint, uint, uint) {
+        return ( ownerAttackStartTime[_owner], uint(now) - ownerAttackStartTime[_owner], ownerAttackTotalTime[_owner] ) ;
+    }
+
+    function getAttackerInfo(address _owner) public returns(bool,address) {
+        return (ownerIsAttacked[_owner], ownerAttackerAddress[_owner]);
+    }
+
+    // // return 0 if success else return remaining time
+    function updateMarch(address _owner) public returns(uint) {
+        if (ownerAttackStartTime[_owner] == 0) return 0;
+        if (uint(now) >= ownerAttackStartTime[_owner].add(ownerAttackTotalTime[_owner])) {
+            // uint num;
+            // num = ownerTotalMarchTime[_owner].div(  MarchInstance.levelOfMarch(_owner).mul(MarchInstance.createMarchTime()) );
+            // MarchInstance.setNumOfMarch(_owner, MarchInstance.numOfMarch(_owner) + (num));
+            ownerIsAttacked[_owner] = false;
+            ownerAttackerAddress[_owner] = _owner;
+            ownerAttackStartTime[_owner] = 0;
+            ownerAttackTotalTime[_owner] = 0;
+            return 0;
+        }
+        else {
+            uint remainingTime = (ownerAttackStartTime[_owner] + ownerAttackTotalTime[_owner]).sub(uint(now));
+            return remainingTime;
+        }
+    }
 
     function checkUserAddress() public view returns(bool) {
         if(ownerCastleCount[msg.sender] > 0) return true;
@@ -76,13 +122,48 @@ contract Account {
         return kingdomAmount;
     }
 
-    function getUserPower(address idx) public view returns(uint) {
+    function getUserPowerById(uint idx) public returns(uint) {
+        if(idx < kingdomAmount) {
+            address idx = castleToOwner[idx];
+            power[idx] = soldierPower[idx] + wallPower[idx] + protectorPower[idx] + cannonPower[idx];
+            return power[idx];
+        }
+        return 0;
+    }
+
+    function getUserPower(address idx) public returns(uint) {
+        power[idx] = soldierPower[idx] + wallPower[idx] + protectorPower[idx] + cannonPower[idx];
         return power[idx];
     }
 
     function setUserPower(address idx, uint value) public {
         power[idx] = value;
     }
+
+
+
+    function setUserSoldierPower(address idx, uint value) public {
+        power[idx] = value;
+    }
+
+
+
+    function setUserProtectorPower(address idx, uint value) public {
+        power[idx] = value;
+    }
+
+
+
+    function setUserCannonPower(address idx, uint value) public {
+        power[idx] = value;
+    }
+
+
+
+    function setUserWallPower(address idx, uint value) public {
+        power[idx] = value;
+    }
+
 
     function getUserHealth(address idx) public view returns(uint) {
         return health[idx];
@@ -104,6 +185,10 @@ contract Account {
         return kingdomAmount;
     }
 
+    function convertCastleToOwner(uint id) public view returns(address) {
+        return castleToOwner[id];
+    }
+
     // for web to create castle
     function initializeKingdom(address _owner) public {
         require(ownerCastleCount[_owner] == 0);
@@ -118,6 +203,9 @@ contract Account {
         power[_owner] = 0;
         health[_owner] = 0;
         spyPower[_owner] = 0;
+        ownerIsAttacked[_owner] = false;
+        ownerAttackStartTime[_owner] = 0;
+        ownerAttackTotalTime[_owner] = 0;
     }
 
     function cost(address _owner, uint food, uint wood, uint iron, uint stone, uint coin) public returns (bool){
